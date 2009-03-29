@@ -1,15 +1,9 @@
 ﻿namespace NDDDSample.Domain.Shared
 {
-    #region Usings
-
-    using System.Runtime.Serialization;
-
-    #endregion
-
     /// <summary>
     /// An entity, as explained in the DDD book.
-    /// </summary>
-    public interface IEntity<T> : ISerializable
+    /// </summary>  
+    public interface IEntity<T> 
     {
         /// <summary>
         /// Entities compare by identity, not by attributes.

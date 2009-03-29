@@ -1,15 +1,9 @@
 namespace NDDDSample.Domain.Shared
-{
-    #region Usings
-
-    using System.Runtime.Serialization;
-
-    #endregion
-
+{   
     /// <summary>
     /// A value object, as described in the DDD book.
     /// </summary>
-    public interface IValueObject<T> : ISerializable
+    public interface IValueObject<T>
     {
         /// <summary>
         /// Value objects compare by the values of their attributes, they don't have an identity.

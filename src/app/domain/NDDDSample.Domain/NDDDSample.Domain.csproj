@@ -42,6 +42,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Model\Cargos\Cargo.cs" />
+    <Compile Include="Model\Cargos\TrackingId.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Shared\AbstractSpecification.cs" />
     <Compile Include="Shared\AndSpecification.cs" />
@@ -52,6 +54,7 @@
     <Compile Include="Shared\IValueObject.cs" />
     <Compile Include="Shared\NotSpecification.cs" />
     <Compile Include="Shared\OrSpecification.cs" />
+    <Compile Include="_TempHelper\Validate.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\..\NDDDSample.snk">
@@ -59,7 +62,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Model\" />
     <Folder Include="Service\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
