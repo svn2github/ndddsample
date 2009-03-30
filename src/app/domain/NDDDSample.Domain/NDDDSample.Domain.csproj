@@ -43,7 +43,25 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Model\Cargos\Cargo.cs" />
+    <Compile Include="Model\Cargos\Delivery.cs" />
+    <Compile Include="Model\Cargos\HandlingActivity.cs" />
+    <Compile Include="Model\Cargos\Itinerary.cs" />
+    <Compile Include="Model\Cargos\Leg.cs" />
+    <Compile Include="Model\Cargos\RouteSpecification.cs" />
+    <Compile Include="Model\Cargos\RoutingStatus.cs" />
     <Compile Include="Model\Cargos\TrackingId.cs" />
+    <Compile Include="Model\Cargos\TransportStatus.cs" />
+    <Compile Include="Model\Handlings\HandlingEvent.cs" />
+    <Compile Include="Model\Handlings\HandlingHistory.cs" />
+    <Compile Include="Model\Locations\Location.cs" />
+    <Compile Include="Model\Locations\ILocationRepository.cs" />
+    <Compile Include="Model\Locations\SampleLocations.cs" />
+    <Compile Include="Model\Locations\UnLocode.cs" />
+    <Compile Include="Model\Voyages\CarrierMovement.cs" />
+    <Compile Include="_TempHelper\EqualsBuilder.cs" />
+    <Compile Include="Model\Voyages\Schedule.cs" />
+    <Compile Include="Model\Voyages\Voyage.cs" />
+    <Compile Include="Model\Voyages\VoyageNumber.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Shared\AbstractSpecification.cs" />
     <Compile Include="Shared\AndSpecification.cs" />
@@ -54,6 +72,8 @@
     <Compile Include="Shared\IValueObject.cs" />
     <Compile Include="Shared\NotSpecification.cs" />
     <Compile Include="Shared\OrSpecification.cs" />
+    <Compile Include="_TempHelper\ExtentionMethods.cs" />
+    <Compile Include="_TempHelper\HashCodeBuilder.cs" />
     <Compile Include="_TempHelper\Validate.cs" />
   </ItemGroup>
   <ItemGroup>

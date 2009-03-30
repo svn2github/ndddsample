@@ -14,6 +14,6 @@ namespace NDDDSample.Domain.Shared
         /// </summary>
         /// <param name="other">The other domain event.</param>
         /// <returns>true if the given domain event and this event are regarded as being the same event.</returns>
-        bool sameEventAs(T other);
+        bool SameEventAs(T other);
     }
 }

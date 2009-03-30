@@ -10,6 +10,6 @@ namespace NDDDSample.Domain.Shared
         /// </summary>
         /// <param name="other">The other value object.</param>
         /// <returns>true if the given value object's and this value object's attributes are the same.</returns>
-        bool sameValueAs(T other);
+        bool SameValueAs(T other);
     }
 }

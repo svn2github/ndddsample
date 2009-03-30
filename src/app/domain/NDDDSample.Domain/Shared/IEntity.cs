@@ -10,6 +10,6 @@
         /// </summary>
         /// <param name="other">The other entity.</param>
         /// <returns>true if the identities are the same, regardles of other attributes.</returns>
-        bool sameIdentityAs(T other);
+        bool SameIdentityAs(T other);
     }
 }
