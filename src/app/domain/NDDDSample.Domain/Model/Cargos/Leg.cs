@@ -15,11 +15,12 @@
     /// </summary>
     public class Leg : IValueObject<Leg>
     {
-        private Voyage voyage;
-        private Location loadLocation;
-        private Location unloadLocation;
-        private DateTime loadTime;
-        private DateTime unloadTime;
+        private readonly Location loadLocation;
+        private readonly DateTime loadTime;
+        private readonly Location unloadLocation;
+        private readonly DateTime unloadTime;
+        private readonly Voyage voyage;
+        protected long id;
 
         public Leg(Voyage voyage, Location loadLocation, Location unloadLocation, DateTime loadTime, DateTime unloadTime)
         {
@@ -32,31 +33,12 @@
             this.unloadTime = unloadTime;
         }
 
-        public Voyage Voyage()
+        protected Leg()
         {
-            return voyage;
+            // Needed by Hibernate
         }
 
-        public Location LoadLocation()
-        {
-            return loadLocation;
-        }
-
-        public Location UnloadLocation()
-        {
-            return unloadLocation;
-        }
-
-        public DateTime LoadTime()
-        {
-            return loadTime;
-        }
-
-        public DateTime UnloadTime()
-        {
-            //TODO: atrosin : new Date(unloadTime.getTime());
-            return unloadTime;
-        }
+        #region IValueObject<Leg> Members
 
         /// <summary>
         /// Value objects compare by the values of their attributes, they don't have an identity.
@@ -73,6 +55,8 @@
                                         Append(unloadTime, other.unloadTime).
                                         IsEquals();
         }
+
+        #endregion
 
         #region Object's override
 
@@ -105,12 +89,30 @@
 
         #endregion
 
-        protected Leg()
+        public Voyage Voyage()
         {
-            // Needed by Hibernate
+            return voyage;
         }
 
-        // Auto-generated surrogate key
-        protected long id;
+        public Location LoadLocation()
+        {
+            return loadLocation;
+        }
+
+        public Location UnloadLocation()
+        {
+            return unloadLocation;
+        }
+
+        public DateTime LoadTime()
+        {
+            return loadTime;
+        }
+
+        public DateTime UnloadTime()
+        {
+            //TODO: atrosin : new Date(unloadTime.getTime());
+            return unloadTime;
+        }
     }
 }

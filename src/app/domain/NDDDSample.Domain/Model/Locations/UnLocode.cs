@@ -14,11 +14,10 @@
     /// http://www.unece.org/cefact/locode/DocColumnDescription.htm#LOCODE</summary>
     public class UnLocode : IValueObject<UnLocode>
     {
-        private readonly string unlocode;
-
         // Country code is exactly two letters.
         // Location code is usually three letters, but may contain the numbers 2-9 as well
         private static readonly Regex VALID_PATTERN = new Regex("[a-zA-Z]{2}[a-zA-Z2-9]{3}", RegexOptions.Compiled);
+        private readonly string unlocode;
 
         /// <summary>
         ///  Constructor.
@@ -33,17 +32,12 @@
             unlocode = countryAndLocation.ToUpper();
         }
 
-        /// <summary>
-        /// Get code and location code concatenated, always upper case.
-        /// </summary>
-        /// <returns>code and location code concatenated, always upper case.</returns>
-        public string IdString()
+        protected UnLocode()
         {
-            return unlocode;
+            // Needed by Hibernate
         }
 
-
-       
+        #region IValueObject<UnLocode> Members
 
         /// <summary>
         /// Value objects compare by the values of their attributes, they don't have an identity.
@@ -55,7 +49,7 @@
             return other != null && unlocode.Equals(other.unlocode);
         }
 
-
+        #endregion
 
         #region Object's Override 
 
@@ -70,7 +64,7 @@
                 return false;
             }
 
-            var other = (UnLocode)obj;
+            var other = (UnLocode) obj;
 
             return SameValueAs(other);
         }
@@ -79,7 +73,7 @@
         {
             return unlocode.GetHashCode();
         }
-     
+
         public override string ToString()
         {
             return IdString();
@@ -87,10 +81,13 @@
 
         #endregion
 
-
-        protected UnLocode()
+        /// <summary>
+        /// GetVoyage code and location code concatenated, always upper case.
+        /// </summary>
+        /// <returns>code and location code concatenated, always upper case.</returns>
+        public string IdString()
         {
-            // Needed by Hibernate
+            return unlocode;
         }
     }
 }

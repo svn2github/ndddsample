@@ -11,9 +11,11 @@
     /// </summary>
     public class RoutingStatus : IValueObject<RoutingStatus>
     {
+        public static readonly RoutingStatus MISROUTED = new RoutingStatus();
         public static readonly RoutingStatus NOT_ROUTED = new RoutingStatus();
         public static readonly RoutingStatus ROUTED = new RoutingStatus();
-        public static readonly RoutingStatus MISROUTED = new RoutingStatus();
+
+        #region IValueObject<RoutingStatus> Members
 
         /// <summary>
         /// Value objects compare by the values of their attributes, they don't have an identity.
@@ -24,5 +26,7 @@
         {
             return Equals(other);
         }
+
+        #endregion
     }
 }

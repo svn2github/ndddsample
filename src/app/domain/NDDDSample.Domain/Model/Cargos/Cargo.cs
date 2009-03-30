@@ -2,8 +2,10 @@ namespace NDDDSample.Domain.Model.Cargos
 {
     #region Usings
 
+    using Handlings;
     using Locations;
-    using NDDDSample.Domain.Shared;
+    using Shared;
+    using TempHelper;
 
     #endregion
 
@@ -36,12 +38,33 @@ namespace NDDDSample.Domain.Model.Cargos
     /// </summary>
     public class Cargo : IEntity<Cargo>
     {
-        private TrackingId trackingId;
-        private Location origin;
-        private RouteSpecification routeSpecification;
-        private Itinerary itinerary;
+        private readonly Location origin;
+        private readonly TrackingId trackingId;
         private Delivery delivery;
-       
+        private long id;
+        private Itinerary itinerary;
+        private RouteSpecification routeSpecification;
+
+        public Cargo(TrackingId trackingId, RouteSpecification routeSpecification)
+        {
+            Validate.notNull(trackingId, "Tracking ID is required");
+            Validate.notNull(routeSpecification, "Route specification is required");
+
+            this.trackingId = trackingId;
+            // Cargo origin never changes, even if the route specification changes.
+            // However, at creation, cargo orgin can be derived from the initial route specification.
+            origin = routeSpecification.Origin();
+            this.routeSpecification = routeSpecification;
+
+            delivery = Delivery.DerivedFrom(this.routeSpecification, itinerary, HandlingHistory.EMPTY);
+        }
+
+        private Cargo()
+        {
+            // Needed by Hibernate
+        }
+
+        #region IEntity<Cargo> Members
 
         /// <summary>
         /// Entities compare by identity, not by attributes.
@@ -50,9 +73,133 @@ namespace NDDDSample.Domain.Model.Cargos
         /// <returns>true if the identities are the same, regardles of other attributes.</returns>
         public bool SameIdentityAs(Cargo other)
         {
-            throw new System.NotImplementedException();
+            return other != null && trackingId.SameValueAs(other.trackingId);
         }
 
-       
+        #endregion
+
+        #region Object's override
+
+        public override bool Equals(object obj)
+        {
+            if (this == obj)
+            {
+                return true;
+            }
+            if (obj == null || GetType() != obj.GetType())
+            {
+                return false;
+            }
+
+            Cargo other = (Cargo) obj;
+            return SameIdentityAs(other);
+        }
+
+        public override int GetHashCode()
+        {
+            return trackingId.GetHashCode();
+        }
+
+
+        public override string ToString()
+        {
+            return trackingId.ToString();
+        }
+
+        #endregion
+
+        /// <summary>
+        /// The tracking id is the identity of this entity, and is unique.
+        /// </summary>
+        /// <returns>Tracking id.</returns>
+        public TrackingId TrackingId()
+        {
+            return trackingId;
+        }
+
+        /// <summary>
+        /// Origin location.
+        /// </summary>
+        /// <returns></returns>
+        public Location Origin()
+        {
+            return origin;
+        }
+
+        /// <summary>
+        /// The delivery. Never null.
+        /// </summary>
+        /// <returns></returns>
+        public Delivery GetDelivery()
+        {
+            return delivery;
+        }
+
+        /// <summary>
+        /// The itinerary. Never null.
+        /// </summary>
+        /// <returns></returns>
+        public Itinerary GetItinerary()
+        {
+            return DomainObjectUtils.nullSafe(itinerary, Itinerary.EMPTY_ITINERARY);
+        }
+
+        /// <summary>
+        /// he route specification.
+        /// </summary>
+        /// <returns></returns>
+        public RouteSpecification RouteSpecification()
+        {
+            return routeSpecification;
+        }
+
+        /// <summary>
+        /// Specifies a new route for this cargo.
+        /// </summary>
+        /// <param name="routeSpecification">routeSpecification route specification.</param>
+        public void specifyNewRoute(RouteSpecification routeSpecification)
+        {
+            Validate.notNull(routeSpecification, "Route specification is required");
+
+            this.routeSpecification = routeSpecification;
+            // Handling consistency within the Cargo aggregate synchronously
+            delivery = delivery.UpdateOnRouting(this.routeSpecification, itinerary);
+        }
+
+        /// <summary>
+        /// Attach a new itinerary to this cargo.
+        /// </summary>
+        /// <param name="itinerary">itinerary an itinerary. May not be null.</param>
+        public void AssignToRoute(Itinerary itinerary)
+        {
+            Validate.notNull(itinerary, "Itinerary is required for assignment");
+
+            this.itinerary = itinerary;
+            // Handling consistency within the Cargo aggregate synchronously
+            delivery = delivery.UpdateOnRouting(routeSpecification, this.itinerary);
+        }
+
+        /// <summary>
+        ///  Updates all aspects of the cargo aggregate status
+        /// based on the current route specification, itinerary and handling of the cargo.
+        ///<p/>
+        ///When either of those three changes, i.e. when a new route is specified for the cargo,
+        /// the cargo is assigned to a route or when the cargo is handled, the status must be
+        /// re-calculated.
+        /// <p/>
+        /// RouteSpecification and Itinerary are both inside the Cargo
+        /// aggregate, so changes to them cause the status to be updated <b>synchronously</b>,
+        /// but changes to the delivery history (when a cargo is handled) cause the status update
+        /// to happen <b>asynchronously</b> since HandlingEvent is in a different aggregate.
+        /// </summary>
+        /// <param name="handlingHistory"></param>
+        public void DeriveDeliveryProgress(HandlingHistory handlingHistory)
+        {
+            // TODO filter events on cargo (must be same as this cargo)
+
+            // Delivery is a value object, so we can simply discard the old one
+            // and replace it with a new
+            delivery = Delivery.DerivedFrom(RouteSpecification(), GetItinerary(), handlingHistory);
+        }
     }
 }

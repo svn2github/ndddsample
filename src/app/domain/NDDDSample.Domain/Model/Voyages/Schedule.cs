@@ -13,9 +13,8 @@
     /// </summary>
     public class Schedule : IValueObject<Schedule>
     {
-        private readonly List<CarrierMovement> carrierMovements = new List<CarrierMovement>();
-
         public static readonly Schedule EMPTY = new Schedule();
+        private readonly List<CarrierMovement> carrierMovements = new List<CarrierMovement>();
 
 
         internal Schedule(List<CarrierMovement> carrierMovements)
@@ -27,14 +26,12 @@
             this.carrierMovements = carrierMovements;
         }
 
-        /// <summary>
-        /// Carrier movements.
-        /// </summary>
-        /// <returns></returns>
-        public IList<CarrierMovement> CarrierMovements()
+        private Schedule()
         {
-            return new List<CarrierMovement>(carrierMovements).AsReadOnly();
+            // Needed by Hibernate
         }
+
+        #region IValueObject<Schedule> Members
 
         /// <summary>
         /// Value objects compare by the values of their attributes, they don't have an identity.
@@ -44,6 +41,17 @@
         public bool SameValueAs(Schedule other)
         {
             return other != null && carrierMovements.Equals(other.carrierMovements);
+        }
+
+        #endregion
+
+        /// <summary>
+        /// Carrier movements.
+        /// </summary>
+        /// <returns></returns>
+        public IList<CarrierMovement> CarrierMovements()
+        {
+            return new List<CarrierMovement>(carrierMovements).AsReadOnly();
         }
 
         public override bool Equals(object o)
@@ -65,11 +73,6 @@
         public override int GetHashCode()
         {
             return new HashCodeBuilder().Append(carrierMovements).ToHashCode();
-        }
-
-        private Schedule()
-        {
-            // Needed by Hibernate
         }
     }
 }

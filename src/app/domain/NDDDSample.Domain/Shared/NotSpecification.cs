@@ -24,9 +24,9 @@ namespace NDDDSample.Domain.Shared
         /// </summary>
         /// <param name="t">Object to test.</param>
         /// <returns>true if t satisfies the specification.</returns>
-        public override bool isSatisfiedBy(T t)
+        public override bool IsSatisfiedBy(T t)
         {
-            return !spec1.isSatisfiedBy(t);
+            return !spec1.IsSatisfiedBy(t);
         }
 
         #endregion

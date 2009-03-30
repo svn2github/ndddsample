@@ -1,5 +1,5 @@
 namespace NDDDSample.Domain.Shared
-{   
+{
     /// <summary>
     /// A value object, as described in the DDD book.
     /// </summary>

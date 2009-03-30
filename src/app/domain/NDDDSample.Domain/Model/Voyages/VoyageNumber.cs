@@ -20,7 +20,14 @@
             Validate.notNull(number);
 
             this.number = number;
-        }       
+        }
+
+        protected VoyageNumber()
+        {
+            // Needed by Hibernate
+        }
+
+        #region IValueObject<VoyageNumber> Members
 
         /// <summary>
         /// Value objects compare by the values of their attributes, they don't have an identity.
@@ -31,6 +38,8 @@
         {
             return other != null && number.Equals(other.number);
         }
+
+        #endregion
 
         #region Object's override
 
@@ -44,12 +53,12 @@
             {
                 return false;
             }
-            if (!(obj.GetType().IsInstanceOfType(typeof(VoyageNumber))))
+            if (!(obj.GetType().IsInstanceOfType(typeof (VoyageNumber))))
             {
                 return false;
             }
 
-            var other = (VoyageNumber)obj;
+            var other = (VoyageNumber) obj;
 
             return SameValueAs(other);
         }
@@ -70,11 +79,6 @@
         public string IdString()
         {
             return number;
-        }
-
-        protected VoyageNumber()
-        {
-            // Needed by Hibernate
         }
     }
 }

@@ -18,46 +18,18 @@
     /// </summary>
     public class Delivery : IValueObject<Delivery>
     {
-        private TransportStatus transportStatus;
-        private Location lastKnownLocation;
-        private Voyage currentVoyage;
-        private bool misdirected;
-        private DateTime eta;
-        private HandlingActivity nextExpectedActivity;
-        private bool isUnloadedAtDestination;
-        private RoutingStatus routingStatus;
-        private DateTime calculatedAt;
-        private HandlingEvent lastEvent;
-
-        //TODO: atrosin revise ETA_UNKOWN = null
-        private static DateTime ETA_UNKOWN = DateTime.MinValue;
-        private static HandlingActivity NO_ACTIVITY = null;
-
-        /// <summary>
-        /// Creates a new delivery snapshot to reflect changes in routing, i.e.
-        /// when the route specification or the itinerary has changed
-        /// but no additional handling of the cargo has been performed.
-        /// </summary>
-        /// <param name="routeSpecification">route specification</param>
-        /// <param name="itinerary">itinerary itinerary</param>
-        /// <returns>An up to date delivery</returns>
-        private Delivery UpdateOnRouting(RouteSpecification routeSpecification, Itinerary itinerary)
-        {
-            Validate.notNull(routeSpecification, "Route specification is required");
-
-            return new Delivery(lastEvent, itinerary, routeSpecification);
-        }
-
-        private static Delivery DerivedFrom(RouteSpecification routeSpecification, Itinerary itinerary,
-                                            HandlingHistory handlingHistory)
-        {
-            Validate.notNull(routeSpecification, "Route specification is required");
-            Validate.notNull(handlingHistory, "Delivery history is required");
-
-            HandlingEvent lastEvent = handlingHistory.MostRecentlyCompletedEvent();
-
-            return new Delivery(lastEvent, itinerary, routeSpecification);
-        }
+        private static readonly DateTime ETA_UNKOWN = DateTime.MinValue;
+        private static HandlingActivity NO_ACTIVITY;
+        private readonly DateTime calculatedAt;
+        private readonly Voyage currentVoyage;
+        private readonly DateTime eta;
+        private readonly bool isUnloadedAtDestination;
+        private readonly HandlingEvent lastEvent;
+        private readonly Location lastKnownLocation;
+        private readonly bool misdirected;
+        private readonly HandlingActivity nextExpectedActivity;
+        private readonly RoutingStatus routingStatus;
+        private readonly TransportStatus transportStatus;
 
         /// <summary>
         /// Internal constructor.
@@ -78,6 +50,100 @@
             eta = CalculateEta(itinerary);
             nextExpectedActivity = CalculateNextExpectedActivity(routeSpecification, itinerary);
             isUnloadedAtDestination = CalculateUnloadedAtDestination(routeSpecification);
+        }
+
+        private Delivery()
+        {
+            // Needed by Hibernate
+        }
+
+        #region IValueObject<Delivery> Members
+
+        /// <summary>
+        /// Value objects compare by the values of their attributes, they don't have an identity.
+        /// </summary>
+        /// <param name="other">The other value object.</param>
+        /// <returns>true if the given value object's and this value object's attributes are the same.</returns>
+        public bool SameValueAs(Delivery other)
+        {
+            return other != null && new EqualsBuilder().
+                                        Append(transportStatus, other.transportStatus).
+                                        Append(lastKnownLocation, other.lastKnownLocation).
+                                        Append(currentVoyage, other.currentVoyage).
+                                        Append(misdirected, other.misdirected).
+                                        Append(eta, other.eta).
+                                        Append(nextExpectedActivity, other.nextExpectedActivity).
+                                        Append(isUnloadedAtDestination, other.isUnloadedAtDestination).
+                                        Append(routingStatus, other.routingStatus).
+                                        Append(calculatedAt, other.calculatedAt).
+                                        Append(lastEvent, other.lastEvent).
+                                        IsEquals();
+        }
+
+        #endregion
+
+        #region Object's override
+
+        public override bool Equals(object obj)
+        {
+            if (this == obj)
+            {
+                return true;
+            }
+            if (obj == null || GetType() != obj.GetType())
+            {
+                return false;
+            }
+
+            Delivery other = (Delivery) obj;
+
+            return SameValueAs(other);
+        }
+
+        public override int GetHashCode()
+        {
+            return new HashCodeBuilder().
+                Append(transportStatus).
+                Append(lastKnownLocation).
+                Append(currentVoyage).
+                Append(misdirected).
+                Append(eta).
+                Append(nextExpectedActivity).
+                Append(isUnloadedAtDestination).
+                Append(routingStatus).
+                Append(calculatedAt).
+                Append(lastEvent).
+                ToHashCode();
+        }
+
+        #endregion
+
+        //TODO: atrosin revise ETA_UNKOWN = null
+
+        /// <summary>
+        /// Creates a new delivery snapshot to reflect changes in routing, i.e.
+        /// when the route specification or the itinerary has changed
+        /// but no additional handling of the cargo has been performed.
+        /// </summary>
+        /// <param name="routeSpecification">route specification</param>
+        /// <param name="itinerary">itinerary itinerary</param>
+        /// <returns>An up to date delivery</returns>
+        internal Delivery UpdateOnRouting(RouteSpecification routeSpecification, Itinerary itinerary)
+        {
+            Validate.notNull(routeSpecification, "Route specification is required");
+
+            return new Delivery(lastEvent, itinerary, routeSpecification);
+        }
+
+        internal static Delivery DerivedFrom(RouteSpecification routeSpecification, Itinerary itinerary,
+                                             HandlingHistory handlingHistory)
+        {
+            Validate.notNull(routeSpecification, "Route specification is required");
+            Validate.notNull(handlingHistory, "Delivery history is required");
+
+            HandlingEvent lastEvent = handlingHistory.MostRecentlyCompletedEvent();
+
+            return new Delivery(lastEvent, itinerary, routeSpecification);
         }
 
         /// <summary>
@@ -217,7 +283,7 @@
         {
             if (transportStatus.Equals(TransportStatus.ONBOARD_CARRIER) && lastEvent != null)
             {
-                return lastEvent.Voyage();
+                return lastEvent.GetVoyage();
             }
             return null;
         }
@@ -311,7 +377,7 @@
                 return RoutingStatus.NOT_ROUTED;
             }
 
-            if (routeSpecification.isSatisfiedBy(itinerary))
+            if (routeSpecification.IsSatisfiedBy(itinerary))
             {
                 return RoutingStatus.ROUTED;
             }
@@ -323,74 +389,12 @@
         {
             return lastEvent != null &&
                    HandlingEvent.HandlingType.UNLOAD.SameValueAs(lastEvent.Type()) &&
-                   routeSpecification.Destination().sameIdentityAs(lastEvent.Location());
+                   routeSpecification.Destination().SameIdentityAs(lastEvent.Location());
         }
 
         private bool OnTrack()
         {
-            return routingStatus.Equals(RoutingStatus.ROUTED) && !misdirected;  
-        }
-
-        /// <summary>
-        /// Value objects compare by the values of their attributes, they don't have an identity.
-        /// </summary>
-        /// <param name="other">The other value object.</param>
-        /// <returns>true if the given value object's and this value object's attributes are the same.</returns>
-        public bool SameValueAs(Delivery other)
-        {
-            return other != null && new EqualsBuilder().
-                                        Append(transportStatus, other.transportStatus).
-                                        Append(lastKnownLocation, other.lastKnownLocation).
-                                        Append(currentVoyage, other.currentVoyage).
-                                        Append(misdirected, other.misdirected).
-                                        Append(eta, other.eta).
-                                        Append(nextExpectedActivity, other.nextExpectedActivity).
-                                        Append(isUnloadedAtDestination, other.isUnloadedAtDestination).
-                                        Append(routingStatus, other.routingStatus).
-                                        Append(calculatedAt, other.calculatedAt).
-                                        Append(lastEvent, other.lastEvent).
-                                        IsEquals();
-        }
-
-        #region Object's override
-
-        public override bool Equals(object obj)
-        {
-            if (this == obj)
-            {
-                return true;
-            }
-            if (obj == null || GetType() != obj.GetType())
-            {
-                return false;
-            }
-
-            Delivery other = (Delivery) obj;
-
-            return SameValueAs(other);
-        }
-
-        public override int GetHashCode()
-        {
-            return new HashCodeBuilder().
-                Append(transportStatus).
-                Append(lastKnownLocation).
-                Append(currentVoyage).
-                Append(misdirected).
-                Append(eta).
-                Append(nextExpectedActivity).
-                Append(isUnloadedAtDestination).
-                Append(routingStatus).
-                Append(calculatedAt).
-                Append(lastEvent).
-                ToHashCode();
-        }
-
-        #endregion
-
-        private Delivery()
-        {
-            // Needed by Hibernate
+            return routingStatus.Equals(RoutingStatus.ROUTED) && !misdirected;
         }
     }
 }

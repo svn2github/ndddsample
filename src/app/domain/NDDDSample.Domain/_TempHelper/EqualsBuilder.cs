@@ -1,6 +1,10 @@
 namespace NDDDSample.Domain.TempHelper
 {
+    #region Usings
+
     using System;
+
+    #endregion
 
     public class EqualsBuilder
     {

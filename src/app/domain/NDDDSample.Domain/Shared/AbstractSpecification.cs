@@ -14,14 +14,14 @@
         /// </summary>
         /// <param name="t">Object to test.</param>
         /// <returns>true if t satisfies the specification.</returns>
-        public abstract bool isSatisfiedBy(T t);
+        public abstract bool IsSatisfiedBy(T t);
 
         /// <summary>
         /// Create a new specification that is the AND operation of this specification and another specification.
         /// </summary>
         /// <param name="specification">Specification to AND.</param>
         /// <returns>A new specification.</returns>
-        public ISpecification<T> and(ISpecification<T> specification)
+        public ISpecification<T> And(ISpecification<T> specification)
         {
             return new AndSpecification<T>(this, specification);
         }
@@ -31,7 +31,7 @@
         /// </summary>
         /// <param name="specification">Specification to OR.</param>
         /// <returns>A new specification.</returns>
-        public ISpecification<T> or(ISpecification<T> specification)
+        public ISpecification<T> Or(ISpecification<T> specification)
         {
             return new OrSpecification<T>(this, specification);
         }
@@ -41,7 +41,7 @@
         /// </summary>
         /// <param name="specification">Specification to NOT.</param>
         /// <returns>A new specification.</returns>
-        public ISpecification<T> not(ISpecification<T> specification)
+        public ISpecification<T> Not(ISpecification<T> specification)
         {
             return new NotSpecification<T>(specification);
         }

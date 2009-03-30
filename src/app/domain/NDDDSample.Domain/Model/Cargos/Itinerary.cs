@@ -1,20 +1,25 @@
 ﻿namespace NDDDSample.Domain.Model.Cargos
 {
+    #region Usings
+
     using System;
+    using System.Collections.Generic;
     using Handlings;
     using Locations;
     using Shared;
-    using System.Collections.Generic;
     using TempHelper;
+
+    #endregion
 
     /// <summary>
     /// An itinerary.
     /// </summary>
     public class Itinerary : IValueObject<Itinerary>
     {
-        private readonly List<Leg> legs = new List<Leg>();
-        static Itinerary EMPTY_ITINERARY = new Itinerary();
         private static readonly DateTime END_OF_DAYS = DateTime.MaxValue;
+        internal static Itinerary EMPTY_ITINERARY = new Itinerary();
+        private readonly List<Leg> legs = new List<Leg>();
+        private long id;
 
         public Itinerary(List<Leg> legs)
         {
@@ -23,6 +28,25 @@
 
             this.legs = legs;
         }
+
+        private Itinerary()
+        {
+            // Needed by Hibernate
+        }
+
+        #region IValueObject<Itinerary> Members
+
+        /// <summary>
+        /// Value objects compare by the values of their attributes, they don't have an identity.
+        /// </summary>
+        /// <param name="other">The other value object.</param>
+        /// <returns>true if the given value object's and this value object's attributes are the same.</returns>
+        public bool SameValueAs(Itinerary other)
+        {
+            return other != null && legs.Equals(other.legs);
+        }
+
+        #endregion
 
         /// <summary>
         /// the legs of this itinerary, as an <b>immutable</b> list.
@@ -58,8 +82,10 @@
                 foreach (Leg leg in legs)
                 {
                     if (leg.LoadLocation().SameIdentityAs(handlingEvent.Location()) &&
-                        leg.Voyage().SameIdentityAs(handlingEvent.Voyage()))
+                        leg.Voyage().SameIdentityAs(handlingEvent.GetVoyage()))
+                    {
                         return true;
+                    }
                 }
                 return false;
             }
@@ -70,8 +96,10 @@
                 foreach (Leg leg in legs)
                 {
                     if (leg.UnloadLocation().Equals(handlingEvent.Location()) &&
-                        leg.Voyage().Equals(handlingEvent.Voyage()))
+                        leg.Voyage().Equals(handlingEvent.GetVoyage()))
+                    {
                         return true;
+                    }
                 }
                 return false;
             }
@@ -91,7 +119,7 @@
         /// The initial departure location.
         /// </summary>
         /// <returns></returns>
-        Location InitialDepartureLocation()
+        internal Location InitialDepartureLocation()
         {
             if (legs.IsEmpty())
             {
@@ -104,7 +132,7 @@
         /// Date when cargo arrives at final destination.
         /// </summary>
         /// <returns></returns>
-        Location FinalArrivalLocation()
+        internal Location FinalArrivalLocation()
         {
             if (legs.IsEmpty())
             {
@@ -135,7 +163,7 @@
         /// The last leg on the itinerary.
         /// </summary>
         /// <returns></returns>
-        Leg LastLeg()
+        private Leg LastLeg()
         {
             if (legs.IsEmpty())
             {
@@ -145,22 +173,18 @@
         }
 
 
-        /// <summary>
-        /// Value objects compare by the values of their attributes, they don't have an identity.
-        /// </summary>
-        /// <param name="other">The other value object.</param>
-        /// <returns>true if the given value object's and this value object's attributes are the same.</returns>
-        public bool SameValueAs(Itinerary other)
-        {
-            return other != null && legs.Equals(other.legs);
-        }
-
         public override bool Equals(object obj)
         {
-            if (this == obj) return true;
-            if (obj == null || GetType() != obj.GetType()) return false;
+            if (this == obj)
+            {
+                return true;
+            }
+            if (obj == null || GetType() != obj.GetType())
+            {
+                return false;
+            }
 
-            var itinerary = (Itinerary)obj;
+            var itinerary = (Itinerary) obj;
 
             return SameValueAs(itinerary);
         }
@@ -170,13 +194,5 @@
             //TODO: atrosin ensure that hashcode is returned correctly: java version legs.hashCode();
             return legs.GetHashCode();
         }
-
-        Itinerary()
-        {
-            // Needed by Hibernate
-        }
-
-        // Auto-generated surrogate key
-        private long id;
     }
 }

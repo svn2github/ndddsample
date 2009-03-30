@@ -3,7 +3,7 @@
     /// <summary>
     /// An entity, as explained in the DDD book.
     /// </summary>  
-    public interface IEntity<T> 
+    public interface IEntity<T>
     {
         /// <summary>
         /// Entities compare by identity, not by attributes.

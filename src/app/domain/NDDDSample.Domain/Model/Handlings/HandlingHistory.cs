@@ -13,8 +13,8 @@
     /// </summary>
     public class HandlingHistory : IValueObject<HandlingHistory>
     {
-        private List<HandlingEvent> handlingEvents;
         public static readonly HandlingHistory EMPTY = new HandlingHistory(new List<HandlingEvent>());
+        private readonly List<HandlingEvent> handlingEvents;
 
         public HandlingHistory(IEnumerable<HandlingEvent> handlingEvents)
         {
@@ -22,6 +22,20 @@
 
             this.handlingEvents = new List<HandlingEvent>(handlingEvents);
         }
+
+        #region IValueObject<HandlingHistory> Members
+
+        /// <summary>
+        /// Value objects compare by the values of their attributes, they don't have an identity.
+        /// </summary>
+        /// <param name="other">The other value object.</param>
+        /// <returns>true if the given value object's and this value object's attributes are the same.</returns>
+        public bool SameValueAs(HandlingHistory other)
+        {
+            return other != null && handlingEvents.Equals(other.handlingEvents);
+        }
+
+        #endregion
 
         /// <summary>
         /// A distinct list (no duplicate registrations) of handling events, ordered by completion time.
@@ -48,16 +62,6 @@
                 return null;
             }
             return distinctEvents[distinctEvents.Count - 1];
-        }
-
-        /// <summary>
-        /// Value objects compare by the values of their attributes, they don't have an identity.
-        /// </summary>
-        /// <param name="other">The other value object.</param>
-        /// <returns>true if the given value object's and this value object's attributes are the same.</returns>
-        public bool SameValueAs(HandlingHistory other)
-        {
-            return other != null && handlingEvents.Equals(other.handlingEvents);
         }
 
         public override bool Equals(object obj)

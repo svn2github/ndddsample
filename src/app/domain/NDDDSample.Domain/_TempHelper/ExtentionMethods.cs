@@ -1,15 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace NDDDSample.Domain.TempHelper
+﻿namespace NDDDSample.Domain.TempHelper
 {
+    #region Usings
+
+    using System;
+    using System.Collections.Generic;
+
+    #endregion
+
     public static class ExtentionMethods
     {
         public static bool IsEmpty<T>(this IList<T> list)
         {
             return list == null || list.Count == 0;
+        }
+
+        public static bool After(this DateTime dateTime, DateTime when)
+        {
+            return dateTime > when;
         }
     }
 }

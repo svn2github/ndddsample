@@ -15,10 +15,10 @@
     /// </summary>
     public class Location : IEntity<Location>
     {
-        private readonly UnLocode unLocode;
-        private readonly string name;
-
         public static readonly Location UNKNOWN = new Location(new UnLocode("XXXXX"), "Unknown location");
+        private readonly string name;
+        private readonly UnLocode unLocode;
+        protected long id;
 
         /// <summary>
         ///  Package-level constructor, visible for test only.
@@ -34,26 +34,12 @@
             this.name = name;
         }
 
-
-        /// <summary>
-        /// Get UN Locode for this location.
-        /// </summary>
-        /// <returns>UN Locode for this location.</returns>
-        public UnLocode UnLocode()
+        protected Location()
         {
-            return unLocode;
+            // Needed by Hibernate
         }
 
-        /// <summary>
-        /// Get Actual name of this location
-        /// </summary>
-        /// <returns>Actual name of this location, e.g. "Stockholm".</returns>
-        public string Name()
-        {
-            return name;
-        }
-       
-       
+        #region IEntity<Location> Members
 
         /// <summary>
         /// Value objects compare by the values of their attributes, they don't have an identity.
@@ -64,7 +50,8 @@
         {
             return unLocode.SameValueAs(other.unLocode);
         }
-     
+
+        #endregion
 
         #region Object's Override
 
@@ -83,11 +70,11 @@
             {
                 return true;
             }
-            if (!(obj.GetType().IsInstanceOfType(typeof(Location))))
+            if (!(obj.GetType().IsInstanceOfType(typeof (Location))))
             {
                 return false;
             }
-            var other = (Location)obj;
+            var other = (Location) obj;
             return SameIdentityAs(other);
         }
 
@@ -101,13 +88,25 @@
         {
             return name + " [" + unLocode + "]";
         }
+
         #endregion
 
-        protected Location()
+        /// <summary>
+        /// GetVoyage UN Locode for this location.
+        /// </summary>
+        /// <returns>UN Locode for this location.</returns>
+        public UnLocode UnLocode()
         {
-            // Needed by Hibernate
+            return unLocode;
         }
 
-        protected long id;
+        /// <summary>
+        /// GetVoyage Actual name of this location
+        /// </summary>
+        /// <returns>Actual name of this location, e.g. "Stockholm".</returns>
+        public string Name()
+        {
+            return name;
+        }
     }
 }

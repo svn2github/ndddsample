@@ -24,7 +24,16 @@ namespace NDDDSample.Domain.Model.Cargos
             this.id = id;
         }
 
-       
+        /// <summary>
+        /// String representation of this tracking id.
+        /// </summary>
+        /// <returns></returns>
+        public string IdString()
+        {
+            return id;
+        }
+
+        #region IValueObject<TrackingId> Members
 
         /// <summary>
         /// Value objects compare by the values of their attributes, they don't have an identity.
@@ -36,6 +45,36 @@ namespace NDDDSample.Domain.Model.Cargos
             return other != null && id.Equals(other.id);
         }
 
-       
+        #endregion
+
+        #region Object's override
+
+        public override bool Equals(object obj)
+        {
+            if (this == obj) return true;
+            if (obj == null || GetType() != obj.GetType()) return false;
+
+            TrackingId other = (TrackingId)obj;
+
+            return SameValueAs(other);
+        }
+
+
+        public override int GetHashCode()
+        {
+            return id.GetHashCode();
+        }
+
+        public override string ToString()
+        {
+            return id;
+        }
+
+        #endregion 
+
+        TrackingId()
+        {
+            // Needed by Hibernate
+        }
     }
 }
