@@ -21,7 +21,7 @@
         private readonly VoyageNumber voyageNumber;
         private long id;
 
-        #region Neted Voyage Builder 
+        #region Nested Voyage Builder 
 
         /// <summary>
         ///  Builder pattern is used for incremental construction
