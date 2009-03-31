@@ -13,23 +13,29 @@
     /// </summary>
     public class SampleLocations
     {
-        public static IDictionary<UnLocode, Location> ALL = new Dictionary<UnLocode, Location>();
-        public static Location CHICAGO = new Location(new UnLocode("USCHI"), "Chicago");
-        public static Location DALLAS = new Location(new UnLocode("USDAL"), "Dallas");
+        public static readonly IDictionary<UnLocode, Location> ALL = new Dictionary<UnLocode, Location>();
+
+        #region Cities
+
+        public static readonly Location CHICAGO = new Location(new UnLocode("USCHI"), "Chicago");
+        public static readonly Location DALLAS = new Location(new UnLocode("USDAL"), "Dallas");
         public static Location GOTHENBURG = new Location(new UnLocode("SEGOT"), "Göteborg");
-        public static Location HAMBURG = new Location(new UnLocode("DEHAM"), "Hamburg");
-        public static Location HANGZOU = new Location(new UnLocode("CNHGH"), "Hangzhou");
-        public static Location HELSINKI = new Location(new UnLocode("FIHEL"), "Helsinki");
-        public static Location HONGKONG = new Location(new UnLocode("CNHKG"), "Hongkong");
-        public static Location MELBOURNE = new Location(new UnLocode("AUMEL"), "Melbourne");
-        public static Location NEWYORK = new Location(new UnLocode("USNYC"), "New York");
-        public static Location ROTTERDAM = new Location(new UnLocode("NLRTM"), "Rotterdam");
-        public static Location SHANGHAI = new Location(new UnLocode("CNSHA"), "Shanghai");
-        public static Location STOCKHOLM = new Location(new UnLocode("SESTO"), "Stockholm");
-        public static Location TOKYO = new Location(new UnLocode("JNTKO"), "Tokyo");
+        public static readonly Location HAMBURG = new Location(new UnLocode("DEHAM"), "Hamburg");
+        public static readonly Location HANGZOU = new Location(new UnLocode("CNHGH"), "Hangzhou");
+        public static readonly Location HELSINKI = new Location(new UnLocode("FIHEL"), "Helsinki");
+        public static readonly Location HONGKONG = new Location(new UnLocode("CNHKG"), "Hongkong");
+        public static readonly Location MELBOURNE = new Location(new UnLocode("AUMEL"), "Melbourne");
+        public static readonly Location NEWYORK = new Location(new UnLocode("USNYC"), "New York");
+        public static readonly Location ROTTERDAM = new Location(new UnLocode("NLRTM"), "Rotterdam");
+        public static readonly Location SHANGHAI = new Location(new UnLocode("CNSHA"), "Shanghai");
+        public static readonly Location STOCKHOLM = new Location(new UnLocode("SESTO"), "Stockholm");
+        public static readonly Location TOKYO = new Location(new UnLocode("JNTKO"), "Tokyo");
+
+        #endregion
 
         static SampleLocations()
         {
+            //TODO: atrosin verify if that logic works correctly
             foreach (var fieldInfo in typeof (SampleLocations).GetFields(BindingFlags.Static))
             {
                 try

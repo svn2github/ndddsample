@@ -4,6 +4,7 @@
 
     using System;
     using System.Collections.Generic;
+    using System.Reflection;
     using Locations;
 
     #endregion
@@ -115,7 +116,26 @@
         {
             return ALL[voyageNumber];
         }
+        
+        static SampleVoyages()
+        {
+            //TODO: atrosin verify if that logic works correctly
+            foreach (var fieldInfo in typeof(SampleVoyages).GetFields(BindingFlags.Static))
+            {
+                try
+                {
+                    if (fieldInfo.FieldType == typeof(Voyage))
+                    {
+                        var voyage = (Voyage)fieldInfo.GetValue(null);
+                        ALL.Add(voyage.VoyageNumber(), voyage);
+                    }
+                }
+                catch (Exception e)
+                {
+                    throw new Exception("Can't initialize Sample Locations", e);
+                }
+            }
 
-        //TODO: atrosin port the logic
+        }
     }
 }

@@ -5,9 +5,9 @@
     using System;
     using System.Text;
     using Cargos;
+    using JavaRelated;
     using Locations;
     using Shared;
-    using TempHelper;
     using Voyages;
 
     #endregion
@@ -104,11 +104,11 @@
             Validate.notNull(registrationTime, "Registration time is required");
             Validate.notNull(eventType, "Handling event eventType is required");
             Validate.notNull(location, "Location is required");
-            Validate.notNull(voyage, "GetVoyage is required");
+            Validate.notNull(voyage, "Voyage is required");
 
             if (eventType.ProhibitsVoyage())
             {
-                throw new ArgumentException("GetVoyage is not allowed with event eventType " + eventType);
+                throw new ArgumentException("Voyage is not allowed with event eventType " + eventType);
             }
 
             this.voyage = voyage;
@@ -134,7 +134,7 @@
 
             if (type.RequiresVoyage())
             {
-                throw new ArgumentException("GetVoyage is required for event type " + type);
+                throw new ArgumentException("Voyage is required for event type " + type);
             }
 
             //TODO: atrosin revise (DateTime) completionTime.Clone(); and (DateTime) registrationTime.clone();
@@ -236,7 +236,7 @@
 
             if (voyage != null)
             {
-                builder.Append("GetVoyage: ").Append(voyage.VoyageNumber()).Append("\n");
+                builder.Append("Voyage: ").Append(voyage.VoyageNumber()).Append("\n");
             }
 
             return builder.ToString();

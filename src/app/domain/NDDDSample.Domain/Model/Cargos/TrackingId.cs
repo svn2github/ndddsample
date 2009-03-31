@@ -2,8 +2,8 @@ namespace NDDDSample.Domain.Model.Cargos
 {
     #region Usings
 
+    using JavaRelated;
     using Shared;
-    using TempHelper;
 
     #endregion
 

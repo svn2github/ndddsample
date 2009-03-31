@@ -4,14 +4,14 @@
 
     using System;
     using System.Collections.Generic;
+    using JavaRelated;
     using Locations;
     using Shared;
-    using TempHelper;
 
     #endregion
 
     /// <summary>
-    /// A GetVoyage.
+    /// A Voyage.
     /// </summary>
     public class Voyage : IEntity<Voyage>
     {
@@ -21,11 +21,11 @@
         private readonly VoyageNumber voyageNumber;
         private long id;
 
-        #region Neted GetVoyage Builder 
+        #region Neted Voyage Builder 
 
         /// <summary>
         ///  Builder pattern is used for incremental construction
-        ///  of a GetVoyage aggregate. This serves as an aggregate factory.
+        ///  of a Voyage aggregate. This serves as an aggregate factory.
         /// TODO:atrosin revise the java declaration if is port correctly:  static final class Builder {
         /// </summary>
         public class Builder
@@ -36,7 +36,7 @@
 
             public Builder(VoyageNumber voyageNumber, Location departureLocation)
             {
-                Validate.notNull(voyageNumber, "GetVoyage number is required");
+                Validate.notNull(voyageNumber, "Voyage number is required");
                 Validate.notNull(departureLocation, "Departure location is required");
 
                 this.voyageNumber = voyageNumber;
@@ -61,8 +61,8 @@
 
         public Voyage(VoyageNumber voyageNumber, Schedule schedule)
         {
-            Validate.notNull(voyageNumber, "GetVoyage number is required");
-            Validate.notNull(schedule, "GetSchedule is required");
+            Validate.notNull(voyageNumber, "Voyage number is required");
+            Validate.notNull(schedule, "Schedule is required");
 
             this.voyageNumber = voyageNumber;
             this.schedule = schedule;
@@ -83,7 +83,7 @@
         #endregion
 
         /// <summary>
-        /// GetVoyage number.
+        /// Voyage number.
         /// </summary>
         /// <returns></returns>
         public VoyageNumber VoyageNumber()
@@ -128,7 +128,7 @@
 
         public override String ToString()
         {
-            return "GetVoyage " + voyageNumber;
+            return "Voyage " + voyageNumber;
         }
     }
 }

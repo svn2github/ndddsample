@@ -3,9 +3,9 @@
     #region Usings
 
     using Handlings;
+    using JavaRelated;
     using Locations;
     using Shared;
-    using TempHelper;
     using Voyages;
 
     #endregion
@@ -36,7 +36,7 @@
         {
             Validate.notNull(type, "Handling event type is required");
             Validate.notNull(location, "Location is required");
-            Validate.notNull(location, "GetVoyage is required");
+            Validate.notNull(location, "Voyage is required");
 
             this.type = type;
             this.location = location;

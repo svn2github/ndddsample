@@ -3,8 +3,8 @@
     #region Usings
 
     using System.Text.RegularExpressions;
+    using JavaRelated;
     using Shared;
-    using TempHelper;
 
     #endregion
 
@@ -82,7 +82,7 @@
         #endregion
 
         /// <summary>
-        /// GetVoyage code and location code concatenated, always upper case.
+        /// Voyage code and location code concatenated, always upper case.
         /// </summary>
         /// <returns>code and location code concatenated, always upper case.</returns>
         public string IdString()

@@ -3,8 +3,8 @@
     #region Usings
 
     using System;
+    using JavaRelated;
     using Shared;
-    using TempHelper;
 
     #endregion
 

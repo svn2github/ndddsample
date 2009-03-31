@@ -67,7 +67,7 @@
     <Compile Include="Model\Voyages\CarrierMovement.cs" />
     <Compile Include="Model\Voyages\IVoyageRepository.cs" />
     <Compile Include="Model\Voyages\SampleVoyages.cs" />
-    <Compile Include="_TempHelper\EqualsBuilder.cs" />
+    <Compile Include="JavaRelated\EqualsBuilder.cs" />
     <Compile Include="Model\Voyages\Schedule.cs" />
     <Compile Include="Model\Voyages\Voyage.cs" />
     <Compile Include="Model\Voyages\VoyageNumber.cs" />
@@ -81,9 +81,9 @@
     <Compile Include="Shared\IValueObject.cs" />
     <Compile Include="Shared\NotSpecification.cs" />
     <Compile Include="Shared\OrSpecification.cs" />
-    <Compile Include="_TempHelper\ExtentionMethods.cs" />
-    <Compile Include="_TempHelper\HashCodeBuilder.cs" />
-    <Compile Include="_TempHelper\Validate.cs" />
+    <Compile Include="JavaRelated\ExtentionMethods.cs" />
+    <Compile Include="JavaRelated\HashCodeBuilder.cs" />
+    <Compile Include="JavaRelated\Validate.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\..\NDDDSample.snk">

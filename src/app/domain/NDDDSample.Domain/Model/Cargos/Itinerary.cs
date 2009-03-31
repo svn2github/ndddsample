@@ -5,9 +5,9 @@
     using System;
     using System.Collections.Generic;
     using Handlings;
+    using JavaRelated;
     using Locations;
     using Shared;
-    using TempHelper;
 
     #endregion
 
@@ -73,7 +73,7 @@
             {
                 //Check that the first leg's origin is the event's location
                 Leg leg = legs[0];
-                return (leg.LoadLocation().Equals(handlingEvent.Location()));
+                return leg.LoadLocation().Equals(handlingEvent.Location());
             }
 
             if (handlingEvent.Type() == HandlingEvent.HandlingType.LOAD)

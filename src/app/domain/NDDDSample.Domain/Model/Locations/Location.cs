@@ -2,8 +2,8 @@
 {
     #region Usings
 
+    using JavaRelated;
     using Shared;
-    using TempHelper;
 
     #endregion
 
@@ -92,7 +92,7 @@
         #endregion
 
         /// <summary>
-        /// GetVoyage UN Locode for this location.
+        /// Voyage UN Locode for this location.
         /// </summary>
         /// <returns>UN Locode for this location.</returns>
         public UnLocode UnLocode()
@@ -101,7 +101,7 @@
         }
 
         /// <summary>
-        /// GetVoyage Actual name of this location
+        /// Voyage Actual name of this location
         /// </summary>
         /// <returns>Actual name of this location, e.g. "Stockholm".</returns>
         public string Name()
