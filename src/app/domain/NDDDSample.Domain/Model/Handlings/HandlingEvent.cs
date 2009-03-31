@@ -105,12 +105,12 @@
                              Location location,
                              Voyage voyage)
         {
-            Validate.notNull(cargo, "Cargo is required");
-            Validate.notNull(completionTime, "Completion time is required");
-            Validate.notNull(registrationTime, "Registration time is required");
-            Validate.notNull(eventType, "Handling event eventType is required");
-            Validate.notNull(location, "Location is required");
-            Validate.notNull(voyage, "Voyage is required");
+            Validate.NotNull(cargo, "Cargo is required");
+            Validate.NotNull(completionTime, "Completion time is required");
+            Validate.NotNull(registrationTime, "Registration time is required");
+            Validate.NotNull(eventType, "Handling event eventType is required");
+            Validate.NotNull(location, "Location is required");
+            Validate.NotNull(voyage, "Voyage is required");
 
             if (eventType.ProhibitsVoyage())
             {
@@ -132,11 +132,11 @@
                              HandlingType type,
                              Location location)
         {
-            Validate.notNull(cargo, "Cargo is required");
-            Validate.notNull(completionTime, "Completion time is required");
-            Validate.notNull(registrationTime, "Registration time is required");
-            Validate.notNull(type, "Handling event type is required");
-            Validate.notNull(location, "Location is required");
+            Validate.NotNull(cargo, "Cargo is required");
+            Validate.NotNull(completionTime, "Completion time is required");
+            Validate.NotNull(registrationTime, "Registration time is required");
+            Validate.NotNull(type, "Handling event type is required");
+            Validate.NotNull(location, "Location is required");
 
             if (type.RequiresVoyage())
             {
@@ -183,7 +183,7 @@
 
         public Voyage Voyage
         {
-            get { return DomainObjectUtils.nullSafe(voyage, Voyage.NONE); }
+            get { return DomainObjectUtils.NullSafe(voyage, Voyage.NONE); }
         }
 
         public DateTime CompletionTime

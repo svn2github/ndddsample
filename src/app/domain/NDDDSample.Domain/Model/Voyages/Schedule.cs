@@ -20,9 +20,9 @@
 
         internal Schedule(List<CarrierMovement> carrierMovements)
         {
-            Validate.notNull(carrierMovements);
-            Validate.noNullElements(carrierMovements);
-            Validate.notEmpty(carrierMovements);
+            Validate.NotNull(carrierMovements);
+            Validate.NoNullElements(carrierMovements);
+            Validate.NotEmpty(carrierMovements);
 
             this.carrierMovements = carrierMovements;
         }

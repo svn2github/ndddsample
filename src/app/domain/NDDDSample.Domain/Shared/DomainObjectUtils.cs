@@ -12,7 +12,7 @@ namespace NDDDSample.Domain.Shared
         /// <param name="actual">actual value</param>
         /// <param name="safe">a null-safe value</param>
         /// <returns>actual value, if it's not null, or safe value if the actual value is null.</returns>
-        public static T nullSafe<T>(T actual, T safe)
+        public static T NullSafe<T>(T actual, T safe)
             where T : class
         {
             return actual ?? safe;

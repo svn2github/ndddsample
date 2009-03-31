@@ -47,8 +47,8 @@ namespace NDDDSample.Domain.Model.Cargos
 
         public Cargo(TrackingId trackingId, RouteSpecification routeSpecification)
         {
-            Validate.notNull(trackingId, "Tracking ID is required");
-            Validate.notNull(routeSpecification, "Route specification is required");
+            Validate.NotNull(trackingId, "Tracking ID is required");
+            Validate.NotNull(routeSpecification, "Route specification is required");
 
             this.trackingId = trackingId;
             // Cargo origin never changes, even if the route specification changes.
@@ -139,7 +139,7 @@ namespace NDDDSample.Domain.Model.Cargos
         /// </summary>       
         public Itinerary Itinerary
         {
-            get { return DomainObjectUtils.nullSafe(itinerary, Itinerary.EMPTY_ITINERARY); }
+            get { return DomainObjectUtils.NullSafe(itinerary, Itinerary.EMPTY_ITINERARY); }
         }
 
         /// <summary>
@@ -160,7 +160,7 @@ namespace NDDDSample.Domain.Model.Cargos
         /// <param name="routeSpec">routeSpecification route specification.</param>
         public void SpecifyNewRoute(RouteSpecification routeSpec)
         {
-            Validate.notNull(routeSpec, "Route specification is required");
+            Validate.NotNull(routeSpec, "Route specification is required");
 
             this.routeSpecification = routeSpec;
             // Handling consistency within the Cargo aggregate synchronously
@@ -173,7 +173,7 @@ namespace NDDDSample.Domain.Model.Cargos
         /// <param name="itineraryPrm">itinerary an itinerary. May not be null.</param>
         public void AssignToRoute(Itinerary itineraryPrm)
         {
-            Validate.notNull(itineraryPrm, "Itinerary is required for assignment");
+            Validate.NotNull(itineraryPrm, "Itinerary is required for assignment");
 
             this.itinerary = itineraryPrm;
             // Handling consistency within the Cargo aggregate synchronously

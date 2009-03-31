@@ -20,7 +20,7 @@
 
         public HandlingHistory(IEnumerable<HandlingEvent> handlingEvents)
         {
-            Validate.notNull(handlingEvents, "Handling events are required");
+            Validate.NotNull(handlingEvents, "Handling events are required");
 
             this.handlingEvents = new List<HandlingEvent>(handlingEvents);
         }

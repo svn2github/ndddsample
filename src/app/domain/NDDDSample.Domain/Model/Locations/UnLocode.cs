@@ -27,8 +27,8 @@
         /// <param name="countryAndLocation">Location string</param>
         public UnLocode(string countryAndLocation)
         {
-            Validate.notNull(countryAndLocation, "Country and location may not be null");
-            Validate.isTrue(VALID_PATTERN.Match(countryAndLocation).Success,
+            Validate.NotNull(countryAndLocation, "Country and location may not be null");
+            Validate.IsTrue(VALID_PATTERN.Match(countryAndLocation).Success,
                             countryAndLocation + " is not a valid UN/LOCODE (does not match pattern)");
 
             unlocode = countryAndLocation.ToUpper();

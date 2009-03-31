@@ -36,8 +36,8 @@
 
             public Builder(VoyageNumber voyageNumber, Location departureLocation)
             {
-                Validate.notNull(voyageNumber, "Voyage number is required");
-                Validate.notNull(departureLocation, "Departure location is required");
+                Validate.NotNull(voyageNumber, "Voyage number is required");
+                Validate.NotNull(departureLocation, "Departure location is required");
 
                 this.voyageNumber = voyageNumber;
                 this.departureLocation = departureLocation;
@@ -63,8 +63,8 @@
 
         public Voyage(VoyageNumber voyageNumber, Schedule schedule)
         {
-            Validate.notNull(voyageNumber, "Voyage number is required");
-            Validate.notNull(schedule, "Schedule is required");
+            Validate.NotNull(voyageNumber, "Voyage number is required");
+            Validate.NotNull(schedule, "Schedule is required");
 
             this.voyageNumber = voyageNumber;
             this.schedule = schedule;

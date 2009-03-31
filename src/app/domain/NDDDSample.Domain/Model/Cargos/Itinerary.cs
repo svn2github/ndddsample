@@ -25,8 +25,8 @@
 
         public Itinerary(List<Leg> legs)
         {
-            Validate.notEmpty(legs);
-            Validate.noNullElements(legs);
+            Validate.NotEmpty(legs);
+            Validate.NoNullElements(legs);
 
             this.legs = legs;
         }

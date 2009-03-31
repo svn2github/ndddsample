@@ -26,8 +26,8 @@
 
         public HandlingActivity(HandlingEvent.HandlingType type, Location location)
         {
-            Validate.notNull(type, "Handling event type is required");
-            Validate.notNull(location, "Location is required");
+            Validate.NotNull(type, "Handling event type is required");
+            Validate.NotNull(location, "Location is required");
 
             this.type = type;
             this.location = location;
@@ -35,9 +35,9 @@
 
         public HandlingActivity(HandlingEvent.HandlingType type, Location location, Voyage voyage)
         {
-            Validate.notNull(type, "Handling event type is required");
-            Validate.notNull(location, "Location is required");
-            Validate.notNull(location, "Voyage is required");
+            Validate.NotNull(type, "Handling event type is required");
+            Validate.NotNull(location, "Location is required");
+            Validate.NotNull(location, "Voyage is required");
 
             this.type = type;
             this.location = location;

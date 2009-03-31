@@ -22,7 +22,7 @@ namespace NDDDSample.Domain.Model.Cargos
         /// <param name="id"></param>
         public TrackingId(string id)
         {
-            Validate.notNull(id);
+            Validate.NotNull(id);
             this.id = id;
         }
 

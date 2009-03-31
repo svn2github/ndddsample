@@ -29,10 +29,10 @@
         /// <param name="arrivalDeadline">arrival deadline</param>
         public RouteSpecification(Location origin, Location destination, DateTime arrivalDeadline)
         {
-            Validate.notNull(origin, "Origin is required");
-            Validate.notNull(destination, "Destination is required");
-            Validate.notNull(arrivalDeadline, "Arrival deadline is required");
-            Validate.isTrue(!origin.SameIdentityAs(destination), "Origin and destination can't be the same: " + origin);
+            Validate.NotNull(origin, "Origin is required");
+            Validate.NotNull(destination, "Destination is required");
+            Validate.NotNull(arrivalDeadline, "Arrival deadline is required");
+            Validate.IsTrue(!origin.SameIdentityAs(destination), "Origin and destination can't be the same: " + origin);
 
             this.origin = origin;
             this.destination = destination;

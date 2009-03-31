@@ -5,7 +5,7 @@
 
     public class Validate
     {
-        public static void notNull(object id, string msg)
+        public static void NotNull(object id, string msg)
         {
             if (id == null)
             {
@@ -13,7 +13,7 @@
             }
         }
 
-        public static void notNull(object id)
+        public static void NotNull(object id)
         {
             if (id == null)
             {
@@ -21,7 +21,7 @@
             }
         }
 
-        public static void isTrue(bool isTrue, string msg)
+        public static void IsTrue(bool isTrue, string msg)
         {
             if (!isTrue)
             {
@@ -29,23 +29,23 @@
             }
         }
 
-        public static void noNullElements(object[] objects)
+        public static void NoNullElements(object[] objects)
         {
             foreach (object obj in objects)
             {
-                notNull(obj);
+                NotNull(obj);
             }
         }
 
-        public static void noNullElements<T>(IList<T> objects)
+        public static void NoNullElements<T>(IList<T> objects)
         {
             foreach (object obj in objects)
             {
-                notNull(obj);
+                NotNull(obj);
             }
         }
 
-        public static void notEmpty<T>(IList<T> movements)
+        public static void NotEmpty<T>(IList<T> movements)
         {
             if (movements == null || movements.Count == 0)
             {

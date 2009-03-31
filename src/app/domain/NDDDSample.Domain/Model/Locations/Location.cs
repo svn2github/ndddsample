@@ -29,8 +29,8 @@
         /// <param name="name">location name</param>
         internal Location(UnLocode unLocode, string name)
         {
-            Validate.notNull(unLocode);
-            Validate.notNull(name);
+            Validate.NotNull(unLocode);
+            Validate.NotNull(name);
 
             this.unLocode = unLocode;
             this.name = name;

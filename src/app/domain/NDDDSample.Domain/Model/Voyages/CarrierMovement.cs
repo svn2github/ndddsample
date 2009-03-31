@@ -43,7 +43,7 @@
                                DateTime departureTime,
                                DateTime arrivalTime)
         {
-            Validate.noNullElements(new object[] {departureLocation, arrivalLocation, departureTime, arrivalTime});
+            Validate.NoNullElements(new object[] {departureLocation, arrivalLocation, departureTime, arrivalTime});
             this.departureTime = departureTime;
             this.arrivalTime = arrivalTime;
             this.departureLocation = departureLocation;

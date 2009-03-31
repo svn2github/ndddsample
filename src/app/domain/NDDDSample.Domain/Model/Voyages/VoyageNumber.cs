@@ -19,7 +19,7 @@
 
         public VoyageNumber(String number)
         {
-            Validate.notNull(number);
+            Validate.NotNull(number);
 
             this.number = number;
         }

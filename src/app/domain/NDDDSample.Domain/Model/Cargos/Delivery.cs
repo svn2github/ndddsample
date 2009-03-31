@@ -140,7 +140,7 @@
         /// <returns>An up to date delivery</returns>
         internal Delivery UpdateOnRouting(RouteSpecification routeSpecification, Itinerary itinerary)
         {
-            Validate.notNull(routeSpecification, "Route specification is required");
+            Validate.NotNull(routeSpecification, "Route specification is required");
 
             return new Delivery(lastEvent, itinerary, routeSpecification);
         }
@@ -148,8 +148,8 @@
         internal static Delivery DerivedFrom(RouteSpecification routeSpecification, Itinerary itinerary,
                                              HandlingHistory handlingHistory)
         {
-            Validate.notNull(routeSpecification, "Route specification is required");
-            Validate.notNull(handlingHistory, "Delivery history is required");
+            Validate.NotNull(routeSpecification, "Route specification is required");
+            Validate.NotNull(handlingHistory, "Delivery history is required");
 
             HandlingEvent lastEvent = handlingHistory.MostRecentlyCompletedEvent();
 
@@ -173,7 +173,7 @@
         /// </summary>
         public Location LastKnownLocation
         {
-            get { return DomainObjectUtils.nullSafe(lastKnownLocation, Location.UNKNOWN); }
+            get { return DomainObjectUtils.NullSafe(lastKnownLocation, Location.UNKNOWN); }
         }
 
         /// <summary>
@@ -181,7 +181,7 @@
         /// </summary>
         public Voyage CurrentVoyage
         {
-            get { return DomainObjectUtils.nullSafe(currentVoyage, Voyage.NONE); }
+            get { return DomainObjectUtils.NullSafe(currentVoyage, Voyage.NONE); }
         }
 
         /// <summary>
