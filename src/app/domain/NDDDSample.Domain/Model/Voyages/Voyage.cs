@@ -59,6 +59,8 @@
 
         #endregion
 
+        #region Constr
+
         public Voyage(VoyageNumber voyageNumber, Schedule schedule)
         {
             Validate.notNull(voyageNumber, "Voyage number is required");
@@ -73,32 +75,39 @@
             // Needed by Hibernate
         }
 
+        #endregion
+
         #region IEntity<Voyage> Members
 
         public bool SameIdentityAs(Voyage other)
         {
-            return other != null && VoyageNumber().SameValueAs(other.VoyageNumber());
+            return other != null && VoyageNumber.SameValueAs(other.VoyageNumber);
         }
 
         #endregion
 
+        #region Public Props
+
         /// <summary>
         /// Voyage number.
         /// </summary>
-        /// <returns></returns>
-        public VoyageNumber VoyageNumber()
+        public VoyageNumber VoyageNumber
         {
-            return voyageNumber;
+            get { return voyageNumber; }
         }
 
         /// <summary>
         /// GetSchedule
         /// </summary>
         /// <returns></returns>
-        public Schedule GetSchedule()
+        public Schedule Schedule
         {
-            return schedule;
+            get { return schedule; }
         }
+
+        #endregion
+
+        #region Object's override
 
         public override int GetHashCode()
         {
@@ -130,5 +139,7 @@
         {
             return "Voyage " + voyageNumber;
         }
+
+        #endregion
     }
 }

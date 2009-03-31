@@ -14,6 +14,9 @@
     /// </summary>
     public class CarrierMovement : IValueObject<CarrierMovement>
     {
+        #region Private fields
+
+        // Null object pattern 
         public static CarrierMovement NONE = new CarrierMovement(
             Location.UNKNOWN, Location.UNKNOWN, new DateTime(0), new DateTime(0));
 
@@ -23,8 +26,9 @@
         private readonly DateTime departureTime;
         protected long id;
 
-        // Null object pattern 
+        #endregion
 
+        #region Constr
 
         /// <summary>
         /// Constructor.
@@ -50,6 +54,8 @@
         {
             // Needed by Hibernate
         }
+
+        #endregion
 
         #region IValueObject<CarrierMovement> Members
 
@@ -100,42 +106,48 @@
 
         #endregion
 
+        #region Public Props
+
         /// <summary>
         /// Departure location.
         /// </summary>
-        /// <returns></returns>
-        public Location DepartureLocation()
+        public Location DepartureLocation
         {
-            return departureLocation;
+            get { return departureLocation; }
         }
 
         /// <summary>
         /// Arrival location.
         /// </summary>
-        /// <returns></returns>
-        public Location ArrivalLocation()
+        public Location ArrivalLocation
         {
-            return arrivalLocation;
+            get { return arrivalLocation; }
         }
 
         /// <summary>
         /// Time of departure.
         /// </summary>
-        /// <returns></returns>
-        public DateTime DepartureTime()
+        public DateTime DepartureTime
         {
-            //TODO: atrosin : new Date(arrivalTime.getTime());
-            return departureTime;
+            get
+            {
+                //TODO: atrosin : new Date(arrivalTime.getTime());
+                return departureTime;
+            }
         }
 
         /// <summary>
         ///  Time of arrival.
         /// </summary>
-        /// <returns></returns>
-        public DateTime ArrivalTime()
+        public DateTime ArrivalTime
         {
-            //TODO: atrosin : new Date(arrivalTime.getTime());
-            return arrivalTime;
+            get
+            {
+                //TODO: atrosin : new Date(arrivalTime.getTime());
+                return arrivalTime;
+            }
         }
+
+        #endregion
     }
 }

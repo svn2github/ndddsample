@@ -1,7 +1,11 @@
 ﻿namespace NDDDSample.Domain.Service
 {
+    #region Usings
+
     using System.Collections.Generic;
     using Model.Cargos;
+
+    #endregion
 
     /// <summary>
     ///  Routing service.

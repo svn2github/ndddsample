@@ -18,10 +18,11 @@
     public class HandlingActivity : IValueObject<HandlingActivity>
     {
         // TODO make HandlingActivity a part of HandlingEvent too? There is some overlap. 
-
         private readonly Location location;
         private readonly HandlingEvent.HandlingType type;
         private readonly Voyage voyage;
+
+        #region Constr
 
         public HandlingActivity(HandlingEvent.HandlingType type, Location location)
         {
@@ -48,6 +49,8 @@
             // Needed by Hibernate
         }
 
+        #endregion
+
         #region IValueObject<HandlingActivity> Members
 
         public bool SameValueAs(HandlingActivity other)
@@ -72,7 +75,7 @@
                 ToHashCode();
         }
 
-        public bool Equals(object obj)
+        public override bool Equals(object obj)
         {
             if (obj == this)
             {
@@ -94,19 +97,23 @@
 
         #endregion
 
-        public HandlingEvent.HandlingType Type()
+        #region Props
+
+        public HandlingEvent.HandlingType Type
         {
-            return type;
+            get { return type; }
         }
 
-        public Location Location()
+        public Location Location
         {
-            return location;
+            get { return location; }
         }
 
-        public Voyage Voyage()
+        public Voyage Voyage
         {
-            return voyage;
+            get { return voyage; }
         }
+
+        #endregion
     }
 }

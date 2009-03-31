@@ -19,6 +19,8 @@
         private readonly Location destination;
         private readonly Location origin;
 
+        #region Constr
+
         /// <summary>
         /// Constructor.
         /// </summary>
@@ -42,6 +44,8 @@
         {
             // Needed by Hibernate
         }
+
+        #endregion
 
         #region IValueObject<RouteSpecification> Members
 
@@ -85,36 +89,41 @@
 
         #endregion
 
+        #region Props
+
         /// <summary>
         /// Specified origin location.
         /// </summary>
-        /// <returns></returns>
-        public Location Origin()
+        public Location Origin
         {
-            return origin;
+            get { return origin; }
         }
 
         /// <summary>
         /// Specfied destination location.
         /// </summary>
-        /// <returns></returns>
-        public Location Destination()
+        public Location Destination
         {
-            return destination;
+            get { return destination; }
         }
 
-        public DateTime ArrivalDeadline()
+        public DateTime ArrivalDeadline
         {
-            //TODO: atrosin revise new Date(arrivalDeadline.getTime());
-            return arrivalDeadline;
+            get
+            {
+                //TODO: atrosin revise new Date(arrivalDeadline.getTime());
+                return arrivalDeadline;
+            }
         }
+
+        #endregion
 
         public override bool IsSatisfiedBy(Itinerary itinerary)
         {
             return itinerary != null &&
-                   Origin().SameIdentityAs(itinerary.InitialDepartureLocation()) &&
-                   Destination().SameIdentityAs(itinerary.FinalArrivalLocation()) &&
-                   ArrivalDeadline().After(itinerary.FinalArrivalDate());
+                   Origin.SameIdentityAs(itinerary.InitialDepartureLocation) &&
+                   Destination.SameIdentityAs(itinerary.FinalArrivalLocation) &&
+                   ArrivalDeadline.After(itinerary.FinalArrivalDate);
         }
     }
 }

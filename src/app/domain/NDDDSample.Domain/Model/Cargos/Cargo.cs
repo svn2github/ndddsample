@@ -53,7 +53,7 @@ namespace NDDDSample.Domain.Model.Cargos
             this.trackingId = trackingId;
             // Cargo origin never changes, even if the route specification changes.
             // However, at creation, cargo orgin can be derived from the initial route specification.
-            origin = routeSpecification.Origin();
+            origin = routeSpecification.Origin;
             this.routeSpecification = routeSpecification;
 
             delivery = Delivery.DerivedFrom(this.routeSpecification, itinerary, HandlingHistory.EMPTY);
@@ -91,7 +91,7 @@ namespace NDDDSample.Domain.Model.Cargos
                 return false;
             }
 
-            Cargo other = (Cargo) obj;
+            var other = (Cargo) obj;
             return SameIdentityAs(other);
         }
 
@@ -108,60 +108,61 @@ namespace NDDDSample.Domain.Model.Cargos
 
         #endregion
 
+        #region Props
+
         /// <summary>
         /// The tracking id is the identity of this entity, and is unique.
-        /// </summary>
-        /// <returns>Tracking id.</returns>
-        public TrackingId TrackingId()
+        /// </summary>      
+        public TrackingId TrackingId
         {
-            return trackingId;
+            get { return trackingId; }
         }
 
         /// <summary>
         /// Origin location.
-        /// </summary>
-        /// <returns></returns>
-        public Location Origin()
+        /// </summary>      
+        public Location Origin
         {
-            return origin;
+            get { return origin; }
         }
 
         /// <summary>
         /// The delivery. Never null.
-        /// </summary>
-        /// <returns></returns>
-        public Delivery GetDelivery()
+        /// </summary>       
+        public Delivery Delivery
         {
-            return delivery;
+            get { return delivery; }
         }
 
         /// <summary>
         /// The itinerary. Never null.
-        /// </summary>
-        /// <returns></returns>
-        public Itinerary GetItinerary()
+        /// </summary>       
+        public Itinerary Itinerary
         {
-            return DomainObjectUtils.nullSafe(itinerary, Itinerary.EMPTY_ITINERARY);
+            get { return DomainObjectUtils.nullSafe(itinerary, Itinerary.EMPTY_ITINERARY); }
         }
 
         /// <summary>
-        /// he route specification.
-        /// </summary>
-        /// <returns></returns>
-        public RouteSpecification RouteSpecification()
+        /// The route specification.
+        /// </summary>       
+        public RouteSpecification RouteSpecification
         {
-            return routeSpecification;
+            get { return routeSpecification; }
         }
+
+        #endregion
+
+        #region Pub Methods
 
         /// <summary>
         /// Specifies a new route for this cargo.
         /// </summary>
-        /// <param name="routeSpecification">routeSpecification route specification.</param>
-        public void specifyNewRoute(RouteSpecification routeSpecification)
+        /// <param name="routeSpec">routeSpecification route specification.</param>
+        public void SpecifyNewRoute(RouteSpecification routeSpec)
         {
-            Validate.notNull(routeSpecification, "Route specification is required");
+            Validate.notNull(routeSpec, "Route specification is required");
 
-            this.routeSpecification = routeSpecification;
+            this.routeSpecification = routeSpec;
             // Handling consistency within the Cargo aggregate synchronously
             delivery = delivery.UpdateOnRouting(this.routeSpecification, itinerary);
         }
@@ -169,12 +170,12 @@ namespace NDDDSample.Domain.Model.Cargos
         /// <summary>
         /// Attach a new itinerary to this cargo.
         /// </summary>
-        /// <param name="itinerary">itinerary an itinerary. May not be null.</param>
-        public void AssignToRoute(Itinerary itinerary)
+        /// <param name="itineraryPrm">itinerary an itinerary. May not be null.</param>
+        public void AssignToRoute(Itinerary itineraryPrm)
         {
-            Validate.notNull(itinerary, "Itinerary is required for assignment");
+            Validate.notNull(itineraryPrm, "Itinerary is required for assignment");
 
-            this.itinerary = itinerary;
+            this.itinerary = itineraryPrm;
             // Handling consistency within the Cargo aggregate synchronously
             delivery = delivery.UpdateOnRouting(routeSpecification, this.itinerary);
         }
@@ -199,7 +200,9 @@ namespace NDDDSample.Domain.Model.Cargos
 
             // Delivery is a value object, so we can simply discard the old one
             // and replace it with a new
-            delivery = Delivery.DerivedFrom(RouteSpecification(), GetItinerary(), handlingHistory);
+            delivery = Delivery.DerivedFrom(RouteSpecification, Itinerary, handlingHistory);
         }
+
+        #endregion
     }
 }

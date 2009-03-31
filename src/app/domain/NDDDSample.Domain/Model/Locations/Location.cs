@@ -20,6 +20,8 @@
         private readonly UnLocode unLocode;
         protected long id;
 
+        #region Constr
+
         /// <summary>
         ///  Package-level constructor, visible for test only.
         /// </summary>
@@ -38,6 +40,8 @@
         {
             // Needed by Hibernate
         }
+
+        #endregion
 
         #region IEntity<Location> Members
 
@@ -91,22 +95,25 @@
 
         #endregion
 
+        #region Public Props
+
         /// <summary>
         /// Voyage UN Locode for this location.
         /// </summary>
-        /// <returns>UN Locode for this location.</returns>
-        public UnLocode UnLocode()
+        public UnLocode UnLocode
         {
-            return unLocode;
+            get { return unLocode; }
         }
 
         /// <summary>
-        /// Voyage Actual name of this location
+        /// Actual name of this location, e.g. "Stockholm".
         /// </summary>
-        /// <returns>Actual name of this location, e.g. "Stockholm".</returns>
-        public string Name()
+        /// <returns></returns>
+        public string Name
         {
-            return name;
+            get { return name; }
         }
+
+        #endregion
     }
 }

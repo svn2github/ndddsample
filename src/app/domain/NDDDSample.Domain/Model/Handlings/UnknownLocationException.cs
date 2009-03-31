@@ -18,7 +18,7 @@
 
         public override string Message
         {
-            get { return "No location with UN locode " + unlocode.IdString() + " exists in the system"; }
+            get { return "No location with UN locode " + unlocode.IdString + " exists in the system"; }
         }
     }
 }

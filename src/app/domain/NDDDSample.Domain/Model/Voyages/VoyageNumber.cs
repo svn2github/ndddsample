@@ -15,6 +15,8 @@
     {
         private readonly string number;
 
+        #region Constr
+
         public VoyageNumber(String number)
         {
             Validate.notNull(number);
@@ -26,6 +28,8 @@
         {
             // Needed by Hibernate
         }
+
+        #endregion
 
         #region IValueObject<VoyageNumber> Members
 
@@ -76,9 +80,9 @@
 
         #endregion
 
-        public string IdString()
+        public string IdString
         {
-            return number;
+            get { return number; }
         }
     }
 }

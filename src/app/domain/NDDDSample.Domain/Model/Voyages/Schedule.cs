@@ -16,6 +16,7 @@
         public static readonly Schedule EMPTY = new Schedule();
         private readonly List<CarrierMovement> carrierMovements = new List<CarrierMovement>();
 
+        #region Constr
 
         internal Schedule(List<CarrierMovement> carrierMovements)
         {
@@ -30,6 +31,8 @@
         {
             // Needed by Hibernate
         }
+
+        #endregion
 
         #region IValueObject<Schedule> Members
 
@@ -48,11 +51,12 @@
         /// <summary>
         /// Carrier movements.
         /// </summary>
-        /// <returns></returns>
-        public IList<CarrierMovement> CarrierMovements()
+        public IList<CarrierMovement> CarrierMovements
         {
-            return new List<CarrierMovement>(carrierMovements).AsReadOnly();
+            get { return new List<CarrierMovement>(carrierMovements).AsReadOnly(); }
         }
+
+        #region Object's override
 
         public override bool Equals(object o)
         {
@@ -74,5 +78,8 @@
         {
             return new HashCodeBuilder().Append(carrierMovements).ToHashCode();
         }
+
+        #endregion
+
     }
 }

@@ -22,6 +22,8 @@
         private readonly Voyage voyage;
         protected long id;
 
+        #region Constr
+
         public Leg(Voyage voyage, Location loadLocation, Location unloadLocation, DateTime loadTime, DateTime unloadTime)
         {
             Validate.noNullElements(new Object[] {voyage, loadLocation, unloadLocation, loadTime, unloadTime});
@@ -37,6 +39,8 @@
         {
             // Needed by Hibernate
         }
+
+        #endregion
 
         #region IValueObject<Leg> Members
 
@@ -89,30 +93,38 @@
 
         #endregion
 
-        public Voyage Voyage()
+        #region Public props
+
+        public Voyage Voyage
         {
-            return voyage;
+            get { return voyage; }
         }
 
-        public Location LoadLocation()
+        public Location LoadLocation
         {
-            return loadLocation;
+            get { return loadLocation; }
         }
 
-        public Location UnloadLocation()
+        public Location UnloadLocation
         {
-            return unloadLocation;
+            get { return unloadLocation; }
         }
 
-        public DateTime LoadTime()
+        public DateTime LoadTime
         {
-            return loadTime;
+            get { return loadTime; }
         }
 
-        public DateTime UnloadTime()
+        public DateTime UnloadTime
         {
-            //TODO: atrosin : new Date(unloadTime.getTime());
-            return unloadTime;
+            get
+            {
+                //TODO: atrosin : new Date(unloadTime.getTime());
+                return unloadTime;
+            }
         }
+
+        #endregion
+
     }
 }

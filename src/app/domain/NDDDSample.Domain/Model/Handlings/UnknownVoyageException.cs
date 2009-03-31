@@ -18,10 +18,9 @@
             this.voyageNumber = voyageNumber;
         }
 
-
         public override string Message
         {
-            get { return "No voyage with number " + voyageNumber.IdString() + " exists in the system"; }
+            get { return "No voyage with number " + voyageNumber.IdString + " exists in the system"; }
         }
     }
 }

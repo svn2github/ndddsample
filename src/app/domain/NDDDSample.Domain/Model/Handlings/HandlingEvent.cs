@@ -14,6 +14,8 @@
 
     public sealed class HandlingEvent : IDomainEvent<HandlingEvent>
     {
+        #region Private Props
+
         private readonly Cargo cargo;
         private readonly DateTime completionTime;
         private readonly Location location;
@@ -21,6 +23,8 @@
         private readonly HandlingType type;
         private readonly Voyage voyage;
         private long id;
+
+        #endregion
 
         #region Nested HandlingType
 
@@ -82,6 +86,8 @@
         }
 
         #endregion
+
+        #region Constr
 
         /// <summary>
         /// Constructor.
@@ -151,6 +157,8 @@
             // Needed by Hibernate
         }
 
+        #endregion
+
         #region IDomainEvent<HandlingEvent> Members
 
         public bool SameEventAs(HandlingEvent other)
@@ -166,37 +174,49 @@
 
         #endregion
 
-        public HandlingType Type()
+        #region Public Props
+
+        public HandlingType Type
         {
-            return type;
+            get { return type; }
         }
 
-        public Voyage GetVoyage()
+        public Voyage Voyage
         {
-            return DomainObjectUtils.nullSafe(voyage, Voyage.NONE);
+            get { return DomainObjectUtils.nullSafe(voyage, Voyage.NONE); }
         }
 
-        public DateTime CompletionTime()
+        public DateTime CompletionTime
         {
-            //TODO: atrosin revise translation new Date(this.completionTime.getTime());
-            return completionTime;
+            get
+            {
+                //TODO: atrosin revise translation new Date(this.completionTime.getTime());
+                return completionTime;
+            }
         }
 
-        public DateTime RegistrationTime()
+        public DateTime RegistrationTime
         {
-            //TODO: atrosin revise new Date(this.registrationTime.getTime());
-            return registrationTime;
+            get
+            {
+                //TODO: atrosin revise new Date(this.registrationTime.getTime());
+                return registrationTime;
+            }
         }
 
-        public Location Location()
+        public Location Location
         {
-            return location;
+            get { return location; }
         }
 
-        public Cargo Cargo()
+        public Cargo Cargo
         {
-            return cargo;
+            get { return cargo; }
         }
+
+        #endregion
+
+        #region Object's override
 
         public override bool Equals(object obj)
         {
@@ -209,7 +229,7 @@
                 return false;
             }
 
-            HandlingEvent eventType = (HandlingEvent) obj;
+            var eventType = (HandlingEvent) obj;
 
             return SameEventAs(eventType);
         }
@@ -228,18 +248,20 @@
         public override string ToString()
         {
             StringBuilder builder = new StringBuilder("\n--- Handling event ---\n").
-                Append("Cargo: ").Append(cargo.TrackingId()).Append("\n").
+                Append("Cargo: ").Append(cargo.TrackingId).Append("\n").
                 Append("Type: ").Append(type).Append("\n").
-                Append("Location: ").Append(location.Name()).Append("\n").
+                Append("Location: ").Append(location.Name).Append("\n").
                 Append("Completed on: ").Append(completionTime).Append("\n").
                 Append("Registered on: ").Append(registrationTime).Append("\n");
 
             if (voyage != null)
             {
-                builder.Append("Voyage: ").Append(voyage.VoyageNumber()).Append("\n");
+                builder.Append("Voyage: ").Append(voyage.VoyageNumber).Append("\n");
             }
 
             return builder.ToString();
         }
+
+        #endregion
     }
 }

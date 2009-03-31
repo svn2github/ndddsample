@@ -19,6 +19,8 @@
         private static readonly Regex VALID_PATTERN = new Regex("[a-zA-Z]{2}[a-zA-Z2-9]{3}", RegexOptions.Compiled);
         private readonly string unlocode;
 
+        #region Constr
+
         /// <summary>
         ///  Constructor.
         /// </summary>
@@ -36,6 +38,8 @@
         {
             // Needed by Hibernate
         }
+
+        #endregion
 
         #region IValueObject<UnLocode> Members
 
@@ -76,7 +80,7 @@
 
         public override string ToString()
         {
-            return IdString();
+            return IdString;
         }
 
         #endregion
@@ -84,10 +88,9 @@
         /// <summary>
         /// Voyage code and location code concatenated, always upper case.
         /// </summary>
-        /// <returns>code and location code concatenated, always upper case.</returns>
-        public string IdString()
+        public string IdString
         {
-            return unlocode;
+            get { return unlocode; }
         }
     }
 }

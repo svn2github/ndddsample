@@ -18,6 +18,9 @@
     /// </summary>
     public class Delivery : IValueObject<Delivery>
     {
+        #region Private props
+
+        //TODO: atrosin revise ETA_UNKOWN = null
         private static readonly DateTime ETA_UNKOWN = DateTime.MinValue;
         private static HandlingActivity NO_ACTIVITY;
         private readonly DateTime calculatedAt;
@@ -31,6 +34,10 @@
         private readonly RoutingStatus routingStatus;
         private readonly TransportStatus transportStatus;
 
+        #endregion
+
+        #region Constr
+
         /// <summary>
         /// Internal constructor.
         /// </summary>
@@ -39,6 +46,7 @@
         /// <param name="routeSpecification">route specification</param>
         private Delivery(HandlingEvent lastEvent, Itinerary itinerary, RouteSpecification routeSpecification)
         {
+            NO_ACTIVITY = null;
             calculatedAt = new DateTime();
             this.lastEvent = lastEvent;
 
@@ -56,6 +64,8 @@
         {
             // Needed by Hibernate
         }
+
+        #endregion
 
         #region IValueObject<Delivery> Members
 
@@ -118,7 +128,7 @@
 
         #endregion
 
-        //TODO: atrosin revise ETA_UNKOWN = null
+        #region Internal Methods
 
         /// <summary>
         /// Creates a new delivery snapshot to reflect changes in routing, i.e.
@@ -146,99 +156,102 @@
             return new Delivery(lastEvent, itinerary, routeSpecification);
         }
 
+        #endregion
+
+        #region Props
+
         /// <summary>
         /// Transport status
         /// </summary>
-        /// <returns></returns>
-        public TransportStatus GetTransportStatus()
+        public TransportStatus TransportStatus
         {
-            return transportStatus;
+            get { return transportStatus; }
         }
 
         /// <summary>
         /// Last known location of the cargo, or Location.UNKNOWN if the delivery history is empty.
         /// </summary>
-        /// <returns></returns>
-        public Location LastKnownLocation()
+        public Location LastKnownLocation
         {
-            return DomainObjectUtils.nullSafe(lastKnownLocation, Location.UNKNOWN);
+            get { return DomainObjectUtils.nullSafe(lastKnownLocation, Location.UNKNOWN); }
         }
 
         /// <summary>
         /// Current voyage.
         /// </summary>
-        /// <returns></returns>
-        public Voyage CurrentVoyage()
+        public Voyage CurrentVoyage
         {
-            return DomainObjectUtils.nullSafe(currentVoyage, Voyage.NONE);
+            get { return DomainObjectUtils.nullSafe(currentVoyage, Voyage.NONE); }
+        }
+
+        /// <summary>
+        /// Estimated time of arrival
+        /// </summary>     
+        public bool IsMisdirected
+        {
+            get { return misdirected; }
         }
 
         /// <summary>
         /// Estimated time of arrival
         /// </summary>
-        /// <returns></returns>
-        public bool IsMisdirected()
+        public DateTime EstimatedTimeOfArrival
         {
-            return misdirected;
-        }
-
-        /// <summary>
-        /// Estimated time of arrival
-        /// </summary>
-        /// <returns></returns>
-        public DateTime EstimatedTimeOfArrival()
-        {
-            if (eta != ETA_UNKOWN)
+            get
             {
-                //TODO: atrosin revise new Date(eta.getTime());
-                return eta;
-            }
+                if (eta != ETA_UNKOWN)
+                {
+                    //TODO: atrosin revise new Date(eta.getTime());
+                    return eta;
+                }
 
-            return ETA_UNKOWN;
+                return ETA_UNKOWN;
+            }
         }
 
         /// <summary>
         /// The next expected handling activity.
         /// </summary>
-        /// <returns></returns>
-        public HandlingActivity NextExpectedActivity()
+        public HandlingActivity NextExpectedActivity
         {
-            return nextExpectedActivity;
+            get { return nextExpectedActivity; }
         }
 
         /// <summary>
         /// True if the cargo has been unloaded at the final destination.
         /// </summary>
-        /// <returns></returns>
-        public bool IsUnloadedAtDestination()
+        public bool IsUnloadedAtDestination
         {
-            return isUnloadedAtDestination;
+            get { return isUnloadedAtDestination; }
         }
 
         /// <summary>
         /// Routing status.
         /// </summary>
         /// <returns></returns>
-        public RoutingStatus GetRoutingStatus()
+        public RoutingStatus RoutingStatus
         {
-            return routingStatus;
+            get { return routingStatus; }
         }
 
         /// <summary>
         /// When this delivery was calculated.
         /// </summary>
-        /// <returns></returns>
-        public DateTime CalculatedAt()
+        public DateTime CalculatedAt
         {
-            //TODO: atrosin new DateTime(calculatedAt.getTime());
-            return calculatedAt;
+            get
+            {
+                //TODO: atrosin new DateTime(calculatedAt.getTime());
+                return calculatedAt;
+            }
         }
 
-        // TODO add currentCarrierMovement (?)
+        #endregion
 
+        #region Private Methods
 
         // --- Internal calculations below ---
-
+        // TODO add currentCarrierMovement (?)
         private TransportStatus CalculateTransportStatus()
         {
             //TODO: atrosin revise the if pattern spagetti code
@@ -248,21 +261,21 @@
                 return TransportStatus.NOT_RECEIVED;
             }
 
-            if (lastEvent.Type() == HandlingEvent.HandlingType.LOAD)
+            if (lastEvent.Type == HandlingEvent.HandlingType.LOAD)
             {
                 return TransportStatus.ONBOARD_CARRIER;
             }
 
-            bool isInPort = lastEvent.Type() == HandlingEvent.HandlingType.UNLOAD
-                            || lastEvent.Type() == HandlingEvent.HandlingType.RECEIVE
-                            || lastEvent.Type() == HandlingEvent.HandlingType.CUSTOMS;
+            bool isInPort = lastEvent.Type == HandlingEvent.HandlingType.UNLOAD
+                            || lastEvent.Type == HandlingEvent.HandlingType.RECEIVE
+                            || lastEvent.Type == HandlingEvent.HandlingType.CUSTOMS;
 
             if (isInPort)
             {
                 return TransportStatus.IN_PORT;
             }
 
-            if (lastEvent.Type() == HandlingEvent.HandlingType.CLAIM)
+            if (lastEvent.Type == HandlingEvent.HandlingType.CLAIM)
             {
                 return TransportStatus.CLAIMED;
             }
@@ -274,7 +287,7 @@
         {
             if (lastEvent != null)
             {
-                return lastEvent.Location();
+                return lastEvent.Location;
             }
             return null;
         }
@@ -283,7 +296,7 @@
         {
             if (transportStatus.Equals(TransportStatus.ONBOARD_CARRIER) && lastEvent != null)
             {
-                return lastEvent.GetVoyage();
+                return lastEvent.Voyage;
             }
             return null;
         }
@@ -299,9 +312,9 @@
 
         private DateTime CalculateEta(Itinerary itinerary)
         {
-            if (OnTrack())
+            if (IsOnTrack())
             {
-                return itinerary.FinalArrivalDate();
+                return itinerary.FinalArrivalDate;
             }
 
             return ETA_UNKOWN;
@@ -310,58 +323,58 @@
         private HandlingActivity CalculateNextExpectedActivity(RouteSpecification routeSpecification,
                                                                Itinerary itinerary)
         {
-            if (!OnTrack())
+            if (!IsOnTrack())
             {
                 return NO_ACTIVITY;
             }
 
             if (lastEvent == null)
             {
-                return new HandlingActivity(HandlingEvent.HandlingType.RECEIVE, routeSpecification.Origin());
+                return new HandlingActivity(HandlingEvent.HandlingType.RECEIVE, routeSpecification.Origin);
             }
 
-            if (lastEvent.Type() == HandlingEvent.HandlingType.LOAD)
+            if (lastEvent.Type == HandlingEvent.HandlingType.LOAD)
             {
-                foreach (Leg leg in itinerary.Legs())
+                foreach (Leg leg in itinerary.Legs)
                 {
-                    if (leg.LoadLocation().SameIdentityAs(lastEvent.Location()))
+                    if (leg.LoadLocation.SameIdentityAs(lastEvent.Location))
                     {
-                        return new HandlingActivity(HandlingEvent.HandlingType.UNLOAD, leg.UnloadLocation(),
-                                                    leg.Voyage());
+                        return new HandlingActivity(HandlingEvent.HandlingType.UNLOAD, leg.UnloadLocation,
+                                                    leg.Voyage);
                     }
                 }
 
                 return NO_ACTIVITY;
             }
 
-            if (lastEvent.Type() == HandlingEvent.HandlingType.UNLOAD)
+            if (lastEvent.Type == HandlingEvent.HandlingType.UNLOAD)
             {
-                for (IEnumerator<Leg> it = itinerary.Legs().GetEnumerator(); it.MoveNext();)
+                for (IEnumerator<Leg> it = itinerary.Legs.GetEnumerator(); it.MoveNext();)
                 {
                     Leg leg = it.Current;
-                    if (leg.UnloadLocation().SameIdentityAs(lastEvent.Location()))
+                    if (leg.UnloadLocation.SameIdentityAs(lastEvent.Location))
                     {
                         if (it.MoveNext())
                         {
                             Leg nextLeg = it.Current;
-                            return new HandlingActivity(HandlingEvent.HandlingType.LOAD, nextLeg.LoadLocation(),
-                                                        nextLeg.Voyage());
+                            return new HandlingActivity(HandlingEvent.HandlingType.LOAD, nextLeg.LoadLocation,
+                                                        nextLeg.Voyage);
                         }
-                        return new HandlingActivity(HandlingEvent.HandlingType.CLAIM, leg.UnloadLocation());
+                        return new HandlingActivity(HandlingEvent.HandlingType.CLAIM, leg.UnloadLocation);
                     }
                 }
                 return NO_ACTIVITY;
             }
 
-            if (lastEvent.Type() == HandlingEvent.HandlingType.RECEIVE)
+            if (lastEvent.Type == HandlingEvent.HandlingType.RECEIVE)
             {
-                IEnumerator<Leg> enumerator = itinerary.Legs().GetEnumerator();
+                IEnumerator<Leg> enumerator = itinerary.Legs.GetEnumerator();
                 enumerator.MoveNext();
                 var firstLeg = enumerator.Current;
-                return new HandlingActivity(HandlingEvent.HandlingType.LOAD, firstLeg.LoadLocation(), firstLeg.Voyage());
+                return new HandlingActivity(HandlingEvent.HandlingType.LOAD, firstLeg.LoadLocation, firstLeg.Voyage);
             }
 
-            if (lastEvent.Type() == HandlingEvent.HandlingType.CLAIM)
+            if (lastEvent.Type == HandlingEvent.HandlingType.CLAIM)
             {
                 //DO nothing
             }
@@ -388,13 +401,16 @@
         private bool CalculateUnloadedAtDestination(RouteSpecification routeSpecification)
         {
             return lastEvent != null &&
-                   HandlingEvent.HandlingType.UNLOAD.SameValueAs(lastEvent.Type()) &&
-                   routeSpecification.Destination().SameIdentityAs(lastEvent.Location());
+                   HandlingEvent.HandlingType.UNLOAD.SameValueAs(lastEvent.Type) &&
+                   routeSpecification.Destination.SameIdentityAs(lastEvent.Location);
         }
 
-        private bool OnTrack()
+        private bool IsOnTrack()
         {
             return routingStatus.Equals(RoutingStatus.ROUTED) && !misdirected;
         }
+
+        #endregion
+
     }
 }

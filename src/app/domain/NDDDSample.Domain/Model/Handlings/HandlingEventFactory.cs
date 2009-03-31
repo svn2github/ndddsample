@@ -1,9 +1,13 @@
 ﻿namespace NDDDSample.Domain.Model.Handlings
 {
+    #region Usings
+
     using System;
     using Cargos;
     using Locations;
     using Voyages;
+
+    #endregion
 
     /// <summary>
     /// Creates handling events.
@@ -14,6 +18,8 @@
         private readonly IVoyageRepository voyageRepository;
         private readonly ILocationRepository locationRepository;
 
+        #region Constr
+
         public HandlingEventFactory(ICargoRepository cargoRepository,
                                     IVoyageRepository voyageRepository,
                                     ILocationRepository locationRepository)
@@ -22,6 +28,10 @@
             this.voyageRepository = voyageRepository;
             this.locationRepository = locationRepository;
         }
+
+        #endregion
+
+        #region Factory Method
 
         /// <summary>
         /// Creates handling event
@@ -36,7 +46,9 @@
         /// <param name="unlocode">United Nations Location Code for the location of the event</param>
         /// <param name="type">type of event</param>
         /// <returns> A handling event.</returns>
-        public HandlingEvent CreateHandlingEvent(DateTime registrationTime, DateTime completionTime, TrackingId trackingId, VoyageNumber voyageNumber, UnLocode unlocode, HandlingEvent.HandlingType type)
+        public HandlingEvent CreateHandlingEvent(DateTime registrationTime, DateTime completionTime,
+                                                 TrackingId trackingId, VoyageNumber voyageNumber, UnLocode unlocode,
+                                                 HandlingEvent.HandlingType type)
         {
             Cargo cargo = FindCargo(trackingId);
             Voyage voyage = FindVoyage(voyageNumber);
@@ -57,10 +69,17 @@
             }
         }
 
+        #endregion
+
+        #region Find Methods
+
         private Cargo FindCargo(TrackingId trackingId)
         {
             Cargo cargo = cargoRepository.Find(trackingId);
-            if (cargo == null) throw new UnknownCargoException(trackingId);
+            if (cargo == null)
+            {
+                throw new UnknownCargoException(trackingId);
+            }
             return cargo;
         }
 
@@ -90,5 +109,7 @@
 
             return location;
         }
+
+        #endregion
     }
 }

@@ -14,6 +14,8 @@ namespace NDDDSample.Domain.Model.Cargos
     {
         private readonly string id;
 
+        #region Constr
+
         /// <summary>
         /// Constructor.
         /// </summary>
@@ -24,14 +26,24 @@ namespace NDDDSample.Domain.Model.Cargos
             this.id = id;
         }
 
+
+        TrackingId()
+        {
+            // Needed by Hibernate
+        }
+        #endregion
+
+        #region Props
+
         /// <summary>
         /// String representation of this tracking id.
         /// </summary>
-        /// <returns></returns>
-        public string IdString()
+        public string IdString
         {
-            return id;
+            get { return id; }
         }
+
+        #endregion
 
         #region IValueObject<TrackingId> Members
 
@@ -71,10 +83,5 @@ namespace NDDDSample.Domain.Model.Cargos
         }
 
         #endregion 
-
-        TrackingId()
-        {
-            // Needed by Hibernate
-        }
     }
 }

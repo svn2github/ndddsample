@@ -18,6 +18,6 @@
         public CannotCreateHandlingEventException(Exception e)
             : base("Cannot create handling event", e) {}
 
-        public CannotCreateHandlingEventException() {}
+        protected CannotCreateHandlingEventException() {}
     }
 }

@@ -13,7 +13,7 @@
     /// </summary>
     public class SampleLocations
     {
-        public static readonly IDictionary<UnLocode, Location> ALL = new Dictionary<UnLocode, Location>();
+        private static readonly IDictionary<UnLocode, Location> ALL = new Dictionary<UnLocode, Location>();
 
         #region Cities
 
@@ -33,6 +33,8 @@
 
         #endregion
 
+        #region Static Constr
+
         static SampleLocations()
         {
             //TODO: atrosin verify if that logic works correctly
@@ -43,7 +45,7 @@
                     if (fieldInfo.FieldType == typeof (Location))
                     {
                         var location = (Location) fieldInfo.GetValue(null);
-                        ALL.Add(location.UnLocode(), location);
+                        ALL.Add(location.UnLocode, location);
                     }
                 }
                 catch (Exception e)
@@ -52,6 +54,8 @@
                 }
             }
         }
+
+        #endregion
 
         public static List<Location> GetAll()
         {
