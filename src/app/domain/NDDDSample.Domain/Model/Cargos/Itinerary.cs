@@ -23,12 +23,12 @@
 
         #region Constr
 
-        public Itinerary(List<Leg> legs)
+        public Itinerary(IList<Leg> legs)
         {
             Validate.NotEmpty(legs);
             Validate.NoNullElements(legs);
 
-            this.legs = legs;
+            this.legs = new List<Leg>(legs);
         }
 
         private Itinerary()

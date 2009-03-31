@@ -18,13 +18,13 @@
 
         #region Constr
 
-        internal Schedule(List<CarrierMovement> carrierMovements)
+        internal Schedule(IList<CarrierMovement> carrierMovements)
         {
             Validate.NotNull(carrierMovements);
             Validate.NoNullElements(carrierMovements);
             Validate.NotEmpty(carrierMovements);
 
-            this.carrierMovements = carrierMovements;
+            this.carrierMovements = new List<CarrierMovement>(carrierMovements);
         }
 
         private Schedule()

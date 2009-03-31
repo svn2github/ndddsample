@@ -57,7 +57,7 @@
 
         #endregion
 
-        public static List<Location> GetAll()
+        public static IList<Location> GetAll()
         {
             return new List<Location>(ALL.Values);
         }

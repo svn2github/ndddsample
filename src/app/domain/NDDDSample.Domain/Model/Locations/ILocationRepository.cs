@@ -22,6 +22,6 @@
         /// Finds all locations.
         /// </summary>
         /// <returns>All locations.</returns>
-        List<Location> FindAll();
+        IList<Location> FindAll();
     }
 }

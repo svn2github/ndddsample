@@ -5,7 +5,7 @@
 
     public class HashCodeBuilder
     {
-        public HashCodeBuilder Append<T>(List<T> movements)
+        public HashCodeBuilder Append<T>(IList<T> movements)
         {
             throw new NotImplementedException();
         }

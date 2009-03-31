@@ -138,7 +138,7 @@
         }
 
 
-        public static List<Voyage> GetAll()
+        public static IList<Voyage> GetAll()
         {
             return new List<Voyage>(ALL.Values);
         }
