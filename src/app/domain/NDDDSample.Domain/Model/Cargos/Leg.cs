@@ -26,7 +26,7 @@
 
         public Leg(Voyage voyage, Location loadLocation, Location unloadLocation, DateTime loadTime, DateTime unloadTime)
         {
-            Validate.NoNullElements(new Object[] {voyage, loadLocation, unloadLocation, loadTime, unloadTime});
+            Validate.NoNullElements(new object[] {voyage, loadLocation, unloadLocation, loadTime, unloadTime});
 
             this.voyage = voyage;
             this.loadLocation = loadLocation;

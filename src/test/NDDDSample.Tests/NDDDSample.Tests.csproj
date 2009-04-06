@@ -59,6 +59,12 @@
       <Link>Properties\NDDDSample.snk</Link>
     </None>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\app\domain\NDDDSample.Domain\NDDDSample.Domain.csproj">
+      <Project>{A57A3967-E613-4598-94FF-BD55711D4CAD}</Project>
+      <Name>NDDDSample.Domain</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
