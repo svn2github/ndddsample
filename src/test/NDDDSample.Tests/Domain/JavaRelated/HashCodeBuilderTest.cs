@@ -35,7 +35,7 @@ namespace NDDDSample.Tests.Domain.JavaRelated
             {
                 new HashCodeBuilder(0, 0);
             }
-            catch (IllegalArgumentException ex)
+            catch (ArgumentException ex)
             {
                 return;
             }
@@ -50,7 +50,7 @@ namespace NDDDSample.Tests.Domain.JavaRelated
             {
                 new HashCodeBuilder(2, 2);
             }
-            catch (IllegalArgumentException ex)
+            catch (ArgumentException ex)
             {
                 return;
             }
@@ -62,19 +62,19 @@ namespace NDDDSample.Tests.Domain.JavaRelated
         [Test]
         public void testReflectionHashCode()
         {
-            Assert.Equals(17 * 37, HashCodeBuilder.reflectionHashCode(new TestObject(0)));
-            Assert.Equals(17 * 37 + 123456, HashCodeBuilder.reflectionHashCode(new TestObject(123456)));
+            Assert.AreEqual(17 * 37, HashCodeBuilder.ReflectionHashCode(new TestObject(0)));
+            Assert.AreEqual(17 * 37 + 123456, HashCodeBuilder.ReflectionHashCode(new TestObject(123456)));
         }
 
         [Test]
         public void testReflectionHierarchyHashCode()
         {
-            Assert.Equals(17 * 37 * 37, HashCodeBuilder.reflectionHashCode(new TestSubObject(0, 0, 0)));
-            Assert.Equals(17 * 37 * 37 * 37, HashCodeBuilder.reflectionHashCode(new TestSubObject(0, 0, 0), true));
-            Assert.Equals((17 * 37 + 7890) * 37 + 123456,
-                          HashCodeBuilder.reflectionHashCode(new TestSubObject(123456, 7890, 0)));
-            Assert.Equals(((17 * 37 + 7890) * 37 + 0) * 37 + 123456,
-                          HashCodeBuilder.reflectionHashCode(new TestSubObject(123456, 7890, 0), true));
+            Assert.AreEqual(17 * 37 * 37, HashCodeBuilder.ReflectionHashCode(new TestSubObject(0, 0, 0)));
+            Assert.AreEqual(17 * 37 * 37 * 37, HashCodeBuilder.ReflectionHashCode(new TestSubObject(0, 0, 0), true));
+            Assert.AreEqual((17 * 37 + 7890) * 37 + 123456,
+                          HashCodeBuilder.ReflectionHashCode(new TestSubObject(123456, 7890, 0)));
+            Assert.AreEqual(((17 * 37 + 7890) * 37 + 0) * 37 + 123456,
+                          HashCodeBuilder.ReflectionHashCode(new TestSubObject(123456, 7890, 0), true));
         }
 
         [Test]
@@ -82,9 +82,9 @@ namespace NDDDSample.Tests.Domain.JavaRelated
         {
             try
             {
-                HashCodeBuilder.reflectionHashCode(0, 0, new TestSubObject(0, 0, 0), true);
+                HashCodeBuilder.ReflectionHashCode(0, 0, new TestSubObject(0, 0, 0), true);
             }
-            catch (IllegalArgumentException ex)
+            catch (ArgumentException ex)
             {
                 return;
             }
@@ -96,9 +96,9 @@ namespace NDDDSample.Tests.Domain.JavaRelated
         {
             try
             {
-                HashCodeBuilder.reflectionHashCode(2, 2, new TestSubObject(0, 0, 0), true);
+                HashCodeBuilder.ReflectionHashCode(2, 2, new TestSubObject(0, 0, 0), true);
             }
-            catch (IllegalArgumentException ex)
+            catch (ArgumentException ex)
             {
                 return;
             }
@@ -110,9 +110,9 @@ namespace NDDDSample.Tests.Domain.JavaRelated
         {
             try
             {
-                HashCodeBuilder.reflectionHashCode(0, 0, new TestObject(0), true);
+                HashCodeBuilder.ReflectionHashCode(0, 0, new TestObject(0), true);
             }
-            catch (IllegalArgumentException ex)
+            catch (ArgumentException ex)
             {
                 return;
             }
@@ -124,9 +124,9 @@ namespace NDDDSample.Tests.Domain.JavaRelated
         {
             try
             {
-                HashCodeBuilder.reflectionHashCode(2, 2, new TestObject(0), true);
+                HashCodeBuilder.ReflectionHashCode(2, 2, new TestObject(0), true);
             }
-            catch (IllegalArgumentException ex)
+            catch (ArgumentException ex)
             {
                 return;
             }
@@ -138,9 +138,9 @@ namespace NDDDSample.Tests.Domain.JavaRelated
         {
             try
             {
-                HashCodeBuilder.reflectionHashCode(13, 19, null, true);
+                HashCodeBuilder.ReflectionHashCode(13, 19, null, true);
             }
-            catch (IllegalArgumentException ex)
+            catch (ArgumentException ex)
             {
                 return;
             }
@@ -151,323 +151,323 @@ namespace NDDDSample.Tests.Domain.JavaRelated
         public void testSuper()
         {
             var obj = new object();
-            Assert.Equals(17 * 37 + (19 * 41 + obj.GetHashCode()), new HashCodeBuilder(17, 37).appendSuper(
-                                                                       new HashCodeBuilder(19, 41).append(obj).
-                                                                           toHashCode()
-                                                                       ).toHashCode());
+            Assert.AreEqual(17 * 37 + (19 * 41 + obj.GetHashCode()), new HashCodeBuilder(17, 37).AppendSuper(
+                                                                       new HashCodeBuilder(19, 41).Append(obj).
+                                                                           ToHashCode()
+                                                                       ).ToHashCode());
         }
 
         [Test]
         public void testObject()
         {
             object obj = null;
-            Assert.Equals(17 * 37, new HashCodeBuilder(17, 37).append(obj).toHashCode());
+            Assert.AreEqual(17 * 37, new HashCodeBuilder(17, 37).Append(obj).ToHashCode());
             obj = new object();
-            Assert.Equals(17 * 37 + obj.GetHashCode(), new HashCodeBuilder(17, 37).append(obj).toHashCode());
+            Assert.AreEqual(17 * 37 + obj.GetHashCode(), new HashCodeBuilder(17, 37).Append(obj).ToHashCode());
         }
 
         [Test]
         public void testLong()
         {
-            Assert.Equals(17 * 37, new HashCodeBuilder(17, 37).append((long) 0L).toHashCode());
-            Assert.Equals(17 * 37 + (int) (123456789L ^ (123456789L >> 32)),
-                          new HashCodeBuilder(17, 37).append((long) 123456789L).toHashCode());
+            Assert.AreEqual(17 * 37, new HashCodeBuilder(17, 37).Append((long) 0L).ToHashCode());
+            Assert.AreEqual(17 * 37 + (int) (123456789L ^ (123456789L >> 32)),
+                          new HashCodeBuilder(17, 37).Append((long) 123456789L).ToHashCode());
         }
 
         [Test]
         public void testInt()
         {
-            Assert.Equals(17 * 37, new HashCodeBuilder(17, 37).append((int) 0).toHashCode());
-            Assert.Equals(17 * 37 + 123456, new HashCodeBuilder(17, 37).append((int) 123456).toHashCode());
+            Assert.AreEqual(17 * 37, new HashCodeBuilder(17, 37).Append((int) 0).ToHashCode());
+            Assert.AreEqual(17 * 37 + 123456, new HashCodeBuilder(17, 37).Append((int) 123456).ToHashCode());
         }
 
         [Test]
         public void testShort()
         {
-            Assert.Equals(17 * 37, new HashCodeBuilder(17, 37).append((short) 0).toHashCode());
-            Assert.Equals(17 * 37 + 12345, new HashCodeBuilder(17, 37).append((short) 12345).toHashCode());
+            Assert.AreEqual(17 * 37, new HashCodeBuilder(17, 37).Append((short) 0).ToHashCode());
+            Assert.AreEqual(17 * 37 + 12345, new HashCodeBuilder(17, 37).Append((short) 12345).ToHashCode());
         }
 
         [Test]
         public void testChar()
         {
-            Assert.Equals(17 * 37, new HashCodeBuilder(17, 37).append((char) 0).toHashCode());
-            Assert.Equals(17 * 37 + 1234, new HashCodeBuilder(17, 37).append((char) 1234).toHashCode());
+            Assert.AreEqual(17 * 37, new HashCodeBuilder(17, 37).Append((char) 0).ToHashCode());
+            Assert.AreEqual(17 * 37 + 1234, new HashCodeBuilder(17, 37).Append((char) 1234).ToHashCode());
         }
 
         [Test]
         public void testByte()
         {
-            Assert.Equals(17 * 37, new HashCodeBuilder(17, 37).append((byte) 0).toHashCode());
-            Assert.Equals(17 * 37 + 123, new HashCodeBuilder(17, 37).append((byte) 123).toHashCode());
+            Assert.AreEqual(17 * 37, new HashCodeBuilder(17, 37).Append((byte) 0).ToHashCode());
+            Assert.AreEqual(17 * 37 + 123, new HashCodeBuilder(17, 37).Append((byte) 123).ToHashCode());
         }
 
         [Test]
         public void testDouble()
         {
-            Assert.Equals(17 * 37, new HashCodeBuilder(17, 37).append((double) 0d).toHashCode());
+            Assert.AreEqual(17 * 37, new HashCodeBuilder(17, 37).Append((double) 0d).ToHashCode());
             double d = 1234567.89;
             long l = Convert.ToInt64(d);
-            Assert.Equals(17 * 37 + (int) (l ^ (l >> 32)), new HashCodeBuilder(17, 37).append(d).toHashCode());
+            Assert.AreEqual(17 * 37 + (int) (l ^ (l >> 32)), new HashCodeBuilder(17, 37).Append(d).ToHashCode());
         }
 
         [Test]
         public void testFloat()
         {
-            Assert.Equals(17 * 37, new HashCodeBuilder(17, 37).append((float) 0f).toHashCode());
+            Assert.AreEqual(17 * 37, new HashCodeBuilder(17, 37).Append((float) 0f).ToHashCode());
             float f = 1234.89f;
             int i = Convert.ToInt32(f);
-            Assert.Equals(17 * 37 + i, new HashCodeBuilder(17, 37).append(f).toHashCode());
+            Assert.AreEqual(17 * 37 + i, new HashCodeBuilder(17, 37).Append(f).ToHashCode());
         }
 
         [Test]
         public void testBoolean()
         {
-            Assert.Equals(17 * 37 + 0, new HashCodeBuilder(17, 37).append(true).toHashCode());
-            Assert.Equals(17 * 37 + 1, new HashCodeBuilder(17, 37).append(false).toHashCode());
+            Assert.AreEqual(17 * 37 + 0, new HashCodeBuilder(17, 37).Append(true).ToHashCode());
+            Assert.AreEqual(17 * 37 + 1, new HashCodeBuilder(17, 37).Append(false).ToHashCode());
         }
 
         [Test]
         public void testObjectArray()
         {
-            Assert.Equals(17 * 37, new HashCodeBuilder(17, 37).append((Object[]) null).toHashCode());
+            Assert.AreEqual(17 * 37, new HashCodeBuilder(17, 37).Append((Object[]) null).ToHashCode());
             object[] obj = new object[2];
-            Assert.Equals((17 * 37) * 37, new HashCodeBuilder(17, 37).append(obj).toHashCode());
+            Assert.AreEqual((17 * 37) * 37, new HashCodeBuilder(17, 37).Append(obj).ToHashCode());
             obj[0] = new object();
-            Assert.Equals((17 * 37 + obj[0].GetHashCode()) * 37, new HashCodeBuilder(17, 37).append(obj).toHashCode());
+            Assert.AreEqual((17 * 37 + obj[0].GetHashCode()) * 37, new HashCodeBuilder(17, 37).Append(obj).ToHashCode());
             obj[1] = new object();
-            Assert.Equals((17 * 37 + obj[0].GetHashCode()) * 37 + obj[1].GetHashCode(),
-                          new HashCodeBuilder(17, 37).append(obj).toHashCode());
+            Assert.AreEqual((17 * 37 + obj[0].GetHashCode()) * 37 + obj[1].GetHashCode(),
+                          new HashCodeBuilder(17, 37).Append(obj).ToHashCode());
         }
 
         [Test]
         public void testObjectArrayAsObject()
         {
             object[] obj = new object[2];
-            Assert.Equals((17 * 37) * 37, new HashCodeBuilder(17, 37).append((object) obj).toHashCode());
+            Assert.AreEqual((17 * 37) * 37, new HashCodeBuilder(17, 37).Append((object) obj).ToHashCode());
             obj[0] = new object();
-            Assert.Equals((17 * 37 + obj[0].GetHashCode()) * 37,
-                          new HashCodeBuilder(17, 37).append((object) obj).toHashCode());
+            Assert.AreEqual((17 * 37 + obj[0].GetHashCode()) * 37,
+                          new HashCodeBuilder(17, 37).Append((object) obj).ToHashCode());
             obj[1] = new object();
-            Assert.Equals((17 * 37 + obj[0].GetHashCode()) * 37 + obj[1].GetHashCode(),
-                          new HashCodeBuilder(17, 37).append((object) obj).toHashCode());
+            Assert.AreEqual((17 * 37 + obj[0].GetHashCode()) * 37 + obj[1].GetHashCode(),
+                          new HashCodeBuilder(17, 37).Append((object) obj).ToHashCode());
         }
 
         [Test]
         public void testLongArray()
         {
-            Assert.Equals(17 * 37, new HashCodeBuilder(17, 37).append((long[]) null).toHashCode());
+            Assert.AreEqual(17 * 37, new HashCodeBuilder(17, 37).Append((long[]) null).ToHashCode());
             long[] obj = new long[2];
-            Assert.Equals((17 * 37) * 37, new HashCodeBuilder(17, 37).append(obj).toHashCode());
+            Assert.AreEqual((17 * 37) * 37, new HashCodeBuilder(17, 37).Append(obj).ToHashCode());
             obj[0] = 5L;
             int h1 = (int) (5L ^ (5L >> 32));
-            Assert.Equals((17 * 37 + h1) * 37, new HashCodeBuilder(17, 37).append(obj).toHashCode());
+            Assert.AreEqual((17 * 37 + h1) * 37, new HashCodeBuilder(17, 37).Append(obj).ToHashCode());
             obj[1] = 6L;
             int h2 = (int) (6L ^ (6L >> 32));
-            Assert.Equals((17 * 37 + h1) * 37 + h2, new HashCodeBuilder(17, 37).append(obj).toHashCode());
+            Assert.AreEqual((17 * 37 + h1) * 37 + h2, new HashCodeBuilder(17, 37).Append(obj).ToHashCode());
         }
 
         [Test]
         public void testLongArrayAsObject()
         {
             long[] obj = new long[2];
-            Assert.Equals((17 * 37) * 37, new HashCodeBuilder(17, 37).append((object) obj).toHashCode());
+            Assert.AreEqual((17 * 37) * 37, new HashCodeBuilder(17, 37).Append((object) obj).ToHashCode());
             obj[0] = 5L;
             int h1 = (int) (5L ^ (5L >> 32));
-            Assert.Equals((17 * 37 + h1) * 37, new HashCodeBuilder(17, 37).append((object) obj).toHashCode());
+            Assert.AreEqual((17 * 37 + h1) * 37, new HashCodeBuilder(17, 37).Append((object) obj).ToHashCode());
             obj[1] = 6L;
             int h2 = (int) (6L ^ (6L >> 32));
-            Assert.Equals((17 * 37 + h1) * 37 + h2, new HashCodeBuilder(17, 37).append((object) obj).toHashCode());
+            Assert.AreEqual((17 * 37 + h1) * 37 + h2, new HashCodeBuilder(17, 37).Append((object) obj).ToHashCode());
         }
 
         [Test]
         public void testIntArray()
         {
-            Assert.Equals(17 * 37, new HashCodeBuilder(17, 37).append((int[]) null).toHashCode());
+            Assert.AreEqual(17 * 37, new HashCodeBuilder(17, 37).Append((int[]) null).ToHashCode());
             int[] obj = new int[2];
-            Assert.Equals((17 * 37) * 37, new HashCodeBuilder(17, 37).append(obj).toHashCode());
+            Assert.AreEqual((17 * 37) * 37, new HashCodeBuilder(17, 37).Append(obj).ToHashCode());
             obj[0] = 5;
-            Assert.Equals((17 * 37 + 5) * 37, new HashCodeBuilder(17, 37).append(obj).toHashCode());
+            Assert.AreEqual((17 * 37 + 5) * 37, new HashCodeBuilder(17, 37).Append(obj).ToHashCode());
             obj[1] = 6;
-            Assert.Equals((17 * 37 + 5) * 37 + 6, new HashCodeBuilder(17, 37).append(obj).toHashCode());
+            Assert.AreEqual((17 * 37 + 5) * 37 + 6, new HashCodeBuilder(17, 37).Append(obj).ToHashCode());
         }
 
         [Test]
         public void testIntArrayAsObject()
         {
             int[] obj = new int[2];
-            Assert.Equals((17 * 37) * 37, new HashCodeBuilder(17, 37).append((object) obj).toHashCode());
+            Assert.AreEqual((17 * 37) * 37, new HashCodeBuilder(17, 37).Append((object) obj).ToHashCode());
             obj[0] = 5;
-            Assert.Equals((17 * 37 + 5) * 37, new HashCodeBuilder(17, 37).append((object) obj).toHashCode());
+            Assert.AreEqual((17 * 37 + 5) * 37, new HashCodeBuilder(17, 37).Append((object) obj).ToHashCode());
             obj[1] = 6;
-            Assert.Equals((17 * 37 + 5) * 37 + 6, new HashCodeBuilder(17, 37).append((object) obj).toHashCode());
+            Assert.AreEqual((17 * 37 + 5) * 37 + 6, new HashCodeBuilder(17, 37).Append((object) obj).ToHashCode());
         }
 
         [Test]
         public void testShortArray()
         {
-            Assert.Equals(17 * 37, new HashCodeBuilder(17, 37).append((short[]) null).toHashCode());
+            Assert.AreEqual(17 * 37, new HashCodeBuilder(17, 37).Append((short[]) null).ToHashCode());
             short[] obj = new short[2];
-            Assert.Equals((17 * 37) * 37, new HashCodeBuilder(17, 37).append(obj).toHashCode());
+            Assert.AreEqual((17 * 37) * 37, new HashCodeBuilder(17, 37).Append(obj).ToHashCode());
             obj[0] = (short) 5;
-            Assert.Equals((17 * 37 + 5) * 37, new HashCodeBuilder(17, 37).append(obj).toHashCode());
+            Assert.AreEqual((17 * 37 + 5) * 37, new HashCodeBuilder(17, 37).Append(obj).ToHashCode());
             obj[1] = (short) 6;
-            Assert.Equals((17 * 37 + 5) * 37 + 6, new HashCodeBuilder(17, 37).append(obj).toHashCode());
+            Assert.AreEqual((17 * 37 + 5) * 37 + 6, new HashCodeBuilder(17, 37).Append(obj).ToHashCode());
         }
 
         [Test]
         public void testShortArrayAsObject()
         {
             short[] obj = new short[2];
-            Assert.Equals((17 * 37) * 37, new HashCodeBuilder(17, 37).append((object) obj).toHashCode());
+            Assert.AreEqual((17 * 37) * 37, new HashCodeBuilder(17, 37).Append((object) obj).ToHashCode());
             obj[0] = (short) 5;
-            Assert.Equals((17 * 37 + 5) * 37, new HashCodeBuilder(17, 37).append((object) obj).toHashCode());
+            Assert.AreEqual((17 * 37 + 5) * 37, new HashCodeBuilder(17, 37).Append((object) obj).ToHashCode());
             obj[1] = (short) 6;
-            Assert.Equals((17 * 37 + 5) * 37 + 6, new HashCodeBuilder(17, 37).append((object) obj).toHashCode());
+            Assert.AreEqual((17 * 37 + 5) * 37 + 6, new HashCodeBuilder(17, 37).Append((object) obj).ToHashCode());
         }
 
         [Test]
         public void testCharArray()
         {
-            Assert.Equals(17 * 37, new HashCodeBuilder(17, 37).append((char[]) null).toHashCode());
+            Assert.AreEqual(17 * 37, new HashCodeBuilder(17, 37).Append((char[]) null).ToHashCode());
             char[] obj = new char[2];
-            Assert.Equals((17 * 37) * 37, new HashCodeBuilder(17, 37).append(obj).toHashCode());
+            Assert.AreEqual((17 * 37) * 37, new HashCodeBuilder(17, 37).Append(obj).ToHashCode());
             obj[0] = (char) 5;
-            Assert.Equals((17 * 37 + 5) * 37, new HashCodeBuilder(17, 37).append(obj).toHashCode());
+            Assert.AreEqual((17 * 37 + 5) * 37, new HashCodeBuilder(17, 37).Append(obj).ToHashCode());
             obj[1] = (char) 6;
-            Assert.Equals((17 * 37 + 5) * 37 + 6, new HashCodeBuilder(17, 37).append(obj).toHashCode());
+            Assert.AreEqual((17 * 37 + 5) * 37 + 6, new HashCodeBuilder(17, 37).Append(obj).ToHashCode());
         }
 
         [Test]
         public void testCharArrayAsObject()
         {
             char[] obj = new char[2];
-            Assert.Equals((17 * 37) * 37, new HashCodeBuilder(17, 37).append((object) obj).toHashCode());
+            Assert.AreEqual((17 * 37) * 37, new HashCodeBuilder(17, 37).Append((object) obj).ToHashCode());
             obj[0] = (char) 5;
-            Assert.Equals((17 * 37 + 5) * 37, new HashCodeBuilder(17, 37).append((object) obj).toHashCode());
+            Assert.AreEqual((17 * 37 + 5) * 37, new HashCodeBuilder(17, 37).Append((object) obj).ToHashCode());
             obj[1] = (char) 6;
-            Assert.Equals((17 * 37 + 5) * 37 + 6, new HashCodeBuilder(17, 37).append((object) obj).toHashCode());
+            Assert.AreEqual((17 * 37 + 5) * 37 + 6, new HashCodeBuilder(17, 37).Append((object) obj).ToHashCode());
         }
 
         [Test]
         public void testByteArray()
         {
-            Assert.Equals(17 * 37, new HashCodeBuilder(17, 37).append((byte[]) null).toHashCode());
+            Assert.AreEqual(17 * 37, new HashCodeBuilder(17, 37).Append((byte[]) null).ToHashCode());
             byte[] obj = new byte[2];
-            Assert.Equals((17 * 37) * 37, new HashCodeBuilder(17, 37).append(obj).toHashCode());
+            Assert.AreEqual((17 * 37) * 37, new HashCodeBuilder(17, 37).Append(obj).ToHashCode());
             obj[0] = (byte) 5;
-            Assert.Equals((17 * 37 + 5) * 37, new HashCodeBuilder(17, 37).append(obj).toHashCode());
+            Assert.AreEqual((17 * 37 + 5) * 37, new HashCodeBuilder(17, 37).Append(obj).ToHashCode());
             obj[1] = (byte) 6;
-            Assert.Equals((17 * 37 + 5) * 37 + 6, new HashCodeBuilder(17, 37).append(obj).toHashCode());
+            Assert.AreEqual((17 * 37 + 5) * 37 + 6, new HashCodeBuilder(17, 37).Append(obj).ToHashCode());
         }
 
         [Test]
         public void testByteArrayAsObject()
         {
             byte[] obj = new byte[2];
-            Assert.Equals((17 * 37) * 37, new HashCodeBuilder(17, 37).append((object) obj).toHashCode());
+            Assert.AreEqual((17 * 37) * 37, new HashCodeBuilder(17, 37).Append((object) obj).ToHashCode());
             obj[0] = (byte) 5;
-            Assert.Equals((17 * 37 + 5) * 37, new HashCodeBuilder(17, 37).append((object) obj).toHashCode());
+            Assert.AreEqual((17 * 37 + 5) * 37, new HashCodeBuilder(17, 37).Append((object) obj).ToHashCode());
             obj[1] = (byte) 6;
-            Assert.Equals((17 * 37 + 5) * 37 + 6, new HashCodeBuilder(17, 37).append((object) obj).toHashCode());
+            Assert.AreEqual((17 * 37 + 5) * 37 + 6, new HashCodeBuilder(17, 37).Append((object) obj).ToHashCode());
         }
 
         [Test]
         public void testDoubleArray()
         {
-            Assert.Equals(17 * 37, new HashCodeBuilder(17, 37).append((double[]) null).toHashCode());
+            Assert.AreEqual(17 * 37, new HashCodeBuilder(17, 37).Append((double[]) null).ToHashCode());
             double[] obj = new double[2];
-            Assert.Equals((17 * 37) * 37, new HashCodeBuilder(17, 37).append(obj).toHashCode());
+            Assert.AreEqual((17 * 37) * 37, new HashCodeBuilder(17, 37).Append(obj).ToHashCode());
             obj[0] = 5.4d;
             long l1 = Convert.ToInt64(5.4d);
             int h1 = (int) (l1 ^ (l1 >> 32));
-            Assert.Equals((17 * 37 + h1) * 37, new HashCodeBuilder(17, 37).append(obj).toHashCode());
+            Assert.AreEqual((17 * 37 + h1) * 37, new HashCodeBuilder(17, 37).Append(obj).ToHashCode());
             obj[1] = 6.3d;
             long l2 = Convert.ToInt64(6.3d);
             int h2 = (int) (l2 ^ (l2 >> 32));
-            Assert.Equals((17 * 37 + h1) * 37 + h2, new HashCodeBuilder(17, 37).append(obj).toHashCode());
+            Assert.AreEqual((17 * 37 + h1) * 37 + h2, new HashCodeBuilder(17, 37).Append(obj).ToHashCode());
         }
 
         [Test]
         public void testDoubleArrayAsObject()
         {
             double[] obj = new double[2];
-            Assert.Equals((17 * 37) * 37, new HashCodeBuilder(17, 37).append((object) obj).toHashCode());
+            Assert.AreEqual((17 * 37) * 37, new HashCodeBuilder(17, 37).Append((object) obj).ToHashCode());
             obj[0] = 5.4d;
             long l1 = Convert.ToInt64(5.4d);
             int h1 = (int) (l1 ^ (l1 >> 32));
-            Assert.Equals((17 * 37 + h1) * 37, new HashCodeBuilder(17, 37).append((object) obj).toHashCode());
+            Assert.AreEqual((17 * 37 + h1) * 37, new HashCodeBuilder(17, 37).Append((object) obj).ToHashCode());
             obj[1] = 6.3d;
             long l2 = Convert.ToInt64(6.3d);
             int h2 = (int) (l2 ^ (l2 >> 32));
-            Assert.Equals((17 * 37 + h1) * 37 + h2, new HashCodeBuilder(17, 37).append((object) obj).toHashCode());
+            Assert.AreEqual((17 * 37 + h1) * 37 + h2, new HashCodeBuilder(17, 37).Append((object) obj).ToHashCode());
         }
 
         [Test]
         public void testFloatArray()
         {
-            Assert.Equals(17 * 37, new HashCodeBuilder(17, 37).append((float[]) null).toHashCode());
+            Assert.AreEqual(17 * 37, new HashCodeBuilder(17, 37).Append((float[]) null).ToHashCode());
             float[] obj = new float[2];
-            Assert.Equals((17 * 37) * 37, new HashCodeBuilder(17, 37).append(obj).toHashCode());
+            Assert.AreEqual((17 * 37) * 37, new HashCodeBuilder(17, 37).Append(obj).ToHashCode());
             obj[0] = 5.4f;
             int h1 = Convert.ToInt32(5.4f);
-            Assert.Equals((17 * 37 + h1) * 37, new HashCodeBuilder(17, 37).append(obj).toHashCode());
+            Assert.AreEqual((17 * 37 + h1) * 37, new HashCodeBuilder(17, 37).Append(obj).ToHashCode());
             obj[1] = 6.3f;
             int h2 = Convert.ToInt32(6.3f);
-            Assert.Equals((17 * 37 + h1) * 37 + h2, new HashCodeBuilder(17, 37).append(obj).toHashCode());
+            Assert.AreEqual((17 * 37 + h1) * 37 + h2, new HashCodeBuilder(17, 37).Append(obj).ToHashCode());
         }
 
         [Test]
         public void testFloatArrayAsObject()
         {
             float[] obj = new float[2];
-            Assert.Equals((17 * 37) * 37, new HashCodeBuilder(17, 37).append((object) obj).toHashCode());
+            Assert.AreEqual((17 * 37) * 37, new HashCodeBuilder(17, 37).Append((object) obj).ToHashCode());
             obj[0] = 5.4f;
             int h1 = Convert.ToInt32(5.4f);
-            Assert.Equals((17 * 37 + h1) * 37, new HashCodeBuilder(17, 37).append((object) obj).toHashCode());
+            Assert.AreEqual((17 * 37 + h1) * 37, new HashCodeBuilder(17, 37).Append((object) obj).ToHashCode());
             obj[1] = 6.3f;
             int h2 = Convert.ToInt32(6.3f);
-            Assert.Equals((17 * 37 + h1) * 37 + h2, new HashCodeBuilder(17, 37).append((object) obj).toHashCode());
+            Assert.AreEqual((17 * 37 + h1) * 37 + h2, new HashCodeBuilder(17, 37).Append((object) obj).ToHashCode());
         }
 
         [Test]
         public void testBooleanArray()
         {
-            Assert.Equals(17 * 37, new HashCodeBuilder(17, 37).append((bool[]) null).toHashCode());
+            Assert.AreEqual(17 * 37, new HashCodeBuilder(17, 37).Append((bool[]) null).ToHashCode());
             var obj = new bool[2];
-            Assert.Equals((17 * 37 + 1) * 37 + 1, new HashCodeBuilder(17, 37).append(obj).toHashCode());
+            Assert.AreEqual((17 * 37 + 1) * 37 + 1, new HashCodeBuilder(17, 37).Append(obj).ToHashCode());
             obj[0] = true;
-            Assert.Equals((17 * 37 + 0) * 37 + 1, new HashCodeBuilder(17, 37).append(obj).toHashCode());
+            Assert.AreEqual((17 * 37 + 0) * 37 + 1, new HashCodeBuilder(17, 37).Append(obj).ToHashCode());
             obj[1] = false;
-            Assert.Equals((17 * 37 + 0) * 37 + 1, new HashCodeBuilder(17, 37).append(obj).toHashCode());
+            Assert.AreEqual((17 * 37 + 0) * 37 + 1, new HashCodeBuilder(17, 37).Append(obj).ToHashCode());
         }
 
         [Test]
         public void testBooleanArrayAsObject()
         {
             var obj = new bool[2];
-            Assert.Equals((17 * 37 + 1) * 37 + 1, new HashCodeBuilder(17, 37).append((object) obj).toHashCode());
+            Assert.AreEqual((17 * 37 + 1) * 37 + 1, new HashCodeBuilder(17, 37).Append((object) obj).ToHashCode());
             obj[0] = true;
-            Assert.Equals((17 * 37 + 0) * 37 + 1, new HashCodeBuilder(17, 37).append((object) obj).toHashCode());
+            Assert.AreEqual((17 * 37 + 0) * 37 + 1, new HashCodeBuilder(17, 37).Append((object) obj).ToHashCode());
             obj[1] = false;
-            Assert.Equals((17 * 37 + 0) * 37 + 1, new HashCodeBuilder(17, 37).append((object) obj).toHashCode());
+            Assert.AreEqual((17 * 37 + 0) * 37 + 1, new HashCodeBuilder(17, 37).Append((object) obj).ToHashCode());
         }
 
         [Test]
         public void testboolMultiArray()
         {
             var obj = new bool[2][];
-            Assert.Equals((17 * 37) * 37, new HashCodeBuilder(17, 37).append(obj).toHashCode());
+            Assert.AreEqual((17 * 37) * 37, new HashCodeBuilder(17, 37).Append(obj).ToHashCode());
             obj[0] = new bool[0];
-            Assert.Equals(17 * 37, new HashCodeBuilder(17, 37).append(obj).toHashCode());
+            Assert.AreEqual(17 * 37, new HashCodeBuilder(17, 37).Append(obj).ToHashCode());
             obj[0] = new bool[1];
-            Assert.Equals((17 * 37 + 1) * 37, new HashCodeBuilder(17, 37).append(obj).toHashCode());
+            Assert.AreEqual((17 * 37 + 1) * 37, new HashCodeBuilder(17, 37).Append(obj).ToHashCode());
             obj[0] = new bool[2];
-            Assert.Equals(((17 * 37 + 1) * 37 + 1) * 37, new HashCodeBuilder(17, 37).append(obj).toHashCode());
+            Assert.AreEqual(((17 * 37 + 1) * 37 + 1) * 37, new HashCodeBuilder(17, 37).Append(obj).ToHashCode());
             obj[0][0] = true;
-            Assert.Equals(((17 * 37 + 0) * 37 + 1) * 37, new HashCodeBuilder(17, 37).append(obj).toHashCode());
+            Assert.AreEqual(((17 * 37 + 0) * 37 + 1) * 37, new HashCodeBuilder(17, 37).Append(obj).ToHashCode());
             obj[1] = new bool[1];
-            Assert.Equals((((17 * 37 + 0) * 37 + 1) * 37 + 1), new HashCodeBuilder(17, 37).append(obj).toHashCode());
+            Assert.AreEqual((((17 * 37 + 0) * 37 + 1) * 37 + 1), new HashCodeBuilder(17, 37).Append(obj).ToHashCode());
         }
 
 
@@ -477,9 +477,7 @@ namespace NDDDSample.Tests.Domain.JavaRelated
         }
     }
 
-    #region Test Related Classes
-
-    public class IllegalArgumentException : Exception {}
+    #region Test Related Classes 
 
 
     public class TestObject
