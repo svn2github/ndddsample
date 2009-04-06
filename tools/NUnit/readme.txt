@@ -1,0 +1,1 @@
+Extarct just required assemblies from the zip file.
