@@ -15,6 +15,7 @@
  *  limitations under the License.
  */
 #endregion
+
 namespace NDDDSample.Tests.Domain.JavaRelated
 {
     #region Usings
@@ -40,7 +41,7 @@ namespace NDDDSample.Tests.Domain.JavaRelated
                 return;
             }
 
-            fail();
+             Assert.Fail();
         }
 
         [Test]
@@ -55,7 +56,7 @@ namespace NDDDSample.Tests.Domain.JavaRelated
                 return;
             }
 
-            fail();
+             Assert.Fail();
         }
 
 
@@ -88,7 +89,7 @@ namespace NDDDSample.Tests.Domain.JavaRelated
             {
                 return;
             }
-            fail();
+             Assert.Fail();
         }
 
         [Test]
@@ -102,7 +103,7 @@ namespace NDDDSample.Tests.Domain.JavaRelated
             {
                 return;
             }
-            fail();
+             Assert.Fail();
         }
 
         [Test]
@@ -116,7 +117,7 @@ namespace NDDDSample.Tests.Domain.JavaRelated
             {
                 return;
             }
-            fail();
+             Assert.Fail();
         }
 
         [Test]
@@ -130,7 +131,7 @@ namespace NDDDSample.Tests.Domain.JavaRelated
             {
                 return;
             }
-            fail();
+             Assert.Fail();
         }
 
         [Test]
@@ -144,7 +145,7 @@ namespace NDDDSample.Tests.Domain.JavaRelated
             {
                 return;
             }
-            fail();
+             Assert.Fail();
         }
 
         [Test]
@@ -177,7 +178,7 @@ namespace NDDDSample.Tests.Domain.JavaRelated
         [Test]
         public void testInt()
         {
-            Assert.AreEqual(17 * 37, new HashCodeBuilder(17, 37).Append((int) 0).ToHashCode());
+            Assert.AreEqual(17 * 37, new HashCodeBuilder(17, 37).Append(0).ToHashCode());
             Assert.AreEqual(17 * 37 + 123456, new HashCodeBuilder(17, 37).Append((int) 123456).ToHashCode());
         }
 
@@ -206,7 +207,7 @@ namespace NDDDSample.Tests.Domain.JavaRelated
         public void testDouble()
         {
             Assert.AreEqual(17 * 37, new HashCodeBuilder(17, 37).Append((double) 0d).ToHashCode());
-            double d = 1234567.89;
+            const double d = 1234567.89;
             long l = Convert.ToInt64(d);
             Assert.AreEqual(17 * 37 + (int) (l ^ (l >> 32)), new HashCodeBuilder(17, 37).Append(d).ToHashCode());
         }
@@ -468,12 +469,6 @@ namespace NDDDSample.Tests.Domain.JavaRelated
             Assert.AreEqual(((17 * 37 + 0) * 37 + 1) * 37, new HashCodeBuilder(17, 37).Append(obj).ToHashCode());
             obj[1] = new bool[1];
             Assert.AreEqual((((17 * 37 + 0) * 37 + 1) * 37 + 1), new HashCodeBuilder(17, 37).Append(obj).ToHashCode());
-        }
-
-
-        private static void fail()
-        {
-            Assert.Fail();
         }
     }
 

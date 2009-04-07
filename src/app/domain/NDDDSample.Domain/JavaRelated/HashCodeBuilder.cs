@@ -27,44 +27,89 @@ namespace NDDDSample.Domain.JavaRelated
 
     #endregion
 
+    /// <summary>
+    ///<p>Assists in implementing object.GetHashCode() methods.</p>
+    ///<p> This class enables a good <code>GetHashCode</code> method to be built for any class. It
+    ///follows the rules laid out in the book
+    ///<a HREF="http://java.sun.com/docs/books/effective/index.html">Effective Java</a>
+    ///by Joshua Bloch. Writing a good <code>GetHashCode</code> method is actually quite
+    ///difficult. This class aims to simplify the process.</p>
+    ///<p>All relevant fields from the object should be included in the
+    ///<code>GetHashCode</code> method. Derived fields may be excluded. In general, any
+    ///field used in the <code>equals</code> method must be used in the <code>GetHashCode</code>
+    ///method.</p>
+    ///<p>To use this class write code as follows:</p>
+    ///<pre>
+    ///public class Person {
+    ///String name;
+    ///int age;
+    ///boolean isSmoker;
+    ///...
+    ///public int GetHashCode() {
+    // you pick a hard-coded, randomly chosen, non-zero, odd number
+    // ideally different for each class
+    ///return new HashCodeBuilder(17, 37).
+    ///    Append(name).
+    ///    Append(age).
+    ///    Append(smoker).
+    ///    ToHashCode();
+    /// }
+    ///}
+    ///</pre>
+    ///<p>If required, the superclass <code>hashCode()</code> can be added
+    ///using {@link #appendSuper}.</p>
+    ///<p>Alternatively, there is a method that uses reflection to determine
+    ///the fields to test. Because these fields are usually private, the method,
+    ///<code>reflectionHashCode</code>, uses <code>AccessibleObject.setAccessible</code> to
+    ///change the visibility of the fields. This will fail under a security manager,
+    ///unless the appropriate permissions are set up correctly. It is also slower
+    ///than testing explicitly.</p>
+    ///<p>A typical invocation for this method would look like:</p>
+    ///<pre>
+    ///public int hashCode() {
+    ///return HashCodeBuilder.reflectionHashCode(this);
+    ///}
+    ///</pre>
+    ///@author Stephen Colebourne
+    ///@author Gary Gregory
+    ///@author Pete Gieser    
+    ///@since 1.0
+    ///ported to C# by Artur Trosin
+    ///@version $Id: HashCodeBuilder.java 161243 2005-04-14 04:30:28Z ggregory $
+    /// </summary>
     public class HashCodeBuilder
     {
-        /**
-     * Constant to use in building the hashCode.
-     */
+        /// <summary>
+        ///Constant to use in building the hashCode.
+        /// </summary>
         private readonly int iConstant;
-        /**
-         * Running total of the hashCode.
-         */
+
+        /// <summary>
+        /// Running total of the hashCode.
+        /// </summary>
         private int iTotal;
 
-        /**
-         * &ltp&gtConstructor.</p>
-         *
-         * &ltp&gtThis constructor uses two hard coded choices for the constants
-         * needed to build a &ltcode&gthashCode</code>.</p>
-         */
-
+        /// <summary>
+        /// Constructor.
+        /// This constructor uses two hard coded choices for the constants
+        /// needed to build a GetHashCode
+        /// </summary>
         public HashCodeBuilder()
         {
             iConstant = 37;
             iTotal = 17;
         }
 
-        /**
-    * &ltp&gtConstructor.</p>
-    *
-    * &ltp&gtTwo randomly chosen, non-zero, odd numbers must be passed in.
-    * Ideally these should be different for each class, however this is
-    * not vital.</p>
-    *
-    * &ltp&gtPrime numbers are preferred, especially for the multiplier.</p>
-    *
-    * @param initialNonZeroOddNumber  a non-zero, odd number used as the initial value
-    * @param multiplierNonZeroOddNumber  a non-zero, odd number used as the multiplier
-    * @throws IllegalArgumentException if the number is zero or even
-    */
-
+        /// <summary>
+        /// Constructor.
+        /// Two randomly chosen, non-zero, odd numbers must be passed in.
+        /// Ideally these should be different for each class, however this is
+        /// not vital.
+        /// Prime numbers are preferred, especially for the multiplier.
+        /// throws ArgumentException if the number is zero or even
+        /// </summary>
+        /// <param name="initialNonZeroOddNumber">a non-zero, odd number used as the initial value</param>
+        /// <param name="multiplierNonZeroOddNumber">a non-zero, odd number used as the multiplier</param>
         public HashCodeBuilder(int initialNonZeroOddNumber, int multiplierNonZeroOddNumber)
         {
             if (initialNonZeroOddNumber == 0)
@@ -87,27 +132,21 @@ namespace NDDDSample.Domain.JavaRelated
             iTotal = initialNonZeroOddNumber;
         }
 
-        /**
-     * &ltp&gtThis method uses reflection to build a valid hash code.</p>
-     *
-     * &ltp&gtThis constructor uses two hard coded choices for the constants
-     * needed to build a hash code.</p>
-     *
-     * &ltp&gtIt uses &ltcode&gtAccessibleObject.setAccessible</code> to gain access to private
-     * fields. This means that it will throw a security exception if run under
-     * a security manager, if the permissions are not set up correctly. It is
-     * also not as efficient as testing explicitly.</p>
-     *
-     * &ltp&gtTransient members will be not be used, as they are likely derived
-     * fields, and not part of the value of the &ltcode&gtObject</code>.</p>
-     *
-     * &ltp&gtStatic fields will not be tested. Superclass fields will be included.</p>
-     *
-     * @param object  the Object to create a &ltcode&gthashCode</code> for
-     * @return int hash code
-     * @throws IllegalArgumentException if the object is &ltcode&gtnull</code>
-     */
-
+        /// <summary>
+        /// This method uses reflection to build a valid hash code.
+        /// This constructor uses two hard coded choices for the constants
+        /// needed to build a hash code.
+        /// It uses &ltcode&gtAccessibleObject.setAccessible</code> to gain access to private
+        /// fields. This means that it will throw a security exception if run under
+        /// a security manager, if the permissions are not set up correctly. It is
+        /// also not as efficient as testing explicitly.
+        /// Transient members will be not be used, as they are likely derived
+        /// fields, and not part of the value of the &ltcode&gtObject
+        /// Static fields will not be tested. Superclass fields will be included.
+        /// throws ArgumentException if the object is null
+        /// </summary>
+        /// <param name="obj">the Object to create a GetHashCode</param>
+        /// <returns>hash code</returns>
         public static int ReflectionHashCode(object obj)
         {
             return ReflectionHashCode(17, 37, obj, false, null);
@@ -275,8 +314,10 @@ namespace NDDDSample.Domain.JavaRelated
         {
             //TODO: atrosin what does it mean? f.Name.IndexOf('$')                        
             //TODO: atrosin //AccessibleObject.setAccessible(fields, true);
-            
-            FieldInfo[] fields = clazz.GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.GetField);
+
+            FieldInfo[] fields =
+                clazz.GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic
+                                | BindingFlags.GetField);
             //AccessibleObject.setAccessible(fields, true);
             for (int i = 0; i < fields.Length; i++)
             {
