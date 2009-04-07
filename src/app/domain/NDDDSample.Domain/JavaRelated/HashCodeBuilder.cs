@@ -57,7 +57,7 @@ namespace NDDDSample.Domain.JavaRelated
     ///}
     ///</pre>
     ///<p>If required, the superclass <code>hashCode()</code> can be added
-    ///using {@link #appendSuper}.</p>
+    ///using {@link #AppendSuper}.</p>
     ///<p>Alternatively, there is a method that uses reflection to determine
     ///the fields to test. Because these fields are usually private, the method,
     ///<code>reflectionHashCode</code>, uses <code>AccessibleObject.setAccessible</code> to
@@ -304,9 +304,9 @@ namespace NDDDSample.Domain.JavaRelated
      * &ltp&gtAppends the fields and values defined by the given object of the
      * given &ltcode&gtClass</code>.</p>
      * 
-     * @param object  the object to append details of
-     * @param clazz  the class to append details of
-     * @param builder  the builder to append to
+     * @param object  the object to Append details of
+     * @param clazz  the class to Append details of
+     * @param builder  the builder to Append to
      * @param useTransients  whether to use transient fields
      */
 
