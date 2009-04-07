@@ -30,5 +30,35 @@ namespace NDDDSample.Domain.JavaRelated
         {
             throw new NotImplementedException();
         }
+
+        public static bool reflectionEquals(object o1, object obj2)
+        {
+            throw new NotImplementedException();
+        }
+
+        public static bool reflectionEquals(object o1, object obj2, bool isTrans)
+        {
+            throw new NotImplementedException();
+        }
+
+        public EqualsBuilder appendSuper(bool b)
+        {
+            throw new NotImplementedException();
+        }
+
+        public EqualsBuilder append(object obj1, object obj2)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool isEquals()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void setEquals(bool b)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
