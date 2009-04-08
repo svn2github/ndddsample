@@ -53,6 +53,7 @@
   <ItemGroup>
     <Compile Include="Domain\JavaRelated\EqualsBuilderTest.cs" />
     <Compile Include="Domain\JavaRelated\HashCodeBuilderTest.cs" />
+    <Compile Include="Infrastructure\Messaging\Stub\SynchronousApplicationEventsStub.cs" />
     <Compile Include="Scenarios\CargoLifecycleScenarioTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -60,10 +61,23 @@
     <None Include="Properties\NDDDSample.snk" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\app\application\NDDDSample.Application\NDDDSample.Application.csproj">
+      <Project>{D9890BDD-C115-48F2-9A12-80A516A31ED0}</Project>
+      <Name>NDDDSample.Application</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\app\domain\NDDDSample.Domain\NDDDSample.Domain.csproj">
       <Project>{A57A3967-E613-4598-94FF-BD55711D4CAD}</Project>
       <Name>NDDDSample.Domain</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\app\interfaces\NDDDSample.Interfaces\NDDDSample.Interfaces.csproj">
+      <Project>{BDA5AFA5-0114-4C4C-989E-29457FAA4FDF}</Project>
+      <Name>NDDDSample.Interfaces</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Infrastructure\Persistence\Inmemory\" />
+    <Folder Include="Infrastructure\Persistence\NHibernate\" />
+    <Folder Include="Infrastructure\Routing\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
