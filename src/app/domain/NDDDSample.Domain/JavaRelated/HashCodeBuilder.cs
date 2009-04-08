@@ -330,8 +330,8 @@ namespace NDDDSample.Domain.JavaRelated
                     try
                     {
                         builder.Append(f.GetValue(obj));
-                    }
-                    catch (InvalidOperationException e)
+                    }//TODO: atrosin revise for more specific exc.
+                    catch (Exception e)
                     {
                         //this can't happen. Would get a Security exception instead
                         //throw a runtime exception in case the impossible happens.
