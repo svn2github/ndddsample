@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{85016CA7-7628-4E77-8E8B-65FD22ED57B9}</ProjectGuid>
+    <ProjectGuid>{D9890BDD-C115-48F2-9A12-80A516A31ED0}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>NDDDSample.Tests</RootNamespace>
-    <AssemblyName>NDDDSample.Tests</AssemblyName>
+    <RootNamespace>NDDDSample.Application</RootNamespace>
+    <AssemblyName>NDDDSample.Application</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SignAssembly>true</SignAssembly>
@@ -33,10 +33,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="nunit.framework, Version=2.4.8.0, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\tools\NUnit\nunit.framework.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -51,18 +47,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Domain\JavaRelated\EqualsBuilderTest.cs" />
-    <Compile Include="Domain\JavaRelated\HashCodeBuilderTest.cs" />
-    <Compile Include="Scenarios\CargoLifecycleScenarioTest.cs" />
+    <Compile Include="IApplicationEvents.cs" />
+    <Compile Include="IBookingService.cs" />
+    <Compile Include="ICargoInspectionService.cs" />
+    <Compile Include="IHandlingEventService.cs" />
+    <Compile Include="Impl\BookingService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utils\DateTestUtil.cs" />
+    <Compile Include="Utils\SampleDataGenerator.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\NDDDSample.snk" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\app\domain\NDDDSample.Domain\NDDDSample.Domain.csproj">
+    <ProjectReference Include="..\..\domain\NDDDSample.Domain\NDDDSample.Domain.csproj">
       <Project>{A57A3967-E613-4598-94FF-BD55711D4CAD}</Project>
       <Name>NDDDSample.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\interfaces\NDDDSample.Interfaces\NDDDSample.Interfaces.csproj">
+      <Project>{BDA5AFA5-0114-4C4C-989E-29457FAA4FDF}</Project>
+      <Name>NDDDSample.Interfaces</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

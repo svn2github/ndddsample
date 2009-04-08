@@ -12,6 +12,8 @@
     <AssemblyName>NDDDSample.Domain</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>Properties\NDDDSample.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -42,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="JavaRelated\ToStringBuilder.cs" />
     <Compile Include="Model\Cargos\Cargo.cs" />
     <Compile Include="Model\Cargos\Delivery.cs" />
     <Compile Include="Model\Cargos\HandlingActivity.cs" />
@@ -87,9 +90,7 @@
     <Compile Include="JavaRelated\Validate.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\..\..\NDDDSample.snk">
-      <Link>Properties\NDDDSample.snk</Link>
-    </None>
+    <None Include="Properties\NDDDSample.snk" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
