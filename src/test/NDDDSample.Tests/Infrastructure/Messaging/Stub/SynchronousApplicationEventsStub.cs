@@ -22,7 +22,7 @@
         public void cargoWasHandled(HandlingEvent evnt)
         {
             System.Console.WriteLine("EVENT: cargo was handled: " + evnt);
-            cargoInspectionService.inspectCargo(evnt.Cargo.TrackingId);
+            cargoInspectionService.InspectCargo(evnt.Cargo.TrackingId);
         }
 
 

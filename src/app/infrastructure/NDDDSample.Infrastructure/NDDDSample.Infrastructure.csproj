@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{D9890BDD-C115-48F2-9A12-80A516A31ED0}</ProjectGuid>
+    <ProjectGuid>{6D41623A-7B9E-4DFA-8F2A-1B4EBEF7F990}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>NDDDSample.Application</RootNamespace>
-    <AssemblyName>NDDDSample.Application</AssemblyName>
+    <RootNamespace>NDDDSample.Infrastructure</RootNamespace>
+    <AssemblyName>NDDDSample.Infrastructure</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SignAssembly>true</SignAssembly>
@@ -33,11 +33,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\lib\log4net\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
-    <Reference Include="System.Transactions" />
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -48,33 +51,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IApplicationEvents.cs" />
-    <Compile Include="IBookingService.cs" />
-    <Compile Include="ICargoInspectionService.cs" />
-    <Compile Include="IHandlingEventService.cs" />
-    <Compile Include="Impl\BookingService.cs" />
-    <Compile Include="Impl\CargoInspectionService.cs" />
-    <Compile Include="Impl\HandlingEventService.cs" />
+    <Compile Include="Log\ILog.cs" />
+    <Compile Include="Log\Log4NetLoggerProxy.cs" />
+    <Compile Include="Log\LogFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Utils\DateTestUtil.cs" />
-    <Compile Include="Utils\SampleDataGenerator.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\NDDDSample.snk" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\domain\NDDDSample.Domain\NDDDSample.Domain.csproj">
-      <Project>{A57A3967-E613-4598-94FF-BD55711D4CAD}</Project>
-      <Name>NDDDSample.Domain</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\infrastructure\NDDDSample.Infrastructure\NDDDSample.Infrastructure.csproj">
-      <Project>{6D41623A-7B9E-4DFA-8F2A-1B4EBEF7F990}</Project>
-      <Name>NDDDSample.Infrastructure</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\interfaces\NDDDSample.Interfaces\NDDDSample.Interfaces.csproj">
-      <Project>{BDA5AFA5-0114-4C4C-989E-29457FAA4FDF}</Project>
-      <Name>NDDDSample.Interfaces</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

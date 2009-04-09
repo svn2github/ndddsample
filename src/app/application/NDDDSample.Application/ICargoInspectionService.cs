@@ -13,6 +13,6 @@
         ///  at the final destination.
         /// </summary>
         /// <param name="trackingId">cargo tracking id</param>
-        void inspectCargo(TrackingId trackingId);
+        void InspectCargo(TrackingId trackingId);
     }
 }

@@ -5,8 +5,10 @@
     using System;
     using System.Collections.Generic;
     using Application;
+    using Application.Impl;
     using Application.Utils;
     using Infrastructure.Messaging.Stub;
+    using Infrastructure.Persistence.Inmemory;
     using NDDDSample.Domain.Model.Cargos;
     using NDDDSample.Domain.Model.Handlings;
     using NDDDSample.Domain.Model.Locations;
@@ -80,7 +82,7 @@
             /* Use case 1: booking
  
         A new cargo is booked, and the unique tracking id is assigned to the cargo. */
-            TrackingId trackingId = bookingService.bookNewCargo(
+            TrackingId trackingId = bookingService.BookNewCargo(
                 origin.UnLocode, destination.UnLocode, arrivalDeadline);
 
 
@@ -109,7 +111,7 @@
         but this test simply uses an arbitrary selection to mimic that process.
  
         The cargo is then assigned to the selected route, described by an itinerary. */
-            IList<Itinerary> itineraries = bookingService.requestPossibleRoutesForCargo(trackingId);
+            IList<Itinerary> itineraries = bookingService.RequestPossibleRoutesForCargo(trackingId);
             Itinerary itinerary = SelectPreferedItinerary(itineraries);
             cargo.AssignToRoute(itinerary);
 
@@ -201,7 +203,7 @@
             Assert.IsNull(cargo.Delivery.NextExpectedActivity);
 
             // Repeat procedure of selecting one out of a number of possible routes satisfying the route spec
-            IList<Itinerary> newItineraries = bookingService.requestPossibleRoutesForCargo(cargo.TrackingId);
+            IList<Itinerary> newItineraries = bookingService.RequestPossibleRoutesForCargo(cargo.TrackingId);
             Itinerary newItinerary = SelectPreferedItinerary(newItineraries);
             cargo.AssignToRoute(newItinerary);
 
@@ -290,15 +292,14 @@
       * Utility stubs below.
       */
 
-        private Itinerary SelectPreferedItinerary(IList<Itinerary> itineraries)
+        private static Itinerary SelectPreferedItinerary(IList<Itinerary> itineraries)
         {
             return itineraries[0];
         }
 
         [SetUp]
         public void SetUp()
-        {
-            //TODO:atrosin revise inplementation of the IRoutingService from java code
+        {            
             routingService = new RoutingServiceImpl();
 
 
@@ -313,9 +314,9 @@
             // Actual factories and application services, wired with stubbed or in-memory infrastructure
             handlingEventFactory = new HandlingEventFactory(cargoRepository, voyageRepository, locationRepository);
 
-            cargoInspectionService = new CargoInspectionServiceImpl(applicationEvents, cargoRepository, handlingEventRepository);
-            handlingEventService = new HandlingEventServiceImpl(handlingEventRepository, applicationEvents, handlingEventFactory);
-            bookingService = new BookingServiceImpl(cargoRepository, locationRepository, routingService);
+            cargoInspectionService = new CargoInspectionService(applicationEvents, cargoRepository, handlingEventRepository);
+            handlingEventService = new HandlingEventService(handlingEventRepository, applicationEvents, handlingEventFactory);
+            bookingService = new BookingService(cargoRepository, locationRepository, routingService);
 
             // Circular dependency when doing synchrounous calls
             ((SynchronousApplicationEventsStub)applicationEvents).setCargoInspectionService(cargoInspectionService);

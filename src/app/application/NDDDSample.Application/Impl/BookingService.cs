@@ -4,32 +4,103 @@
 
     using System;
     using System.Collections.Generic;
+    using System.Transactions;
     using Domain.Model.Cargos;
     using Domain.Model.Locations;
+    using Domain.Service;
+    using Infrastructure.Log;
 
     #endregion
-
-    //TODO: port lately
+   
     public class BookingService : IBookingService
     {
-        public TrackingId bookNewCargo(UnLocode origin, UnLocode destination, DateTime arrivalDeadline)
+        private readonly ICargoRepository cargoRepository;
+        private readonly ILocationRepository locationRepository;
+        private readonly IRoutingService routingService;
+        private readonly ILog logger = LogFactory.GetApplicationLayer();
+
+        public BookingService(ICargoRepository cargoRepository,
+                              ILocationRepository locationRepository,
+                              IRoutingService routingService)
         {
-            throw new NotImplementedException();
+            this.cargoRepository = cargoRepository;
+            this.locationRepository = locationRepository;
+            this.routingService = routingService;
         }
 
-        public IList<Itinerary> requestPossibleRoutesForCargo(TrackingId trackingId)
+        public TrackingId BookNewCargo(UnLocode originUnLocode,
+                                       UnLocode destinationUnLocode,
+                                       DateTime arrivalDeadline)
         {
-            throw new NotImplementedException();
+            using (var transactionScope = new TransactionScope())
+            {
+                // TODO modeling this as a cargo factory might be suitable
+                TrackingId trackingId = cargoRepository.NextTrackingId();
+                Location origin = locationRepository.Find(originUnLocode);
+                Location destination = locationRepository.Find(destinationUnLocode);
+                var routeSpecification = new RouteSpecification(origin, destination, arrivalDeadline);
+
+                Cargo cargo = new Cargo(trackingId, routeSpecification);
+				
+                cargoRepository.Store(cargo);
+                logger.Info("Booked new cargo with tracking id " + cargo.TrackingId.IdString);
+				
+                transactionScope.Complete();
+                return cargo.TrackingId;
+            }
         }
 
-        public void assignCargoToRoute(Itinerary itinerary, TrackingId trackingId)
+        public IList<Itinerary> RequestPossibleRoutesForCargo(TrackingId trackingId)
         {
-            throw new NotImplementedException();
+            using (var transactionScope = new TransactionScope())
+            {
+                Cargo cargo = cargoRepository.Find(trackingId);
+
+                if (cargo == null)
+                {
+                    return new List<Itinerary>();
+                }
+
+                transactionScope.Complete();
+                return routingService.FetchRoutesForSpecification(cargo.RouteSpecification);
+            }
         }
 
-        public void changeDestination(TrackingId trackingId, UnLocode unLocode)
+
+        public void AssignCargoToRoute(Itinerary itinerary, TrackingId trackingId)
         {
-            throw new NotImplementedException();
+            using (var transactionScope = new TransactionScope())
+            {
+                Cargo cargo = cargoRepository.Find(trackingId);
+                if (cargo == null)
+                {
+                    throw new ArgumentException("Can't assign itinerary to non-existing cargo " + trackingId);
+                }
+
+                cargo.AssignToRoute(itinerary);
+                cargoRepository.Store(cargo);
+
+                transactionScope.Complete();
+                logger.Info("Assigned cargo " + trackingId + " to new route");
+            }
+        }
+
+        public void ChangeDestination(TrackingId trackingId, UnLocode unLocode)
+        {
+            using (var transactionScope = new TransactionScope())
+            {
+                Cargo cargo = cargoRepository.Find(trackingId);
+                Location newDestination = locationRepository.Find(unLocode);
+
+                RouteSpecification routeSpecification = new RouteSpecification(
+                    cargo.Origin, newDestination, cargo.RouteSpecification.ArrivalDeadline
+                    );
+                cargo.SpecifyNewRoute(routeSpecification);
+
+                cargoRepository.Store(cargo);
+                transactionScope.Complete();
+                logger.Info("Changed destination for cargo " + trackingId + " to " + routeSpecification.Destination);
+            }
         }
     }
 }

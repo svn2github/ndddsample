@@ -54,10 +54,15 @@
     <Compile Include="Domain\JavaRelated\EqualsBuilderTest.cs" />
     <Compile Include="Domain\JavaRelated\HashCodeBuilderTest.cs" />
     <Compile Include="Infrastructure\Messaging\Stub\SynchronousApplicationEventsStub.cs" />
+    <Compile Include="Infrastructure\Persistence\Inmemory\CargoRepositoryInMem.cs" />
+    <Compile Include="Infrastructure\Persistence\Inmemory\HandlingEventRepositoryInMem.cs" />
+    <Compile Include="Infrastructure\Persistence\Inmemory\LocationRepositoryInMem.cs" />
+    <Compile Include="Infrastructure\Persistence\Inmemory\VoyageRepositoryInMem.cs" />
     <Compile Include="Scenarios\CargoLifecycleScenarioTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
     <None Include="Properties\NDDDSample.snk" />
   </ItemGroup>
   <ItemGroup>
@@ -75,7 +80,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Infrastructure\Persistence\Inmemory\" />
     <Folder Include="Infrastructure\Persistence\NHibernate\" />
     <Folder Include="Infrastructure\Routing\" />
   </ItemGroup>
