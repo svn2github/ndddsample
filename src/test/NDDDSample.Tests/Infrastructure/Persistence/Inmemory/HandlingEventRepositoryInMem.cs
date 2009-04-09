@@ -16,22 +16,31 @@
         public void Store(HandlingEvent evnt)
         {
             TrackingId trackingId = evnt.Cargo.TrackingId;
-            List<HandlingEvent> list = eventMap[trackingId];
-            if (list == null)
+
+            List<HandlingEvent> list;
+            if (!eventMap.ContainsKey(trackingId))
             {
-                list = new List<HandlingEvent>();
-                eventMap.Add(trackingId, list);
+               list = new List<HandlingEvent>();
+               eventMap.Add(trackingId, list); 
             }
+
+            list = eventMap[trackingId];
+            
             list.Add(evnt);
         }
 
 
         public HandlingHistory LookupHandlingHistoryOfCargo(TrackingId trackingId)
         {
-            List<HandlingEvent> events = eventMap[trackingId];
-            if (events == null)
+            List<HandlingEvent> events;
+
+            if (!eventMap.ContainsKey(trackingId))
             {
                 events = new List<HandlingEvent>();
+            }
+            else
+            {
+                events = eventMap[trackingId];
             }
 
             return new HandlingHistory(events);

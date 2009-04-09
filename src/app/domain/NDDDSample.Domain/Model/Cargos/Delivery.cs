@@ -21,7 +21,7 @@
         #region Private props
 
         //TODO: atrosin revise ETA_UNKOWN = null
-        private static readonly DateTime ETA_UNKOWN = DateTime.MinValue;
+        public static readonly DateTime ETA_UNKOWN = DateTime.MinValue;
         private static HandlingActivity NO_ACTIVITY;
         private readonly DateTime calculatedAt;
         private readonly Voyage currentVoyage;

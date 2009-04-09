@@ -53,6 +53,7 @@
   <ItemGroup>
     <Compile Include="Domain\JavaRelated\EqualsBuilderTest.cs" />
     <Compile Include="Domain\JavaRelated\HashCodeBuilderTest.cs" />
+    <Compile Include="Domain\JavaRelated\ToStringBuilderTest.cs" />
     <Compile Include="Infrastructure\Messaging\Stub\SynchronousApplicationEventsStub.cs" />
     <Compile Include="Infrastructure\Persistence\Inmemory\CargoRepositoryInMem.cs" />
     <Compile Include="Infrastructure\Persistence\Inmemory\HandlingEventRepositoryInMem.cs" />

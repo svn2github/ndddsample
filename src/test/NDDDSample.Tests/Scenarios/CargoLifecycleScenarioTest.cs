@@ -99,7 +99,7 @@
             Assert.AreEqual(TransportStatus.NOT_RECEIVED, cargo.Delivery.TransportStatus);
             Assert.AreEqual(RoutingStatus.NOT_ROUTED, cargo.Delivery.RoutingStatus);
             Assert.IsFalse(cargo.Delivery.IsMisdirected);
-            Assert.IsNull(cargo.Delivery.EstimatedTimeOfArrival);
+            Assert.AreEqual(cargo.Delivery.EstimatedTimeOfArrival, Delivery.ETA_UNKOWN);
             Assert.IsNull(cargo.Delivery.NextExpectedActivity);
 
 

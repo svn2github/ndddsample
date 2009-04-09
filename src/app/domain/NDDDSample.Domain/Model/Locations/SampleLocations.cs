@@ -19,7 +19,7 @@
 
         public static readonly Location CHICAGO = new Location(new UnLocode("USCHI"), "Chicago");
         public static readonly Location DALLAS = new Location(new UnLocode("USDAL"), "Dallas");
-        public static Location GOTHENBURG = new Location(new UnLocode("SEGOT"), "Göteborg");
+        public static readonly Location GOTHENBURG = new Location(new UnLocode("SEGOT"), "Göteborg");
         public static readonly Location HAMBURG = new Location(new UnLocode("DEHAM"), "Hamburg");
         public static readonly Location HANGZOU = new Location(new UnLocode("CNHGH"), "Hangzhou");
         public static readonly Location HELSINKI = new Location(new UnLocode("FIHEL"), "Helsinki");
@@ -36,9 +36,8 @@
         #region Static Constr
 
         static SampleLocations()
-        {
-            //TODO: atrosin verify if that logic works correctly
-            foreach (var fieldInfo in typeof (SampleLocations).GetFields(BindingFlags.Static))
+        {           
+            foreach (var fieldInfo in typeof (SampleLocations).GetFields(BindingFlags.Static | BindingFlags.Public))
             {
                 try
                 {

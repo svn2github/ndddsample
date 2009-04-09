@@ -38,7 +38,14 @@
 
         public void Store(Cargo cargo)
         {
-            cargoDb.Add(cargo.TrackingId.IdString, cargo);
+            if (cargoDb.ContainsKey(cargo.TrackingId.IdString))
+            {
+                cargoDb[cargo.TrackingId.IdString] = cargo;
+            }
+            else
+            {
+                cargoDb.Add(cargo.TrackingId.IdString, cargo);    
+            }            
         }
 
         public TrackingId NextTrackingId()

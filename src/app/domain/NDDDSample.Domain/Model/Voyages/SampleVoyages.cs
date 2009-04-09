@@ -145,6 +145,11 @@
 
         public static Voyage Lookup(VoyageNumber voyageNumber)
         {
+            if (!ALL.ContainsKey(voyageNumber))
+            {
+                return null;
+            }
+
             return ALL[voyageNumber];
         }
 
@@ -153,9 +158,8 @@
         #region Static constr
 
         static SampleVoyages()
-        {
-            //TODO: atrosin verify if that logic works correctly
-            foreach (var fieldInfo in typeof (SampleVoyages).GetFields(BindingFlags.Static))
+        {          
+            foreach (var fieldInfo in typeof (SampleVoyages).GetFields(BindingFlags.Static | BindingFlags.Public))
             {
                 try
                 {

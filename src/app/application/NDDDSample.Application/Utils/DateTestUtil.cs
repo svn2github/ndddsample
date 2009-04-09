@@ -20,7 +20,7 @@
         /// <returns>Date representation</returns>
         public static DateTime toDate(string date)
         {
-            return toDate(date, "00:00.00.000");
+            return toDate(date, "00:00");
         }
 
         public static DateTime toDate(string date, string time)

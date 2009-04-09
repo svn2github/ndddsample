@@ -76,7 +76,7 @@
 
         public override string ToString()
         {
-            return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
+            return ToStringBuilder.ReflectionToString(this);
         }
     }
 }
