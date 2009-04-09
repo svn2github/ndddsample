@@ -117,7 +117,7 @@
 
             Assert.AreEqual(TransportStatus.NOT_RECEIVED, cargo.Delivery.TransportStatus);
             Assert.AreEqual(RoutingStatus.ROUTED, cargo.Delivery.RoutingStatus);
-            Assert.IsNotNull(cargo.Delivery.EstimatedTimeOfArrival);
+            Assert.AreNotEqual(Delivery.ETA_UNKOWN, cargo.Delivery.EstimatedTimeOfArrival);
             Assert.AreEqual(new HandlingActivity(HandlingEvent.HandlingType.RECEIVE, SampleLocations.HONGKONG),
                             cargo.Delivery.NextExpectedActivity);
 
