@@ -29,101 +29,85 @@ namespace NDDDSample.Domain.JavaRelated
 
     public class EqualsBuilder
     {
-        /**
-     * If the fields tested are equals.
-     */
+        
+        // If the fields tested are equals.     
         private bool isEqual;
-
-        /**
-         * &ltp&gtConstructor for EqualsBuilder.</p>
-         *
-         * &ltp&gtStarts off assuming that equals is &ltcode&gttrue</code>.</p>
-         * @see java.lang.Object#equals
-         */
-
+        
+        // Constructor for EqualsBuilder.
+        // Starts off assuming that equals is true
         public EqualsBuilder()
         {
             isEqual = true;
         }
 
-
-        /**
-     * &ltp&gtThis method uses reflection to determine if the two &ltcode&gtObject</code&gts
-     * are equal.</p>
-     *
-     * &ltp&gtIt uses &ltcode&gtAccessibleObject.setAccessible</code> to gain access to private
-     * fields. This means that it will throw a security exception if run under
-     * a security manager, if the permissions are not set up correctly. It is also
-     * not as efficient as testing explicitly.</p>
-     *
-     * &ltp&gtTransient members will be not be tested, as they are likely derived
-     * fields, and not part of the value of the Object.</p>
-     *
-     * &ltp&gtStatic fields will not be tested. Superclass fields will be included.</p>
-     *
-     * @param lhs  &ltcode&gtthis</code> object
-     * @param rhs  the other object
-     * @return &ltcode&gttrue</code> if the two Objects have tested equals.
-     */
-
+        /// <summary>
+        ///  This method uses reflection to determine if the two Object
+        /// are equal.
+        ///
+        /// It uses AccessibleObject.setAccessible to gain access to private
+        /// fields. This means that it will throw a security exception if run under
+        /// a security manager, if the permissions are not set up correctly. It is also
+        /// not as efficient as testing explicitly.
+        ///
+        /// Transient members will be not be tested, as they are likely derived
+        /// fields, and not part of the value of the Object.
+        ///
+        /// Static fields will not be tested. Superclass fields will be included.        
+        /// </summary>
+        /// <param name="lhs">this object</param>
+        /// <param name="rhs">the other object</param>
+        /// <returns>true if the two Objects have tested equals.</returns>
         public static bool ReflectionEquals(Object lhs, Object rhs)
         {
             return ReflectionEquals(lhs, rhs, false, null);
         }
 
-
-        /**
-     * &ltp&gtThis method uses reflection to determine if the two &ltcode&gtObject</code&gts
-     * are equal.</p>
-     *
-     * &ltp&gtIt uses &ltcode&gtAccessibleObject.setAccessible</code> to gain access to private
-     * fields. This means that it will throw a security exception if run under
-     * a security manager, if the permissions are not set up correctly. It is also
-     * not as efficient as testing explicitly.</p>
-     *
-     * &ltp&gtIf the TestTransients parameter is set to &ltcode&gttrue</code>, transient
-     * members will be tested, otherwise they are ignored, as they are likely
-     * derived fields, and not part of the value of the &ltcode&gtObject</code>.</p>
-     *
-     * &ltp&gtStatic fields will not be tested. Superclass fields will be included.</p>
-     *
-     * @param lhs  &ltcode&gtthis</code> object
-     * @param rhs  the other object
-     * @param testTransients  whether to include transient fields
-     * @return &ltcode&gttrue</code> if the two Objects have tested equals.
-     */
-
+        /// <summary>
+        /// This method uses reflection to determine if the two Object
+        /// are equal.
+        ///
+        /// It uses AccessibleObject.setAccessible to gain access to private
+        /// fields. This means that it will throw a security exception if run under
+        /// a security manager, if the permissions are not set up correctly. It is also
+        /// not as efficient as testing explicitly.
+        ///
+        /// If the TestTransients parameter is set to true, transient
+        /// members will be tested, otherwise they are ignored, as they are likely
+        /// derived fields, and not part of the value of the Object.
+        ///
+        /// Static fields will not be tested. Superclass fields will be included.
+        /// </summary>
+        /// <param name="lhs">this object</param>
+        /// <param name="rhs">the other object</param>
+        /// <param name="testTransients">whether to include transient fields</param>
+        /// <returns>true if the two Objects have tested equals.</returns>
         public static bool ReflectionEquals(Object lhs, Object rhs, bool testTransients)
         {
             return ReflectionEquals(lhs, rhs, testTransients, null);
         }
 
-        /**
-    * &ltp&gtThis method uses reflection to determine if the two &ltcode&gtObject</code&gts
-    * are equal.</p>
-    *
-    * &ltp&gtIt uses &ltcode&gtAccessibleObject.setAccessible</code> to gain access to private
-    * fields. This means that it will throw a security exception if run under
-    * a security manager, if the permissions are not set up correctly. It is also
-    * not as efficient as testing explicitly.</p>
-    *
-    * &ltp&gtIf the testTransients parameter is set to &ltcode&gttrue</code>, transient
-    * members will be tested, otherwise they are ignored, as they are likely
-    * derived fields, and not part of the value of the &ltcode&gtObject</code>.</p>
-    *
-    * &ltp&gtStatic fields will not be included. Superclass fields will be appended
-    * up to and including the specified superclass. A null superclass is treated
-    * as java.lang.Object.</p>
-    *
-    * @param lhs  &ltcode&gtthis</code> object
-    * @param rhs  the other object
-    * @param testTransients  whether to include transient fields
-    * @param reflectUpToClass  the superclass to reflect up to (inclusive),
-    *  may be &ltcode&gtnull</code>
-    * @return &ltcode&gttrue</code> if the two Objects have tested equals.
-    * @since 2.0
-    */
-
+        /// <summary>
+        /// This method uses reflection to determine if the two Object
+        /// are equal.
+        ///
+        /// It uses AccessibleObject.setAccessible to gain access to private
+        /// fields. This means that it will throw a security exception if run under
+        /// a security manager, if the permissions are not set up correctly. It is also
+        /// not as efficient as testing explicitly.
+        ///
+        /// If the testTransients parameter is set to true, transient
+        /// members will be tested, otherwise they are ignored, as they are likely
+        /// derived fields, and not part of the value of the Object.
+        ///
+        /// Static fields will not be included. Superclass fields will be appended
+        /// up to and including the specified superclass. A null superclass is treated
+        /// as java.lang.Object.
+        /// </summary>
+        /// <param name="lhs">this object</param>
+        /// <param name="rhs">the other object</param>
+        /// <param name="testTransients">whether to include transient fields</param>
+        /// <param name="reflectUpToClass">the superclass to reflect up to (inclusive), may be null</param>
+        /// <returns>true if the two Objects have tested equals.</returns>
         public static bool ReflectionEquals(Object lhs, Object rhs, bool testTransients, Type reflectUpToClass)
         {
             if (lhs == rhs)
@@ -185,19 +169,15 @@ namespace NDDDSample.Domain.JavaRelated
             }
             return equalsBuilder.IsEquals();
         }
-
-
-        /**
-    * &ltp&gtAppends the fields and values defined by the given object of the
-    * given Class.</p>
-    * 
-    * @param lhs  the left hand object
-    * @param rhs  the right hand object
-    * @param clazz  the class to Append details of
-    * @param builder  the builder to Append to
-    * @param useTransients  whether to test transient fields
-    */
-
+    
+        /// <summary>
+        /// Appends the fields and values defined by the given object of the given Class.
+        /// </summary>
+        /// <param name="builder">the builder to Append to</param>
+        /// <param name="clazz">the class to Append details of</param>
+        /// <param name="lhs">the left hand object</param>
+        /// <param name="rhs">the right hand object</param>
+        /// <param name="useTransients">whether to test transient fields</param>
         private static void ReflectionAppend(
             Object lhs,
             Object rhs,
@@ -230,14 +210,11 @@ namespace NDDDSample.Domain.JavaRelated
             }
         }
 
-        /**
-    * &ltp&gtAdds the result of &ltcode&gtsuper.equals()</code> to this builder.</p>
-    *
-    * @param superEquals  the result of calling &ltcode&gtsuper.equals()</code>
-    * @return EqualsBuilder - used to chain calls.
-    * @since 2.0
-    */
-
+        /// <summary>
+        /// Adds the result of super.equals() to this builder.
+        /// </summary>
+        /// <param name="superEquals">the result of calling super.equals()</param>
+        /// <returns>EqualsBuilder - used to chain calls.</returns>
         public EqualsBuilder AppendSuper(bool superEquals)
         {
             if (isEqual == false)
@@ -248,15 +225,12 @@ namespace NDDDSample.Domain.JavaRelated
             return this;
         }
 
-        /**
-    * &ltp&gtTest if two &ltcode&gtObject</code&gts are equal using their
-    * &ltcode&gtequals</code> method.</p>
-    *
-    * @param lhs  the left hand object
-    * @param rhs  the right hand object
-    * @return EqualsBuilder - used to chain calls.
-    */
-
+        /// <summary>
+        /// Test if two Object are equal using their equals method.
+        /// </summary>
+        /// <param name="lhs">the left hand object</param>
+        /// <param name="rhs">the right hand object</param>
+        /// <returns>EqualsBuilder - used to chain calls.</returns>        
         public EqualsBuilder Append(Object lhs, Object rhs)
         {
             if (isEqual == false)
@@ -323,14 +297,12 @@ namespace NDDDSample.Domain.JavaRelated
             return this;
         }
 
-        /**
-    * &ltp&gtTest if two &ltcode&gtlong</code&gts are equal.</p>
-    *
-    * @param lhs  the left hand &ltcode&gtlong</code>
-    * @param rhs  the right hand &ltcode&gtlong</code>
-    * @return EqualsBuilder - used to chain calls.
-    */
-
+        /// <summary>
+        /// Test if two long are equal.
+        /// </summary>
+        /// <param name="lhs">the left hand long</param>
+        /// <param name="rhs">the right hand long</param>
+        /// <returns>EqualsBuilder - used to chain calls.</returns>
         public EqualsBuilder Append(long lhs, long rhs)
         {
             if (isEqual == false)
@@ -340,15 +312,13 @@ namespace NDDDSample.Domain.JavaRelated
             isEqual = (lhs == rhs);
             return this;
         }
-
-        /**
-         * &ltp&gtTest if two &ltcode&gtint</code&gts are equal.</p>
-         *
-         * @param lhs  the left hand &ltcode&gtint</code>
-         * @param rhs  the right hand &ltcode&gtint</code>
-         * @return EqualsBuilder - used to chain calls.
-         */
-
+        
+        /// <summary>
+        /// Test if two int are equal.
+        /// </summary>
+        /// <param name="lhs">the left hand int</param>
+        /// <param name="rhs">the right hand int</param>
+        /// <returns>EqualsBuilder - used to chain calls.</returns>
         public EqualsBuilder Append(int lhs, int rhs)
         {
             if (isEqual == false)
@@ -359,14 +329,12 @@ namespace NDDDSample.Domain.JavaRelated
             return this;
         }
 
-        /**
-     * &ltp&gtTest if two &ltcode&gtshort</code&gts are equal.</p>
-     *
-     * @param lhs  the left hand &ltcode&gtshort</code>
-     * @param rhs  the right hand &ltcode&gtshort</code>
-     * @return EqualsBuilder - used to chain calls.
-     */
-
+        /// <summary>
+        /// Test if two short are equal.
+        /// </summary>
+        /// <param name="lhs">the left hand short</param>
+        /// <param name="rhs">the right hand short</param>
+        /// <returns>EqualsBuilder - used to chain calls.</returns>
         public EqualsBuilder Append(short lhs, short rhs)
         {
             if (isEqual == false)
@@ -376,15 +344,13 @@ namespace NDDDSample.Domain.JavaRelated
             isEqual = (lhs == rhs);
             return this;
         }
-
-        /**
-         * &ltp&gtTest if two &ltcode&gtchar</code&gts are equal.</p>
-         *
-         * @param lhs  the left hand &ltcode&gtchar</code>
-         * @param rhs  the right hand &ltcode&gtchar</code>
-         * @return EqualsBuilder - used to chain calls.
-         */
-
+     
+        /// <summary>
+        /// Test if two char are equal.
+        /// </summary>
+        /// <param name="lhs">the left hand char</param>
+        /// <param name="rhs">the right hand char</param>
+        /// <returns>EqualsBuilder - used to chain calls.</returns>
         public EqualsBuilder Append(char lhs, char rhs)
         {
             if (isEqual == false)
@@ -395,14 +361,12 @@ namespace NDDDSample.Domain.JavaRelated
             return this;
         }
 
-        /**
-     * &ltp&gtTest if two &ltcode&gtbyte</code&gts are equal.</p>
-     *
-     * @param lhs  the left hand &ltcode&gtbyte</code>
-     * @param rhs  the right hand &ltcode&gtbyte</code>
-     * @return EqualsBuilder - used to chain calls.
-     */
-
+        /// <summary>
+        /// Test if two byte are equal.
+        /// </summary>
+        /// <param name="lhs">the left hand byte</param>
+        /// <param name="rhs">the right hand byte</param>
+        /// <returns>EqualsBuilder - used to chain calls.</returns>
         public EqualsBuilder Append(byte lhs, byte rhs)
         {
             if (isEqual == false)
@@ -413,20 +377,16 @@ namespace NDDDSample.Domain.JavaRelated
             return this;
         }
 
-        /**
-    * &ltp&gtTest if two &ltcode&gtdouble</code&gts are equal by testing that the
-    * pattern of bits returned by &ltcode&gtdoubleToLong</code> are equal.</p>
-    *
-    * &ltp&gtThis handles NaNs, Infinties, and &ltcode>-0.0</code>.</p>
-    *
-    * &ltp&gtIt is compatible with the hash code generated by
-    * &ltcode&gtHashCodeBuilder</code>.</p>
-    *
-    * @param lhs  the left hand &ltcode&gtdouble</code>
-    * @param rhs  the right hand &ltcode&gtdouble</code>
-    * @return EqualsBuilder - used to chain calls.
-    */
-
+        /// <summary>
+        /// Test if two double are equal by testing that the
+        /// pattern of bits returned by doubleToLong are equal.     
+        /// This handles NaNs, Infinties, and &ltcode>-0.0.        
+        /// It is compatible with the hash code generated by
+        /// HashCodeBuilder.
+        /// </summary>
+        /// <param name="lhs">the left hand double</param>
+        /// <param name="rhs">the right hand double</param>
+        /// <returns>EqualsBuilder - used to chain calls.</returns>
         public EqualsBuilder Append(double lhs, double rhs)
         {
             if (isEqual == false)
@@ -437,21 +397,16 @@ namespace NDDDSample.Domain.JavaRelated
             return this;
         }
 
-
-        /**
-     * &ltp&gtTest if two &ltcode&gtfloat</code&gts are equal byt testing that the
-     * pattern of bits returned by doubleToLong are equal.</p>
-     *
-     * &ltp&gtThis handles NaNs, Infinties, and &ltcode>-0.0</code>.</p>
-     *
-     * &ltp&gtIt is compatible with the hash code generated by
-     * &ltcode&gtHashCodeBuilder</code>.</p>
-     *
-     * @param lhs  the left hand &ltcode&gtfloat</code>
-     * @param rhs  the right hand &ltcode&gtfloat</code>
-     * @return EqualsBuilder - used to chain calls.
-     */
-
+        /// <summary>
+        /// Test if two float are equal byt testing that the
+        /// pattern of bits returned by doubleToLong are equal.        
+        /// This handles NaNs, Infinties, and &ltcode>-0.0.        
+        /// It is compatible with the hash code generated by
+        /// HashCodeBuilder.        
+        /// </summary>
+        /// <param name="lhs">the left hand float</param>
+        /// <param name="rhs">the right hand float</param>
+        /// <returns>EqualsBuilder - used to chain calls.</returns>
         public EqualsBuilder Append(float lhs, float rhs)
         {
             if (isEqual == false)
@@ -462,14 +417,12 @@ namespace NDDDSample.Domain.JavaRelated
             return this;
         }
 
-        /**
-         * &ltp&gtTest if two &ltcode&gtbools</code&gts are equal.</p>
-         *
-         * @param lhs  the left hand &ltcode&gtbool</code>
-         * @param rhs  the right hand &ltcode&gtbool</code>
-         * @return EqualsBuilder - used to chain calls.
-          */
-
+        /// <summary>
+        /// Test if two bools are equal.
+        /// </summary>
+        /// <param name="lhs">the left hand bool</param>
+        /// <param name="rhs">the right hand bool</param>
+        /// <returns>EqualsBuilder - used to chain calls.</returns>
         public EqualsBuilder Append(bool lhs, bool rhs)
         {
             if (isEqual == false)
@@ -479,19 +432,15 @@ namespace NDDDSample.Domain.JavaRelated
             isEqual = (lhs == rhs);
             return this;
         }
-
-
-        /**
-    * &ltp&gtPerforms a deep comparison of two &ltcode&gtObject</code> arrays.</p>
-    *
-    * &ltp&gtThis also will be called for the top level of
-    * multi-dimensional, ragged, and multi-typed arrays.</p>
-    *
-    * @param lhs  the left hand &ltcode&gtObject[]</code>
-    * @param rhs  the right hand &ltcode&gtObject[]</code>
-    * @return EqualsBuilder - used to chain calls.
-    */
-
+    
+        /// <summary>
+        /// Performs a deep comparison of two Object arrays.        
+        /// This also will be called for the top level of
+        /// multi-dimensional, ragged, and multi-typed arrays.        
+        /// </summary>
+        /// <param name="lhs">the left hand Object[]</param>
+        /// <param name="rhs">the right hand Object[]</param>
+        /// <returns>EqualsBuilder - used to chain calls.</returns>
         public EqualsBuilder Append(Object[] lhs, Object[] rhs)
         {
             if (isEqual == false)
@@ -528,17 +477,14 @@ namespace NDDDSample.Domain.JavaRelated
             return this;
         }
 
-        /**
-     * &ltp&gtDeep comparison of array of &ltcode&gtlong</code>. Length and all
-     * values are compared.</p>
-     *
-     * &ltp&gtThe method {@link #Append(long, long)} is used.</p>
-     *
-     * @param lhs  the left hand &ltcode&gtlong[]</code>
-     * @param rhs  the right hand &ltcode&gtlong[]</code>
-     * @return EqualsBuilder - used to chain calls.
-     */
-
+        /// <summary>
+        /// Deep comparison of array of long. Length and all
+        /// values are compared.        
+        /// The method {@link #Append(long, long)} is used.      
+        /// </summary>
+        /// <param name="lhs">the left hand long[]</param>
+        /// <param name="rhs">the right hand long[]</param>
+        /// <returns>EqualsBuilder - used to chain calls.</returns>
         public EqualsBuilder Append(long[] lhs, long[] rhs)
         {
             if (isEqual == false)
@@ -566,17 +512,14 @@ namespace NDDDSample.Domain.JavaRelated
             return this;
         }
 
-        /**
-     * &ltp&gtDeep comparison of array of &ltcode&gtint</code>. Length and all
-     * values are compared.</p>
-     *
-     * &ltp&gtThe method {@link #Append(int, int)} is used.</p>
-     *
-     * @param lhs  the left hand &ltcode&gtint[]</code>
-     * @param rhs  the right hand &ltcode&gtint[]</code>
-     * @return EqualsBuilder - used to chain calls.
-     */
-
+        /// <summary>
+        /// Deep comparison of array of long. Length and all
+        /// values are compared.        
+        /// The method {@link #Append(int, int)} is used.    
+        /// </summary>
+        /// <param name="lhs">the left hand int[]</param>
+        /// <param name="rhs">the right hand int[]</param>
+        /// <returns>EqualsBuilder - used to chain calls.</returns>
         public EqualsBuilder Append(int[] lhs, int[] rhs)
         {
             if (isEqual == false)
@@ -604,17 +547,14 @@ namespace NDDDSample.Domain.JavaRelated
             return this;
         }
 
-        /**
-    * &ltp&gtDeep comparison of array of &ltcode&gtshort</code>. Length and all
-    * values are compared.</p>
-    *
-    * &ltp&gtThe method {@link #Append(short, short)} is used.</p>
-    *
-    * @param lhs  the left hand &ltcode&gtshort[]</code>
-    * @param rhs  the right hand &ltcode&gtshort[]</code>
-    * @return EqualsBuilder - used to chain calls.
-    */
-
+        /// <summary>
+        /// Deep comparison of array of long. Length and all
+        /// values are compared.        
+        /// The method {@link #Append(short, short)} is used.    
+        /// </summary>
+        /// <param name="lhs">the left hand short[]</param>
+        /// <param name="rhs">the right hand short[]</param>
+        /// <returns>EqualsBuilder - used to chain calls.</returns>
         public EqualsBuilder Append(short[] lhs, short[] rhs)
         {
             if (isEqual == false)
@@ -642,17 +582,14 @@ namespace NDDDSample.Domain.JavaRelated
             return this;
         }
 
-        /**
-     * &ltp&gtDeep comparison of array of &ltcode&gtchar</code>. Length and all
-     * values are compared.</p>
-     *
-     * &ltp&gtThe method {@link #Append(char, char)} is used.</p>
-     *
-     * @param lhs  the left hand &ltcode&gtchar[]</code>
-     * @param rhs  the right hand &ltcode&gtchar[]</code>
-     * @return EqualsBuilder - used to chain calls.
-     */
-
+        /// <summary>
+        /// Deep comparison of array of long. Length and all
+        /// values are compared.        
+        /// The method {@link #Append(char, char)} is used.    
+        /// </summary>
+        /// <param name="lhs">the left hand char[]</param>
+        /// <param name="rhs">the right hand char[]</param>
+        /// <returns>EqualsBuilder - used to chain calls.</returns>
         public EqualsBuilder Append(char[] lhs, char[] rhs)
         {
             if (isEqual == false)
@@ -680,17 +617,14 @@ namespace NDDDSample.Domain.JavaRelated
             return this;
         }
 
-        /**
-         * &ltp&gtDeep comparison of array of &ltcode&gtbyte</code>. Length and all
-         * values are compared.</p>
-         *
-         * &ltp&gtThe method {@link #Append(byte, byte)} is used.</p>
-         *
-         * @param lhs  the left hand &ltcode&gtbyte[]</code>
-         * @param rhs  the right hand &ltcode&gtbyte[]</code>
-         * @return EqualsBuilder - used to chain calls.
-         */
-
+        /// <summary>
+        /// Deep comparison of array of long. Length and all
+        /// values are compared.        
+        /// The method {@link #Append(byte, byte)} is used.    
+        /// </summary>
+        /// <param name="lhs">the left hand byte[]</param>
+        /// <param name="rhs">the right hand byte[]</param>
+        /// <returns>EqualsBuilder - used to chain calls.</returns>
         public EqualsBuilder Append(byte[] lhs, byte[] rhs)
         {
             if (isEqual == false)
@@ -718,17 +652,14 @@ namespace NDDDSample.Domain.JavaRelated
             return this;
         }
 
-        /**
-         * &ltp&gtDeep comparison of array of &ltcode&gtdouble</code>. Length and all
-         * values are compared.</p>
-         *
-         * &ltp&gtThe method {@link #Append(double, double)} is used.</p>
-         *
-         * @param lhs  the left hand &ltcode&gtdouble[]</code>
-         * @param rhs  the right hand &ltcode&gtdouble[]</code>
-         * @return EqualsBuilder - used to chain calls.
-         */
-
+        /// <summary>
+        /// Deep comparison of array of long. Length and all
+        /// values are compared.        
+        /// The method {@link #Append(double, double)} is used.    
+        /// </summary>
+        /// <param name="lhs">the left hand double[]</param>
+        /// <param name="rhs">the right hand double[]</param>
+        /// <returns>EqualsBuilder - used to chain calls.</returns>
         public EqualsBuilder Append(double[] lhs, double[] rhs)
         {
             if (isEqual == false)
@@ -756,17 +687,14 @@ namespace NDDDSample.Domain.JavaRelated
             return this;
         }
 
-        /**
-         * &ltp&gtDeep comparison of array of &ltcode&gtfloat</code>. Length and all
-         * values are compared.</p>
-         *
-         * &ltp&gtThe method {@link #Append(float, float)} is used.</p>
-         *
-         * @param lhs  the left hand &ltcode&gtfloat[]</code>
-         * @param rhs  the right hand &ltcode&gtfloat[]</code>
-         * @return EqualsBuilder - used to chain calls.
-         */
-
+        /// <summary>
+        /// Deep comparison of array of long. Length and all
+        /// values are compared.        
+        /// The method {@link #Append(float, float)} is used.    
+        /// </summary>
+        /// <param name="lhs">the left hand float[]</param>
+        /// <param name="rhs">the right hand float[]</param>
+        /// <returns>EqualsBuilder - used to chain calls.</returns>
         public EqualsBuilder Append(float[] lhs, float[] rhs)
         {
             if (isEqual == false)
@@ -794,17 +722,14 @@ namespace NDDDSample.Domain.JavaRelated
             return this;
         }
 
-        /**
-         * &ltp&gtDeep comparison of array of &ltcode&gtbool</code>. Length and all
-         * values are compared.</p>
-         *
-         * &ltp&gtThe method {@link #Append(boolean, boolean)} is used.</p>
-         *
-         * @param lhs  the left hand &ltcode&gtboolean[]</code>
-         * @param rhs  the right hand &ltcode&gtboolean[]</code>
-         * @return EqualsBuilder - used to chain calls.
-         */
-
+        /// <summary>
+        /// Deep comparison of array of long. Length and all
+        /// values are compared.        
+        /// The method {@link #Append(boolean, boolean)} is used.    
+        /// </summary>
+        /// <param name="lhs">the left hand boolean[]</param>
+        /// <param name="rhs">the right hand boolean[]</param>
+        /// <returns>EqualsBuilder - used to chain calls.</returns>
         public EqualsBuilder Append(bool[] lhs, bool[] rhs)
         {
             if (isEqual == false)
@@ -831,14 +756,11 @@ namespace NDDDSample.Domain.JavaRelated
             }
             return this;
         }
-
-        /**
-         * &ltp&gtReturn &ltcode&gttrue</code> if the fields that have been checked
-         * are all equal.</p>
-         *
-         * @return bool
-         */
-
+        
+        /// <summary>
+        /// Return true if the fields that have been checked are all equal.
+        /// </summary>
+        /// <returns>bool</returns>
         public bool IsEquals()
         {
             return isEqual;
