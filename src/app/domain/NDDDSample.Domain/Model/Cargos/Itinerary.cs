@@ -16,8 +16,8 @@
     /// </summary>
     public class Itinerary : IValueObject<Itinerary>
     {
-        private static readonly DateTime END_OF_DAYS = DateTime.MaxValue;
         internal static readonly Itinerary EMPTY_ITINERARY = new Itinerary();
+        private static readonly DateTime END_OF_DAYS = DateTime.MaxValue;
         private readonly List<Leg> legs = new List<Leg>();
         private long id;
 
@@ -217,6 +217,5 @@
         }
 
         #endregion
-
     }
 }

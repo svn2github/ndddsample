@@ -29,10 +29,9 @@ namespace NDDDSample.Domain.JavaRelated
 
     public class EqualsBuilder
     {
-        
         // If the fields tested are equals.     
         private bool isEqual;
-        
+
         // Constructor for EqualsBuilder.
         // Starts off assuming that equals is true
         public EqualsBuilder()
@@ -169,7 +168,7 @@ namespace NDDDSample.Domain.JavaRelated
             }
             return equalsBuilder.IsEquals();
         }
-    
+
         /// <summary>
         /// Appends the fields and values defined by the given object of the given Class.
         /// </summary>
@@ -199,7 +198,7 @@ namespace NDDDSample.Domain.JavaRelated
                     try
                     {
                         builder.Append(f.GetValue(lhs), f.GetValue(rhs));
-                    }//TODO: atrosin revise for more specific exc.
+                    } //TODO: atrosin revise for more specific exc.
                     catch (Exception e)
                     {
                         //this can't happen. Would get a Security exception instead
@@ -312,7 +311,7 @@ namespace NDDDSample.Domain.JavaRelated
             isEqual = (lhs == rhs);
             return this;
         }
-        
+
         /// <summary>
         /// Test if two int are equal.
         /// </summary>
@@ -344,7 +343,7 @@ namespace NDDDSample.Domain.JavaRelated
             isEqual = (lhs == rhs);
             return this;
         }
-     
+
         /// <summary>
         /// Test if two char are equal.
         /// </summary>
@@ -432,7 +431,7 @@ namespace NDDDSample.Domain.JavaRelated
             isEqual = (lhs == rhs);
             return this;
         }
-    
+
         /// <summary>
         /// Performs a deep comparison of two Object arrays.        
         /// This also will be called for the top level of
@@ -756,7 +755,7 @@ namespace NDDDSample.Domain.JavaRelated
             }
             return this;
         }
-        
+
         /// <summary>
         /// Return true if the fields that have been checked are all equal.
         /// </summary>

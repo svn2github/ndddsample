@@ -31,6 +31,8 @@
             cargoDb = new Dictionary<string, Cargo>();
         }
 
+        #region ICargoRepository Members
+
         public Cargo Find(TrackingId trackingId)
         {
             return cargoDb[trackingId.IdString];
@@ -44,8 +46,8 @@
             }
             else
             {
-                cargoDb.Add(cargo.TrackingId.IdString, cargo);    
-            }            
+                cargoDb.Add(cargo.TrackingId.IdString, cargo);
+            }
         }
 
         public TrackingId NextTrackingId()
@@ -60,6 +62,8 @@
         {
             return new List<Cargo>(cargoDb.Values);
         }
+
+        #endregion
 
         public void Init()
         {
@@ -90,7 +94,7 @@
 
         public void SetHandlingEventRepository(IHandlingEventRepository handeEventRepository)
         {
-            this.handlingEventRepository = handeEventRepository;
+            handlingEventRepository = handeEventRepository;
         }
 
         public static Cargo createCargoWithDeliveryHistory(TrackingId trackingId,

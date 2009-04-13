@@ -26,7 +26,7 @@
             var clazz = obj.GetType();
             sb.AppendFormat("--Type:<{0}>", clazz);
 
-           
+
             FieldInfo[] fields = clazz.GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic
                                                  | BindingFlags.GetField);
 

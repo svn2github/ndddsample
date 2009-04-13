@@ -9,6 +9,8 @@
 
     public class LocationRepositoryInMem : ILocationRepository
     {
+        #region ILocationRepository Members
+
         public Location Find(UnLocode unLocode)
         {
             foreach (Location location in SampleLocations.GetAll())
@@ -25,5 +27,7 @@
         {
             return SampleLocations.GetAll();
         }
+
+        #endregion
     }
 }

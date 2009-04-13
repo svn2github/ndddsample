@@ -34,20 +34,6 @@
 
         #endregion
 
-        #region IValueObject<Schedule> Members
-
-        /// <summary>
-        /// Value objects compare by the values of their attributes, they don't have an identity.
-        /// </summary>
-        /// <param name="other">The other value object.</param>
-        /// <returns>true if the given value object's and this value object's attributes are the same.</returns>
-        public bool SameValueAs(Schedule other)
-        {
-            return other != null && carrierMovements.Equals(other.carrierMovements);
-        }
-
-        #endregion
-
         /// <summary>
         /// Carrier movements.
         /// </summary>
@@ -81,5 +67,18 @@
 
         #endregion
 
+        #region IValueObject<Schedule> Members
+
+        /// <summary>
+        /// Value objects compare by the values of their attributes, they don't have an identity.
+        /// </summary>
+        /// <param name="other">The other value object.</param>
+        /// <returns>true if the given value object's and this value object's attributes are the same.</returns>
+        public bool SameValueAs(Schedule other)
+        {
+            return other != null && carrierMovements.Equals(other.carrierMovements);
+        }
+
+        #endregion
     }
 }

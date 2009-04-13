@@ -1,6 +1,10 @@
 ﻿namespace NDDDSample.Infrastructure.Log
 {
+    #region Usings
+
     using System;
+
+    #endregion
 
     public interface ILog
     {

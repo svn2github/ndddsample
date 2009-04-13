@@ -11,13 +11,13 @@
     using Infrastructure.Log;
 
     #endregion
-   
+
     public class BookingService : IBookingService
     {
         private readonly ICargoRepository cargoRepository;
         private readonly ILocationRepository locationRepository;
-        private readonly IRoutingService routingService;
         private readonly ILog logger = LogFactory.GetApplicationLayer();
+        private readonly IRoutingService routingService;
 
         public BookingService(ICargoRepository cargoRepository,
                               ILocationRepository locationRepository,
@@ -27,6 +27,8 @@
             this.locationRepository = locationRepository;
             this.routingService = routingService;
         }
+
+        #region IBookingService Members
 
         public TrackingId BookNewCargo(UnLocode originUnLocode,
                                        UnLocode destinationUnLocode,
@@ -41,10 +43,10 @@
                 var routeSpecification = new RouteSpecification(origin, destination, arrivalDeadline);
 
                 Cargo cargo = new Cargo(trackingId, routeSpecification);
-				
+
                 cargoRepository.Store(cargo);
                 logger.Info("Booked new cargo with tracking id " + cargo.TrackingId.IdString);
-				
+
                 transactionScope.Complete();
                 return cargo.TrackingId;
             }
@@ -102,5 +104,7 @@
                 logger.Info("Changed destination for cargo " + trackingId + " to " + routeSpecification.Destination);
             }
         }
+
+        #endregion
     }
 }

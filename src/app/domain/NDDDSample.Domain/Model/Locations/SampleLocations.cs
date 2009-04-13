@@ -36,7 +36,7 @@
         #region Static Constr
 
         static SampleLocations()
-        {           
+        {
             foreach (var fieldInfo in typeof (SampleLocations).GetFields(BindingFlags.Static | BindingFlags.Public))
             {
                 try

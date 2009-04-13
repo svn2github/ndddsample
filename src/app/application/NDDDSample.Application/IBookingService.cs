@@ -1,9 +1,13 @@
 ﻿namespace NDDDSample.Application
 {
+    #region Usings
+
     using System;
     using System.Collections.Generic;
     using Domain.Model.Cargos;
     using Domain.Model.Locations;
+
+    #endregion
 
     /// <summary>
     /// Cargo booking service.

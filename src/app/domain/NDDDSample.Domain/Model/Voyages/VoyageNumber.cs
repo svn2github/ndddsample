@@ -31,6 +31,11 @@
 
         #endregion
 
+        public string IdString
+        {
+            get { return number; }
+        }
+
         #region IValueObject<VoyageNumber> Members
 
         /// <summary>
@@ -79,10 +84,5 @@
         }
 
         #endregion
-
-        public string IdString
-        {
-            get { return number; }
-        }
     }
 }

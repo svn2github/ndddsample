@@ -13,6 +13,8 @@
         private readonly IDictionary<TrackingId, List<HandlingEvent>> eventMap =
             new Dictionary<TrackingId, List<HandlingEvent>>();
 
+        #region IHandlingEventRepository Members
+
         public void Store(HandlingEvent evnt)
         {
             TrackingId trackingId = evnt.Cargo.TrackingId;
@@ -20,12 +22,12 @@
             List<HandlingEvent> list;
             if (!eventMap.ContainsKey(trackingId))
             {
-               list = new List<HandlingEvent>();
-               eventMap.Add(trackingId, list); 
+                list = new List<HandlingEvent>();
+                eventMap.Add(trackingId, list);
             }
 
             list = eventMap[trackingId];
-            
+
             list.Add(evnt);
         }
 
@@ -45,5 +47,7 @@
 
             return new HandlingHistory(events);
         }
+
+        #endregion
     }
 }

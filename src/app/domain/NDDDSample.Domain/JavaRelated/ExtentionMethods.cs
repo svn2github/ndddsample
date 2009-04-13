@@ -1,7 +1,11 @@
 ﻿namespace NDDDSample.Domain.JavaRelated
 {
+    #region Usings
+
     using System;
     using System.Collections.Generic;
+
+    #endregion
 
     public static class ExtentionMethods
     {

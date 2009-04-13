@@ -20,12 +20,12 @@
     [Serializable]
     public sealed class HandlingEventRegistrationAttempt
     {
-        private readonly DateTime registrationTime;
         private readonly DateTime completionTime;
+        private readonly DateTime registrationTime;
         private readonly TrackingId trackingId;
-        private readonly VoyageNumber voyageNumber;
         private readonly HandlingEvent.HandlingType type;
         private readonly UnLocode unLocode;
+        private readonly VoyageNumber voyageNumber;
 
         public HandlingEventRegistrationAttempt(DateTime registrationDate,
                                                 DateTime completionDate,

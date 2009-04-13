@@ -124,8 +124,7 @@
             AddMovement(SampleLocations.HAMBURG, DateTime.Parse("2009-03-20"), DateTime.Parse("2009-03-22")).
             Build();
 
-
-        #endregion       
+        #endregion
 
         #region Static Methods
 
@@ -158,7 +157,7 @@
         #region Static constr
 
         static SampleVoyages()
-        {          
+        {
             foreach (var fieldInfo in typeof (SampleVoyages).GetFields(BindingFlags.Static | BindingFlags.Public))
             {
                 try

@@ -15,8 +15,8 @@
     public class HandlingEventFactory
     {
         private readonly ICargoRepository cargoRepository;
-        private readonly IVoyageRepository voyageRepository;
         private readonly ILocationRepository locationRepository;
+        private readonly IVoyageRepository voyageRepository;
 
         #region Constr
 

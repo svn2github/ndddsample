@@ -1,6 +1,10 @@
 ﻿namespace NDDDSample.Application
 {
+    #region Usings
+
     using Domain.Model.Cargos;
+
+    #endregion
 
     /// <summary>
     /// Cargo inspection service.

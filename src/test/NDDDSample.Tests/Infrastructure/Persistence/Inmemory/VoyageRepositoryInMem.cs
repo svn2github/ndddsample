@@ -8,9 +8,13 @@
 
     public class VoyageRepositoryInMem : IVoyageRepository
     {
+        #region IVoyageRepository Members
+
         public Voyage Find(VoyageNumber voyageNumber)
         {
             return SampleVoyages.Lookup(voyageNumber);
         }
+
+        #endregion
     }
 }

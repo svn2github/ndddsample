@@ -1,5 +1,5 @@
 namespace NDDDSample.Domain.Model.Voyages
-{    
+{
     public interface IVoyageRepository
     {
         /// <summary>

@@ -281,6 +281,7 @@ namespace NDDDSample.Domain.JavaRelated
         /**
      
      */
+
         /// <summary>
         /// Appends the fields and values defined by the given object of the given Class.        
         /// </summary>
@@ -308,7 +309,7 @@ namespace NDDDSample.Domain.JavaRelated
                     try
                     {
                         builder.Append(f.GetValue(obj));
-                    }//TODO: atrosin revise for more specific exc.
+                    } //TODO: atrosin revise for more specific exc.
                     catch (Exception e)
                     {
                         //this can't happen. Would get a Security exception instead
@@ -329,7 +330,7 @@ namespace NDDDSample.Domain.JavaRelated
             iTotal = iTotal * iConstant + superHashCode;
             return this;
         }
-       
+
         /// <summary>
         /// Append a hashCode for an Object.
         /// </summary>
@@ -393,7 +394,7 @@ namespace NDDDSample.Domain.JavaRelated
             }
             return this;
         }
-        
+
         /// <summary>
         /// Append a hashCode for a long.
         /// </summary>
@@ -415,7 +416,7 @@ namespace NDDDSample.Domain.JavaRelated
             iTotal = iTotal * iConstant + value;
             return this;
         }
-     
+
         /// <summary>
         /// Append a hashCode for a short.
         /// </summary>
@@ -426,7 +427,7 @@ namespace NDDDSample.Domain.JavaRelated
             iTotal = iTotal * iConstant + value;
             return this;
         }
-     
+
         /// <summary>
         /// Append a hashCode for a char.
         /// </summary>
@@ -437,7 +438,7 @@ namespace NDDDSample.Domain.JavaRelated
             iTotal = iTotal * iConstant + value;
             return this;
         }
-     
+
         /// <summary>
         /// Append a hashCode for a byte.
         /// </summary>
@@ -448,7 +449,7 @@ namespace NDDDSample.Domain.JavaRelated
             iTotal = iTotal * iConstant + value;
             return this;
         }
-     
+
         /// <summary>
         /// Append a hashCode for a double.
         /// </summary>
@@ -458,7 +459,7 @@ namespace NDDDSample.Domain.JavaRelated
         {
             return Append(Convert.ToInt64(value));
         }
-        
+
         /// <summary>
         /// Append a hashCode for a float.
         /// </summary>
@@ -669,7 +670,7 @@ namespace NDDDSample.Domain.JavaRelated
             }
             return this;
         }
-        
+
         /// <summary>
         /// Return the computed hashCode.
         /// </summary>

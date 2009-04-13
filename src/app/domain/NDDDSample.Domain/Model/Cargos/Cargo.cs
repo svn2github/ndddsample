@@ -162,9 +162,9 @@ namespace NDDDSample.Domain.Model.Cargos
         {
             Validate.NotNull(routeSpec, "Route specification is required");
 
-            this.routeSpecification = routeSpec;
+            routeSpecification = routeSpec;
             // Handling consistency within the Cargo aggregate synchronously
-            delivery = delivery.UpdateOnRouting(this.routeSpecification, itinerary);
+            delivery = delivery.UpdateOnRouting(routeSpecification, itinerary);
         }
 
         /// <summary>
@@ -175,9 +175,9 @@ namespace NDDDSample.Domain.Model.Cargos
         {
             Validate.NotNull(itineraryPrm, "Itinerary is required for assignment");
 
-            this.itinerary = itineraryPrm;
+            itinerary = itineraryPrm;
             // Handling consistency within the Cargo aggregate synchronously
-            delivery = delivery.UpdateOnRouting(routeSpecification, this.itinerary);
+            delivery = delivery.UpdateOnRouting(routeSpecification, itinerary);
         }
 
         /// <summary>

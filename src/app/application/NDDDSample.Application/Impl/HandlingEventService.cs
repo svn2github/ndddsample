@@ -15,18 +15,20 @@
     public class HandlingEventService : IHandlingEventService
     {
         private readonly IApplicationEvents applicationEvents;
-        private readonly IHandlingEventRepository handlingEventRepository;
         private readonly HandlingEventFactory handlingEventFactory;
+        private readonly IHandlingEventRepository handlingEventRepository;
         private readonly ILog logger = LogFactory.GetApplicationLayer();
 
         public HandlingEventService(IHandlingEventRepository handlingEventRepository,
-                                        IApplicationEvents applicationEvents,
-                                        HandlingEventFactory handlingEventFactory)
+                                    IApplicationEvents applicationEvents,
+                                    HandlingEventFactory handlingEventFactory)
         {
             this.handlingEventRepository = handlingEventRepository;
             this.applicationEvents = applicationEvents;
             this.handlingEventFactory = handlingEventFactory;
         }
+
+        #region IHandlingEventService Members
 
         public void registerHandlingEvent(DateTime completionTime,
                                           TrackingId trackingId,
@@ -47,7 +49,7 @@
                 /* Store the new handling event, which updates the persistent
                    state of the handling event aggregate (but not the cargo aggregate -
                    that happens asynchronously!)*/
-     
+
                 handlingEventRepository.Store(evnt);
 
                 /* Publish an event stating that a cargo has been handled. */
@@ -57,5 +59,7 @@
             }
             logger.Info("Registered handling event");
         }
+
+        #endregion
     }
 }

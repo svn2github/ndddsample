@@ -27,10 +27,11 @@ namespace NDDDSample.Domain.Model.Cargos
         }
 
 
-        TrackingId()
+        private TrackingId()
         {
             // Needed by Hibernate
         }
+
         #endregion
 
         #region Props
@@ -63,10 +64,16 @@ namespace NDDDSample.Domain.Model.Cargos
 
         public override bool Equals(object obj)
         {
-            if (this == obj) return true;
-            if (obj == null || GetType() != obj.GetType()) return false;
+            if (this == obj)
+            {
+                return true;
+            }
+            if (obj == null || GetType() != obj.GetType())
+            {
+                return false;
+            }
 
-            TrackingId other = (TrackingId)obj;
+            TrackingId other = (TrackingId) obj;
 
             return SameValueAs(other);
         }
@@ -82,6 +89,6 @@ namespace NDDDSample.Domain.Model.Cargos
             return id;
         }
 
-        #endregion 
+        #endregion
     }
 }

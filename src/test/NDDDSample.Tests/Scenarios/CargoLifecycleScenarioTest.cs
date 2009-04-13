@@ -25,6 +25,38 @@
       * Repository implementations are part of the infrastructure layer,
       * which in this test is stubbed out by in-memory replacements.
       */
+
+        #region Setup/Teardown
+
+        [SetUp]
+        public void SetUp()
+        {
+            routingService = new RoutingServiceImpl();
+
+
+            applicationEvents = new SynchronousApplicationEventsStub();
+
+            // In-memory implementations of the repositories
+            handlingEventRepository = new HandlingEventRepositoryInMem();
+            cargoRepository = new CargoRepositoryInMem();
+            locationRepository = new LocationRepositoryInMem();
+            voyageRepository = new VoyageRepositoryInMem();
+
+            // Actual factories and application services, wired with stubbed or in-memory infrastructure
+            handlingEventFactory = new HandlingEventFactory(cargoRepository, voyageRepository, locationRepository);
+
+            cargoInspectionService = new CargoInspectionService(applicationEvents, cargoRepository,
+                                                                handlingEventRepository);
+            handlingEventService = new HandlingEventService(handlingEventRepository, applicationEvents,
+                                                            handlingEventFactory);
+            bookingService = new BookingService(cargoRepository, locationRepository, routingService);
+
+            // Circular dependency when doing synchrounous calls
+            ((SynchronousApplicationEventsStub) applicationEvents).setCargoInspectionService(cargoInspectionService);
+        }
+
+        #endregion
+
         private IHandlingEventRepository handlingEventRepository;
         private ICargoRepository cargoRepository;
         private ILocationRepository locationRepository;
@@ -68,6 +100,52 @@
      */
         private IRoutingService routingService;
 
+
+        /*
+      * Utility stubs below.
+      */
+
+        private static Itinerary SelectPreferedItinerary(IList<Itinerary> itineraries)
+        {
+            return itineraries[0];
+        }
+
+        public class RoutingServiceImpl : IRoutingService
+        {
+            #region IRoutingService Members
+
+            public IList<Itinerary> FetchRoutesForSpecification(RouteSpecification routeSpecification)
+            {
+                if (routeSpecification.Origin.Equals(SampleLocations.HONGKONG))
+                {
+                    var nsLegs = new List<Leg>
+                                     {
+                                         new Leg(SampleVoyages.v100, SampleLocations.HONGKONG, SampleLocations.NEWYORK,
+                                                 DateTestUtil.toDate("2009-03-03"), DateTestUtil.toDate("2009-03-09")),
+                                         new Leg(SampleVoyages.v200, SampleLocations.NEWYORK, SampleLocations.CHICAGO,
+                                                 DateTestUtil.toDate("2009-03-10"), DateTestUtil.toDate("2009-03-14")),
+                                         new Leg(SampleVoyages.v200, SampleLocations.CHICAGO, SampleLocations.STOCKHOLM,
+                                                 DateTestUtil.toDate("2009-03-07"), DateTestUtil.toDate("2009-03-11"))
+                                     };
+                    // Hongkong - NYC - Chicago - Stockholm, initial routing
+                    return new List<Itinerary> {new Itinerary(nsLegs)};
+                }
+                else
+                {
+                    var tsLegs = new List<Leg>
+                                     {
+                                         new Leg(SampleVoyages.v300, SampleLocations.TOKYO, SampleLocations.HAMBURG,
+                                                 DateTestUtil.toDate("2009-03-08"), DateTestUtil.toDate("2009-03-12")),
+                                         new Leg(SampleVoyages.v400, SampleLocations.HAMBURG, SampleLocations.STOCKHOLM,
+                                                 DateTestUtil.toDate("2009-03-14"), DateTestUtil.toDate("2009-03-15"))
+                                     };
+                    // Tokyo - Hamburg - Stockholm, rerouting misdirected cargo from Tokyo 
+                    return new List<Itinerary> {new Itinerary(tsLegs)};
+                }
+            }
+
+            #endregion
+        }
 
         [Test]
         public void testCargoFromHongkongToStockholm()
@@ -287,72 +365,5 @@
             Assert.IsFalse(cargo.Delivery.IsMisdirected);
             Assert.IsNull(cargo.Delivery.NextExpectedActivity);
         }
-
-        /*
-      * Utility stubs below.
-      */
-
-        private static Itinerary SelectPreferedItinerary(IList<Itinerary> itineraries)
-        {
-            return itineraries[0];
-        }
-
-        [SetUp]
-        public void SetUp()
-        {            
-            routingService = new RoutingServiceImpl();
-
-
-            applicationEvents = new SynchronousApplicationEventsStub();
-
-            // In-memory implementations of the repositories
-            handlingEventRepository = new HandlingEventRepositoryInMem();
-            cargoRepository = new CargoRepositoryInMem();
-            locationRepository = new LocationRepositoryInMem();
-            voyageRepository = new VoyageRepositoryInMem();
-
-            // Actual factories and application services, wired with stubbed or in-memory infrastructure
-            handlingEventFactory = new HandlingEventFactory(cargoRepository, voyageRepository, locationRepository);
-
-            cargoInspectionService = new CargoInspectionService(applicationEvents, cargoRepository, handlingEventRepository);
-            handlingEventService = new HandlingEventService(handlingEventRepository, applicationEvents, handlingEventFactory);
-            bookingService = new BookingService(cargoRepository, locationRepository, routingService);
-
-            // Circular dependency when doing synchrounous calls
-            ((SynchronousApplicationEventsStub)applicationEvents).setCargoInspectionService(cargoInspectionService);
-        }
-
-        public class RoutingServiceImpl : IRoutingService
-        {
-            public IList<Itinerary> FetchRoutesForSpecification(RouteSpecification routeSpecification)
-            {
-                if (routeSpecification.Origin.Equals(SampleLocations.HONGKONG))
-                {
-                    var nsLegs = new List<Leg>()
-                                 {
-                                     new Leg(SampleVoyages.v100, SampleLocations.HONGKONG, SampleLocations.NEWYORK,
-                                             DateTestUtil.toDate("2009-03-03"), DateTestUtil.toDate("2009-03-09")),
-                                     new Leg(SampleVoyages.v200, SampleLocations.NEWYORK, SampleLocations.CHICAGO,
-                                             DateTestUtil.toDate("2009-03-10"), DateTestUtil.toDate("2009-03-14")),
-                                     new Leg(SampleVoyages.v200, SampleLocations.CHICAGO, SampleLocations.STOCKHOLM,
-                                             DateTestUtil.toDate("2009-03-07"), DateTestUtil.toDate("2009-03-11"))
-                                 };
-                    // Hongkong - NYC - Chicago - Stockholm, initial routing
-                    return new List<Itinerary>() { new Itinerary(nsLegs) };
-                }
-                else
-                {
-                    var tsLegs = new List<Leg>()
-                                 {
-                                     new Leg(SampleVoyages.v300, SampleLocations.TOKYO, SampleLocations.HAMBURG,
-                                             DateTestUtil.toDate("2009-03-08"), DateTestUtil.toDate("2009-03-12")),
-                                     new Leg(SampleVoyages.v400, SampleLocations.HAMBURG, SampleLocations.STOCKHOLM,
-                                             DateTestUtil.toDate("2009-03-14"), DateTestUtil.toDate("2009-03-15"))
-                                 };
-                    // Tokyo - Hamburg - Stockholm, rerouting misdirected cargo from Tokyo 
-                    return new List<Itinerary>() { new Itinerary(tsLegs) };
-                }
-            }
-        }                      
     }
 }

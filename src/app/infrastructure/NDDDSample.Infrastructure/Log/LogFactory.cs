@@ -6,7 +6,7 @@
     /// necessary for application statistics is outside the scope of this module.
     /// </summary>
     public static class LogFactory
-    {       
+    {
         /// <summary>
         /// The method returns a logger for Application layer.
         /// </summary>
@@ -14,6 +14,6 @@
         public static ILog GetApplicationLayer()
         {
             return Log4NetLoggerProxy.GetLogger("ApplicationLayerLogger");
-        }       
+        }
     }
 }

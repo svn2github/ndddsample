@@ -18,14 +18,15 @@
         private readonly ILog logger = LogFactory.GetApplicationLayer();
 
         public CargoInspectionService(IApplicationEvents applicationEvents,
-                                          ICargoRepository cargoRepository,
-                                          IHandlingEventRepository handlingEventRepository)
+                                      ICargoRepository cargoRepository,
+                                      IHandlingEventRepository handlingEventRepository)
         {
             this.applicationEvents = applicationEvents;
             this.cargoRepository = cargoRepository;
             this.handlingEventRepository = handlingEventRepository;
         }
 
+        #region ICargoInspectionService Members
 
         public void InspectCargo(TrackingId trackingId)
         {
@@ -58,5 +59,7 @@
 
             cargoRepository.Store(cargo);
         }
+
+        #endregion
     }
 }

@@ -41,6 +41,14 @@
 
         #endregion
 
+        /// <summary>
+        /// Voyage code and location code concatenated, always upper case.
+        /// </summary>
+        public string IdString
+        {
+            get { return unlocode; }
+        }
+
         #region IValueObject<UnLocode> Members
 
         /// <summary>
@@ -84,13 +92,5 @@
         }
 
         #endregion
-
-        /// <summary>
-        /// Voyage code and location code concatenated, always upper case.
-        /// </summary>
-        public string IdString
-        {
-            get { return unlocode; }
-        }
     }
 }

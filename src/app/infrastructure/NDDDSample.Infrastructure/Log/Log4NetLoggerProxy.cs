@@ -1,16 +1,22 @@
 ﻿namespace NDDDSample.Infrastructure.Log
 {
+    #region Usings
+
     using System;
     using log4net;
 
-    internal sealed class Log4NetLoggerProxy: ILog
+    #endregion
+
+    internal sealed class Log4NetLoggerProxy : ILog
     {
-        private readonly log4net.ILog netLog; 
+        private readonly log4net.ILog netLog;
 
         private Log4NetLoggerProxy(log4net.ILog log)
         {
             netLog = log;
-        }      
+        }
+
+        #region ILog Members
 
         public void Debug(object message)
         {
@@ -86,11 +92,12 @@
         {
             netLog.FatalFormat(format, args);
         }
-     
+
+        #endregion
+
         public static ILog GetLogger(string loggerType)
         {
             return new Log4NetLoggerProxy(LogManager.GetLogger(loggerType));
         }
-
     }
 }

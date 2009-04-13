@@ -1,10 +1,14 @@
 ﻿namespace NDDDSample.Application
 {
+    #region Usings
+
     using System;
     using Domain.Model.Cargos;
     using Domain.Model.Handlings;
     using Domain.Model.Locations;
     using Domain.Model.Voyages;
+
+    #endregion
 
     /// <summary>
     /// Handling event service.
@@ -22,10 +26,10 @@
         /// <param name="voyageNumber">voyage number</param>
         /// <param name="unLocode">UN locode for the location where the event occurred</param>
         /// <param name="type">type of event</param>
-         void registerHandlingEvent(DateTime completionTime,
-                             TrackingId trackingId,
-                             VoyageNumber voyageNumber,
-                             UnLocode unLocode,
-                             HandlingEvent.HandlingType type);
+        void registerHandlingEvent(DateTime completionTime,
+                                   TrackingId trackingId,
+                                   VoyageNumber voyageNumber,
+                                   UnLocode unLocode,
+                                   HandlingEvent.HandlingType type);
     }
 }

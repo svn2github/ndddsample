@@ -13,11 +13,7 @@
     {
         private ICargoInspectionService cargoInspectionService;
 
-        public void setCargoInspectionService(ICargoInspectionService cargoInspectionSrv)
-        {
-            this.cargoInspectionService = cargoInspectionSrv;
-        }
-
+        #region IApplicationEvents Members
 
         public void cargoWasHandled(HandlingEvent evnt)
         {
@@ -41,6 +37,13 @@
         public void receivedHandlingEventRegistrationAttempt(HandlingEventRegistrationAttempt attempt)
         {
             System.Console.WriteLine("EVENT: received handling event registration attempt");
+        }
+
+        #endregion
+
+        public void setCargoInspectionService(ICargoInspectionService cargoInspectionSrv)
+        {
+            cargoInspectionService = cargoInspectionSrv;
         }
     }
 }
