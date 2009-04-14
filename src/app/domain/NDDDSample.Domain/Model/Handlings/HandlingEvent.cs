@@ -117,8 +117,7 @@
                 throw new ArgumentException("Voyage is not allowed with event eventType " + eventType);
             }
 
-            this.voyage = voyage;
-            //TODO: atrosin revise (DateTime) completionTime.Clone(); and (DateTime) registrationTime.clone();
+            this.voyage = voyage;            
             this.completionTime = completionTime;
             this.registrationTime = registrationTime;
             type = eventType;
@@ -142,8 +141,7 @@
             {
                 throw new ArgumentException("Voyage is required for event type " + type);
             }
-
-            //TODO: atrosin revise (DateTime) completionTime.Clone(); and (DateTime) registrationTime.clone();
+           
             this.completionTime = completionTime;
             this.registrationTime = registrationTime;
             this.type = type;
@@ -189,8 +187,7 @@
         public DateTime CompletionTime
         {
             get
-            {
-                //TODO: atrosin revise translation new Date(this.completionTime.getTime());
+            {             
                 return completionTime;
             }
         }
@@ -198,8 +195,7 @@
         public DateTime RegistrationTime
         {
             get
-            {
-                //TODO: atrosin revise new Date(this.registrationTime.getTime());
+            {               
                 return registrationTime;
             }
         }

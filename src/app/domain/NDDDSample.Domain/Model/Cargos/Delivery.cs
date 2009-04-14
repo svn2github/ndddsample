@@ -200,8 +200,7 @@
             get
             {
                 if (eta != ETA_UNKOWN)
-                {
-                    //TODO: atrosin revise new Date(eta.getTime());
+                {                 
                     return eta;
                 }
 
@@ -240,8 +239,7 @@
         public DateTime CalculatedAt
         {
             get
-            {
-                //TODO: atrosin new DateTime(calculatedAt.getTime());
+            {              
                 return calculatedAt;
             }
         }

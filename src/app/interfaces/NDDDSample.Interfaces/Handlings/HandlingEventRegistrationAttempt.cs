@@ -43,8 +43,7 @@
         }
 
         public DateTime getCompletionTime()
-        {
-            //TODO: atrosin revise new Date(completionTime.getTime())
+        {           
             return completionTime;
         }
 

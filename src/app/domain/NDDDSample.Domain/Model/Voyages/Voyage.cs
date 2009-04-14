@@ -25,8 +25,7 @@
 
         /// <summary>
         ///  Builder pattern is used for incremental construction
-        ///  of a Voyage aggregate. This serves as an aggregate factory.
-        /// TODO:atrosin revise the java declaration if is port correctly:  static final class Builder {
+        ///  of a Voyage aggregate. This serves as an aggregate factory.        
         /// </summary>
         public class Builder
         {

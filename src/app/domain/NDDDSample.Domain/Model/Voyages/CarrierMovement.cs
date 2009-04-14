@@ -130,8 +130,7 @@
         public DateTime DepartureTime
         {
             get
-            {
-                //TODO: atrosin : new Date(arrivalTime.getTime());
+            {              
                 return departureTime;
             }
         }
@@ -142,8 +141,7 @@
         public DateTime ArrivalTime
         {
             get
-            {
-                //TODO: atrosin : new Date(arrivalTime.getTime());
+            {               
                 return arrivalTime;
             }
         }

@@ -118,8 +118,7 @@
         public DateTime UnloadTime
         {
             get
-            {
-                //TODO: atrosin : new Date(unloadTime.getTime());
+            {              
                 return unloadTime;
             }
         }

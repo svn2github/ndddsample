@@ -102,12 +102,10 @@
                 Leg lastLeg = LastLeg;
 
                 if (lastLeg == null)
-                {
-                    //TODO: atrosin revise translation new Date(END_OF_DAYS.getTime());
+                {                  
                     return END_OF_DAYS;
                 }
-
-                //TODO: atrosin revise translation new Date(LastLeg.unloadTime().getTime());
+               
                 return lastLeg.UnloadTime;
             }
         }

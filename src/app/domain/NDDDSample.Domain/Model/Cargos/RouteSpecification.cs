@@ -35,8 +35,7 @@
             Validate.IsTrue(!origin.SameIdentityAs(destination), "Origin and destination can't be the same: " + origin);
 
             this.origin = origin;
-            this.destination = destination;
-            //TODO: atrosin revise (DateTime)arrivalDeadline.clone();
+            this.destination = destination;           
             this.arrivalDeadline = arrivalDeadline;
         }
 
@@ -110,8 +109,7 @@
         public DateTime ArrivalDeadline
         {
             get
-            {
-                //TODO: atrosin revise new Date(arrivalDeadline.getTime());
+            {              
                 return arrivalDeadline;
             }
         }
