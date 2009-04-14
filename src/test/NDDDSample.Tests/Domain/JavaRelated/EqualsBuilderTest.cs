@@ -651,10 +651,10 @@ namespace NDDDSample.Tests.Domain.JavaRelated
 
             // compare 1 dim to 2.
             var array3 = new bool[] {true, true};
-            Assert.IsTrue(new EqualsBuilder().Append(array1, array3).IsEquals());
-            Assert.IsTrue(new EqualsBuilder().Append(array3, array1).IsEquals());
-            Assert.IsTrue(new EqualsBuilder().Append(array2, array3).IsEquals());
-            Assert.IsTrue(new EqualsBuilder().Append(array3, array2).IsEquals());
+            Assert.IsFalse(new EqualsBuilder().Append(array1, array3).IsEquals());
+            Assert.IsFalse(new EqualsBuilder().Append(array3, array1).IsEquals());
+            Assert.IsFalse(new EqualsBuilder().Append(array2, array3).IsEquals());
+            Assert.IsFalse(new EqualsBuilder().Append(array3, array2).IsEquals());
         }
 
         [Test]
@@ -888,8 +888,10 @@ namespace NDDDSample.Tests.Domain.JavaRelated
             // sanity checks:
             Assert.IsTrue(Array.Equals(x, x));
             Assert.IsTrue(Array.Equals(y, y));
-            Assert.IsTrue(Array.Equals(x, y));
-            Assert.IsTrue(Array.Equals(y, x));
+            //in C# they are false
+            Assert.IsFalse(Array.Equals(x, y));
+            Assert.IsFalse(Array.Equals(y, x));
+            
             // real tests:
             Assert.IsTrue(x[0].Equals(x[0]));
             Assert.IsTrue(y[0].Equals(y[0]));
@@ -897,8 +899,9 @@ namespace NDDDSample.Tests.Domain.JavaRelated
             Assert.IsTrue(y[0].Equals(x[0]));
             Assert.IsTrue(new EqualsBuilder().Append(x, x).IsEquals());
             Assert.IsTrue(new EqualsBuilder().Append(y, y).IsEquals());
-            Assert.IsTrue(new EqualsBuilder().Append(x, y).IsEquals());
-            Assert.IsTrue(new EqualsBuilder().Append(y, x).IsEquals());
+            //in C# they are false
+            Assert.IsFalse(new EqualsBuilder().Append(x, y).IsEquals());
+            Assert.IsFalse(new EqualsBuilder().Append(y, x).IsEquals());
         }
 
         /**

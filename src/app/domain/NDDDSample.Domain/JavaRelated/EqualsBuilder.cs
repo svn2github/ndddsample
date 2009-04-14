@@ -23,6 +23,7 @@ namespace NDDDSample.Domain.JavaRelated
     #region Usings
 
     using System;
+    using System.Collections;
     using System.Reflection;
 
     #endregion
@@ -184,8 +185,7 @@ namespace NDDDSample.Domain.JavaRelated
             EqualsBuilder builder,
             bool useTransients)
         {
-            FieldInfo[] fields = clazz.GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic
-                                                 | BindingFlags.GetField);
+            FieldInfo[] fields = clazz.GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.GetField);
             //TODO:atrosin Revise: AccessibleObject.setAccessible(fields, true);
             for (int i = 0; i < fields.Length && builder.isEqual; i++)
             {
@@ -253,48 +253,205 @@ namespace NDDDSample.Domain.JavaRelated
             }
             else
             {
+                EnsureArraysSameDemention(lhs, rhs);
+                if (isEqual == false)
+                {
+                    return this;
+                }
+
                 //'Switch' on type of array, to dispatch to the correct handler
                 // This handles multi dimensional arrays
                 if (lhs is long[])
                 {
-                    Append((long[]) lhs, (long[]) rhs);
+                    Append((long[])lhs, rhs as long[]);
                 }
                 else if (lhs is int[])
                 {
-                    Append((int[]) lhs, (int[]) rhs);
+                    Append((int[])lhs, rhs as int[]);
                 }
                 else if (lhs is short[])
                 {
-                    Append((short[]) lhs, (short[]) rhs);
+                    Append((short[])lhs, rhs as short[]);
                 }
                 else if (lhs is char[])
                 {
-                    Append((char[]) lhs, (char[]) rhs);
+                    Append((char[])lhs, rhs as char[]);
                 }
                 else if (lhs is byte[])
                 {
-                    Append((byte[]) lhs, (byte[]) rhs);
+                    Append((byte[])lhs, rhs as byte[]);
                 }
                 else if (lhs is double[])
                 {
-                    Append((double[]) lhs, (double[]) rhs);
+                    Append((double[])lhs, rhs as double[]);
                 }
                 else if (lhs is float[])
                 {
-                    Append((float[]) lhs, (float[]) rhs);
+                    Append((float[])lhs, rhs as float[]);
                 }
                 else if (lhs is bool[])
                 {
-                    Append((bool[]) lhs, (bool[]) rhs);
+                    Append((bool[])lhs, rhs as bool[]);
                 }
-                else
+                else if (lhs is object[])
                 {
-                    // Not an array of primitives
-                    Append((Object[]) lhs, (Object[]) rhs);
+                    Append((object[])lhs, rhs as object[]);
+                }
+                {
+                    // Not an simple array of primitives
+                    CompareArrays(lhs, rhs, 0, 0);
                 }
             }
             return this;
         }
+
+
+        private void EnsureArraysSameDemention(object lhs, object rhs)
+        {
+            bool isArray1 = lhs is Array;
+            bool isArray2 = rhs is Array;
+
+            if (isArray1 != isArray2)
+            {
+                isEqual = false;
+                return;
+            }
+
+            Array array1 = (Array)lhs;
+            Array array2 = (Array)lhs;
+
+            if (array1.Rank != array2.Rank)
+            {
+                isEqual = false;
+            }
+
+            if (array1.Length != array2.Length)
+            {
+                isEqual = false;
+            }
+        }
+
+        //TODO:Refactor the logic to make it more readable
+        private void CompareArrays(object parray1, object parray2, int prank, int pindex)
+        {
+            if (isEqual == false)
+            {
+                return;
+            }
+            if (parray1 == parray2)
+            {
+                return;
+            }
+            if (parray1 == null || parray2 == null)
+            {
+                isEqual = false;
+                return;
+            }
+
+            Array array1 = (Array)parray1;
+            Array array2 = (Array)parray2;
+            int rank1 = array1.Rank;
+            int rank2 = array2.Rank;
+
+            if (rank1 != rank2)
+            {
+                isEqual = false;
+                return;
+            }
+
+            int size1 = array1.GetLength(prank);
+            int size2 = array2.GetLength(prank);
+
+            if (size1 != size2)
+            {
+                isEqual = false;
+                return;
+            }
+
+            if (prank == rank1 - 1)
+            {
+                int index = 0;
+
+                int min = pindex;
+                int max = min + size1;
+
+
+                var enumerator1 = array1.GetEnumerator();
+                var enumerator2 = array2.GetEnumerator();
+                while (enumerator1.MoveNext())
+                {
+                    if (isEqual == false)
+                    {
+                        return;
+                    }
+                    enumerator2.MoveNext();
+
+
+                    if ((index >= min) && (index < max))
+                    {
+                        object obj1 = enumerator1.Current;
+                        object obj2 = enumerator2.Current;
+
+                        bool isArray1 = obj1 is Array;
+                        bool isArray2 = obj2 is Array;
+
+                        if (isArray1 != isArray2)
+                        {
+                            isEqual = false;
+                            return;
+                        }
+
+                        if (isArray1)
+                        {
+                            CompareArrays(obj1, obj2, 0, 0);
+                        }
+                        else
+                        {
+                            Append(obj1, obj2);
+                        }
+                    }
+
+                    index++;
+                }
+            }
+            else
+            {
+                int mux = 1;
+
+                int currentRank = rank1 - 1;
+
+                do
+                {
+                    int sizeMux1 = array1.GetLength(currentRank);
+                    int sizeMux2 = array2.GetLength(currentRank);
+
+                    if (sizeMux1 != sizeMux2)
+                    {
+                        isEqual = false;
+                        return;
+                    }
+
+                    mux *= sizeMux1;
+                    currentRank--;
+                } while (currentRank > prank);
+
+                for (int i = 0; i < size1; i++)
+                {
+                    Console.Write("{ ");
+                    CompareArrays(parray1, parray2, prank + 1, pindex + (i * mux));
+                    Console.Write("} ");
+                }
+            }
+        }
+
+        /**
+    * &ltp&gtTest if two &ltcode&gtlong</code&gts are equal.</p>
+    *
+    * @param lhs  the left hand &ltcode&gtlong</code>
+    * @param rhs  the right hand &ltcode&gtlong</code>
+    * @return EqualsBuilder - used to chain calls.
+    */
+
 
         /// <summary>
         /// Test if two long are equal.
@@ -302,6 +459,7 @@ namespace NDDDSample.Domain.JavaRelated
         /// <param name="lhs">the left hand long</param>
         /// <param name="rhs">the right hand long</param>
         /// <returns>EqualsBuilder - used to chain calls.</returns>
+
         public EqualsBuilder Append(long lhs, long rhs)
         {
             if (isEqual == false)
