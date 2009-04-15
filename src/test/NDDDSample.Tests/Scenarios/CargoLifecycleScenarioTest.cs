@@ -20,19 +20,13 @@
 
     [TestFixture]
     public class CargoLifecycleScenarioTest
-    {
-        /**
-      * Repository implementations are part of the infrastructure layer,
-      * which in this test is stubbed out by in-memory replacements.
-      */
-
+    {       
         #region Setup/Teardown
 
         [SetUp]
         public void SetUp()
         {
             routingService = new RoutingServiceImpl();
-
 
             applicationEvents = new SynchronousApplicationEventsStub();
 
@@ -57,53 +51,50 @@
 
         #endregion
 
+        /// <summary>
+        /// Repository implementations are part of the infrastructure layer,
+        /// which in this test is stubbed out by in-memory replacements.
+        /// </summary>
         private IHandlingEventRepository handlingEventRepository;
         private ICargoRepository cargoRepository;
         private ILocationRepository locationRepository;
         private IVoyageRepository voyageRepository;
 
-        /**
-         * This interface is part of the application layer,
-         * and defines a number of events that occur during
-         * aplication execution. It is used for message-driving
-         * and is implemented using JMS.
-         *
-         * In this test it is stubbed with synchronous calls.
-         */
+        /// <summary>
+        /// This interface is part of the application layer,
+        ///and defines a number of events that occur during
+        ///aplication execution. It is used for message-driving
+        ///and is implemented using JMS.
+        ///In this test it is stubbed with synchronous calls.         
+        /// </summary>
         private IApplicationEvents applicationEvents;
 
-        /**
-   * These three components all belong to the application layer,
-   * and map against use cases of the application. The "real"
-   * implementations are used in this lifecycle test,
-   * but wired with stubbed infrastructure.
-   */
+        /// <summary>      
+        /// These three components all belong to the application layer,
+        ///and map against use cases of the application. The "real"
+        ///implementations are used in this lifecycle test,
+        ///but wired with stubbed infrastructure.
+        /// </summary>
         private IBookingService bookingService;
         private IHandlingEventService handlingEventService;
         private ICargoInspectionService cargoInspectionService;
 
-
-        /**
-    * This factory is part of the handling aggregate and belongs to
-    * the domain layer. Similar to the application layer components,
-    * the "real" implementation is used here too,
-    * wired with stubbed infrastructure.
-    */
+        /// <summary>       
+        /// This factory is part of the handling aggregate and belongs to
+        ///the domain layer. Similar to the application layer components,
+        ///the "real" implementation is used here too,
+        ///wired with stubbed infrastructure.
+        /// </summary>
         private HandlingEventFactory handlingEventFactory;
 
-
-        /**
-     * This is a domain service interface, whose implementation
-     * is part of the infrastructure layer (remote call to external system).
-     *
-     * It is stubbed in this test.
-     */
+        /// <summary>
+        /// This is a domain service interface, whose implementation
+        ///is part of the infrastructure layer (remote call to external system).
+        ///It is stubbed in this test.
+        /// </summary>
         private IRoutingService routingService;
 
-
-        /*
-      * Utility stubs below.
-      */
+        #region Utility stubs
 
         private static Itinerary SelectPreferedItinerary(IList<Itinerary> itineraries)
         {
@@ -145,33 +136,33 @@
             }
 
             #endregion
+
+
+            #endregion
         }
 
         [Test]
         public void testCargoFromHongkongToStockholm()
         {
-            /* Test setup: A cargo should be shipped from Hongkong to Stockholm,
-         and it should arrive in no more than two weeks. */
+            //Test setup: A cargo should be shipped from Hongkong to Stockholm,
+            //and it should arrive in no more than two weeks. 
             Location origin = SampleLocations.HONGKONG;
             Location destination = SampleLocations.STOCKHOLM;
             DateTime arrivalDeadline = DateTestUtil.toDate("2009-03-18");
 
 
-            /* Use case 1: booking
- 
-        A new cargo is booked, and the unique tracking id is assigned to the cargo. */
+            //  Use case 1: booking 
+            //A new cargo is booked, and the unique tracking id is assigned to the cargo. 
             TrackingId trackingId = bookingService.BookNewCargo(
                 origin.UnLocode, destination.UnLocode, arrivalDeadline);
 
+            //      The tracking id can be used to lookup the cargo in the repository.
+            //Important: The cargo, and thus the domain model, is responsible for determining
+            //the status of the cargo, whether it is on the right track or not and so on.
+            //This is core domain logic.
 
-            /* The tracking id can be used to lookup the cargo in the repository.
-
-       Important: The cargo, and thus the domain model, is responsible for determining
-       the status of the cargo, whether it is on the right track or not and so on.
-       This is core domain logic.
-
-       Tracking the cargo basically amounts to presenting information extracted from
-       the cargo aggregate in a suitable way. */
+            //Tracking the cargo basically amounts to presenting information extracted from
+            //the cargo aggregate in a suitable way. 
             Cargo cargo = cargoRepository.Find(trackingId);
             Assert.IsNotNull(cargo);
             Assert.AreEqual(TransportStatus.NOT_RECEIVED, cargo.Delivery.TransportStatus);
@@ -181,14 +172,13 @@
             Assert.IsNull(cargo.Delivery.NextExpectedActivity);
 
 
-            /* Use case 2: routing
- 
-        A number of possible routes for this cargo is requested and may be
-        presented to the customer in some way for him/her to choose from.
-        Selection could be affected by things like price and time of delivery,
-        but this test simply uses an arbitrary selection to mimic that process.
- 
-        The cargo is then assigned to the selected route, described by an itinerary. */
+            //   Use case 2: routing 
+            //A number of possible routes for this cargo is requested and may be
+            //presented to the customer in some way for him/her to choose from.
+            //Selection could be affected by things like price and time of delivery,
+            //but this test simply uses an arbitrary selection to mimic that process.
+
+            //The cargo is then assigned to the selected route, described by an itinerary.
             IList<Itinerary> itineraries = bookingService.RequestPossibleRoutesForCargo(trackingId);
             Itinerary itinerary = SelectPreferedItinerary(itineraries);
             cargo.AssignToRoute(itinerary);
@@ -199,20 +189,19 @@
             Assert.AreEqual(new HandlingActivity(HandlingEvent.HandlingType.RECEIVE, SampleLocations.HONGKONG),
                             cargo.Delivery.NextExpectedActivity);
 
-            /*
-       Use case 3: handling
- 
-       A handling event registration attempt will be formed from parsing
-       the data coming in as a handling report either via
-       the web service interface or as an uploaded CSV file.
- 
-       The handling event factory tries to create a HandlingEvent from the attempt,
-       and if the factory decides that this is a plausible handling event, it is stored.
-       If the attempt is invalid, for example if no cargo exists for the specfied tracking id,
-       the attempt is rejected.
- 
-       Handling begins: cargo is received in Hongkong.
-       */
+          
+           //   Use case 3: handling
+     
+           //A handling event registration attempt will be formed from parsing
+           //the data coming in as a handling report either via
+           //the web service interface or as an uploaded CSV file.
+     
+           //The handling event factory tries to create a HandlingEvent from the attempt,
+           //and if the factory decides that this is a plausible handling event, it is stored.
+           //If the attempt is invalid, for example if no cargo exists for the specfied tracking id,
+           //the attempt is rejected.
+     
+           //Handling begins: cargo is received in Hongkong.     
             handlingEventService.registerHandlingEvent(
                 DateTestUtil.toDate("2009-03-01"), trackingId, null, SampleLocations.HONGKONG.UnLocode,
                 HandlingEvent.HandlingType.RECEIVE);
@@ -233,15 +222,12 @@
             Assert.AreEqual(
                 new HandlingActivity(HandlingEvent.HandlingType.UNLOAD, SampleLocations.NEWYORK, SampleVoyages.v100),
                 cargo.Delivery.NextExpectedActivity);
-
-
-            /*
-       Here's an attempt to register a handling event that's not valid
-       because there is no voyage with the specified voyage number,
-       and there's no location with the specified UN Locode either.
- 
-       This attempt will be rejected and will not affect the cargo delivery in any way.
-      */
+           
+           //Here's an attempt to register a handling event that's not valid
+           //because there is no voyage with the specified voyage number,
+           //and there's no location with the specified UN Locode either.
+     
+           //This attempt will be rejected and will not affect the cargo delivery in any way.
             VoyageNumber noSuchVoyageNumber = new VoyageNumber("XX000");
             UnLocode noSuchUnLocode = new UnLocode("ZZZZZ");
             try
@@ -268,7 +254,6 @@
 
 
             // -- Cargo needs to be rerouted --
-
             // TODO cleaner reroute from "earliest location from where the new route originates"
 
             // Specify a new route, this time from Tokyo (where it was incorrectly unloaded) to Stockholm
