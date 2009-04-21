@@ -30,6 +30,6 @@
                                    TrackingId trackingId,
                                    VoyageNumber voyageNumber,
                                    UnLocode unLocode,
-                                   HandlingEvent.HandlingType type);
+                                   HandlingType type);
     }
 }

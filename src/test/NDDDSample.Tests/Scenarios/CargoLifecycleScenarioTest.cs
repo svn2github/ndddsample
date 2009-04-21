@@ -186,7 +186,7 @@
             Assert.AreEqual(TransportStatus.NOT_RECEIVED, cargo.Delivery.TransportStatus);
             Assert.AreEqual(RoutingStatus.ROUTED, cargo.Delivery.RoutingStatus);
             Assert.AreNotEqual(Delivery.ETA_UNKOWN, cargo.Delivery.EstimatedTimeOfArrival);
-            Assert.AreEqual(new HandlingActivity(HandlingEvent.HandlingType.RECEIVE, SampleLocations.HONGKONG),
+            Assert.AreEqual(new HandlingActivity(HandlingType.RECEIVE, SampleLocations.HONGKONG),
                             cargo.Delivery.NextExpectedActivity);
 
           
@@ -204,7 +204,7 @@
            //Handling begins: cargo is received in Hongkong.     
             handlingEventService.registerHandlingEvent(
                 DateTestUtil.toDate("2009-03-01"), trackingId, null, SampleLocations.HONGKONG.UnLocode,
-                HandlingEvent.HandlingType.RECEIVE);
+                HandlingType.RECEIVE);
 
             Assert.AreEqual(TransportStatus.IN_PORT, cargo.Delivery.TransportStatus);
             Assert.AreEqual(SampleLocations.HONGKONG, cargo.Delivery.LastKnownLocation);
@@ -212,7 +212,7 @@
             // Next event: Load onto voyage CM003 in Hongkong
             handlingEventService.registerHandlingEvent(
                 DateTestUtil.toDate("2009-03-03"), trackingId, SampleVoyages.v100.VoyageNumber,
-                SampleLocations.HONGKONG.UnLocode, HandlingEvent.HandlingType.LOAD);
+                SampleLocations.HONGKONG.UnLocode, HandlingType.LOAD);
 
             // Check current state - should be ok
             Assert.AreEqual(SampleVoyages.v100, cargo.Delivery.CurrentVoyage);
@@ -220,7 +220,7 @@
             Assert.AreEqual(TransportStatus.ONBOARD_CARRIER, cargo.Delivery.TransportStatus);
             Assert.IsFalse(cargo.Delivery.IsMisdirected);
             Assert.AreEqual(
-                new HandlingActivity(HandlingEvent.HandlingType.UNLOAD, SampleLocations.NEWYORK, SampleVoyages.v100),
+                new HandlingActivity(HandlingType.UNLOAD, SampleLocations.NEWYORK, SampleVoyages.v100),
                 cargo.Delivery.NextExpectedActivity);
            
            //Here's an attempt to register a handling event that's not valid
@@ -234,7 +234,7 @@
             {
                 handlingEventService.registerHandlingEvent(
                     DateTestUtil.toDate("2009-03-05"), trackingId, noSuchVoyageNumber, noSuchUnLocode,
-                    HandlingEvent.HandlingType.LOAD);
+                    HandlingType.LOAD);
                 Assert.Fail("Should not be able to register a handling event with invalid location and voyage");
             }
             catch (CannotCreateHandlingEventException expected) {}
@@ -243,7 +243,7 @@
             // Cargo is now (incorrectly) unloaded in Tokyo
             handlingEventService.registerHandlingEvent(
                 DateTestUtil.toDate("2009-03-05"), trackingId, SampleVoyages.v100.VoyageNumber,
-                SampleLocations.TOKYO.UnLocode, HandlingEvent.HandlingType.UNLOAD);
+                SampleLocations.TOKYO.UnLocode, HandlingType.UNLOAD);
 
             // Check current state - cargo is misdirected!
             Assert.AreEqual(Voyage.NONE, cargo.Delivery.CurrentVoyage);
@@ -284,7 +284,7 @@
             // Load in Tokyo
             handlingEventService.registerHandlingEvent(
                 DateTestUtil.toDate("2009-03-08"), trackingId, SampleVoyages.v300.VoyageNumber,
-                SampleLocations.TOKYO.UnLocode, HandlingEvent.HandlingType.LOAD);
+                SampleLocations.TOKYO.UnLocode, HandlingType.LOAD);
 
             // Check current state - should be ok
             Assert.AreEqual(SampleVoyages.v300, cargo.Delivery.CurrentVoyage);
@@ -292,13 +292,13 @@
             Assert.AreEqual(TransportStatus.ONBOARD_CARRIER, cargo.Delivery.TransportStatus);
             Assert.IsFalse(cargo.Delivery.IsMisdirected);
             Assert.AreEqual(
-                new HandlingActivity(HandlingEvent.HandlingType.UNLOAD, SampleLocations.HAMBURG, SampleVoyages.v300),
+                new HandlingActivity(HandlingType.UNLOAD, SampleLocations.HAMBURG, SampleVoyages.v300),
                 cargo.Delivery.NextExpectedActivity);
 
             // Unload in Hamburg
             handlingEventService.registerHandlingEvent(
                 DateTestUtil.toDate("2009-03-12"), trackingId, SampleVoyages.v300.VoyageNumber,
-                SampleLocations.HAMBURG.UnLocode, HandlingEvent.HandlingType.UNLOAD);
+                SampleLocations.HAMBURG.UnLocode, HandlingType.UNLOAD);
 
             // Check current state - should be ok
             Assert.AreEqual(Voyage.NONE, cargo.Delivery.CurrentVoyage);
@@ -306,14 +306,14 @@
             Assert.AreEqual(TransportStatus.IN_PORT, cargo.Delivery.TransportStatus);
             Assert.IsFalse(cargo.Delivery.IsMisdirected);
             Assert.AreEqual(
-                new HandlingActivity(HandlingEvent.HandlingType.LOAD, SampleLocations.HAMBURG, SampleVoyages.v400),
+                new HandlingActivity(HandlingType.LOAD, SampleLocations.HAMBURG, SampleVoyages.v400),
                 cargo.Delivery.NextExpectedActivity);
 
 
             // Load in Hamburg
             handlingEventService.registerHandlingEvent(
                 DateTestUtil.toDate("2009-03-14"), trackingId, SampleVoyages.v400.VoyageNumber,
-                SampleLocations.HAMBURG.UnLocode, HandlingEvent.HandlingType.LOAD);
+                SampleLocations.HAMBURG.UnLocode, HandlingType.LOAD);
 
             // Check current state - should be ok
             Assert.AreEqual(SampleVoyages.v400, cargo.Delivery.CurrentVoyage);
@@ -321,27 +321,27 @@
             Assert.AreEqual(TransportStatus.ONBOARD_CARRIER, cargo.Delivery.TransportStatus);
             Assert.IsFalse(cargo.Delivery.IsMisdirected);
             Assert.AreEqual(
-                new HandlingActivity(HandlingEvent.HandlingType.UNLOAD, SampleLocations.STOCKHOLM, SampleVoyages.v400),
+                new HandlingActivity(HandlingType.UNLOAD, SampleLocations.STOCKHOLM, SampleVoyages.v400),
                 cargo.Delivery.NextExpectedActivity);
 
 
             // Unload in Stockholm
             handlingEventService.registerHandlingEvent(
                 DateTestUtil.toDate("2009-03-15"), trackingId, SampleVoyages.v400.VoyageNumber,
-                SampleLocations.STOCKHOLM.UnLocode, HandlingEvent.HandlingType.UNLOAD);
+                SampleLocations.STOCKHOLM.UnLocode, HandlingType.UNLOAD);
 
             // Check current state - should be ok
             Assert.AreEqual(Voyage.NONE, cargo.Delivery.CurrentVoyage);
             Assert.AreEqual(SampleLocations.STOCKHOLM, cargo.Delivery.LastKnownLocation);
             Assert.AreEqual(TransportStatus.IN_PORT, cargo.Delivery.TransportStatus);
             Assert.IsFalse(cargo.Delivery.IsMisdirected);
-            Assert.AreEqual(new HandlingActivity(HandlingEvent.HandlingType.CLAIM, SampleLocations.STOCKHOLM),
+            Assert.AreEqual(new HandlingActivity(HandlingType.CLAIM, SampleLocations.STOCKHOLM),
                             cargo.Delivery.NextExpectedActivity);
 
             // Finally, cargo is claimed in Stockholm. This ends the cargo lifecycle from our perspective.
             handlingEventService.registerHandlingEvent(
                 DateTestUtil.toDate("2009-03-16"), trackingId, null, SampleLocations.STOCKHOLM.UnLocode,
-                HandlingEvent.HandlingType.CLAIM);
+                HandlingType.CLAIM);
 
             // Check current state - should be ok
             Assert.AreEqual(Voyage.NONE, cargo.Delivery.CurrentVoyage);

@@ -46,6 +46,11 @@ namespace NDDDSample.Domain.Model.Cargos
         private Itinerary itinerary;
         private RouteSpecification routeSpecification;
 
+        protected Cargo()
+        {
+            // Needed by Hibernate
+        }
+
         public Cargo(TrackingId trackingId, RouteSpecification routeSpecification)
         {
             Validate.NotNull(trackingId, "Tracking ID is required");
@@ -60,11 +65,7 @@ namespace NDDDSample.Domain.Model.Cargos
             delivery = Delivery.DerivedFrom(this.routeSpecification, itinerary, HandlingHistory.EMPTY);
         }
 
-        private Cargo()
-        {
-            // Needed by Hibernate
-        }
-
+       
         #region IEntity<Cargo> Members
 
         /// <summary>

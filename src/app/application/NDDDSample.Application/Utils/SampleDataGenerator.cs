@@ -234,21 +234,21 @@
 
             HandlingEvent event1 = handlingEventFactory.CreateHandlingEvent(
                 new DateTime(), DateTestUtil.toDate("2009-03-01"), trackingId, null, SampleLocations.HONGKONG.UnLocode,
-                HandlingEvent.HandlingType.RECEIVE
+                HandlingType.RECEIVE
                 );
             session.Save(event1);
 
             HandlingEvent event2 = handlingEventFactory.CreateHandlingEvent(
                 new DateTime(), DateTestUtil.toDate("2009-03-02"), trackingId,
                 SampleVoyages.HONGKONG_TO_NEW_YORK.VoyageNumber, SampleLocations.HONGKONG.UnLocode,
-                HandlingEvent.HandlingType.LOAD
+                HandlingType.LOAD
                 );
             session.Save(event2);
 
             HandlingEvent event3 = handlingEventFactory.CreateHandlingEvent(
                 new DateTime(), DateTestUtil.toDate("2009-03-05"), trackingId,
                 SampleVoyages.HONGKONG_TO_NEW_YORK.VoyageNumber, SampleLocations.NEWYORK.UnLocode,
-                HandlingEvent.HandlingType.UNLOAD
+                HandlingType.UNLOAD
                 );
             session.Save(event3);
 
@@ -288,28 +288,28 @@
 
             HandlingEvent event21 = handlingEventFactory.CreateHandlingEvent(
                 new DateTime(), DateTestUtil.toDate("2009-03-01"), trackingId1, null, SampleLocations.HANGZOU.UnLocode,
-                HandlingEvent.HandlingType.RECEIVE);
+                HandlingType.RECEIVE);
 
             session.Save(event21);
 
             HandlingEvent event22 = handlingEventFactory.CreateHandlingEvent(
                 new DateTime(), DateTestUtil.toDate("2009-03-03"), trackingId1,
                 SampleVoyages.HONGKONG_TO_NEW_YORK.VoyageNumber, SampleLocations.HANGZOU.UnLocode,
-                HandlingEvent.HandlingType.LOAD
+                HandlingType.LOAD
                 );
             session.Save(event22);
 
             HandlingEvent event23 = handlingEventFactory.CreateHandlingEvent(
                 new DateTime(), DateTestUtil.toDate("2009-03-05"), trackingId1,
                 SampleVoyages.HONGKONG_TO_NEW_YORK.VoyageNumber, SampleLocations.NEWYORK.UnLocode,
-                HandlingEvent.HandlingType.UNLOAD
+                HandlingType.UNLOAD
                 );
             session.Save(event23);
 
             HandlingEvent event24 = handlingEventFactory.CreateHandlingEvent(
                 new DateTime(), DateTestUtil.toDate("2009-03-06"), trackingId1,
                 SampleVoyages.HONGKONG_TO_NEW_YORK.VoyageNumber, SampleLocations.NEWYORK.UnLocode,
-                HandlingEvent.HandlingType.LOAD
+                HandlingType.LOAD
                 );
             session.Save(event24);
 

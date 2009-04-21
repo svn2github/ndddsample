@@ -59,6 +59,7 @@
     <Compile Include="Model\Handlings\HandlingEvent.cs" />
     <Compile Include="Model\Handlings\HandlingEventFactory.cs" />
     <Compile Include="Model\Handlings\HandlingHistory.cs" />
+    <Compile Include="Model\Handlings\HandlingType.cs" />
     <Compile Include="Model\Handlings\IHandlingEventRepository.cs" />
     <Compile Include="Model\Handlings\UnknownCargoException.cs" />
     <Compile Include="Model\Handlings\UnknownLocationException.cs" />

@@ -48,7 +48,7 @@
         /// <returns> A handling event.</returns>
         public HandlingEvent CreateHandlingEvent(DateTime registrationTime, DateTime completionTime,
                                                  TrackingId trackingId, VoyageNumber voyageNumber, UnLocode unlocode,
-                                                 HandlingEvent.HandlingType type)
+                                                 HandlingType type)
         {
             Cargo cargo = FindCargo(trackingId);
             Voyage voyage = FindVoyage(voyageNumber);

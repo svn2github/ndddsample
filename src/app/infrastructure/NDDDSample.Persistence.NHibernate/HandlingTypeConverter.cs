@@ -6,5 +6,5 @@
 
     #endregion
 
-    public class HandlingTypeConverter : EnumerationTypeConverter<HandlingEvent.HandlingType> {}
+    public class HandlingTypeConverter : EnumerationTypeConverter<HandlingType> {}
 }

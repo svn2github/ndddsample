@@ -259,21 +259,21 @@
                 return TransportStatus.NOT_RECEIVED;
             }
 
-            if (lastEvent.Type == HandlingEvent.HandlingType.LOAD)
+            if (lastEvent.Type == HandlingType.LOAD)
             {
                 return TransportStatus.ONBOARD_CARRIER;
             }
 
-            bool isInPort = lastEvent.Type == HandlingEvent.HandlingType.UNLOAD
-                            || lastEvent.Type == HandlingEvent.HandlingType.RECEIVE
-                            || lastEvent.Type == HandlingEvent.HandlingType.CUSTOMS;
+            bool isInPort = lastEvent.Type == HandlingType.UNLOAD
+                            || lastEvent.Type == HandlingType.RECEIVE
+                            || lastEvent.Type == HandlingType.CUSTOMS;
 
             if (isInPort)
             {
                 return TransportStatus.IN_PORT;
             }
 
-            if (lastEvent.Type == HandlingEvent.HandlingType.CLAIM)
+            if (lastEvent.Type == HandlingType.CLAIM)
             {
                 return TransportStatus.CLAIMED;
             }
@@ -328,16 +328,16 @@
 
             if (lastEvent == null)
             {
-                return new HandlingActivity(HandlingEvent.HandlingType.RECEIVE, routeSpecification.Origin);
+                return new HandlingActivity(HandlingType.RECEIVE, routeSpecification.Origin);
             }
 
-            if (lastEvent.Type == HandlingEvent.HandlingType.LOAD)
+            if (lastEvent.Type == HandlingType.LOAD)
             {
                 foreach (Leg leg in itinerary.Legs)
                 {
                     if (leg.LoadLocation.SameIdentityAs(lastEvent.Location))
                     {
-                        return new HandlingActivity(HandlingEvent.HandlingType.UNLOAD, leg.UnloadLocation,
+                        return new HandlingActivity(HandlingType.UNLOAD, leg.UnloadLocation,
                                                     leg.Voyage);
                     }
                 }
@@ -345,7 +345,7 @@
                 return NO_ACTIVITY;
             }
 
-            if (lastEvent.Type == HandlingEvent.HandlingType.UNLOAD)
+            if (lastEvent.Type == HandlingType.UNLOAD)
             {
                 for (IEnumerator<Leg> it = itinerary.Legs.GetEnumerator(); it.MoveNext();)
                 {
@@ -355,24 +355,24 @@
                         if (it.MoveNext())
                         {
                             Leg nextLeg = it.Current;
-                            return new HandlingActivity(HandlingEvent.HandlingType.LOAD, nextLeg.LoadLocation,
+                            return new HandlingActivity(HandlingType.LOAD, nextLeg.LoadLocation,
                                                         nextLeg.Voyage);
                         }
-                        return new HandlingActivity(HandlingEvent.HandlingType.CLAIM, leg.UnloadLocation);
+                        return new HandlingActivity(HandlingType.CLAIM, leg.UnloadLocation);
                     }
                 }
                 return NO_ACTIVITY;
             }
 
-            if (lastEvent.Type == HandlingEvent.HandlingType.RECEIVE)
+            if (lastEvent.Type == HandlingType.RECEIVE)
             {
                 IEnumerator<Leg> enumerator = itinerary.Legs.GetEnumerator();
                 enumerator.MoveNext();
                 var firstLeg = enumerator.Current;
-                return new HandlingActivity(HandlingEvent.HandlingType.LOAD, firstLeg.LoadLocation, firstLeg.Voyage);
+                return new HandlingActivity(HandlingType.LOAD, firstLeg.LoadLocation, firstLeg.Voyage);
             }
 
-            if (lastEvent.Type == HandlingEvent.HandlingType.CLAIM)
+            if (lastEvent.Type == HandlingType.CLAIM)
             {
                 //DO nothing
             }
@@ -399,7 +399,7 @@
         private bool CalculateUnloadedAtDestination(RouteSpecification routeSpecification)
         {
             return lastEvent != null &&
-                   HandlingEvent.HandlingType.UNLOAD.SameValueAs(lastEvent.Type) &&
+                   HandlingType.UNLOAD.SameValueAs(lastEvent.Type) &&
                    routeSpecification.Destination.SameIdentityAs(lastEvent.Location);
         }
 

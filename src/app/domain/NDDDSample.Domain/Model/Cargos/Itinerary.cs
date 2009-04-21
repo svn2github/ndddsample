@@ -142,14 +142,14 @@
                 return true;
             }
 
-            if (handlingEvent.Type == HandlingEvent.HandlingType.RECEIVE)
+            if (handlingEvent.Type == HandlingType.RECEIVE)
             {
                 //Check that the first leg's origin is the event's location
                 Leg leg = legs[0];
                 return leg.LoadLocation.Equals(handlingEvent.Location);
             }
 
-            if (handlingEvent.Type == HandlingEvent.HandlingType.LOAD)
+            if (handlingEvent.Type == HandlingType.LOAD)
             {
                 //Check that the there is one leg with same load location and voyage
                 foreach (Leg leg in legs)
@@ -163,7 +163,7 @@
                 return false;
             }
 
-            if (handlingEvent.Type == HandlingEvent.HandlingType.UNLOAD)
+            if (handlingEvent.Type == HandlingType.UNLOAD)
             {
                 //Check that the there is one leg with same unload location and voyage
                 foreach (Leg leg in legs)
@@ -177,7 +177,7 @@
                 return false;
             }
 
-            if (handlingEvent.Type == HandlingEvent.HandlingType.CLAIM)
+            if (handlingEvent.Type == HandlingType.CLAIM)
             {
                 //Check that the last leg's destination is from the event's location
                 Leg leg = LastLeg;

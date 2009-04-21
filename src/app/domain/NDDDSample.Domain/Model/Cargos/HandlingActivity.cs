@@ -19,12 +19,12 @@
     {
         // TODO make HandlingActivity a part of HandlingEvent too? There is some overlap. 
         private readonly Location location;
-        private readonly HandlingEvent.HandlingType type;
+        private readonly HandlingType type;
         private readonly Voyage voyage;
 
         #region Constr
 
-        public HandlingActivity(HandlingEvent.HandlingType type, Location location)
+        public HandlingActivity(HandlingType type, Location location)
         {
             Validate.NotNull(type, "Handling event type is required");
             Validate.NotNull(location, "Location is required");
@@ -33,7 +33,7 @@
             this.location = location;
         }
 
-        public HandlingActivity(HandlingEvent.HandlingType type, Location location, Voyage voyage)
+        public HandlingActivity(HandlingType type, Location location, Voyage voyage)
         {
             Validate.NotNull(type, "Handling event type is required");
             Validate.NotNull(location, "Location is required");
@@ -99,7 +99,7 @@
 
         #region Props
 
-        public HandlingEvent.HandlingType Type
+        public HandlingType Type
         {
             get { return type; }
         }

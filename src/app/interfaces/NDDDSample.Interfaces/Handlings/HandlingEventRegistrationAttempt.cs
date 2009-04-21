@@ -23,7 +23,7 @@
         private readonly DateTime completionTime;
         private readonly DateTime registrationTime;
         private readonly TrackingId trackingId;
-        private readonly HandlingEvent.HandlingType type;
+        private readonly HandlingType type;
         private readonly UnLocode unLocode;
         private readonly VoyageNumber voyageNumber;
 
@@ -31,7 +31,7 @@
                                                 DateTime completionDate,
                                                 TrackingId trackingId,
                                                 VoyageNumber voyageNumber,
-                                                HandlingEvent.HandlingType type,
+                                                HandlingType type,
                                                 UnLocode unLocode)
         {
             registrationTime = registrationDate;
@@ -57,7 +57,7 @@
             return voyageNumber;
         }
 
-        public HandlingEvent.HandlingType getType()
+        public HandlingType getType()
         {
             return type;
         }

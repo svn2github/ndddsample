@@ -34,7 +34,7 @@
                                           TrackingId trackingId,
                                           VoyageNumber voyageNumber,
                                           UnLocode unLocode,
-                                          HandlingEvent.HandlingType type)
+                                          HandlingType type)
         {
             using (var transactionScope = new TransactionScope())
             {
