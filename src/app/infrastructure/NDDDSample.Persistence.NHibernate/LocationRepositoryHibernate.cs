@@ -7,13 +7,13 @@
 
     #endregion
 
-    public sealed class LocationRepositoryHibernate : HibernateRepository, ILocationRepository
+    public sealed class LocationRepositoryHibernate : HibernateRepository<UnLocode>, ILocationRepository
     {
         #region ILocationRepository Members
 
         public Location Find(UnLocode unLocode)
         {
-            return (Location) getSession().
+            return (Location) Session.
                                   CreateQuery("from Location where unLocode = ?").
                                   SetParameter(0, unLocode).
                                   UniqueResult();
@@ -21,7 +21,7 @@
 
         public IList<Location> FindAll()
         {
-            return getSession().CreateQuery("from Location").List<Location>();
+            return Session.CreateQuery("from Location").List<Location>();
         }
 
         #endregion

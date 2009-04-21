@@ -51,7 +51,7 @@
         /// </summary>
         /// <param name="other">The other value object.</param>
         /// <returns>true if the given value object's and this value object's attributes are the same.</returns>
-        public bool SameIdentityAs(Location other)
+        public virtual bool SameIdentityAs(Location other)
         {
             return unLocode.SameValueAs(other.unLocode);
         }
@@ -101,7 +101,7 @@
         /// <summary>
         /// Voyage UN Locode for this location.
         /// </summary>
-        public UnLocode UnLocode
+        public virtual UnLocode UnLocode
         {
             get { return unLocode; }
         }
@@ -110,7 +110,7 @@
         /// Actual name of this location, e.g. "Stockholm".
         /// </summary>
         /// <returns></returns>
-        public string Name
+        public virtual string Name
         {
             get { return name; }
         }

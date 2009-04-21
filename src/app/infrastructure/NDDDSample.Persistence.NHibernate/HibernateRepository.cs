@@ -7,21 +7,12 @@ using ISessionFactory=NHibernate.ISessionFactory;
 
 namespace NDDDSample.Persistence.NHibernate
 {
+    using Rhino.Commons;
+
     /// <summary>
     /// Functionality common to all Hibernate repositories.
     /// </summary>
-    public abstract class HibernateRepository
-    {
-        private ISessionFactory sessionFactory;
-
-        public void setSessionFactory(ISessionFactory sessFactory)
-        {
-            sessionFactory = sessFactory;
-        }
-
-        protected ISession getSession()
-        {
-            return sessionFactory.GetCurrentSession();
-        }
+    public abstract class HibernateRepository <T>: NHRepository<T>
+    {        
     }
 }

@@ -33,13 +33,25 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="NHibernate.ByteCode.Castle, Version=2.1.0.1001, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\lib\Rhino\NHibernate.ByteCode.Castle.dll</HintPath>
+    </Reference>
     <Reference Include="nunit.framework, Version=2.4.8.0, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\tools\NUnit\nunit.framework.dll</HintPath>
     </Reference>
+    <Reference Include="Rhino.Commons.NHibernate, Version=2.0.0.0, Culture=neutral, PublicKeyToken=0b3305902db7183f, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\lib\Rhino\Rhino.Commons.NHibernate.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.SQLite, Version=1.0.35.1, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\lib\Rhino\System.Data.SQLite.DLL</HintPath>
     </Reference>
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -59,11 +71,16 @@
     <Compile Include="Infrastructure\Persistence\Inmemory\HandlingEventRepositoryInMem.cs" />
     <Compile Include="Infrastructure\Persistence\Inmemory\LocationRepositoryInMem.cs" />
     <Compile Include="Infrastructure\Persistence\Inmemory\VoyageRepositoryInMem.cs" />
+    <Compile Include="Infrastructure\Persistence\NHibernate\BaseRepositoryTest.cs" />
+    <Compile Include="Infrastructure\Persistence\NHibernate\LocationRepositoryTest.cs" />
     <Compile Include="Scenarios\CargoLifecycleScenarioTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <Content Include="nh-windsor.boo">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="Properties\NDDDSample.snk" />
   </ItemGroup>
   <ItemGroup>
@@ -75,13 +92,21 @@
       <Project>{A57A3967-E613-4598-94FF-BD55711D4CAD}</Project>
       <Name>NDDDSample.Domain</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\app\infrastructure\NDDDSample.Persistence.NHibernate\NDDDSample.Persistence.NHibernate.csproj">
+      <Project>{97413EF7-9172-4467-AB4E-ED1155272BD5}</Project>
+      <Name>NDDDSample.Persistence.NHibernate</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\app\interfaces\NDDDSample.Interfaces\NDDDSample.Interfaces.csproj">
       <Project>{BDA5AFA5-0114-4C4C-989E-29457FAA4FDF}</Project>
       <Name>NDDDSample.Interfaces</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Infrastructure\Persistence\NHibernate\" />
+    <Content Include="hibernate.cfg.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
     <Folder Include="Infrastructure\Routing\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

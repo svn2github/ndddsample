@@ -11,13 +11,13 @@
     /// <summary>
     /// Hibernate implementation of CargoRepository.
     /// </summary>
-    public sealed class CargoRepositoryHibernate : HibernateRepository, ICargoRepository
+    public sealed class CargoRepositoryHibernate : HibernateRepository<Cargo>, ICargoRepository
     {
         #region ICargoRepository Members
 
         public Cargo Find(TrackingId tid)
         {
-            return (Cargo) getSession().
+            return (Cargo)Session.
                                CreateQuery("from Cargo where trackingId = :tid").
                                SetParameter("tid", tid).
                                UniqueResult();
@@ -25,9 +25,9 @@
 
         public void Store(Cargo cargo)
         {
-            getSession().SaveOrUpdate(cargo);
+            Session.SaveOrUpdate(cargo);
             // Delete-orphan does not seem to work correctly when the parent is a component
-            getSession().CreateSQLQuery("delete from Leg where cargo_id = null").ExecuteUpdate();
+            Session.CreateSQLQuery("delete from Leg where cargo_id = null").ExecuteUpdate();
         }
 
         public TrackingId NextTrackingId()
@@ -41,7 +41,7 @@
 
         public IList<Cargo> FindAll()
         {
-            return getSession().CreateQuery("from Cargo").List<Cargo>();
+            return Session.CreateQuery("from Cargo").List<Cargo>();
         }
 
         #endregion

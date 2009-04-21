@@ -64,7 +64,7 @@
         /// </summary>
         /// <param name="other">The other value object.</param>
         /// <returns>true if the given value object's and this value object's attributes are the same.</returns>
-        public bool SameValueAs(CarrierMovement other)
+        public virtual bool SameValueAs(CarrierMovement other)
         {
             return other != null && new EqualsBuilder().
                                         Append(departureLocation, other.departureLocation).
@@ -111,7 +111,7 @@
         /// <summary>
         /// Departure location.
         /// </summary>
-        public Location DepartureLocation
+        public virtual Location DepartureLocation
         {
             get { return departureLocation; }
         }
@@ -119,7 +119,7 @@
         /// <summary>
         /// Arrival location.
         /// </summary>
-        public Location ArrivalLocation
+        public virtual Location ArrivalLocation
         {
             get { return arrivalLocation; }
         }
@@ -127,7 +127,7 @@
         /// <summary>
         /// Time of departure.
         /// </summary>
-        public DateTime DepartureTime
+        public virtual DateTime DepartureTime
         {
             get
             {              
@@ -138,7 +138,7 @@
         /// <summary>
         ///  Time of arrival.
         /// </summary>
-        public DateTime ArrivalTime
+        public virtual DateTime ArrivalTime
         {
             get
             {               

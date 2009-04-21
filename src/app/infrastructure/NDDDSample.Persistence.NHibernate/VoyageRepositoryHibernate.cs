@@ -9,14 +9,13 @@
     /// <summary>
     /// Hibernate implementation of CarrierMovementRepository.
     /// </summary>
-    public sealed class VoyageRepositoryHibernate : HibernateRepository, IVoyageRepository
+    public sealed class VoyageRepositoryHibernate : HibernateRepository<Voyage>, IVoyageRepository
     {
         #region IVoyageRepository Members
 
         public Voyage Find(VoyageNumber voyageNumber)
         {
-            return (Voyage) getSession().
-                                CreateQuery("from Voyage where voyageNumber = :vn").
+            return (Voyage) Session.CreateQuery("from Voyage where voyageNumber = :vn").
                                 SetParameter("vn", voyageNumber).
                                 UniqueResult();
         }

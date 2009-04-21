@@ -49,7 +49,7 @@
         /// </summary>
         /// <param name="other">The other value object.</param>
         /// <returns>true if the given value object's and this value object's attributes are the same.</returns>
-        public bool SameValueAs(Leg other)
+        public virtual bool SameValueAs(Leg other)
         {
             return other != null && new EqualsBuilder().
                                         Append(voyage, other.voyage).
@@ -95,27 +95,27 @@
 
         #region Public props
 
-        public Voyage Voyage
+        public virtual Voyage Voyage
         {
             get { return voyage; }
         }
 
-        public Location LoadLocation
+        public virtual Location LoadLocation
         {
             get { return loadLocation; }
         }
 
-        public Location UnloadLocation
+        public virtual Location UnloadLocation
         {
             get { return unloadLocation; }
         }
 
-        public DateTime LoadTime
+        public virtual DateTime LoadTime
         {
             get { return loadTime; }
         }
 
-        public DateTime UnloadTime
+        public virtual DateTime UnloadTime
         {
             get
             {              

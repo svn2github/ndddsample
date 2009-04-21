@@ -78,7 +78,7 @@
 
         #region IEntity<Voyage> Members
 
-        public bool SameIdentityAs(Voyage other)
+        public virtual bool SameIdentityAs(Voyage other)
         {
             return other != null && VoyageNumber.SameValueAs(other.VoyageNumber);
         }
@@ -90,7 +90,7 @@
         /// <summary>
         /// Voyage number.
         /// </summary>
-        public VoyageNumber VoyageNumber
+        public virtual VoyageNumber VoyageNumber
         {
             get { return voyageNumber; }
         }
@@ -99,7 +99,7 @@
         /// GetSchedule
         /// </summary>
         /// <returns></returns>
-        public Schedule Schedule
+        public virtual Schedule Schedule
         {
             get { return schedule; }
         }
