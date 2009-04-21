@@ -9,11 +9,24 @@
     /// <summary>
     /// Routing status. 
     /// </summary>
-    public class RoutingStatus : IValueObject<RoutingStatus>
+    public class RoutingStatus : Enumeration, IValueObject<RoutingStatus>
     {
-        public static readonly RoutingStatus MISROUTED = new RoutingStatus();
-        public static readonly RoutingStatus NOT_ROUTED = new RoutingStatus();
-        public static readonly RoutingStatus ROUTED = new RoutingStatus();
+        public static readonly RoutingStatus MISROUTED = new RoutingStatus("MISROUTED");
+        public static readonly RoutingStatus NOT_ROUTED = new RoutingStatus("NOT_ROUTED");
+        public static readonly RoutingStatus ROUTED = new RoutingStatus("ROUTED");
+
+        /// <summary>
+        /// Required by reflection constructor
+        /// </summary>
+        private RoutingStatus() {}
+
+
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="name">Enum string name</param>
+        private RoutingStatus(string name)
+            : base(name) {}
 
         #region IValueObject<RoutingStatus> Members
 

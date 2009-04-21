@@ -79,6 +79,7 @@
     <Compile Include="Shared\AbstractSpecification.cs" />
     <Compile Include="Shared\AndSpecification.cs" />
     <Compile Include="Shared\DomainObjectUtils.cs" />
+    <Compile Include="Shared\Enumeration.cs" />
     <Compile Include="Shared\IDomainEvent.cs" />
     <Compile Include="Shared\IEntity.cs" />
     <Compile Include="Shared\ISpecification.cs" />

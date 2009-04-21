@@ -9,13 +9,26 @@
     /// <summary>
     /// Represents the different transport statuses for a cargo.
     /// </summary>
-    public class TransportStatus : IValueObject<TransportStatus>
+    public class TransportStatus : Enumeration, IValueObject<TransportStatus>
     {
-        public static readonly TransportStatus CLAIMED = new TransportStatus();
-        public static readonly TransportStatus IN_PORT = new TransportStatus();
-        public static readonly TransportStatus NOT_RECEIVED = new TransportStatus();
-        public static readonly TransportStatus ONBOARD_CARRIER = new TransportStatus();
-        public static readonly TransportStatus UNKNOWN = new TransportStatus();
+        public static readonly TransportStatus CLAIMED = new TransportStatus("CLAIMED");
+        public static readonly TransportStatus IN_PORT = new TransportStatus("IN_PORT");
+        public static readonly TransportStatus NOT_RECEIVED = new TransportStatus("NOT_RECEIVED");
+        public static readonly TransportStatus ONBOARD_CARRIER = new TransportStatus("ONBOARD_CARRIER");
+        public static readonly TransportStatus UNKNOWN = new TransportStatus("UNKNOWN");
+
+        /// <summary>
+        /// Required by reflection constructor
+        /// </summary>
+        private TransportStatus() {}
+
+
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="name">Enum string name</param>
+        private TransportStatus(string name)
+            : base(name) {}
 
         #region IValueObject<TransportStatus> Members
 

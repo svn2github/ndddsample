@@ -20,30 +20,19 @@
       <property name="calculatedAt" column="calculated_at" not-null="true"/>
       <property name="isUnloadedAtDestination" column="unloaded_at_dest" not-null="true"/>
 
-      <property name="routingStatus" column="routing_status" not-null="true">
-        <type name="org.hibernate.type.EnumType">
-          <param name="enumClass">se.citerus.dddsample.domain.model.cargo.RoutingStatus</param>
-          <param name="type">12</param><!-- 12 is java.sql.Types.VARCHAR -->
-        </type>
-      </property>
+      <property name="routingStatus" column="routing_status" not-null="true" 
+                type="NDDDSample.Persistence.NHibernate.RoutingStatusConverter, NDDDSample.Persistence.NHibernate"/>              
 
       <component name="nextExpectedActivity" update="true">
         <many-to-one name="location" column="next_expected_location_id" foreign-key="next_expected_location_fk" cascade="none"/>
-        <property name="type" column="next_expected_handling_event_type">
-          <type name="org.hibernate.type.EnumType">
-            <param name="enumClass">se.citerus.dddsample.domain.model.handling.HandlingEvent$Type</param>
-            <param name="type">12</param><!-- 12 is java.sql.Types.VARCHAR -->
-          </type>
-        </property>
+        <property name="type" column="next_expected_handling_event_type" 
+                  type="NDDDSample.Persistence.NHibernate.HandlingTypeConverter, NDDDSample.Persistence.NHibernate"/>                 
         <many-to-one name="voyage" column="next_expected_voyage_id" foreign-key="next_expected_voyage_fk" cascade="none"/>
       </component>
 
-      <property name="transportStatus" column="transport_status" not-null="true">
-        <type name="org.hibernate.type.EnumType">
-          <param name="enumClass">se.citerus.dddsample.domain.model.cargo.TransportStatus</param>
-          <param name="type">12</param><!-- 12 is java.sql.Types.VARCHAR -->
-        </type>
-      </property>
+      <property name="transportStatus" column="transport_status" not-null="true" 
+                type="NDDDSample.Persistence.NHibernate.TransportStatusConverter, NDDDSample.Persistence.NHibernate"/>       
+      
       <many-to-one name="currentVoyage" column="current_voyage_id" not-null="false" cascade="none" foreign-key="current_voyage_fk"/>
       <many-to-one name="lastKnownLocation" column="last_known_location_id" not-null="false" cascade="none" foreign-key="last_known_location_fk"/>
       <many-to-one name="lastEvent" column="last_event_id" not-null="false" cascade="none" foreign-key="last_event_fk"/>
@@ -60,7 +49,7 @@
       <list name="legs" lazy="true" cascade="all">
         <key column="cargo_id" foreign-key="itinerary_fk"/>
         <index column="leg_index"/>
-        <one-to-many class="se.citerus.dddsample.domain.model.cargo.Leg"/>
+        <one-to-many class="NDDDSample.Domain.Model.Cargos.Leg"/>
       </list>
     </component>
 

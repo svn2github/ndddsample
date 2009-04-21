@@ -12,7 +12,7 @@
 
     #endregion
 
-    public sealed class HandlingEvent : IDomainEvent<HandlingEvent>
+    public class HandlingEvent : IDomainEvent<HandlingEvent>
     {
         #region Private Props
 
@@ -32,22 +32,29 @@
         ///Handling event type. Either requires or prohibits a carrier movement
         ///association, it's never optional.
         /// </summary>
-        public class HandlingType : IValueObject<HandlingType>
+        public class HandlingType : Enumeration, IValueObject<HandlingType>
         {
-            public static readonly HandlingType CLAIM = new HandlingType(false);
-            public static readonly HandlingType CUSTOMS = new HandlingType(false);
-            public static readonly HandlingType LOAD = new HandlingType(true);
-            public static readonly HandlingType RECEIVE = new HandlingType(false);
-            public static readonly HandlingType UNLOAD = new HandlingType(true);
+            public static readonly HandlingType CLAIM = new HandlingType("CLAIM", false);
+            public static readonly HandlingType CUSTOMS = new HandlingType("CUSTOMS", false);
+            public static readonly HandlingType LOAD = new HandlingType("LOAD", true);
+            public static readonly HandlingType RECEIVE = new HandlingType("RECEIVE", false);
+            public static readonly HandlingType UNLOAD = new HandlingType("UNLOAD", true);
 
             private readonly bool voyageRequired;
 
+            /// <summary>
+            /// Required by reflection constructor
+            /// </summary>
+            private HandlingType()                
+            {}
 
             /// <summary>
             /// Private enum constructor        
             /// </summary>
+            /// <param name="name">Enum string name</param>
             /// <param name="voyageRequired">voyageRequired whether or not a voyage is associated with this event type </param>
-            private HandlingType(bool voyageRequired)
+            private HandlingType(string name, bool voyageRequired)
+                : base(name)
             {
                 this.voyageRequired = voyageRequired;
             }
@@ -88,6 +95,11 @@
         #endregion
 
         #region Constr
+
+        protected HandlingEvent()
+        {
+            // Needed by Hibernate
+        }
 
         /// <summary>
         /// Constructor.
@@ -150,16 +162,11 @@
             voyage = null;
         }
 
-        private HandlingEvent()
-        {
-            // Needed by Hibernate
-        }
-
         #endregion
 
         #region IDomainEvent<HandlingEvent> Members
 
-        public bool SameEventAs(HandlingEvent other)
+        public virtual bool SameEventAs(HandlingEvent other)
         {
             return other != null && new EqualsBuilder().
                                         Append(cargo, other.cargo).
@@ -174,17 +181,17 @@
 
         #region Public Props
 
-        public HandlingType Type
+        public virtual HandlingType Type
         {
             get { return type; }
         }
 
-        public Voyage Voyage
+        public virtual Voyage Voyage
         {
             get { return DomainObjectUtils.NullSafe(voyage, Voyage.NONE); }
         }
 
-        public DateTime CompletionTime
+        public virtual DateTime CompletionTime
         {
             get
             {             
@@ -192,7 +199,7 @@
             }
         }
 
-        public DateTime RegistrationTime
+        public virtual DateTime RegistrationTime
         {
             get
             {               
@@ -200,12 +207,12 @@
             }
         }
 
-        public Location Location
+        public virtual Location Location
         {
             get { return location; }
         }
 
-        public Cargo Cargo
+        public virtual Cargo Cargo
         {
             get { return cargo; }
         }

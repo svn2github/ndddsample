@@ -10,12 +10,8 @@
     <many-to-one name="location" column="location_id" not-null="true" cascade="none" foreign-key="location_fk"/>
     <many-to-one name="cargo" column="cargo_id" not-null="true" cascade="none" foreign-key="cargo_fk"/>
     <property name="completionTime" column="completionTime" not-null="true"/>
-    <property name="registrationTime" column="registrationTime" not-null="true"/>
-    <property name="type" column="type" not-null="true">
-      <type name="org.hibernate.type.EnumType">
-        <param name="enumClass">se.citerus.dddsample.domain.model.handling.HandlingEvent$Type</param>
-        <param name="type">12</param><!-- 12 is java.sql.Types.VARCHAR -->
-      </type>
-    </property>
+    <property name="registrationTime" column="registrationTime" not-null="true"/>    
+    <property name="type" column="type"
+                 type="NDDDSample.Persistence.NHibernate.HandlingTypeConverter, NDDDSample.Persistence.NHibernate"/>
   </class>
 </hibernate-mapping>

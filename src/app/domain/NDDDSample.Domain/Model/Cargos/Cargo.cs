@@ -72,7 +72,7 @@ namespace NDDDSample.Domain.Model.Cargos
         /// </summary>
         /// <param name="other">The other entity.</param>
         /// <returns>true if the identities are the same, regardles of other attributes.</returns>
-        public bool SameIdentityAs(Cargo other)
+        public virtual bool SameIdentityAs(Cargo other)
         {
             return other != null && trackingId.SameValueAs(other.trackingId);
         }
@@ -114,7 +114,7 @@ namespace NDDDSample.Domain.Model.Cargos
         /// <summary>
         /// The tracking id is the identity of this entity, and is unique.
         /// </summary>      
-        public TrackingId TrackingId
+        public virtual TrackingId TrackingId
         {
             get { return trackingId; }
         }
@@ -122,7 +122,7 @@ namespace NDDDSample.Domain.Model.Cargos
         /// <summary>
         /// Origin location.
         /// </summary>      
-        public Location Origin
+        public virtual Location Origin
         {
             get { return origin; }
         }
@@ -130,7 +130,7 @@ namespace NDDDSample.Domain.Model.Cargos
         /// <summary>
         /// The delivery. Never null.
         /// </summary>       
-        public Delivery Delivery
+        public virtual Delivery Delivery
         {
             get { return delivery; }
         }
@@ -138,7 +138,7 @@ namespace NDDDSample.Domain.Model.Cargos
         /// <summary>
         /// The itinerary. Never null.
         /// </summary>       
-        public Itinerary Itinerary
+        public virtual Itinerary Itinerary
         {
             get { return DomainObjectUtils.NullSafe(itinerary, Itinerary.EMPTY_ITINERARY); }
         }
@@ -146,7 +146,7 @@ namespace NDDDSample.Domain.Model.Cargos
         /// <summary>
         /// The route specification.
         /// </summary>       
-        public RouteSpecification RouteSpecification
+        public virtual RouteSpecification RouteSpecification
         {
             get { return routeSpecification; }
         }
@@ -159,7 +159,7 @@ namespace NDDDSample.Domain.Model.Cargos
         /// Specifies a new route for this cargo.
         /// </summary>
         /// <param name="routeSpec">routeSpecification route specification.</param>
-        public void SpecifyNewRoute(RouteSpecification routeSpec)
+        public virtual void SpecifyNewRoute(RouteSpecification routeSpec)
         {
             Validate.NotNull(routeSpec, "Route specification is required");
 
@@ -172,7 +172,7 @@ namespace NDDDSample.Domain.Model.Cargos
         /// Attach a new itinerary to this cargo.
         /// </summary>
         /// <param name="itineraryPrm">itinerary an itinerary. May not be null.</param>
-        public void AssignToRoute(Itinerary itineraryPrm)
+        public virtual void AssignToRoute(Itinerary itineraryPrm)
         {
             Validate.NotNull(itineraryPrm, "Itinerary is required for assignment");
 
@@ -195,7 +195,7 @@ namespace NDDDSample.Domain.Model.Cargos
         /// to happen <b>asynchronously</b> since HandlingEvent is in a different aggregate.
         /// </summary>
         /// <param name="handlingHistory"></param>
-        public void DeriveDeliveryProgress(HandlingHistory handlingHistory)
+        public virtual void DeriveDeliveryProgress(HandlingHistory handlingHistory)
         {
             // TODO filter events on cargo (must be same as this cargo)
 
