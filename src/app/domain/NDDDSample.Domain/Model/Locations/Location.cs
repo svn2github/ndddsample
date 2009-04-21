@@ -19,7 +19,7 @@
         public static readonly Location UNKNOWN = new Location(new UnLocode("XXXXX"), "Unknown location");
         private readonly string name;
         private readonly UnLocode unLocode;
-        protected Guid id;
+        protected int id;
 
         #region Constr
 

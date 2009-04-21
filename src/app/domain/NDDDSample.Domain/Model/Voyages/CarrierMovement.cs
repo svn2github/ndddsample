@@ -24,7 +24,7 @@
         private readonly DateTime arrivalTime;
         private readonly Location departureLocation;
         private readonly DateTime departureTime;
-        protected Guid id;
+        protected int id;
 
         #endregion
 

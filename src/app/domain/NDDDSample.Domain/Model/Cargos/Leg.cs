@@ -20,7 +20,7 @@
         private readonly Location unloadLocation;
         private readonly DateTime unloadTime;
         private readonly Voyage voyage;
-        protected Guid id;
+        protected int id;
 
         #region Constr
 

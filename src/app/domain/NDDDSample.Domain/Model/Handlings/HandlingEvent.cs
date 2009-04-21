@@ -22,7 +22,7 @@
         private DateTime registrationTime;
         private HandlingType type;
         private Voyage voyage;
-        private Guid id;
+        private int id;
 
         #endregion      
 

@@ -21,11 +21,9 @@
         private static DateTime baseTime;
 
         static SampleDataGenerator()
-        {
-            DateTime date = new DateTime(2008, 01, 01);
-            baseTime = new DateTime(date.Ticks - 1000L * 60 * 60 * 24 * 100);
+        {            
+            baseTime = new DateTime(2008, 01, 01).AddDays(-100);
         }
-
 
         private static void LoadHandlingEventData(ISession session)
         {
@@ -70,7 +68,7 @@
                                             new object[] {ts(400), ts(440), "UNLOAD", 5, 3, 6} // Unexpected event
                                         };
 
-            executeUpdate(session, handlingEventSql, handlingEventArgs);
+            ExecuteUpdate(session, handlingEventSql, handlingEventArgs);
         }
 
         private static void LoadCarrierMovementData(ISession session)
@@ -82,7 +80,7 @@
                                      new object[] {2, "0202"},
                                      new object[] {3, "0303"}
                                  };
-            executeUpdate(session, voyageSql, voyageArgs);
+            ExecuteUpdate(session, voyageSql, voyageArgs);
 
             const string carrierMovementSql =
                 "insert into CarrierMovement (id, voyage_id, departure_location_id, arrival_location_id, departure_time, arrival_time, cm_index) " +
@@ -108,7 +106,7 @@
                                               new object[] {13, 3, 1, 7, ts(1), ts(2), 3},
                                               new object[] {14, 3, 7, 4, ts(1), ts(2), 4}
                                           };
-            executeUpdate(session, carrierMovementSql, carrierMovementArgs);
+            ExecuteUpdate(session, carrierMovementSql, carrierMovementArgs);
         }
 
         private static void LoadCargoData(ISession session)
@@ -150,7 +148,7 @@
                                             false
                                         }
                                 };
-            executeUpdate(session, cargoSql, cargoArgs);
+            ExecuteUpdate(session, cargoSql, cargoArgs);
         }
 
         private static void LoadLocationData(ISession session)
@@ -168,7 +166,7 @@
                                        new object[] {6, "DEHAM", "Hamburg"},
                                        new object[] {7, "USCHI", "Chicago"}
                                    };
-            executeUpdate(session, locationSql, locationArgs);
+            ExecuteUpdate(session, locationSql, locationArgs);
         }
 
         private static void LoadItineraryData(ISession session)
@@ -188,7 +186,7 @@
                                   new object[] {5, 6, 2, 1, 7, ts(3), ts(4), 1},
                                   new object[] {6, 6, 2, 7, 4, ts(5), ts(6), 2}
                               };
-            executeUpdate(session, legSql, legArgs);
+            ExecuteUpdate(session, legSql, legArgs);
         }
 
         //TODO:atrosin Revise where and how is used the method
@@ -211,14 +209,14 @@
             session.Save(SampleVoyages.HELSINKI_TO_HONGKONG);
             session.Save(SampleVoyages.DALLAS_TO_HELSINKI_ALT);
 
-            RouteSpecification routeSpecification = new RouteSpecification(SampleLocations.HONGKONG,
+            var routeSpecification = new RouteSpecification(SampleLocations.HONGKONG,
                                                                            SampleLocations.HELSINKI,
                                                                            DateTestUtil.toDate("2009-03-15"));
-            TrackingId trackingId = new TrackingId("ABC123");
-            Cargo abc123 = new Cargo(trackingId, routeSpecification);
+            var trackingId = new TrackingId("ABC123");
+            var abc123 = new Cargo(trackingId, routeSpecification);
 
-            Itinerary itinerary = new Itinerary(
-                new List<Leg>()
+            var itinerary = new Itinerary(
+                new List<Leg>
                     {
                         new Leg(SampleVoyages.HONGKONG_TO_NEW_YORK, SampleLocations.HONGKONG, SampleLocations.NEWYORK,
                                 DateTestUtil.toDate("2009-03-02"), DateTestUtil.toDate("2009-03-05")),
@@ -260,27 +258,27 @@
 
             // Cargo JKL567
 
-            RouteSpecification routeSpecification1 = new RouteSpecification(SampleLocations.HANGZOU,
-                                                                            SampleLocations.STOCKHOLM,
-                                                                            DateTestUtil.toDate("2009-03-18"));
-            TrackingId trackingId1 = new TrackingId("JKL567");
-            Cargo jkl567 = new Cargo(trackingId1, routeSpecification1);
+            var routeSpecification1 = new RouteSpecification(SampleLocations.HANGZOU,
+                                                             SampleLocations.STOCKHOLM,
+                                                             DateTestUtil.toDate("2009-03-18"));
+            var trackingId1 = new TrackingId("JKL567");
+            var jkl567 = new Cargo(trackingId1, routeSpecification1);
 
-            Itinerary itinerary1 = new Itinerary(new List<Leg>()
-                                                     {
-                                                         new Leg(SampleVoyages.HONGKONG_TO_NEW_YORK,
-                                                                 SampleLocations.HANGZOU, SampleLocations.NEWYORK,
-                                                                 DateTestUtil.toDate("2009-03-03"),
-                                                                 DateTestUtil.toDate("2009-03-05")),
-                                                         new Leg(SampleVoyages.NEW_YORK_TO_DALLAS,
-                                                                 SampleLocations.NEWYORK, SampleLocations.DALLAS,
-                                                                 DateTestUtil.toDate("2009-03-06"),
-                                                                 DateTestUtil.toDate("2009-03-08")),
-                                                         new Leg(SampleVoyages.DALLAS_TO_HELSINKI,
-                                                                 SampleLocations.DALLAS, SampleLocations.STOCKHOLM,
-                                                                 DateTestUtil.toDate("2009-03-09"),
-                                                                 DateTestUtil.toDate("2009-03-11"))
-                                                     });
+            var itinerary1 = new Itinerary(new List<Leg>
+                                               {
+                                                   new Leg(SampleVoyages.HONGKONG_TO_NEW_YORK,
+                                                           SampleLocations.HANGZOU, SampleLocations.NEWYORK,
+                                                           DateTestUtil.toDate("2009-03-03"),
+                                                           DateTestUtil.toDate("2009-03-05")),
+                                                   new Leg(SampleVoyages.NEW_YORK_TO_DALLAS,
+                                                           SampleLocations.NEWYORK, SampleLocations.DALLAS,
+                                                           DateTestUtil.toDate("2009-03-06"),
+                                                           DateTestUtil.toDate("2009-03-08")),
+                                                   new Leg(SampleVoyages.DALLAS_TO_HELSINKI,
+                                                           SampleLocations.DALLAS, SampleLocations.STOCKHOLM,
+                                                           DateTestUtil.toDate("2009-03-09"),
+                                                           DateTestUtil.toDate("2009-03-11"))
+                                               });
             jkl567.AssignToRoute(itinerary1);
 
             session.Save(jkl567);
@@ -327,7 +325,7 @@
         }
 
         public static void LoadSampleData()
-        {         
+        {
             using (ITransaction transaction = UnitOfWork.CurrentSession.BeginTransaction())
             {
                 ISession session = UnitOfWork.CurrentSession;
@@ -336,13 +334,13 @@
                 LoadCargoData(session);
                 LoadItineraryData(session);
                 LoadHandlingEventData(session);
-    
+
                 transaction.Commit();
-            }            
+            }
         }
 
-        private static void executeUpdate(ISession session, string sql, object[][] dataTable)
-        {            
+        private static void ExecuteUpdate(ISession session, string sql, object[][] dataTable)
+        {
             for (int i = 0; i < dataTable.GetLength(0); i++)
             {
                 IQuery query = session.CreateSQLQuery(sql);
@@ -360,11 +358,10 @@
                     {
                         query.SetParameter(j, objValue);
                     }
-                    
                 }
 
                 query.ExecuteUpdate();
-            }            
+            }
         }
     }
 }

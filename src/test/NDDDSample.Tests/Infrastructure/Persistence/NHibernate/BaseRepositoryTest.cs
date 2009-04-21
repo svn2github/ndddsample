@@ -38,7 +38,7 @@
             CurrentContext.DisposeUnitOfWork();
         }
 
-        protected void LoadData()
+        protected static void LoadData()
         {
             // TODO store Sample* and object instances here instead of handwritten SQL
             SampleDataGenerator.LoadSampleData();          

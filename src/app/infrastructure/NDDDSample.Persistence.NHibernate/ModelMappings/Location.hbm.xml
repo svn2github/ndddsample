@@ -4,7 +4,7 @@
   
   <class name="Location" table="Location">
     <id name="id" column="id">
-      <generator class="guid.comb"/>
+      <generator class="identity"/>
     </id>
     <component name="unLocode" unique="true" update="false">
       <property name="unlocode" column="unlocode" not-null="true"/>

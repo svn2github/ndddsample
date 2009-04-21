@@ -42,7 +42,7 @@ namespace NDDDSample.Domain.Model.Cargos
         private readonly Location origin;
         private readonly TrackingId trackingId;
         private Delivery delivery;
-        private Guid id;
+        private int id;
         private Itinerary itinerary;
         private RouteSpecification routeSpecification;
 
