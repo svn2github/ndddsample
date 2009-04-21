@@ -2,6 +2,7 @@ namespace NDDDSample.Domain.Model.Cargos
 {
     #region Usings
 
+    using System;
     using Handlings;
     using JavaRelated;
     using Locations;
@@ -41,7 +42,7 @@ namespace NDDDSample.Domain.Model.Cargos
         private readonly Location origin;
         private readonly TrackingId trackingId;
         private Delivery delivery;
-        private long id;
+        private Guid id;
         private Itinerary itinerary;
         private RouteSpecification routeSpecification;
 

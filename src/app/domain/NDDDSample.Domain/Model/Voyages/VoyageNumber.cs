@@ -13,7 +13,7 @@
     /// </summary>
     public class VoyageNumber : IValueObject<VoyageNumber>
     {
-        private readonly string number;
+        private string number;
 
         #region Constr
 

@@ -19,7 +19,7 @@
         public static readonly Voyage NONE = new Voyage(new VoyageNumber(""), Schedule.EMPTY);
         private readonly Schedule schedule;
         private readonly VoyageNumber voyageNumber;
-        private long id;
+        protected Guid id;
 
         #region Nested Voyage Builder 
 

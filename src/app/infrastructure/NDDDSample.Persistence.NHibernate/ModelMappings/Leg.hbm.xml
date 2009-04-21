@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" assembly="NDDDSample.Domain" 
+                   namespace="NDDDSample.Domain.Model.Cargos" default-access="field">
+  
+  <class name="Leg" table="Leg" mutable="false">
+    <id name="id" column="id">
+      <generator class="guid.comb"/>
+    </id>
+
+    <many-to-one name="voyage" column="voyage_id" cascade="none" foreign-key="voyage_fk"/>
+
+    <many-to-one name="loadLocation" column="load_location_id" cascade="none" foreign-key="load_location_fk"/>
+    <property name="loadTime" column="load_time" not-null="true"/>
+
+    <many-to-one name="unloadLocation" column="unload_location_id" cascade="none" foreign-key="unload_location_fk"/>
+    <property name="unloadTime" column="unload_time" not-null="true"/>
+    
+  </class>
+</hibernate-mapping>

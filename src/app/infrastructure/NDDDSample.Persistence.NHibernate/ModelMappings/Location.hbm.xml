@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" assembly="NDDDSample.Domain"
+                   namespace="NDDDSample.Domain.Model.Cargos" default-access="field">
+  
+  <class name="Location" table="Location">
+    <id name="id" column="id">
+      <generator class="guid.comb"/>
+    </id>
+    <component name="unLocode" unique="true" update="false">
+      <property name="unlocode" column="unlocode" not-null="true"/>
+    </component>
+    <property name="name" column="name" not-null="true"/>
+  </class>
+</hibernate-mapping>

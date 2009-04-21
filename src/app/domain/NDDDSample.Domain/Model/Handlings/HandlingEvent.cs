@@ -16,13 +16,13 @@
     {
         #region Private Props
 
-        private readonly Cargo cargo;
-        private readonly DateTime completionTime;
-        private readonly Location location;
-        private readonly DateTime registrationTime;
-        private readonly HandlingType type;
-        private readonly Voyage voyage;
-        private long id;
+        private Cargo cargo;
+        private DateTime completionTime;
+        private Location location;
+        private DateTime registrationTime;
+        private HandlingType type;
+        private Voyage voyage;
+        private Guid id;
 
         #endregion
 

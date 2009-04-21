@@ -2,6 +2,7 @@
 {
     #region Usings
 
+    using System;
     using JavaRelated;
     using Shared;
 
@@ -18,7 +19,7 @@
         public static readonly Location UNKNOWN = new Location(new UnLocode("XXXXX"), "Unknown location");
         private readonly string name;
         private readonly UnLocode unLocode;
-        protected long id;
+        protected Guid id;
 
         #region Constr
 
