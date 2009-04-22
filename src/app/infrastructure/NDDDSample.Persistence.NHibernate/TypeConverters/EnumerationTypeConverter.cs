@@ -7,7 +7,7 @@ using SqlTypeFactory=NHibernate.SqlTypes.SqlTypeFactory;
 
 #endregion
 
-namespace NDDDSample.Persistence.NHibernate
+namespace NDDDSample.Persistence.NHibernate.TypeConverters
 {
     #region Usings
 

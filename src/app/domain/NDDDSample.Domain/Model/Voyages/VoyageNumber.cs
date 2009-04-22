@@ -13,7 +13,7 @@
     /// </summary>
     public class VoyageNumber : IValueObject<VoyageNumber>
     {
-        private string number;
+        private readonly string number;
 
         #region Constr
 
@@ -62,7 +62,7 @@
             {
                 return false;
             }
-            if (!( obj is VoyageNumber))
+            if (!(obj is VoyageNumber))
             {
                 return false;
             }

@@ -19,7 +19,7 @@
         internal static readonly Itinerary EMPTY_ITINERARY = new Itinerary();
         private static readonly DateTime END_OF_DAYS = DateTime.MaxValue;
         private readonly IList<Leg> legs = new List<Leg>();
-        private long id;
+        private int id;
 
         #region Constr
 
@@ -102,10 +102,10 @@
                 Leg lastLeg = LastLeg;
 
                 if (lastLeg == null)
-                {                  
+                {
                     return END_OF_DAYS;
                 }
-               
+
                 return lastLeg.UnloadTime;
             }
         }

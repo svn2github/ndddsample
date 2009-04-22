@@ -12,12 +12,12 @@
     public abstract class Enumeration : IComparable
     {
         private string displayName;
-        private string value;       
+        private string value;
 
         protected Enumeration(string value)
         {
             this.value = value;
-            this.displayName = value;
+            displayName = value;
         }
 
         protected Enumeration(string value, string displayName)

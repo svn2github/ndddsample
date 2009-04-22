@@ -21,7 +21,7 @@
         private static DateTime baseTime;
 
         static SampleDataGenerator()
-        {            
+        {
             baseTime = new DateTime(2008, 01, 01).AddDays(-100);
         }
 
@@ -34,38 +34,38 @@
             var handlingEventArgs = new[]
                                         {
                                             //XYZ (SESTO-FIHEL-DEHAM-CNHKG-JPTOK-AUMEL)
-                                            new object[] {ts(0), ts((0)), "RECEIVE", 1, null, 1},
-                                            new object[] {ts((4)), ts((5)), "LOAD", 1, 1, 1},
-                                            new object[] {ts((14)), ts((14)), "UNLOAD", 5, 1, 1},
-                                            new object[] {ts((15)), ts((15)), "LOAD", 5, 1, 1},
-                                            new object[] {ts((30)), ts((30)), "UNLOAD", 6, 1, 1},
-                                            new object[] {ts((33)), ts((33)), "LOAD", 6, 1, 1},
-                                            new object[] {ts((34)), ts((34)), "UNLOAD", 3, 1, 1},
-                                            new object[] {ts((60)), ts((60)), "LOAD", 3, 1, 1},
-                                            new object[] {ts((70)), ts((71)), "UNLOAD", 4, 1, 1},
-                                            new object[] {ts((75)), ts((75)), "LOAD", 4, 1, 1},
-                                            new object[] {ts((88)), ts((88)), "UNLOAD", 2, 1, 1},
-                                            new object[] {ts((100)), ts((102)), "CLAIM", 2, null, 1},
+                                            new object[] {Ts(0), Ts((0)), "RECEIVE", 1, null, 1},
+                                            new object[] {Ts((4)), Ts((5)), "LOAD", 1, 1, 1},
+                                            new object[] {Ts((14)), Ts((14)), "UNLOAD", 5, 1, 1},
+                                            new object[] {Ts((15)), Ts((15)), "LOAD", 5, 1, 1},
+                                            new object[] {Ts((30)), Ts((30)), "UNLOAD", 6, 1, 1},
+                                            new object[] {Ts((33)), Ts((33)), "LOAD", 6, 1, 1},
+                                            new object[] {Ts((34)), Ts((34)), "UNLOAD", 3, 1, 1},
+                                            new object[] {Ts((60)), Ts((60)), "LOAD", 3, 1, 1},
+                                            new object[] {Ts((70)), Ts((71)), "UNLOAD", 4, 1, 1},
+                                            new object[] {Ts((75)), Ts((75)), "LOAD", 4, 1, 1},
+                                            new object[] {Ts((88)), Ts((88)), "UNLOAD", 2, 1, 1},
+                                            new object[] {Ts((100)), Ts((102)), "CLAIM", 2, null, 1},
                                             //ZYX (AUMEL - USCHI - DEHAM -)
-                                            new object[] {ts((200)), ts((201)), "RECEIVE", 2, null, 3},
-                                            new object[] {ts((202)), ts((202)), "LOAD", 2, 2, 3},
-                                            new object[] {ts((208)), ts((208)), "UNLOAD", 7, 2, 3},
-                                            new object[] {ts((212)), ts((212)), "LOAD", 7, 2, 3},
-                                            new object[] {ts((230)), ts((230)), "UNLOAD", 6, 2, 3},
-                                            new object[] {ts((235)), ts((235)), "LOAD", 6, 2, 3},
+                                            new object[] {Ts((200)), Ts((201)), "RECEIVE", 2, null, 3},
+                                            new object[] {Ts((202)), Ts((202)), "LOAD", 2, 2, 3},
+                                            new object[] {Ts((208)), Ts((208)), "UNLOAD", 7, 2, 3},
+                                            new object[] {Ts((212)), Ts((212)), "LOAD", 7, 2, 3},
+                                            new object[] {Ts((230)), Ts((230)), "UNLOAD", 6, 2, 3},
+                                            new object[] {Ts((235)), Ts((235)), "LOAD", 6, 2, 3},
                                             //ABC
-                                            new object[] {ts((20)), ts((21)), "CLAIM", 2, null, 2},
+                                            new object[] {Ts((20)), Ts((21)), "CLAIM", 2, null, 2},
                                             //CBA
-                                            new object[] {ts((0)), ts((1)), "RECEIVE", 2, null, 4},
-                                            new object[] {ts((10)), ts((11)), "LOAD", 2, 2, 4},
-                                            new object[] {ts((20)), ts((21)), "UNLOAD", 7, 2, 4},
+                                            new object[] {Ts((0)), Ts((1)), "RECEIVE", 2, null, 4},
+                                            new object[] {Ts((10)), Ts((11)), "LOAD", 2, 2, 4},
+                                            new object[] {Ts((20)), Ts((21)), "UNLOAD", 7, 2, 4},
                                             //FGH
-                                            new object[] {ts(100), ts(160), "RECEIVE", 3, null, 5},
-                                            new object[] {ts(150), ts(110), "LOAD", 3, 3, 5},
+                                            new object[] {Ts(100), Ts(160), "RECEIVE", 3, null, 5},
+                                            new object[] {Ts(150), Ts(110), "LOAD", 3, 3, 5},
                                             //// JKL
-                                            new object[] {ts(200), ts(220), "RECEIVE", 6, null, 6},
-                                            new object[] {ts(300), ts(330), "LOAD", 6, 3, 6},
-                                            new object[] {ts(400), ts(440), "UNLOAD", 5, 3, 6} // Unexpected event
+                                            new object[] {Ts(200), Ts(220), "RECEIVE", 6, null, 6},
+                                            new object[] {Ts(300), Ts(330), "LOAD", 6, 3, 6},
+                                            new object[] {Ts(400), Ts(440), "UNLOAD", 5, 3, 6} // Unexpected event
                                         };
 
             ExecuteUpdate(session, handlingEventSql, handlingEventArgs);
@@ -89,22 +89,22 @@
             var carrierMovementArgs = new[]
                                           {
                                               // SESTO - FIHEL - DEHAM - CNHKG - JPTOK - AUMEL (voyage 0101)
-                                              new object[] {1, 1, 1, 5, ts(1), ts(2), 0},
-                                              new object[] {2, 1, 5, 6, ts(1), ts(2), 1},
-                                              new object[] {3, 1, 6, 3, ts(1), ts(2), 2},
-                                              new object[] {4, 1, 3, 4, ts(1), ts(2), 3},
-                                              new object[] {5, 1, 4, 2, ts(1), ts(2), 4},
+                                              new object[] {1, 1, 1, 5, Ts(1), Ts(2), 0},
+                                              new object[] {2, 1, 5, 6, Ts(1), Ts(2), 1},
+                                              new object[] {3, 1, 6, 3, Ts(1), Ts(2), 2},
+                                              new object[] {4, 1, 3, 4, Ts(1), Ts(2), 3},
+                                              new object[] {5, 1, 4, 2, Ts(1), Ts(2), 4},
                                               // AUMEL - USCHI - DEHAM - SESTO - FIHEL (voyage 0202)
-                                              new object[] {7, 2, 2, 7, ts(1), ts(2), 0},
-                                              new object[] {8, 2, 7, 6, ts(1), ts(2), 1},
-                                              new object[] {9, 2, 6, 1, ts(1), ts(2), 2},
-                                              new object[] {6, 2, 1, 5, ts(1), ts(2), 3},
+                                              new object[] {7, 2, 2, 7, Ts(1), Ts(2), 0},
+                                              new object[] {8, 2, 7, 6, Ts(1), Ts(2), 1},
+                                              new object[] {9, 2, 6, 1, Ts(1), Ts(2), 2},
+                                              new object[] {6, 2, 1, 5, Ts(1), Ts(2), 3},
                                               // CNHKG - AUMEL - FIHEL - DEHAM - SESTO - USCHI - JPTKO (voyage 0303)
-                                              new object[] {10, 3, 3, 2, ts(1), ts(2), 0},
-                                              new object[] {11, 3, 2, 5, ts(1), ts(2), 1},
-                                              new object[] {12, 3, 6, 1, ts(1), ts(2), 2},
-                                              new object[] {13, 3, 1, 7, ts(1), ts(2), 3},
-                                              new object[] {14, 3, 7, 4, ts(1), ts(2), 4}
+                                              new object[] {10, 3, 3, 2, Ts(1), Ts(2), 0},
+                                              new object[] {11, 3, 2, 5, Ts(1), Ts(2), 1},
+                                              new object[] {12, 3, 6, 1, Ts(1), Ts(2), 2},
+                                              new object[] {13, 3, 1, 7, Ts(1), Ts(2), 3},
+                                              new object[] {14, 3, 7, 4, Ts(1), Ts(2), 4}
                                           };
             ExecuteUpdate(session, carrierMovementSql, carrierMovementArgs);
         }
@@ -119,32 +119,32 @@
                                 {
                                     new object[]
                                         {
-                                            1, "XYZ", 1, 1, 2, ts(10), "IN_PORT", null, 1, false, "ROUTED", ts(100),
+                                            1, "XYZ", 1, 1, 2, Ts(10), "IN_PORT", null, 1, false, "ROUTED", Ts(100),
                                             false
                                         },
                                     new object[]
                                         {
-                                            2, "ABC", 1, 1, 5, ts(20), "IN_PORT", null, 1, false, "ROUTED", ts(100),
+                                            2, "ABC", 1, 1, 5, Ts(20), "IN_PORT", null, 1, false, "ROUTED", Ts(100),
                                             false
                                         },
                                     new object[]
                                         {
-                                            3, "ZYX", 2, 2, 1, ts(30), "IN_PORT", null, 1, false, "NOT_ROUTED", ts(100),
+                                            3, "ZYX", 2, 2, 1, Ts(30), "IN_PORT", null, 1, false, "NOT_ROUTED", Ts(100),
                                             false
                                         },
                                     new object[]
                                         {
-                                            4, "CBA", 5, 5, 1, ts(40), "IN_PORT", null, 1, false, "MISROUTED", ts(100),
+                                            4, "CBA", 5, 5, 1, Ts(40), "IN_PORT", null, 1, false, "MISROUTED", Ts(100),
                                             false
                                         },
                                     new object[]
                                         {
-                                            5, "FGH", 1, 3, 5, ts(50), "IN_PORT", null, 1, false, "ROUTED", ts(100),
+                                            5, "FGH", 1, 3, 5, Ts(50), "IN_PORT", null, 1, false, "ROUTED", Ts(100),
                                             false
                                         }, // Cargo origin differs from spec origin
                                     new object[]
                                         {
-                                            6, "JKL", 6, 6, 4, ts(60), "IN_PORT", null, 1, true, "ROUTED", ts(100),
+                                            6, "JKL", 6, 6, 4, Ts(60), "IN_PORT", null, 1, true, "ROUTED", Ts(100),
                                             false
                                         }
                                 };
@@ -178,13 +178,13 @@
             var legArgs = new[]
                               {
                                   // Cargo 5: Hongkong - Melbourne - Stockholm - Helsinki
-                                  new object[] {1, 5, 1, 3, 2, ts(1), ts(2), 0},
-                                  new object[] {2, 5, 1, 2, 1, ts(3), ts(4), 1},
-                                  new object[] {3, 5, 1, 1, 5, ts(4), ts(5), 2},
+                                  new object[] {1, 5, 1, 3, 2, Ts(1), Ts(2), 0},
+                                  new object[] {2, 5, 1, 2, 1, Ts(3), Ts(4), 1},
+                                  new object[] {3, 5, 1, 1, 5, Ts(4), Ts(5), 2},
                                   // Cargo 6: Hamburg - Stockholm - Chicago - Tokyo
-                                  new object[] {4, 6, 2, 6, 1, ts(1), ts(2), 0},
-                                  new object[] {5, 6, 2, 1, 7, ts(3), ts(4), 1},
-                                  new object[] {6, 6, 2, 7, 4, ts(5), ts(6), 2}
+                                  new object[] {4, 6, 2, 6, 1, Ts(1), Ts(2), 0},
+                                  new object[] {5, 6, 2, 1, 7, Ts(3), Ts(4), 1},
+                                  new object[] {6, 6, 2, 7, 4, Ts(5), Ts(6), 2}
                               };
             ExecuteUpdate(session, legSql, legArgs);
         }
@@ -210,8 +210,8 @@
             session.Save(SampleVoyages.DALLAS_TO_HELSINKI_ALT);
 
             var routeSpecification = new RouteSpecification(SampleLocations.HONGKONG,
-                                                                           SampleLocations.HELSINKI,
-                                                                           DateTestUtil.toDate("2009-03-15"));
+                                                            SampleLocations.HELSINKI,
+                                                            DateTestUtil.toDate("2009-03-15"));
             var trackingId = new TrackingId("ABC123");
             var abc123 = new Cargo(trackingId, routeSpecification);
 
@@ -319,9 +319,9 @@
         }
 
 
-        private static DateTime ts(int hours)
+        private static DateTime Ts(int hours)
         {
-            return baseTime.AddHours(hours);                
+            return baseTime.AddHours(hours);
         }
 
         public static void LoadSampleData()
@@ -366,7 +366,7 @@
 
         public static DateTime Offset(int hours)
         {
-            return ts(hours);
+            return Ts(hours);
         }
     }
 }

@@ -2,7 +2,6 @@ namespace NDDDSample.Domain.Model.Cargos
 {
     #region Usings
 
-    using System;
     using Handlings;
     using JavaRelated;
     using Locations;
@@ -39,12 +38,14 @@ namespace NDDDSample.Domain.Model.Cargos
     /// </summary>
     public class Cargo : IEntity<Cargo>
     {
-        private Location origin;
-        private TrackingId trackingId;
+        private readonly Location origin;
+        private readonly TrackingId trackingId;
         private Delivery delivery;
         private int id;
         private Itinerary itinerary;
         private RouteSpecification routeSpecification;
+
+        #region Constr
 
         protected Cargo()
         {
@@ -65,7 +66,8 @@ namespace NDDDSample.Domain.Model.Cargos
             delivery = Delivery.DerivedFrom(this.routeSpecification, itinerary, HandlingHistory.EMPTY);
         }
 
-       
+        #endregion
+
         #region IEntity<Cargo> Members
 
         /// <summary>

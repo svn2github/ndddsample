@@ -23,16 +23,16 @@
         //TODO: atrosin revise ETA_UNKOWN = null
         public static readonly DateTime ETA_UNKOWN = DateTime.MinValue;
         private static HandlingActivity NO_ACTIVITY;
-        private DateTime calculatedAt;
-        private Voyage currentVoyage;
-        private DateTime eta;
-        private bool isUnloadedAtDestination;
-        private HandlingEvent lastEvent;
-        private Location lastKnownLocation;
-        private bool misdirected;
-        private HandlingActivity nextExpectedActivity;
-        private RoutingStatus routingStatus;
-        private TransportStatus transportStatus;
+        private readonly DateTime calculatedAt;
+        private readonly Voyage currentVoyage;
+        private readonly DateTime eta;
+        private readonly bool isUnloadedAtDestination;
+        private readonly HandlingEvent lastEvent;
+        private readonly Location lastKnownLocation;
+        private readonly bool misdirected;
+        private readonly HandlingActivity nextExpectedActivity;
+        private readonly RoutingStatus routingStatus;
+        private readonly TransportStatus transportStatus;
 
         #endregion
 
@@ -200,7 +200,7 @@
             get
             {
                 if (eta != ETA_UNKOWN)
-                {                 
+                {
                     return eta;
                 }
 
@@ -238,10 +238,7 @@
         /// </summary>
         public DateTime CalculatedAt
         {
-            get
-            {              
-                return calculatedAt;
-            }
+            get { return calculatedAt; }
         }
 
         #endregion

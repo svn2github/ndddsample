@@ -24,7 +24,7 @@
         private readonly DateTime arrivalTime;
         private readonly Location departureLocation;
         private readonly DateTime departureTime;
-        protected int id;
+        private int id;
 
         #endregion
 
@@ -129,10 +129,7 @@
         /// </summary>
         public virtual DateTime DepartureTime
         {
-            get
-            {              
-                return departureTime;
-            }
+            get { return departureTime; }
         }
 
         /// <summary>
@@ -140,10 +137,7 @@
         /// </summary>
         public virtual DateTime ArrivalTime
         {
-            get
-            {               
-                return arrivalTime;
-            }
+            get { return arrivalTime; }
         }
 
         #endregion

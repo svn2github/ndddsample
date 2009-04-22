@@ -2,7 +2,6 @@
 {
     #region Usings
 
-    using System;
     using JavaRelated;
     using Shared;
 
@@ -17,9 +16,9 @@
     public class Location : IEntity<Location>
     {
         public static readonly Location UNKNOWN = new Location(new UnLocode("XXXXX"), "Unknown location");
-        private string name;
-        private UnLocode unLocode;
-        protected int id;
+        private readonly string name;
+        private readonly UnLocode unLocode;
+        private int id;
 
         #region Constr
 
@@ -103,7 +102,7 @@
         /// </summary>
         public virtual UnLocode UnLocode
         {
-            get { return unLocode; }            
+            get { return unLocode; }
         }
 
         /// <summary>

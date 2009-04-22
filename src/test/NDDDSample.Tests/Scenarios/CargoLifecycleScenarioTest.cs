@@ -20,7 +20,7 @@
 
     [TestFixture]
     public class CargoLifecycleScenarioTest
-    {       
+    {
         #region Setup/Teardown
 
         [SetUp]
@@ -56,6 +56,7 @@
         /// which in this test is stubbed out by in-memory replacements.
         /// </summary>
         private IHandlingEventRepository handlingEventRepository;
+
         private ICargoRepository cargoRepository;
         private ILocationRepository locationRepository;
         private IVoyageRepository voyageRepository;
@@ -76,6 +77,7 @@
         ///but wired with stubbed infrastructure.
         /// </summary>
         private IBookingService bookingService;
+
         private IHandlingEventService handlingEventService;
         private ICargoInspectionService cargoInspectionService;
 
@@ -137,7 +139,6 @@
 
             #endregion
 
-
             #endregion
         }
 
@@ -189,19 +190,19 @@
             Assert.AreEqual(new HandlingActivity(HandlingType.RECEIVE, SampleLocations.HONGKONG),
                             cargo.Delivery.NextExpectedActivity);
 
-          
-           //   Use case 3: handling
-     
-           //A handling event registration attempt will be formed from parsing
-           //the data coming in as a handling report either via
-           //the web service interface or as an uploaded CSV file.
-     
-           //The handling event factory tries to create a HandlingEvent from the attempt,
-           //and if the factory decides that this is a plausible handling event, it is stored.
-           //If the attempt is invalid, for example if no cargo exists for the specfied tracking id,
-           //the attempt is rejected.
-     
-           //Handling begins: cargo is received in Hongkong.     
+
+            //   Use case 3: handling
+
+            //A handling event registration attempt will be formed from parsing
+            //the data coming in as a handling report either via
+            //the web service interface or as an uploaded CSV file.
+
+            //The handling event factory tries to create a HandlingEvent from the attempt,
+            //and if the factory decides that this is a plausible handling event, it is stored.
+            //If the attempt is invalid, for example if no cargo exists for the specfied tracking id,
+            //the attempt is rejected.
+
+            //Handling begins: cargo is received in Hongkong.     
             handlingEventService.registerHandlingEvent(
                 DateTestUtil.toDate("2009-03-01"), trackingId, null, SampleLocations.HONGKONG.UnLocode,
                 HandlingType.RECEIVE);
@@ -222,12 +223,12 @@
             Assert.AreEqual(
                 new HandlingActivity(HandlingType.UNLOAD, SampleLocations.NEWYORK, SampleVoyages.v100),
                 cargo.Delivery.NextExpectedActivity);
-           
-           //Here's an attempt to register a handling event that's not valid
-           //because there is no voyage with the specified voyage number,
-           //and there's no location with the specified UN Locode either.
-     
-           //This attempt will be rejected and will not affect the cargo delivery in any way.
+
+            //Here's an attempt to register a handling event that's not valid
+            //because there is no voyage with the specified voyage number,
+            //and there's no location with the specified UN Locode either.
+
+            //This attempt will be rejected and will not affect the cargo delivery in any way.
             VoyageNumber noSuchVoyageNumber = new VoyageNumber("XX000");
             UnLocode noSuchUnLocode = new UnLocode("ZZZZZ");
             try

@@ -14,7 +14,7 @@
     public class Schedule : IValueObject<Schedule>
     {
         public static readonly Schedule EMPTY = new Schedule();
-        private IList<CarrierMovement> carrierMovements = new List<CarrierMovement>();
+        private readonly IList<CarrierMovement> carrierMovements = new List<CarrierMovement>();
 
         #region Constr
 

@@ -56,14 +56,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CargoRepositoryHibernate.cs" />
-    <Compile Include="EnumerationTypeConverter.cs" />
+    <Compile Include="TypeConverters\EnumerationTypeConverter.cs" />
     <Compile Include="HandlingEventRepositoryHibernate.cs" />
     <Compile Include="HibernateRepository.cs" />
     <Compile Include="LocationRepositoryHibernate.cs" />
-    <Compile Include="HandlingTypeConverter.cs" />
+    <Compile Include="TypeConverters\HandlingTypeConverter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RoutingStatusConverter.cs" />
-    <Compile Include="TransportStatusConverter.cs" />
+    <Compile Include="TypeConverters\RoutingStatusConverter.cs" />
+    <Compile Include="TypeConverters\TransportStatusConverter.cs" />
     <Compile Include="VoyageRepositoryHibernate.cs" />
   </ItemGroup>
   <ItemGroup>

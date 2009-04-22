@@ -12,7 +12,7 @@ namespace NDDDSample.Domain.Model.Cargos
     /// </summary>
     public class TrackingId : IValueObject<TrackingId>
     {
-        private string id;
+        private readonly string id;
 
         #region Constr
 

@@ -9,7 +9,7 @@
 
     #endregion
 
-    [TestFixture]    
+    [TestFixture]
     public class LocationRepositoryTest : BaseRepositoryTest
     {
         private ILocationRepository locationRepository;
@@ -20,7 +20,7 @@
             base.SetUp();
             locationRepository = new LocationRepositoryHibernate();
         }
-		
+
 
         [Test]
         public void Find()

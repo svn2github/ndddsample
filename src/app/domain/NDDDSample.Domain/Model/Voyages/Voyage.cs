@@ -17,9 +17,9 @@
     {
         // Null object pattern
         public static readonly Voyage NONE = new Voyage(new VoyageNumber(""), Schedule.EMPTY);
-        private Schedule schedule;
-        private VoyageNumber voyageNumber;
-        protected int id;
+        private readonly Schedule schedule;
+        private readonly VoyageNumber voyageNumber;
+        private int id;
 
         #region Nested Voyage Builder 
 
@@ -28,7 +28,7 @@
         ///  of a Voyage aggregate. This serves as an aggregate factory.        
         /// </summary>
         public class Builder
-        {          
+        {
             private readonly IList<CarrierMovement> carrierMovements = new List<CarrierMovement>();
             private readonly VoyageNumber voyageNumber;
             private Location departureLocation;

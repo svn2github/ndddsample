@@ -1,4 +1,4 @@
-﻿namespace NDDDSample.Persistence.NHibernate
+﻿namespace NDDDSample.Persistence.NHibernate.TypeConverters
 {
     #region Usings
 

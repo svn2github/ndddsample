@@ -1,18 +1,19 @@
 ﻿#region Usings
 
-using ISession=NHibernate.ISession;
-using ISessionFactory=NHibernate.ISessionFactory;
+
 
 #endregion
 
 namespace NDDDSample.Persistence.NHibernate
 {
+    #region Usings
+
     using Rhino.Commons;
+
+    #endregion
 
     /// <summary>
     /// Functionality common to all Hibernate repositories.
     /// </summary>
-    public abstract class HibernateRepository <T>: NHRepository<T>
-    {        
-    }
+    public abstract class HibernateRepository<T> : NHRepository<T> {}
 }

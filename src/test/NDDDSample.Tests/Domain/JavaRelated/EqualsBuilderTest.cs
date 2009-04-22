@@ -295,7 +295,7 @@ namespace NDDDSample.Tests.Domain.JavaRelated
             Assert.IsTrue(new EqualsBuilder().Append(float.PositiveInfinity, float.PositiveInfinity).IsEquals());
         }
 
-       
+
         [Test]
         public void testBoolean()
         {
@@ -891,7 +891,7 @@ namespace NDDDSample.Tests.Domain.JavaRelated
             //in C# they are false
             Assert.IsFalse(Array.Equals(x, y));
             Assert.IsFalse(Array.Equals(y, x));
-            
+
             // real tests:
             Assert.IsTrue(x[0].Equals(x[0]));
             Assert.IsTrue(y[0].Equals(y[0]));

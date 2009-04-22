@@ -35,7 +35,7 @@
             Validate.IsTrue(!origin.SameIdentityAs(destination), "Origin and destination can't be the same: " + origin);
 
             this.origin = origin;
-            this.destination = destination;           
+            this.destination = destination;
             this.arrivalDeadline = arrivalDeadline;
         }
 
@@ -108,10 +108,7 @@
 
         public DateTime ArrivalDeadline
         {
-            get
-            {              
-                return arrivalDeadline;
-            }
+            get { return arrivalDeadline; }
         }
 
         #endregion

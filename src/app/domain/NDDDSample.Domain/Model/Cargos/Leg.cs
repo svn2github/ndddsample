@@ -20,7 +20,7 @@
         private readonly Location unloadLocation;
         private readonly DateTime unloadTime;
         private readonly Voyage voyage;
-        protected int id;
+        private int id;
 
         #region Constr
 
@@ -117,10 +117,7 @@
 
         public virtual DateTime UnloadTime
         {
-            get
-            {              
-                return unloadTime;
-            }
+            get { return unloadTime; }
         }
 
         #endregion

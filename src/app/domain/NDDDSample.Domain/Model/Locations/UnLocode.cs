@@ -17,7 +17,7 @@
         // Country code is exactly two letters.
         // Location code is usually three letters, but may contain the numbers 2-9 as well
         private static readonly Regex VALID_PATTERN = new Regex("[a-zA-Z]{2}[a-zA-Z2-9]{3}", RegexOptions.Compiled);
-        private string unlocode;
+        private readonly string unlocode;
 
         #region Constr
 

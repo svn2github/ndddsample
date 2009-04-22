@@ -15,7 +15,7 @@
 
         public Voyage Find(VoyageNumber voyageNumber)
         {
-            return (Voyage)Session.CreateQuery("from Voyage as v where v.voyageNumber.number = :vn").
+            return (Voyage) Session.CreateQuery("from Voyage as v where v.voyageNumber.number = :vn").
                                 SetParameter("vn", voyageNumber.IdString).
                                 UniqueResult();
         }

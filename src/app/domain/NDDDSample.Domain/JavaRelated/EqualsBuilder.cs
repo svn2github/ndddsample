@@ -23,7 +23,6 @@ namespace NDDDSample.Domain.JavaRelated
     #region Usings
 
     using System;
-    using System.Collections;
     using System.Reflection;
 
     #endregion
@@ -263,39 +262,39 @@ namespace NDDDSample.Domain.JavaRelated
                 // This handles multi dimensional arrays
                 if (lhs is long[])
                 {
-                    Append((long[])lhs, rhs as long[]);
+                    Append((long[]) lhs, rhs as long[]);
                 }
                 else if (lhs is int[])
                 {
-                    Append((int[])lhs, rhs as int[]);
+                    Append((int[]) lhs, rhs as int[]);
                 }
                 else if (lhs is short[])
                 {
-                    Append((short[])lhs, rhs as short[]);
+                    Append((short[]) lhs, rhs as short[]);
                 }
                 else if (lhs is char[])
                 {
-                    Append((char[])lhs, rhs as char[]);
+                    Append((char[]) lhs, rhs as char[]);
                 }
                 else if (lhs is byte[])
                 {
-                    Append((byte[])lhs, rhs as byte[]);
+                    Append((byte[]) lhs, rhs as byte[]);
                 }
                 else if (lhs is double[])
                 {
-                    Append((double[])lhs, rhs as double[]);
+                    Append((double[]) lhs, rhs as double[]);
                 }
                 else if (lhs is float[])
                 {
-                    Append((float[])lhs, rhs as float[]);
+                    Append((float[]) lhs, rhs as float[]);
                 }
                 else if (lhs is bool[])
                 {
-                    Append((bool[])lhs, rhs as bool[]);
+                    Append((bool[]) lhs, rhs as bool[]);
                 }
                 else if (lhs is object[])
                 {
-                    Append((object[])lhs, rhs as object[]);
+                    Append((object[]) lhs, rhs as object[]);
                 }
                 {
                     // Not an simple array of primitives
@@ -317,8 +316,8 @@ namespace NDDDSample.Domain.JavaRelated
                 return;
             }
 
-            Array array1 = (Array)lhs;
-            Array array2 = (Array)lhs;
+            Array array1 = (Array) lhs;
+            Array array2 = (Array) lhs;
 
             if (array1.Rank != array2.Rank)
             {
@@ -348,8 +347,8 @@ namespace NDDDSample.Domain.JavaRelated
                 return;
             }
 
-            Array array1 = (Array)parray1;
-            Array array2 = (Array)parray2;
+            Array array1 = (Array) parray1;
+            Array array2 = (Array) parray2;
             int rank1 = array1.Rank;
             int rank2 = array2.Rank;
 
@@ -459,7 +458,6 @@ namespace NDDDSample.Domain.JavaRelated
         /// <param name="lhs">the left hand long</param>
         /// <param name="rhs">the right hand long</param>
         /// <returns>EqualsBuilder - used to chain calls.</returns>
-
         public EqualsBuilder Append(long lhs, long rhs)
         {
             if (isEqual == false)

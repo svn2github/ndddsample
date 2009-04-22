@@ -43,7 +43,7 @@
         }
 
         public DateTime getCompletionTime()
-        {           
+        {
             return completionTime;
         }
 

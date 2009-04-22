@@ -32,7 +32,9 @@
         [Test]
         public void CanLogType()
         {
-            Assert.IsTrue(ToStringBuilder.ReflectionToString(new TestSubObject(100, 999)).Contains(typeof(TestSubObject).ToString())); 
+            Assert.IsTrue(
+                ToStringBuilder.ReflectionToString(new TestSubObject(100, 999)).Contains(
+                    typeof (TestSubObject).ToString()));
         }
 
         #region Test Classes
@@ -40,12 +42,12 @@
         public class TestObject
         {
             protected int a;
-            public TestObject() { }
+            public TestObject() {}
 
             public TestObject(int a)
             {
                 this.a = a;
-            }          
+            }
 
             public void setA(int a)
             {
@@ -63,7 +65,7 @@
             private int b;
 
             public TestSubObject()
-                : base(0) { }
+                : base(0) {}
 
             public TestSubObject(int a, int b)
                 : base(a)
@@ -81,7 +83,7 @@
                 {
                     return false;
                 }
-                TestSubObject rhs = (TestSubObject)o;
+                TestSubObject rhs = (TestSubObject) o;
                 return base.Equals(o) && (b == rhs.b);
             }
 
@@ -95,6 +97,7 @@
                 return b;
             }
         }
+
         #endregion
-    }    
+    }
 }

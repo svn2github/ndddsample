@@ -16,15 +16,15 @@
     {
         #region Private Props
 
-        private Cargo cargo;
-        private DateTime completionTime;
-        private Location location;
-        private DateTime registrationTime;
-        private HandlingType type;
-        private Voyage voyage;
+        private readonly Cargo cargo;
+        private readonly DateTime completionTime;
+        private readonly Location location;
+        private readonly DateTime registrationTime;
+        private readonly HandlingType type;
+        private readonly Voyage voyage;
         private int id;
 
-        #endregion      
+        #endregion
 
         #region Constr
 
@@ -61,7 +61,7 @@
                 throw new ArgumentException("Voyage is not allowed with event eventType " + eventType);
             }
 
-            this.voyage = voyage;            
+            this.voyage = voyage;
             this.completionTime = completionTime;
             this.registrationTime = registrationTime;
             type = eventType;
@@ -85,7 +85,7 @@
             {
                 throw new ArgumentException("Voyage is required for event type " + type);
             }
-           
+
             this.completionTime = completionTime;
             this.registrationTime = registrationTime;
             this.type = type;
@@ -125,18 +125,12 @@
 
         public virtual DateTime CompletionTime
         {
-            get
-            {             
-                return completionTime;
-            }
+            get { return completionTime; }
         }
 
         public virtual DateTime RegistrationTime
         {
-            get
-            {               
-                return registrationTime;
-            }
+            get { return registrationTime; }
         }
 
         public virtual Location Location

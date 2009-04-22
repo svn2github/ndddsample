@@ -12,6 +12,6 @@
     <property name="completionTime" column="completionTime" not-null="true"/>
     <property name="registrationTime" column="registrationTime" not-null="true"/>    
     <property name="type" column="type"
-                 type="NDDDSample.Persistence.NHibernate.HandlingTypeConverter, NDDDSample.Persistence.NHibernate"/>
+                 type="NDDDSample.Persistence.NHibernate.TypeConverters.HandlingTypeConverter, NDDDSample.Persistence.NHibernate"/>
   </class>
 </hibernate-mapping>

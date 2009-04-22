@@ -18,9 +18,9 @@
     public class HandlingActivity : IValueObject<HandlingActivity>
     {
         // TODO make HandlingActivity a part of HandlingEvent too? There is some overlap. 
-        private Location location;
-        private HandlingType type;
-        private Voyage voyage;
+        private readonly Location location;
+        private readonly HandlingType type;
+        private readonly Voyage voyage;
 
         #region Constr
 

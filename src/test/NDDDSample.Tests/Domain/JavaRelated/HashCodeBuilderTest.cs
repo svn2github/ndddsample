@@ -1,4 +1,5 @@
 ﻿#region The Apache Software License
+
 /*
  *  Copyright 2001-2004 The Apache Software Foundation
  *
@@ -14,6 +15,7 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
+
 #endregion
 
 namespace NDDDSample.Tests.Domain.JavaRelated
@@ -41,7 +43,7 @@ namespace NDDDSample.Tests.Domain.JavaRelated
                 return;
             }
 
-             Assert.Fail();
+            Assert.Fail();
         }
 
         [Test]
@@ -56,7 +58,7 @@ namespace NDDDSample.Tests.Domain.JavaRelated
                 return;
             }
 
-             Assert.Fail();
+            Assert.Fail();
         }
 
 
@@ -73,9 +75,9 @@ namespace NDDDSample.Tests.Domain.JavaRelated
             Assert.AreEqual(17 * 37 * 37, HashCodeBuilder.ReflectionHashCode(new TestSubObject(0, 0, 0)));
             Assert.AreEqual(17 * 37 * 37 * 37, HashCodeBuilder.ReflectionHashCode(new TestSubObject(0, 0, 0), true));
             Assert.AreEqual((17 * 37 + 7890) * 37 + 123456,
-                          HashCodeBuilder.ReflectionHashCode(new TestSubObject(123456, 7890, 0)));
+                            HashCodeBuilder.ReflectionHashCode(new TestSubObject(123456, 7890, 0)));
             Assert.AreEqual(((17 * 37 + 7890) * 37 + 0) * 37 + 123456,
-                          HashCodeBuilder.ReflectionHashCode(new TestSubObject(123456, 7890, 0), true));
+                            HashCodeBuilder.ReflectionHashCode(new TestSubObject(123456, 7890, 0), true));
         }
 
         [Test]
@@ -89,7 +91,7 @@ namespace NDDDSample.Tests.Domain.JavaRelated
             {
                 return;
             }
-             Assert.Fail();
+            Assert.Fail();
         }
 
         [Test]
@@ -103,7 +105,7 @@ namespace NDDDSample.Tests.Domain.JavaRelated
             {
                 return;
             }
-             Assert.Fail();
+            Assert.Fail();
         }
 
         [Test]
@@ -117,7 +119,7 @@ namespace NDDDSample.Tests.Domain.JavaRelated
             {
                 return;
             }
-             Assert.Fail();
+            Assert.Fail();
         }
 
         [Test]
@@ -131,7 +133,7 @@ namespace NDDDSample.Tests.Domain.JavaRelated
             {
                 return;
             }
-             Assert.Fail();
+            Assert.Fail();
         }
 
         [Test]
@@ -145,7 +147,7 @@ namespace NDDDSample.Tests.Domain.JavaRelated
             {
                 return;
             }
-             Assert.Fail();
+            Assert.Fail();
         }
 
         [Test]
@@ -153,9 +155,9 @@ namespace NDDDSample.Tests.Domain.JavaRelated
         {
             var obj = new object();
             Assert.AreEqual(17 * 37 + (19 * 41 + obj.GetHashCode()), new HashCodeBuilder(17, 37).AppendSuper(
-                                                                       new HashCodeBuilder(19, 41).Append(obj).
-                                                                           ToHashCode()
-                                                                       ).ToHashCode());
+                                                                         new HashCodeBuilder(19, 41).Append(obj).
+                                                                             ToHashCode()
+                                                                         ).ToHashCode());
         }
 
         [Test]
@@ -172,7 +174,7 @@ namespace NDDDSample.Tests.Domain.JavaRelated
         {
             Assert.AreEqual(17 * 37, new HashCodeBuilder(17, 37).Append((long) 0L).ToHashCode());
             Assert.AreEqual(17 * 37 + (int) (123456789L ^ (123456789L >> 32)),
-                          new HashCodeBuilder(17, 37).Append((long) 123456789L).ToHashCode());
+                            new HashCodeBuilder(17, 37).Append((long) 123456789L).ToHashCode());
         }
 
         [Test]
@@ -238,7 +240,7 @@ namespace NDDDSample.Tests.Domain.JavaRelated
             Assert.AreEqual((17 * 37 + obj[0].GetHashCode()) * 37, new HashCodeBuilder(17, 37).Append(obj).ToHashCode());
             obj[1] = new object();
             Assert.AreEqual((17 * 37 + obj[0].GetHashCode()) * 37 + obj[1].GetHashCode(),
-                          new HashCodeBuilder(17, 37).Append(obj).ToHashCode());
+                            new HashCodeBuilder(17, 37).Append(obj).ToHashCode());
         }
 
         [Test]
@@ -248,10 +250,10 @@ namespace NDDDSample.Tests.Domain.JavaRelated
             Assert.AreEqual((17 * 37) * 37, new HashCodeBuilder(17, 37).Append((object) obj).ToHashCode());
             obj[0] = new object();
             Assert.AreEqual((17 * 37 + obj[0].GetHashCode()) * 37,
-                          new HashCodeBuilder(17, 37).Append((object) obj).ToHashCode());
+                            new HashCodeBuilder(17, 37).Append((object) obj).ToHashCode());
             obj[1] = new object();
             Assert.AreEqual((17 * 37 + obj[0].GetHashCode()) * 37 + obj[1].GetHashCode(),
-                          new HashCodeBuilder(17, 37).Append((object) obj).ToHashCode());
+                            new HashCodeBuilder(17, 37).Append((object) obj).ToHashCode());
         }
 
         [Test]
@@ -473,7 +475,6 @@ namespace NDDDSample.Tests.Domain.JavaRelated
     }
 
     #region Test Related Classes 
-
 
     public class TestObject
     {
