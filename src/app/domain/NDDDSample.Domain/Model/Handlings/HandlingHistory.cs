@@ -14,7 +14,7 @@
     public class HandlingHistory : IValueObject<HandlingHistory>
     {
         public static readonly HandlingHistory EMPTY = new HandlingHistory(new List<HandlingEvent>());
-        private readonly List<HandlingEvent> handlingEvents;
+        private IList<HandlingEvent> handlingEvents;
 
         #region Constr
 

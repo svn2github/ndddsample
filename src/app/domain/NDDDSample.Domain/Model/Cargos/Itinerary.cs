@@ -18,7 +18,7 @@
     {
         internal static readonly Itinerary EMPTY_ITINERARY = new Itinerary();
         private static readonly DateTime END_OF_DAYS = DateTime.MaxValue;
-        private readonly List<Leg> legs = new List<Leg>();
+        private readonly IList<Leg> legs = new List<Leg>();
         private long id;
 
         #region Constr
@@ -31,7 +31,7 @@
             this.legs = new List<Leg>(legs);
         }
 
-        private Itinerary()
+        protected Itinerary()
         {
             // Needed by Hibernate
         }

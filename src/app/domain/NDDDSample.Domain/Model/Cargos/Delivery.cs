@@ -60,7 +60,7 @@
             isUnloadedAtDestination = CalculateUnloadedAtDestination(routeSpecification);
         }
 
-        private Delivery()
+        protected Delivery()
         {
             // Needed by Hibernate
         }

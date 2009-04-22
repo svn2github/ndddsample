@@ -321,7 +321,7 @@
 
         private static DateTime ts(int hours)
         {
-            return new DateTime(baseTime.Ticks + 1000L * 60 * 60 * hours);
+            return baseTime.AddHours(hours);                
         }
 
         public static void LoadSampleData()
@@ -362,6 +362,11 @@
 
                 query.ExecuteUpdate();
             }
+        }
+
+        public static DateTime Offset(int hours)
+        {
+            return ts(hours);
         }
     }
 }

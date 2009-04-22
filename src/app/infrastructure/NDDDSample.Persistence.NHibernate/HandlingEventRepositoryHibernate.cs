@@ -23,8 +23,8 @@
         public HandlingHistory LookupHandlingHistoryOfCargo(TrackingId trackingId)
         {
             return new HandlingHistory(Session.CreateQuery(
-                                           "from HandlingEvent where cargo.trackingId = :tid").
-                                           SetParameter("tid", trackingId).
+                                           "from HandlingEvent as h where h.cargo.trackingId.id = :tid").
+                                           SetParameter("tid", trackingId.IdString).
                                            List<HandlingEvent>());
         }
 

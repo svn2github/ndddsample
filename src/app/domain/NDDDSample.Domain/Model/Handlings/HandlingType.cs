@@ -21,11 +21,6 @@ namespace NDDDSample.Domain.Model.Handlings
         private readonly bool voyageRequired;
 
         /// <summary>
-        /// Required by reflection constructor
-        /// </summary>
-        private HandlingType() {}
-
-        /// <summary>
         /// Private enum constructor        
         /// </summary>
         /// <param name="name">Enum string name</param>

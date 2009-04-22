@@ -62,7 +62,7 @@
             {
                 return false;
             }
-            if (!(obj.GetType().IsInstanceOfType(typeof (VoyageNumber))))
+            if (!( obj is VoyageNumber))
             {
                 return false;
             }

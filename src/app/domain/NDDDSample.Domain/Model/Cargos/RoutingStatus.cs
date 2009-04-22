@@ -13,13 +13,7 @@
     {
         public static readonly RoutingStatus MISROUTED = new RoutingStatus("MISROUTED");
         public static readonly RoutingStatus NOT_ROUTED = new RoutingStatus("NOT_ROUTED");
-        public static readonly RoutingStatus ROUTED = new RoutingStatus("ROUTED");
-
-        /// <summary>
-        /// Required by reflection constructor
-        /// </summary>
-        private RoutingStatus() {}
-
+        public static readonly RoutingStatus ROUTED = new RoutingStatus("ROUTED");    
 
         /// <summary>
         /// Constructor

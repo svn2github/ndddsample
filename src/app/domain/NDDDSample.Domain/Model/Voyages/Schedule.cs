@@ -14,7 +14,7 @@
     public class Schedule : IValueObject<Schedule>
     {
         public static readonly Schedule EMPTY = new Schedule();
-        private List<CarrierMovement> carrierMovements = new List<CarrierMovement>();
+        private IList<CarrierMovement> carrierMovements = new List<CarrierMovement>();
 
         #region Constr
 
@@ -27,7 +27,7 @@
             this.carrierMovements = new List<CarrierMovement>(carrierMovements);
         }
 
-        private Schedule()
+        protected Schedule()
         {
             // Needed by Hibernate
         }

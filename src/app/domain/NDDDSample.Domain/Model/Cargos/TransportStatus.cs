@@ -18,12 +18,6 @@
         public static readonly TransportStatus UNKNOWN = new TransportStatus("UNKNOWN");
 
         /// <summary>
-        /// Required by reflection constructor
-        /// </summary>
-        private TransportStatus() {}
-
-
-        /// <summary>
         /// Constructor
         /// </summary>
         /// <param name="name">Enum string name</param>

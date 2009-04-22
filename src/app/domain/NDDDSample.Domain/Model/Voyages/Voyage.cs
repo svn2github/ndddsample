@@ -17,8 +17,8 @@
     {
         // Null object pattern
         public static readonly Voyage NONE = new Voyage(new VoyageNumber(""), Schedule.EMPTY);
-        private readonly Schedule schedule;
-        private readonly VoyageNumber voyageNumber;
+        private Schedule schedule;
+        private VoyageNumber voyageNumber;
         protected int id;
 
         #region Nested Voyage Builder 
@@ -28,8 +28,8 @@
         ///  of a Voyage aggregate. This serves as an aggregate factory.        
         /// </summary>
         public class Builder
-        {
-            private readonly List<CarrierMovement> carrierMovements = new List<CarrierMovement>();
+        {          
+            private readonly IList<CarrierMovement> carrierMovements = new List<CarrierMovement>();
             private readonly VoyageNumber voyageNumber;
             private Location departureLocation;
 
@@ -123,7 +123,7 @@
             {
                 return false;
             }
-            if (!(obj.GetType().IsInstanceOfType(typeof (Voyage))))
+            if (!(obj is Voyage))
             {
                 return false;
             }

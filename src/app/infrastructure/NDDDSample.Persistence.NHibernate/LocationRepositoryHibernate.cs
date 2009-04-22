@@ -15,7 +15,7 @@
         {
             return (Location) Session.
                                   CreateQuery("from Location where unLocode = ?").
-                                  SetParameter(0, unLocode).
+                                  SetParameter(0, unLocode.IdString).
                                   UniqueResult();
         }
 

@@ -17,8 +17,8 @@
     public class Location : IEntity<Location>
     {
         public static readonly Location UNKNOWN = new Location(new UnLocode("XXXXX"), "Unknown location");
-        private readonly string name;
-        private readonly UnLocode unLocode;
+        private string name;
+        private UnLocode unLocode;
         protected int id;
 
         #region Constr
@@ -53,7 +53,7 @@
         /// <returns>true if the given value object's and this value object's attributes are the same.</returns>
         public virtual bool SameIdentityAs(Location other)
         {
-            return unLocode.SameValueAs(other.unLocode);
+            return unLocode.SameValueAs(other.UnLocode);
         }
 
         #endregion
@@ -75,7 +75,7 @@
             {
                 return true;
             }
-            if (!(obj.GetType().IsInstanceOfType(typeof (Location))))
+            if (!(obj is Location))
             {
                 return false;
             }
@@ -103,7 +103,7 @@
         /// </summary>
         public virtual UnLocode UnLocode
         {
-            get { return unLocode; }
+            get { return unLocode; }            
         }
 
         /// <summary>

@@ -1,13 +1,21 @@
-﻿using System;
+﻿#region Usings
+
 using IUserType=NHibernate.UserTypes.IUserType;
 using NHibernateUtil=NHibernate.NHibernateUtil;
 using SqlType=NHibernate.SqlTypes.SqlType;
 using SqlTypeFactory=NHibernate.SqlTypes.SqlTypeFactory;
 
+#endregion
+
 namespace NDDDSample.Persistence.NHibernate
 {
+    #region Usings
+
+    using System;
     using System.Data;
     using Domain.Shared;
+
+    #endregion
 
     /// <summary>
     /// The class is used to map Enumeration derived classes to DB.
@@ -36,7 +44,12 @@ namespace NDDDSample.Persistence.NHibernate
 
         public object NullSafeGet(IDataReader rs, string[] names, object owner)
         {
-            var enumName = NHibernateUtil.String.NullSafeGet(rs, names) as string;           
+            var enumName = NHibernateUtil.String.NullSafeGet(rs, names) as string;
+
+            if (string.IsNullOrEmpty(enumName))
+            {
+                return null;
+            }
 
             object res = Enumeration.FromValue<T>(enumName);
             return res;
@@ -46,7 +59,14 @@ namespace NDDDSample.Persistence.NHibernate
         {
             var id = value as Enumeration;
 
-            NHibernateUtil.String.NullSafeSet(cmd, id.Value, index);
+            if (id == null)
+            {
+                NHibernateUtil.String.NullSafeSet(cmd, null, index);
+            }
+            else
+            {
+                NHibernateUtil.String.NullSafeSet(cmd, id.Value, index);
+            }
         }
 
         public object DeepCopy(object value)
@@ -71,12 +91,12 @@ namespace NDDDSample.Persistence.NHibernate
 
         public SqlType[] SqlTypes
         {
-            get { return new[] { SqlTypeFactory.GetString(25) }; }
+            get { return new[] {SqlTypeFactory.GetString(25)}; }
         }
 
         public Type ReturnedType
         {
-            get { return typeof(T); }
+            get { return typeof (T); }
         }
 
         public bool IsMutable

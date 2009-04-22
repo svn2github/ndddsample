@@ -39,7 +39,7 @@
             this.arrivalDeadline = arrivalDeadline;
         }
 
-        private RouteSpecification()
+        protected RouteSpecification()
         {
             // Needed by Hibernate
         }

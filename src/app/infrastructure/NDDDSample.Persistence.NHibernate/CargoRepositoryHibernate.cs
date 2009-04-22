@@ -18,8 +18,8 @@
         public Cargo Find(TrackingId tid)
         {
             return (Cargo)Session.
-                               CreateQuery("from Cargo where trackingId = :tid").
-                               SetParameter("tid", tid).
+                               CreateQuery("from Cargo as c where c.trackingId.id = :tid").
+                               SetParameter("tid", tid.IdString).
                                UniqueResult();
         }
 

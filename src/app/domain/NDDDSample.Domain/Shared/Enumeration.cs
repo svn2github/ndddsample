@@ -11,10 +11,8 @@
 
     public abstract class Enumeration : IComparable
     {
-        private readonly string displayName;
-        private readonly string value;
-
-        protected Enumeration() {}
+        private string displayName;
+        private string value;       
 
         protected Enumeration(string value)
         {
@@ -33,7 +31,7 @@
             get { return value; }
         }
 
-        public virtual string DisplayName
+        public string DisplayName
         {
             get { return displayName; }
         }
@@ -59,8 +57,8 @@
 
             foreach (var info in fields)
             {
-                var instance = Activator.CreateInstance(typeof(T));
-                var locatedValue = info.GetValue(instance) as T;
+                //var instance = Activator.CreateInstance(typeof(T));
+                var locatedValue = info.GetValue(null) as T;
 
                 if (locatedValue != null)
                 {
@@ -73,7 +71,7 @@
         {
             var otherValue = obj as Enumeration;
 
-            if (otherValue != null)
+            if (otherValue == null)
             {
                 return false;
             }

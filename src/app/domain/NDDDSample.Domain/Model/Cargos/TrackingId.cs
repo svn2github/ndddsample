@@ -12,7 +12,7 @@ namespace NDDDSample.Domain.Model.Cargos
     /// </summary>
     public class TrackingId : IValueObject<TrackingId>
     {
-        private readonly string id;
+        private string id;
 
         #region Constr
 
@@ -27,7 +27,7 @@ namespace NDDDSample.Domain.Model.Cargos
         }
 
 
-        private TrackingId()
+        protected TrackingId()
         {
             // Needed by Hibernate
         }

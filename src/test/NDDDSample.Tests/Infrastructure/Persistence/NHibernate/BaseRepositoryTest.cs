@@ -2,10 +2,12 @@
 {
     #region Usings
 
+    using System.Reflection;
     using Application.Utils;
     using NDDDSample.Domain.Model.Cargos;
     using NDDDSample.Persistence.NHibernate;
     using NUnit.Framework;
+    using Rhino.Commons;
     using Rhino.Commons.ForTesting;
 
     #endregion
@@ -17,7 +19,7 @@
         {
             MappingInfo from = MappingInfo.From(typeof (Cargo).Assembly, typeof (HibernateRepository<>).Assembly);
             IntializeNHibernateAndIoC(PersistenceFramwork, RhinoContainerConfig, DatabaseEngine.SQLite, from);
-           
+
             CurrentContext.CreateUnitOfWork();
             LoadData();
         }
@@ -38,11 +40,27 @@
             CurrentContext.DisposeUnitOfWork();
         }
 
-        protected static void LoadData()
+        private static void LoadData()
         {
             // TODO store Sample* and object instances here instead of handwritten SQL
-            SampleDataGenerator.LoadSampleData();          
+            SampleDataGenerator.LoadSampleData();
         }
 
+        protected static void Flush()
+        {
+            UnitOfWork.CurrentSession.Flush();
+        }
+
+        // Instead of exposing a getId() on persistent classes
+        protected static int GetIntId(object o)
+        {
+            if (UnitOfWork.CurrentSession.Contains(o))
+            {
+                return (int) UnitOfWork.CurrentSession.GetIdentifier(o);
+            }
+
+            FieldInfo id = o.GetType().GetField("id");
+            return (int) id.GetValue(o);
+        }
     }
 }

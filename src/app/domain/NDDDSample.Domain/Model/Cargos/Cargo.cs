@@ -39,8 +39,8 @@ namespace NDDDSample.Domain.Model.Cargos
     /// </summary>
     public class Cargo : IEntity<Cargo>
     {
-        private readonly Location origin;
-        private readonly TrackingId trackingId;
+        private Location origin;
+        private TrackingId trackingId;
         private Delivery delivery;
         private int id;
         private Itinerary itinerary;
