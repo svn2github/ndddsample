@@ -63,8 +63,9 @@
                     return new List<Itinerary>();
                 }
 
+                IList<Itinerary> routesForSpecification = routingService.FetchRoutesForSpecification(cargo.RouteSpecification);
                 transactionScope.Complete();
-                return routingService.FetchRoutesForSpecification(cargo.RouteSpecification);
+                return routesForSpecification;
             }
         }
 

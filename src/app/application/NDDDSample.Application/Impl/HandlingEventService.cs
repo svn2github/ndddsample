@@ -30,7 +30,7 @@
 
         #region IHandlingEventService Members
 
-        public void registerHandlingEvent(DateTime completionTime,
+        public void RegisterHandlingEvent(DateTime completionTime,
                                           TrackingId trackingId,
                                           VoyageNumber voyageNumber,
                                           UnLocode unLocode,
@@ -53,7 +53,7 @@
                 handlingEventRepository.Store(evnt);
 
                 /* Publish an event stating that a cargo has been handled. */
-                applicationEvents.cargoWasHandled(evnt);
+                applicationEvents.CargoWasHandled(evnt);
 
                 transactionScope.Complete();
             }

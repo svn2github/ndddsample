@@ -18,12 +18,12 @@
         /// </summary>
         /// <param name="date">Date string as yyyy-MM-dd</param>
         /// <returns>Date representation</returns>
-        public static DateTime toDate(string date)
+        public static DateTime ToDate(string date)
         {
-            return toDate(date, "00:00");
+            return ToDate(date, "00:00");
         }
 
-        public static DateTime toDate(string date, string time)
+        public static DateTime ToDate(string date, string time)
         {
             return DateTime.ParseExact(date + " " + time, "yyyy-MM-dd HH:mm", CultureInfo.InvariantCulture);
         }

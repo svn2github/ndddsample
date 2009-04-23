@@ -22,24 +22,24 @@
         /// A cargo has been handled.
         /// </summary>
         /// <param name="evnt">handling event</param>
-        void cargoWasHandled(HandlingEvent evnt);
+        void CargoWasHandled(HandlingEvent evnt);
 
         /// <summary>
         ///  A cargo has been misdirected.
         /// </summary>
         /// <param name="cargo">cargo</param>
-        void cargoWasMisdirected(Cargo cargo);
+        void CargoWasMisdirected(Cargo cargo);
 
         /// <summary>
         /// A cargo has arrived at its final destination.
         /// </summary>
         /// <param name="cargo">cargo</param>
-        void cargoHasArrived(Cargo cargo);
+        void CargoHasArrived(Cargo cargo);
 
         /// <summary>
         /// A handling event regitration attempt is received.
         /// </summary>
         /// <param name="attempt"> handling event registration attempt</param>
-        void receivedHandlingEventRegistrationAttempt(HandlingEventRegistrationAttempt attempt);
+        void ReceivedHandlingEventRegistrationAttempt(HandlingEventRegistrationAttempt attempt);
     }
 }

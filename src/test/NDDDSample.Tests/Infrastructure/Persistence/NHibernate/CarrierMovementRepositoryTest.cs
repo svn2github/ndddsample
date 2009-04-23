@@ -30,8 +30,8 @@
             //TODO adapt
             /*Assert.AreEqual(STOCKHOLM, carrierMovement.DepartureLocation);
              Assert.AreEqual(HELSINKI, carrierMovement.ArrivalLocation);
-             Assert.AreEqual(DateTestUtil.toDate("2007-09-23", "02:00"), carrierMovement.DepartureTime());
-             Assert.AreEqual(DateTestUtil.toDate("2007-09-23", "03:00"), carrierMovement.ArrivalTime());*/
+             Assert.AreEqual(DateTestUtil.ToDate("2007-09-23", "02:00"), carrierMovement.DepartureTime());
+             Assert.AreEqual(DateTestUtil.ToDate("2007-09-23", "03:00"), carrierMovement.ArrivalTime());*/
         }
     }
 }

@@ -26,7 +26,7 @@
         /// <param name="voyageNumber">voyage number</param>
         /// <param name="unLocode">UN locode for the location where the event occurred</param>
         /// <param name="type">type of event</param>
-        void registerHandlingEvent(DateTime completionTime,
+        void RegisterHandlingEvent(DateTime completionTime,
                                    TrackingId trackingId,
                                    VoyageNumber voyageNumber,
                                    UnLocode unLocode,

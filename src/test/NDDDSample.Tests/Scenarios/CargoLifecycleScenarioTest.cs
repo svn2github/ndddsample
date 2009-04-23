@@ -114,11 +114,11 @@
                     var nsLegs = new List<Leg>
                                      {
                                          new Leg(SampleVoyages.v100, SampleLocations.HONGKONG, SampleLocations.NEWYORK,
-                                                 DateTestUtil.toDate("2009-03-03"), DateTestUtil.toDate("2009-03-09")),
+                                                 DateTestUtil.ToDate("2009-03-03"), DateTestUtil.ToDate("2009-03-09")),
                                          new Leg(SampleVoyages.v200, SampleLocations.NEWYORK, SampleLocations.CHICAGO,
-                                                 DateTestUtil.toDate("2009-03-10"), DateTestUtil.toDate("2009-03-14")),
+                                                 DateTestUtil.ToDate("2009-03-10"), DateTestUtil.ToDate("2009-03-14")),
                                          new Leg(SampleVoyages.v200, SampleLocations.CHICAGO, SampleLocations.STOCKHOLM,
-                                                 DateTestUtil.toDate("2009-03-07"), DateTestUtil.toDate("2009-03-11"))
+                                                 DateTestUtil.ToDate("2009-03-07"), DateTestUtil.ToDate("2009-03-11"))
                                      };
                     // Hongkong - NYC - Chicago - Stockholm, initial routing
                     return new List<Itinerary> {new Itinerary(nsLegs)};
@@ -128,9 +128,9 @@
                     var tsLegs = new List<Leg>
                                      {
                                          new Leg(SampleVoyages.v300, SampleLocations.TOKYO, SampleLocations.HAMBURG,
-                                                 DateTestUtil.toDate("2009-03-08"), DateTestUtil.toDate("2009-03-12")),
+                                                 DateTestUtil.ToDate("2009-03-08"), DateTestUtil.ToDate("2009-03-12")),
                                          new Leg(SampleVoyages.v400, SampleLocations.HAMBURG, SampleLocations.STOCKHOLM,
-                                                 DateTestUtil.toDate("2009-03-14"), DateTestUtil.toDate("2009-03-15"))
+                                                 DateTestUtil.ToDate("2009-03-14"), DateTestUtil.ToDate("2009-03-15"))
                                      };
                     // Tokyo - Hamburg - Stockholm, rerouting misdirected cargo from Tokyo 
                     return new List<Itinerary> {new Itinerary(tsLegs)};
@@ -149,7 +149,7 @@
             //and it should arrive in no more than two weeks. 
             Location origin = SampleLocations.HONGKONG;
             Location destination = SampleLocations.STOCKHOLM;
-            DateTime arrivalDeadline = DateTestUtil.toDate("2009-03-18");
+            DateTime arrivalDeadline = DateTestUtil.ToDate("2009-03-18");
 
 
             //  Use case 1: booking 
@@ -203,16 +203,16 @@
             //the attempt is rejected.
 
             //Handling begins: cargo is received in Hongkong.     
-            handlingEventService.registerHandlingEvent(
-                DateTestUtil.toDate("2009-03-01"), trackingId, null, SampleLocations.HONGKONG.UnLocode,
+            handlingEventService.RegisterHandlingEvent(
+                DateTestUtil.ToDate("2009-03-01"), trackingId, null, SampleLocations.HONGKONG.UnLocode,
                 HandlingType.RECEIVE);
 
             Assert.AreEqual(TransportStatus.IN_PORT, cargo.Delivery.TransportStatus);
             Assert.AreEqual(SampleLocations.HONGKONG, cargo.Delivery.LastKnownLocation);
 
             // Next event: Load onto voyage CM003 in Hongkong
-            handlingEventService.registerHandlingEvent(
-                DateTestUtil.toDate("2009-03-03"), trackingId, SampleVoyages.v100.VoyageNumber,
+            handlingEventService.RegisterHandlingEvent(
+                DateTestUtil.ToDate("2009-03-03"), trackingId, SampleVoyages.v100.VoyageNumber,
                 SampleLocations.HONGKONG.UnLocode, HandlingType.LOAD);
 
             // Check current state - should be ok
@@ -233,8 +233,8 @@
             UnLocode noSuchUnLocode = new UnLocode("ZZZZZ");
             try
             {
-                handlingEventService.registerHandlingEvent(
-                    DateTestUtil.toDate("2009-03-05"), trackingId, noSuchVoyageNumber, noSuchUnLocode,
+                handlingEventService.RegisterHandlingEvent(
+                    DateTestUtil.ToDate("2009-03-05"), trackingId, noSuchVoyageNumber, noSuchUnLocode,
                     HandlingType.LOAD);
                 Assert.Fail("Should not be able to register a handling event with invalid location and voyage");
             }
@@ -242,8 +242,8 @@
 
 
             // Cargo is now (incorrectly) unloaded in Tokyo
-            handlingEventService.registerHandlingEvent(
-                DateTestUtil.toDate("2009-03-05"), trackingId, SampleVoyages.v100.VoyageNumber,
+            handlingEventService.RegisterHandlingEvent(
+                DateTestUtil.ToDate("2009-03-05"), trackingId, SampleVoyages.v100.VoyageNumber,
                 SampleLocations.TOKYO.UnLocode, HandlingType.UNLOAD);
 
             // Check current state - cargo is misdirected!
@@ -283,8 +283,8 @@
 
 
             // Load in Tokyo
-            handlingEventService.registerHandlingEvent(
-                DateTestUtil.toDate("2009-03-08"), trackingId, SampleVoyages.v300.VoyageNumber,
+            handlingEventService.RegisterHandlingEvent(
+                DateTestUtil.ToDate("2009-03-08"), trackingId, SampleVoyages.v300.VoyageNumber,
                 SampleLocations.TOKYO.UnLocode, HandlingType.LOAD);
 
             // Check current state - should be ok
@@ -297,8 +297,8 @@
                 cargo.Delivery.NextExpectedActivity);
 
             // Unload in Hamburg
-            handlingEventService.registerHandlingEvent(
-                DateTestUtil.toDate("2009-03-12"), trackingId, SampleVoyages.v300.VoyageNumber,
+            handlingEventService.RegisterHandlingEvent(
+                DateTestUtil.ToDate("2009-03-12"), trackingId, SampleVoyages.v300.VoyageNumber,
                 SampleLocations.HAMBURG.UnLocode, HandlingType.UNLOAD);
 
             // Check current state - should be ok
@@ -312,8 +312,8 @@
 
 
             // Load in Hamburg
-            handlingEventService.registerHandlingEvent(
-                DateTestUtil.toDate("2009-03-14"), trackingId, SampleVoyages.v400.VoyageNumber,
+            handlingEventService.RegisterHandlingEvent(
+                DateTestUtil.ToDate("2009-03-14"), trackingId, SampleVoyages.v400.VoyageNumber,
                 SampleLocations.HAMBURG.UnLocode, HandlingType.LOAD);
 
             // Check current state - should be ok
@@ -327,8 +327,8 @@
 
 
             // Unload in Stockholm
-            handlingEventService.registerHandlingEvent(
-                DateTestUtil.toDate("2009-03-15"), trackingId, SampleVoyages.v400.VoyageNumber,
+            handlingEventService.RegisterHandlingEvent(
+                DateTestUtil.ToDate("2009-03-15"), trackingId, SampleVoyages.v400.VoyageNumber,
                 SampleLocations.STOCKHOLM.UnLocode, HandlingType.UNLOAD);
 
             // Check current state - should be ok
@@ -340,8 +340,8 @@
                             cargo.Delivery.NextExpectedActivity);
 
             // Finally, cargo is claimed in Stockholm. This ends the cargo lifecycle from our perspective.
-            handlingEventService.registerHandlingEvent(
-                DateTestUtil.toDate("2009-03-16"), trackingId, null, SampleLocations.STOCKHOLM.UnLocode,
+            handlingEventService.RegisterHandlingEvent(
+                DateTestUtil.ToDate("2009-03-16"), trackingId, null, SampleLocations.STOCKHOLM.UnLocode,
                 HandlingType.CLAIM);
 
             // Check current state - should be ok

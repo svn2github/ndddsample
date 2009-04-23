@@ -49,12 +49,12 @@
 
             if (cargo.Delivery.IsMisdirected)
             {
-                applicationEvents.cargoWasMisdirected(cargo);
+                applicationEvents.CargoWasMisdirected(cargo);
             }
 
             if (cargo.Delivery.IsUnloadedAtDestination)
             {
-                applicationEvents.cargoHasArrived(cargo);
+                applicationEvents.CargoHasArrived(cargo);
             }
 
             cargoRepository.Store(cargo);

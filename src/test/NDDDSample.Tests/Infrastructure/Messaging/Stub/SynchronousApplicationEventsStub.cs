@@ -15,26 +15,26 @@
 
         #region IApplicationEvents Members
 
-        public void cargoWasHandled(HandlingEvent evnt)
+        public void CargoWasHandled(HandlingEvent evnt)
         {
             System.Console.WriteLine("EVENT: cargo was handled: " + evnt);
             cargoInspectionService.InspectCargo(evnt.Cargo.TrackingId);
         }
 
 
-        public void cargoWasMisdirected(Cargo cargo)
+        public void CargoWasMisdirected(Cargo cargo)
         {
             System.Console.WriteLine("EVENT: cargo was misdirected");
         }
 
 
-        public void cargoHasArrived(Cargo cargo)
+        public void CargoHasArrived(Cargo cargo)
         {
             System.Console.WriteLine("EVENT: cargo has arrived: " + cargo.TrackingId.IdString);
         }
 
 
-        public void receivedHandlingEventRegistrationAttempt(HandlingEventRegistrationAttempt attempt)
+        public void ReceivedHandlingEventRegistrationAttempt(HandlingEventRegistrationAttempt attempt)
         {
             System.Console.WriteLine("EVENT: received handling event registration attempt");
         }

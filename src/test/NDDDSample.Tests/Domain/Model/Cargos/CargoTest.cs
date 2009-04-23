@@ -38,7 +38,7 @@
         public void testConstruction()
         {
             var trackingId = new TrackingId("XYZ");
-            var arrivalDeadline = DateTestUtil.toDate("2009-03-13");
+            var arrivalDeadline = DateTestUtil.ToDate("2009-03-13");
             var routeSpecification = new RouteSpecification(
                 SampleLocations.STOCKHOLM, SampleLocations.MELBOURNE, arrivalDeadline);
 
