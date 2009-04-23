@@ -1,13 +1,8 @@
-namespace NDDDSample.Tests.Domain.Model.Voyages
+namespace NDDDSample.Tests.Domain.Model.Locations
 {
-    #region Usings
-
     using System;
     using NDDDSample.Domain.Model.Locations;
-    using NDDDSample.Domain.Model.Voyages;
     using NUnit.Framework;
-
-    #endregion
 
     [TestFixture]
     public class LocationTest
@@ -18,14 +13,14 @@ namespace NDDDSample.Tests.Domain.Model.Voyages
         {            
             // Same UN locode - equal
             Assert.IsTrue(new Location(new UnLocode("ATEST"), "test-name").
-                Equals(new Location(new UnLocode("ATEST"), "test-name")));
+                              Equals(new Location(new UnLocode("ATEST"), "test-name")));
 
             // Different UN locodes - not equal
             Assert.IsFalse(new Location(new UnLocode("ATEST"), "test-name").
-                 Equals(new Location(new UnLocode("TESTB"), "test-name")));
+                               Equals(new Location(new UnLocode("TESTB"), "test-name")));
 
             // Always equal to itself
-            Location location = new Location(new UnLocode("ATEST"), "test-name");
+            var location = new Location(new UnLocode("ATEST"), "test-name");
             Assert.IsTrue(location.Equals(location));
 
             // Never equal to null

@@ -71,6 +71,7 @@
     <Compile Include="Domain\JavaRelated\HashCodeBuilderTest.cs" />
     <Compile Include="Domain\JavaRelated\ToStringBuilderTest.cs" />
     <Compile Include="Domain\Model\Cargos\TrackingIdTest.cs" />
+    <Compile Include="Domain\Model\Locations\UnLocodeTest.cs" />
     <Compile Include="Domain\Model\Locations\LocationTest.cs" />
     <Compile Include="Domain\Model\Voyages\CarrierMovementTest.cs" />
     <Compile Include="Infrastructure\Messaging\Stub\SynchronousApplicationEventsStub.cs" />
