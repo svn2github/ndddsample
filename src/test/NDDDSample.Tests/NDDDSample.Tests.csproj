@@ -74,6 +74,9 @@
     <Compile Include="Domain\Model\Locations\UnLocodeTest.cs" />
     <Compile Include="Domain\Model\Locations\LocationTest.cs" />
     <Compile Include="Domain\Model\Voyages\CarrierMovementTest.cs" />
+    <Compile Include="Domain\Model\Voyages\VoyageTest.cs" />
+    <Compile Include="Domain\Model\Voyages\VoyageNumberTest.cs" />
+    <Compile Include="Domain\Model\Voyages\ScheduleTest.cs" />
     <Compile Include="Infrastructure\Messaging\Stub\SynchronousApplicationEventsStub.cs" />
     <Compile Include="Infrastructure\Persistence\Inmemory\CargoRepositoryInMem.cs" />
     <Compile Include="Infrastructure\Persistence\Inmemory\HandlingEventRepositoryInMem.cs" />
