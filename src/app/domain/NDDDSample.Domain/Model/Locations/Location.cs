@@ -27,7 +27,8 @@
         /// </summary>
         /// <param name="unLocode"> UN Locode</param>
         /// <param name="name">location name</param>
-        internal Location(UnLocode unLocode, string name)
+        /// TODO: See if it is possible NOT to make it public
+        public Location(UnLocode unLocode, string name)
         {
             Validate.NotNull(unLocode);
             Validate.NotNull(name);

@@ -71,6 +71,8 @@
     <Compile Include="Domain\JavaRelated\HashCodeBuilderTest.cs" />
     <Compile Include="Domain\JavaRelated\ToStringBuilderTest.cs" />
     <Compile Include="Domain\Model\Cargos\TrackingIdTest.cs" />
+    <Compile Include="Domain\Model\Locations\LocationTest.cs" />
+    <Compile Include="Domain\Model\Voyages\CarrierMovementTest.cs" />
     <Compile Include="Infrastructure\Messaging\Stub\SynchronousApplicationEventsStub.cs" />
     <Compile Include="Infrastructure\Persistence\Inmemory\CargoRepositoryInMem.cs" />
     <Compile Include="Infrastructure\Persistence\Inmemory\HandlingEventRepositoryInMem.cs" />
@@ -116,8 +118,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Domain\Model\Handlings\" />
-    <Folder Include="Domain\Model\Locations\" />
-    <Folder Include="Domain\Model\Voyages\" />
     <Folder Include="Infrastructure\Routing\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
