@@ -1,8 +1,12 @@
 namespace NDDDSample.Tests.Domain.Model.Locations
 {
+    #region Usings
+
     using System;
     using NDDDSample.Domain.Model.Locations;
     using NUnit.Framework;
+
+    #endregion
 
     [TestFixture]
     public class LocationTest

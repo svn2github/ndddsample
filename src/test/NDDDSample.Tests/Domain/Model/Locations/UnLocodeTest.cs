@@ -8,6 +8,7 @@ namespace NDDDSample.Tests.Domain.Model.Locations
     public class UnLocodeTest
     {        
         [Test]
+        [ExpectedException(typeof(AssertionException))]
         public void testNew()
         {
             assertValid("AA234");
@@ -56,15 +57,17 @@ namespace NDDDSample.Tests.Domain.Model.Locations
         {
             new UnLocode(unlocode);
         }
-
+        
         private void assertInvalid(String unlocode)
         {
             try
             {
-                new UnLocode(unlocode);
+                new UnLocode(unlocode);                
+            }
+            catch (Exception expected)
+            {
                 Assert.Fail("The combination [" + unlocode + "] is not a valid UnLocode");
             }
-            catch (Exception expected) { }
         }
     }
 }

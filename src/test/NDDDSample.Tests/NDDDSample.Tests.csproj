@@ -70,7 +70,15 @@
     <Compile Include="Domain\JavaRelated\EqualsBuilderTest.cs" />
     <Compile Include="Domain\JavaRelated\HashCodeBuilderTest.cs" />
     <Compile Include="Domain\JavaRelated\ToStringBuilderTest.cs" />
+    <Compile Include="Domain\Model\Cargos\CargoTest.cs" />
+    <Compile Include="Domain\Model\Cargos\DeliveryTest.cs" />
+    <Compile Include="Domain\Model\Cargos\ItineraryTest.cs" />
+    <Compile Include="Domain\Model\Cargos\LegTest.cs" />
+    <Compile Include="Domain\Model\Cargos\RouteSpecificationTest.cs" />
     <Compile Include="Domain\Model\Cargos\TrackingIdTest.cs" />
+    <Compile Include="Domain\Model\Handlings\HandlingHistoryTest.cs" />
+    <Compile Include="Domain\Model\Handlings\HandlingEventTest.cs" />
+    <Compile Include="Domain\Model\Handlings\HandlingEventFactoryTest.cs" />
     <Compile Include="Domain\Model\Locations\UnLocodeTest.cs" />
     <Compile Include="Domain\Model\Locations\LocationTest.cs" />
     <Compile Include="Domain\Model\Voyages\CarrierMovementTest.cs" />
@@ -121,7 +129,6 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Domain\Model\Handlings\" />
     <Folder Include="Infrastructure\Routing\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

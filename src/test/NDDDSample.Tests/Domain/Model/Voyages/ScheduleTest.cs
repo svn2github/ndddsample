@@ -2,7 +2,6 @@ namespace NDDDSample.Tests.Domain.Model.Voyages
 {
     #region Usings
 
-    using System;    
     using NUnit.Framework;
 
     #endregion

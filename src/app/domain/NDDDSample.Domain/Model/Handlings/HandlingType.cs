@@ -25,7 +25,8 @@ namespace NDDDSample.Domain.Model.Handlings
         /// </summary>
         /// <param name="name">Enum string name</param>
         /// <param name="voyageRequired">voyageRequired whether or not a voyage is associated with this event type </param>
-        private HandlingType(string name, bool voyageRequired)
+        /// TODO: See if it is possible NOT to make it public
+        public HandlingType(string name, bool voyageRequired)
             : base(name)
         {
             this.voyageRequired = voyageRequired;
