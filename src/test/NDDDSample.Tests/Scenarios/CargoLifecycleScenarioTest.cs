@@ -46,7 +46,7 @@
             bookingService = new BookingService(cargoRepository, locationRepository, routingService);
 
             // Circular dependency when doing synchrounous calls
-            ((SynchronousApplicationEventsStub) applicationEvents).setCargoInspectionService(cargoInspectionService);
+            ((SynchronousApplicationEventsStub) applicationEvents).SetCargoInspectionService(cargoInspectionService);
         }
 
         #endregion

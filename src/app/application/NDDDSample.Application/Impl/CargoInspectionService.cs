@@ -35,29 +35,31 @@
             using (var transactionScope = new TransactionScope())
             {
                 cargo = cargoRepository.Find(trackingId);
+
+
+                if (cargo == null)
+                {
+                    logger.Warn("Can't inspect non-existing cargo " + trackingId);
+                    return;
+                }
+
+                HandlingHistory handlingHistory = handlingEventRepository.LookupHandlingHistoryOfCargo(trackingId);
+
+                cargo.DeriveDeliveryProgress(handlingHistory);
+
+                if (cargo.Delivery.IsMisdirected)
+                {
+                    applicationEvents.CargoWasMisdirected(cargo);
+                }
+
+                if (cargo.Delivery.IsUnloadedAtDestination)
+                {
+                    applicationEvents.CargoHasArrived(cargo);
+                }
+
+                cargoRepository.Store(cargo);
                 transactionScope.Complete();
             }
-            if (cargo == null)
-            {
-                logger.Warn("Can't inspect non-existing cargo " + trackingId);
-                return;
-            }
-
-            HandlingHistory handlingHistory = handlingEventRepository.LookupHandlingHistoryOfCargo(trackingId);
-
-            cargo.DeriveDeliveryProgress(handlingHistory);
-
-            if (cargo.Delivery.IsMisdirected)
-            {
-                applicationEvents.CargoWasMisdirected(cargo);
-            }
-
-            if (cargo.Delivery.IsUnloadedAtDestination)
-            {
-                applicationEvents.CargoHasArrived(cargo);
-            }
-
-            cargoRepository.Store(cargo);
         }
 
         #endregion

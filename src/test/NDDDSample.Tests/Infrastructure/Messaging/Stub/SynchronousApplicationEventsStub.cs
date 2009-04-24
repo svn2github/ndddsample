@@ -41,7 +41,7 @@
 
         #endregion
 
-        public void setCargoInspectionService(ICargoInspectionService cargoInspectionSrv)
+        public void SetCargoInspectionService(ICargoInspectionService cargoInspectionSrv)
         {
             cargoInspectionService = cargoInspectionSrv;
         }

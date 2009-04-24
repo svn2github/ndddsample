@@ -17,8 +17,7 @@
 
     [TestFixture]
     public class CargoTest
-    {
-        private static readonly DateTime dateTime = new DateTime(2010, 6, 12);
+    {      
         private List<HandlingEvent> events;
         private Voyage voyage;
 
@@ -28,9 +27,9 @@
             events = new List<HandlingEvent>();
 
             voyage = new Voyage.Builder(new VoyageNumber("0123"), SampleLocations.STOCKHOLM).
-                AddMovement(SampleLocations.HAMBURG, dateTime, dateTime).
-                AddMovement(SampleLocations.HONGKONG, dateTime, dateTime).
-                AddMovement(SampleLocations.MELBOURNE, dateTime, dateTime).
+                AddMovement(SampleLocations.HAMBURG, DateTime.Now, DateTime.Now).
+                AddMovement(SampleLocations.HONGKONG, DateTime.Now, DateTime.Now).
+                AddMovement(SampleLocations.MELBOURNE, DateTime.Now, DateTime.Now).
                 Build();
         }
 
@@ -56,12 +55,12 @@
             /*  //TODO: atrosin revise test how to port java specifics
             Cargo cargo = new Cargo(new TrackingId("XYZ"),
                                     new RouteSpecification(SampleLocations.STOCKHOLM, SampleLocations.MELBOURNE,
-                                                           dateTime));
+                                                           DateTime.Now));
             Itinerary good = new Itinerary();
             Itinerary bad = new Itinerary();
 
             RouteSpecification acceptOnlyGood = new RouteSpecification(cargo.Origin,
-                                                                       cargo.RouteSpecification.Destination, dateTime) 
+                                                                       cargo.RouteSpecification.Destination, DateTime.Now) 
                 {
               @Override
               public boolean isSatisfiedBy(Itinerary itinerary) {
@@ -85,7 +84,7 @@
         {
             Cargo cargo = new Cargo(new TrackingId("XYZ"),
                                     new RouteSpecification(SampleLocations.STOCKHOLM, SampleLocations.MELBOURNE,
-                                                           dateTime));
+                                                           DateTime.Now));
 
             Assert.AreEqual(Location.UNKNOWN, cargo.Delivery.LastKnownLocation);
         }
@@ -126,9 +125,9 @@
         public void testEquality()
         {
             RouteSpecification spec1 = new RouteSpecification(SampleLocations.STOCKHOLM, SampleLocations.HONGKONG,
-                                                              dateTime);
+                                                              DateTime.Now);
             RouteSpecification spec2 = new RouteSpecification(SampleLocations.STOCKHOLM, SampleLocations.MELBOURNE,
-                                                              dateTime);
+                                                              DateTime.Now);
             Cargo c1 = new Cargo(new TrackingId("ABC"), spec1);
             Cargo c2 = new Cargo(new TrackingId("CBA"), spec1);
             Cargo c3 = new Cargo(new TrackingId("ABC"), spec2);
@@ -143,36 +142,36 @@
         [Test]
         public void testIsUnloadedAtFinalDestination()
         {
-            Cargo cargo = setUpCargoWithItinerary(SampleLocations.HANGZOU, SampleLocations.TOKYO,
+            Cargo cargo = SetUpCargoWithItinerary(SampleLocations.HANGZOU, SampleLocations.TOKYO,
                                                   SampleLocations.NEWYORK);
             Assert.IsFalse(cargo.Delivery.IsUnloadedAtDestination);
 
             // Adding an event unrelated to unloading at  destination
             events.Add(
-                new HandlingEvent(cargo, dateTime.AddHours(10), dateTime, HandlingType.RECEIVE, SampleLocations.HANGZOU));
+                new HandlingEvent(cargo, new DateTime(10), DateTime.Now, HandlingType.RECEIVE, SampleLocations.HANGZOU));
             cargo.DeriveDeliveryProgress(new HandlingHistory(events));
             Assert.IsFalse(cargo.Delivery.IsUnloadedAtDestination);
 
             Voyage voyage = new Voyage.Builder(new VoyageNumber("0123"), SampleLocations.HANGZOU).
-                AddMovement(SampleLocations.NEWYORK, dateTime, dateTime).
+                AddMovement(SampleLocations.NEWYORK, DateTime.Now, DateTime.Now).
                 Build();
 
             // Adding an unload event, but not at the final destination
             events.Add(
-                new HandlingEvent(cargo, dateTime.AddHours(20), dateTime, HandlingType.UNLOAD, SampleLocations.TOKYO,
+                new HandlingEvent(cargo, new DateTime(20), DateTime.Now, HandlingType.UNLOAD, SampleLocations.TOKYO,
                                   voyage));
             cargo.DeriveDeliveryProgress(new HandlingHistory(events));
             Assert.IsFalse(cargo.Delivery.IsUnloadedAtDestination);
 
             // Adding an event in the final destination, but not unload
             events.Add(
-                new HandlingEvent(cargo, dateTime.AddHours(30), dateTime, HandlingType.CUSTOMS, SampleLocations.NEWYORK));
+                new HandlingEvent(cargo, new DateTime(30), DateTime.Now, HandlingType.CUSTOMS, SampleLocations.NEWYORK));
             cargo.DeriveDeliveryProgress(new HandlingHistory(events));
             Assert.IsFalse(cargo.Delivery.IsUnloadedAtDestination);
 
             // Finally, cargo is unloaded at final destination
             events.Add(
-                new HandlingEvent(cargo, dateTime.AddHours(40), dateTime, HandlingType.UNLOAD, SampleLocations.NEWYORK,
+                new HandlingEvent(cargo, new DateTime(40), DateTime.Now, HandlingType.UNLOAD, SampleLocations.NEWYORK,
                                   voyage));
             cargo.DeriveDeliveryProgress(new HandlingHistory(events));
             Assert.IsTrue(cargo.Delivery.IsUnloadedAtDestination);
@@ -184,9 +183,9 @@
         {
             Cargo cargo = new Cargo(new TrackingId("XYZ"),
                                     new RouteSpecification(SampleLocations.STOCKHOLM, SampleLocations.MELBOURNE,
-                                                           dateTime));
+                                                           DateTime.Now));
 
-            HandlingEvent he = new HandlingEvent(cargo, getDate("2007-12-01"), dateTime, HandlingType.RECEIVE,
+            HandlingEvent he = new HandlingEvent(cargo, getDate("2007-12-01"), DateTime.Now, HandlingType.RECEIVE,
                                                  SampleLocations.STOCKHOLM);
             events.Add(he);
             cargo.DeriveDeliveryProgress(new HandlingHistory(events));
@@ -199,7 +198,7 @@
         {
             Cargo cargo = populateCargoOffMelbourne();
 
-            events.Add(new HandlingEvent(cargo, getDate("2007-12-09"), dateTime, HandlingType.CLAIM,
+            events.Add(new HandlingEvent(cargo, getDate("2007-12-09"), DateTime.Now, HandlingType.CLAIM,
                                          SampleLocations.MELBOURNE));
             cargo.DeriveDeliveryProgress(new HandlingHistory(events));
 
@@ -211,17 +210,17 @@
         {
             Cargo cargo = new Cargo(new TrackingId("XYZ"),
                                     new RouteSpecification(SampleLocations.STOCKHOLM, SampleLocations.MELBOURNE,
-                                                           dateTime));
+                                                           DateTime.Now));
 
 
-            events.Add(new HandlingEvent(cargo, getDate("2007-12-01"), dateTime, HandlingType.LOAD,
+            events.Add(new HandlingEvent(cargo, getDate("2007-12-01"), DateTime.Now, HandlingType.LOAD,
                                          SampleLocations.STOCKHOLM, voyage));
-            events.Add(new HandlingEvent(cargo, getDate("2007-12-02"), dateTime, HandlingType.UNLOAD,
+            events.Add(new HandlingEvent(cargo, getDate("2007-12-02"), DateTime.Now, HandlingType.UNLOAD,
                                          SampleLocations.HAMBURG, voyage));
 
-            events.Add(new HandlingEvent(cargo, getDate("2007-12-03"), dateTime, HandlingType.LOAD,
+            events.Add(new HandlingEvent(cargo, getDate("2007-12-03"), DateTime.Now, HandlingType.LOAD,
                                          SampleLocations.HAMBURG, voyage));
-            events.Add(new HandlingEvent(cargo, getDate("2007-12-04"), dateTime, HandlingType.UNLOAD,
+            events.Add(new HandlingEvent(cargo, getDate("2007-12-04"), DateTime.Now, HandlingType.UNLOAD,
                                          SampleLocations.HONGKONG, voyage));
 
             cargo.DeriveDeliveryProgress(new HandlingHistory(events));
@@ -233,13 +232,13 @@
         {
             Cargo cargo = new Cargo(new TrackingId("XYZ"),
                                     new RouteSpecification(SampleLocations.STOCKHOLM, SampleLocations.MELBOURNE,
-                                                           dateTime));
+                                                           DateTime.Now));
 
-            events.Add(new HandlingEvent(cargo, getDate("2007-12-01"), dateTime, HandlingType.LOAD,
+            events.Add(new HandlingEvent(cargo, getDate("2007-12-01"), DateTime.Now, HandlingType.LOAD,
                                          SampleLocations.STOCKHOLM, voyage));
-            events.Add(new HandlingEvent(cargo, getDate("2007-12-02"), dateTime, HandlingType.UNLOAD,
+            events.Add(new HandlingEvent(cargo, getDate("2007-12-02"), DateTime.Now, HandlingType.UNLOAD,
                                          SampleLocations.HAMBURG, voyage));
-            events.Add(new HandlingEvent(cargo, getDate("2007-12-03"), dateTime, HandlingType.LOAD,
+            events.Add(new HandlingEvent(cargo, getDate("2007-12-03"), DateTime.Now, HandlingType.LOAD,
                                          SampleLocations.HAMBURG, voyage));
 
             cargo.DeriveDeliveryProgress(new HandlingHistory(events));
@@ -251,21 +250,21 @@
         {
             Cargo cargo = new Cargo(new TrackingId("XYZ"),
                                     new RouteSpecification(SampleLocations.STOCKHOLM, SampleLocations.MELBOURNE,
-                                                           dateTime));
+                                                           DateTime.Now));
 
-            events.Add(new HandlingEvent(cargo, getDate("2007-12-01"), dateTime, HandlingType.LOAD,
+            events.Add(new HandlingEvent(cargo, getDate("2007-12-01"), DateTime.Now, HandlingType.LOAD,
                                          SampleLocations.STOCKHOLM, voyage));
-            events.Add(new HandlingEvent(cargo, getDate("2007-12-02"), dateTime, HandlingType.UNLOAD,
+            events.Add(new HandlingEvent(cargo, getDate("2007-12-02"), DateTime.Now, HandlingType.UNLOAD,
                                          SampleLocations.HAMBURG, voyage));
 
-            events.Add(new HandlingEvent(cargo, getDate("2007-12-03"), dateTime, HandlingType.LOAD,
+            events.Add(new HandlingEvent(cargo, getDate("2007-12-03"), DateTime.Now, HandlingType.LOAD,
                                          SampleLocations.HAMBURG, voyage));
-            events.Add(new HandlingEvent(cargo, getDate("2007-12-04"), dateTime, HandlingType.UNLOAD,
+            events.Add(new HandlingEvent(cargo, getDate("2007-12-04"), DateTime.Now, HandlingType.UNLOAD,
                                          SampleLocations.HONGKONG, voyage));
 
-            events.Add(new HandlingEvent(cargo, getDate("2007-12-05"), dateTime, HandlingType.LOAD,
+            events.Add(new HandlingEvent(cargo, getDate("2007-12-05"), DateTime.Now, HandlingType.LOAD,
                                          SampleLocations.HONGKONG, voyage));
-            events.Add(new HandlingEvent(cargo, getDate("2007-12-07"), dateTime, HandlingType.UNLOAD,
+            events.Add(new HandlingEvent(cargo, getDate("2007-12-07"), DateTime.Now, HandlingType.UNLOAD,
                                          SampleLocations.MELBOURNE, voyage));
 
             cargo.DeriveDeliveryProgress(new HandlingHistory(events));
@@ -278,45 +277,51 @@
             //A cargo with no itinerary is not misdirected
             Cargo cargo = new Cargo(new TrackingId("TRKID"),
                                     new RouteSpecification(SampleLocations.SHANGHAI, SampleLocations.GOTHENBURG,
-                                                           dateTime));
+                                                           DateTime.Now));
             Assert.IsFalse(cargo.Delivery.IsMisdirected);
 
-            cargo = setUpCargoWithItinerary(SampleLocations.SHANGHAI, SampleLocations.ROTTERDAM,
+            cargo = SetUpCargoWithItinerary(SampleLocations.SHANGHAI, SampleLocations.ROTTERDAM,
                                             SampleLocations.GOTHENBURG);
 
             //A cargo with no handling events is not misdirected
             Assert.IsFalse(cargo.Delivery.IsMisdirected);
 
-            var handlingEvents = new Collection<HandlingEvent>();
+            var handlingEvents = new Collection<HandlingEvent>
+                                     {
+                                         new HandlingEvent(cargo, new DateTime(10), new DateTime(20),
+                                                           HandlingType.RECEIVE, SampleLocations.SHANGHAI),
+
+                                         new HandlingEvent(cargo, new DateTime(30), new DateTime(40),
+                                                           HandlingType.LOAD, SampleLocations.SHANGHAI, voyage),
+
+                                         new HandlingEvent(cargo, new DateTime(50), new DateTime(60),
+                                                           HandlingType.UNLOAD, SampleLocations.ROTTERDAM, voyage),
+
+                                         new HandlingEvent(cargo, new DateTime(70), new DateTime(80),
+                                                           HandlingType.LOAD, SampleLocations.ROTTERDAM, voyage),
+
+                                         new HandlingEvent(cargo, new DateTime(90), new DateTime(100),
+                                                           HandlingType.UNLOAD, SampleLocations.GOTHENBURG, voyage),
+
+                                         new HandlingEvent(cargo, new DateTime(110), new DateTime(120),
+                                                           HandlingType.CLAIM, SampleLocations.GOTHENBURG),
+
+                                         new HandlingEvent(cargo, new DateTime(130), new DateTime(140),
+                                                           HandlingType.CUSTOMS, SampleLocations.GOTHENBURG)
+                                     };
 
             //Happy path
-            handlingEvents.Add(new HandlingEvent(cargo, dateTime.AddHours(10), dateTime.AddHours(20),
-                                                 HandlingType.RECEIVE, SampleLocations.SHANGHAI));
-            handlingEvents.Add(new HandlingEvent(cargo, dateTime.AddHours(30), dateTime.AddHours(40), HandlingType.LOAD,
-                                                 SampleLocations.SHANGHAI, voyage));
-            handlingEvents.Add(new HandlingEvent(cargo, dateTime.AddHours(50), dateTime.AddHours(60),
-                                                 HandlingType.UNLOAD, SampleLocations.ROTTERDAM, voyage));
-            handlingEvents.Add(new HandlingEvent(cargo, dateTime.AddHours(70), dateTime.AddHours(80), HandlingType.LOAD,
-                                                 SampleLocations.ROTTERDAM, voyage));
-            handlingEvents.Add(new HandlingEvent(cargo, dateTime.AddHours(90), dateTime.AddHours(100),
-                                                 HandlingType.UNLOAD, SampleLocations.GOTHENBURG, voyage));
-            handlingEvents.Add(new HandlingEvent(cargo, dateTime.AddHours(110), dateTime.AddHours(120),
-                                                 HandlingType.CLAIM, SampleLocations.GOTHENBURG));
-            handlingEvents.Add(new HandlingEvent(cargo, dateTime.AddHours(130), dateTime.AddHours(140),
-                                                 HandlingType.CUSTOMS, SampleLocations.GOTHENBURG));
-
             events.AddRange(handlingEvents);
             cargo.DeriveDeliveryProgress(new HandlingHistory(events));
             Assert.IsFalse(cargo.Delivery.IsMisdirected);
 
             //Try a couple of failing ones
-
-            cargo = setUpCargoWithItinerary(SampleLocations.SHANGHAI, SampleLocations.ROTTERDAM,
+            cargo = SetUpCargoWithItinerary(SampleLocations.SHANGHAI, SampleLocations.ROTTERDAM,
                                             SampleLocations.GOTHENBURG);
 
             handlingEvents = new Collection<HandlingEvent>
                                  {
-                                     new HandlingEvent(cargo, dateTime, dateTime, HandlingType.RECEIVE,
+                                     new HandlingEvent(cargo, DateTime.Now, DateTime.Now, HandlingType.RECEIVE,
                                                        SampleLocations.HANGZOU)
                                  };
 
@@ -326,21 +331,21 @@
             Assert.IsTrue(cargo.Delivery.IsMisdirected);
 
 
-            cargo = setUpCargoWithItinerary(SampleLocations.SHANGHAI, SampleLocations.ROTTERDAM,
+            cargo = SetUpCargoWithItinerary(SampleLocations.SHANGHAI, SampleLocations.ROTTERDAM,
                                             SampleLocations.GOTHENBURG);
 
             handlingEvents = new Collection<HandlingEvent>
                                  {
-                                     new HandlingEvent(cargo, dateTime.AddHours(10), dateTime.AddHours(20),
+                                     new HandlingEvent(cargo, new DateTime(10), new DateTime(20),
                                                        HandlingType.RECEIVE,
                                                        SampleLocations.SHANGHAI),
-                                     new HandlingEvent(cargo, dateTime.AddHours(30), dateTime.AddHours(40),
+                                     new HandlingEvent(cargo, new DateTime(30), new DateTime(40),
                                                        HandlingType.LOAD,
                                                        SampleLocations.SHANGHAI, voyage),
-                                     new HandlingEvent(cargo, dateTime.AddHours(50), dateTime.AddHours(60),
+                                     new HandlingEvent(cargo, new DateTime(50), new DateTime(60),
                                                        HandlingType.UNLOAD,
                                                        SampleLocations.ROTTERDAM, voyage),
-                                     new HandlingEvent(cargo, dateTime.AddHours(70), dateTime.AddHours(80),
+                                     new HandlingEvent(cargo, new DateTime(70), new DateTime(80),
                                                        HandlingType.LOAD,
                                                        SampleLocations.ROTTERDAM, voyage)
                                  };
@@ -351,20 +356,20 @@
             Assert.IsTrue(cargo.Delivery.IsMisdirected);
 
 
-            cargo = setUpCargoWithItinerary(SampleLocations.SHANGHAI, SampleLocations.ROTTERDAM,
+            cargo = SetUpCargoWithItinerary(SampleLocations.SHANGHAI, SampleLocations.ROTTERDAM,
                                             SampleLocations.GOTHENBURG);
             handlingEvents = new Collection<HandlingEvent>
                                  {
-                                     new HandlingEvent(cargo, dateTime.AddHours(10), dateTime.AddHours(20),
+                                     new HandlingEvent(cargo, new DateTime(10), new DateTime(20),
                                                        HandlingType.RECEIVE,
                                                        SampleLocations.SHANGHAI),
-                                     new HandlingEvent(cargo, dateTime.AddHours(30), dateTime.AddHours(40),
+                                     new HandlingEvent(cargo, new DateTime(30), new DateTime(40),
                                                        HandlingType.LOAD,
                                                        SampleLocations.SHANGHAI, voyage),
-                                     new HandlingEvent(cargo, dateTime.AddHours(50), dateTime.AddHours(60),
+                                     new HandlingEvent(cargo, new DateTime(50), new DateTime(60),
                                                        HandlingType.UNLOAD,
                                                        SampleLocations.ROTTERDAM, voyage),
-                                     new HandlingEvent(cargo, dateTime, dateTime, HandlingType.CLAIM,
+                                     new HandlingEvent(cargo, DateTime.Now, DateTime.Now, HandlingType.CLAIM,
                                                        SampleLocations.ROTTERDAM)
                                  };
 
@@ -374,15 +379,15 @@
             Assert.IsTrue(cargo.Delivery.IsMisdirected);
         }
 
-        private Cargo setUpCargoWithItinerary(Location origin, Location midpoint, Location destination)
+        private Cargo SetUpCargoWithItinerary(Location origin, Location midpoint, Location destination)
         {
-            var cargo = new Cargo(new TrackingId("CARGO1"), new RouteSpecification(origin, destination, dateTime));
+            var cargo = new Cargo(new TrackingId("CARGO1"), new RouteSpecification(origin, destination, DateTime.Now));
 
             var itinerary = new Itinerary(
                 new List<Leg>
                     {
-                        new Leg(voyage, origin, midpoint, dateTime, dateTime),
-                        new Leg(voyage, midpoint, destination, dateTime, dateTime)
+                        new Leg(voyage, origin, midpoint, DateTime.Now, DateTime.Now),
+                        new Leg(voyage, midpoint, destination, DateTime.Now, DateTime.Now)
                     });
 
             cargo.AssignToRoute(itinerary);
@@ -395,7 +400,7 @@
         /// </summary>
         /// <param name="isoFormat">String to parse.</param>
         /// <returns>Created date instance.</returns>
-        private static DateTime getDate(String isoFormat)
+        private static DateTime getDate(string isoFormat)
         {
             return DateTime.ParseExact(isoFormat, "yyyy-MM-dd", CultureInfo.InvariantCulture);
         }
