@@ -49,25 +49,18 @@
             Assert.AreEqual(Voyage.NONE, cargo.Delivery.CurrentVoyage);
         }
 
-        [Test, Ignore("TODO: atrosin revise test how to port java specifics")]
+        [Test]
         public void testRoutingStatus()
-        {
-            /*  //TODO: atrosin revise test how to port java specifics
+        {       
             Cargo cargo = new Cargo(new TrackingId("XYZ"),
                                     new RouteSpecification(SampleLocations.STOCKHOLM, SampleLocations.MELBOURNE,
                                                            DateTime.Now));
-            Itinerary good = new Itinerary();
-            Itinerary bad = new Itinerary();
+            var good = new Itinerary();
+            var bad = new Itinerary();
 
-            RouteSpecification acceptOnlyGood = new RouteSpecification(cargo.Origin,
-                                                                       cargo.RouteSpecification.Destination, DateTime.Now) 
-                {
-              @Override
-              public boolean isSatisfiedBy(Itinerary itinerary) {
-                return itinerary == good;
-              }
-            };
-
+            RouteSpecification acceptOnlyGood = new RouteSpecificationStub(cargo.Origin,
+                                                                           cargo.RouteSpecification.Destination,
+                                                                           DateTime.Now, good);             
             cargo.SpecifyNewRoute(acceptOnlyGood);
 
             Assert.AreEqual(RoutingStatus.NOT_ROUTED, cargo.Delivery.RoutingStatus);
@@ -76,8 +69,29 @@
             Assert.AreEqual(RoutingStatus.MISROUTED, cargo.Delivery.RoutingStatus);
 
             cargo.AssignToRoute(good);
-            Assert.AreEqual(RoutingStatus.ROUTED, cargo.Delivery.RoutingStatus);*/
+            Assert.AreEqual(RoutingStatus.ROUTED, cargo.Delivery.RoutingStatus);
         }
+
+        #region Nested RouteSpecificationStub Class
+
+        //TODO: atrosin revise the class, mock it using mocking framework?
+        public class RouteSpecificationStub: RouteSpecification
+        {
+            private readonly Itinerary good;
+
+            public RouteSpecificationStub(Location origin, Location destination, DateTime arrivalDeadline, Itinerary good) 
+                : base(origin, destination, arrivalDeadline)
+            {
+                this.good = good;
+            }
+
+            public override bool IsSatisfiedBy(Itinerary itinerary)
+            {
+                return itinerary == good;
+            } 
+        }
+
+        #endregion
 
         [Test]
         public void testlastKnownLocationUnknownWhenNoEvents()

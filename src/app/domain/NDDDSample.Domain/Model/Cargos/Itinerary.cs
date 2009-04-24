@@ -31,8 +31,9 @@
             this.legs = new List<Leg>(legs);
         }
 
-        protected Itinerary()
-        {
+        //TODO: atrosin, revise the constructor, it is public only for negative test purpose
+        public Itinerary()
+        {           
             // Needed by Hibernate
         }
 
