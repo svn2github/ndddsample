@@ -12,7 +12,7 @@
     #endregion
 
     /// <summary>
-    /// An itinerary.
+    /// An itinerary - plan, path: an established line of travel.
     /// </summary>
     public class Itinerary : IValueObject<Itinerary>
     {

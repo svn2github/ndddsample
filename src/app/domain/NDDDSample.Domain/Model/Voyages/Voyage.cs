@@ -11,7 +11,8 @@
     #endregion
 
     /// <summary>
-    /// A Voyage.
+    /// A Voyage - journey to some distant place,
+    /// usually represents ocean trip as an act of traveling by water.
     /// </summary>
     public class Voyage : IEntity<Voyage>
     {

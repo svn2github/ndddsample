@@ -32,7 +32,7 @@
 
         /// <summary>
         /// Constructor.
-        /// TODO make package local
+        /// TODO make assembly local
         /// </summary>
         /// <param name="departureLocation">location of departure</param>
         /// <param name="arrivalLocation">location of arrival</param>

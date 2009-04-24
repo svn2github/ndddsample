@@ -47,7 +47,7 @@
         private Delivery(HandlingEvent lastEvent, Itinerary itinerary, RouteSpecification routeSpecification)
         {
             NO_ACTIVITY = null;
-            calculatedAt = new DateTime();
+            calculatedAt = DateTime.Now;
             this.lastEvent = lastEvent;
 
             misdirected = CalculateMisdirectionStatus(itinerary);
