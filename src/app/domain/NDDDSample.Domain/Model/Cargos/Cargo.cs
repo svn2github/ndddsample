@@ -163,7 +163,7 @@ namespace NDDDSample.Domain.Model.Cargos
         /// <summary>
         /// Specifies a new route for this cargo.
         /// </summary>
-        /// <param name="routeSpec">routeSpecification route specification.</param>
+        /// <param name="routeSpec">route specification.</param>
         public virtual void SpecifyNewRoute(RouteSpecification routeSpec)
         {
             Validate.NotNull(routeSpec, "Route specification is required");
@@ -176,7 +176,7 @@ namespace NDDDSample.Domain.Model.Cargos
         /// <summary>
         /// Attach a new itinerary to this cargo.
         /// </summary>
-        /// <param name="itineraryPrm">itinerary an itinerary. May not be null.</param>
+        /// <param name="itineraryPrm">an itinerary. May not be null.</param>
         public virtual void AssignToRoute(Itinerary itineraryPrm)
         {
             Validate.NotNull(itineraryPrm, "Itinerary is required for assignment");
@@ -199,7 +199,7 @@ namespace NDDDSample.Domain.Model.Cargos
         /// but changes to the delivery history (when a cargo is handled) cause the status update
         /// to happen <b>asynchronously</b> since HandlingEvent is in a different aggregate.
         /// </summary>
-        /// <param name="handlingHistory"></param>
+        /// <param name="handlingHistory"> Handling History </param>
         public virtual void DeriveDeliveryProgress(HandlingHistory handlingHistory)
         {
             // TODO filter events on cargo (must be same as this cargo)

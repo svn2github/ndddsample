@@ -17,7 +17,7 @@
         private readonly IApplicationEvents applicationEvents;
         private readonly HandlingEventFactory handlingEventFactory;
         private readonly IHandlingEventRepository handlingEventRepository;
-        private readonly ILog logger = LogFactory.GetApplicationLayer();
+        private readonly ILog logger = LogFactory.GetApplicationLayerLogger();
 
         public HandlingEventService(IHandlingEventRepository handlingEventRepository,
                                     IApplicationEvents applicationEvents,

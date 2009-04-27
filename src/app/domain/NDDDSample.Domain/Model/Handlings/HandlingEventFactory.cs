@@ -4,6 +4,7 @@
 
     using System;
     using Cargos;
+    using Exceptions;
     using Locations;
     using Voyages;
 

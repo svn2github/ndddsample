@@ -47,21 +47,35 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Handlings\HandlingEventRegistrationAttempt.cs" />
+    <Compile Include="Bookings\Facade\BookingServiceFacade.cs" />
+    <Compile Include="Bookings\Facade\Dto\CargoRoutingDTO.cs" />
+    <Compile Include="Bookings\Facade\Dto\LegDTO.cs" />
+    <Compile Include="Bookings\Facade\Dto\LocationDTO.cs" />
+    <Compile Include="Bookings\Facade\Dto\RouteCandidateDTO.cs" />
+    <Compile Include="Bookings\Facade\Internal\Assembler\CargoRoutingDTOAssembler.cs" />
+    <Compile Include="Bookings\Facade\Internal\Assembler\ItineraryCandidateDTOAssembler.cs" />
+    <Compile Include="Bookings\Facade\Internal\Assembler\LocationDTOAssembler.cs" />
+    <Compile Include="Bookings\Facade\Internal\BookingServiceFacadeImpl.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\NDDDSample.snk" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\application\NDDDSample.Application\NDDDSample.Application.csproj">
+      <Project>{D9890BDD-C115-48F2-9A12-80A516A31ED0}</Project>
+      <Name>NDDDSample.Application</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\domain\NDDDSample.Domain\NDDDSample.Domain.csproj">
       <Project>{A57A3967-E613-4598-94FF-BD55711D4CAD}</Project>
       <Name>NDDDSample.Domain</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\infrastructure\NDDDSample.Infrastructure\NDDDSample.Infrastructure.csproj">
+      <Project>{6D41623A-7B9E-4DFA-8F2A-1B4EBEF7F990}</Project>
+      <Name>NDDDSample.Infrastructure</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Bookings\Facade\Dto\" />
-    <Folder Include="Bookings\Facade\Internal\Assembler\" />
     <Folder Include="Bookings\Web\" />
     <Folder Include="Handlings\File\" />
     <Folder Include="Handlings\WS\" />

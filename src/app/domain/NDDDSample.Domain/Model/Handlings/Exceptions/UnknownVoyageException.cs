@@ -1,10 +1,6 @@
-﻿namespace NDDDSample.Domain.Model.Handlings
+﻿namespace NDDDSample.Domain.Model.Handlings.Exceptions
 {
-    #region Usings
-
     using Voyages;
-
-    #endregion
 
     /// <summary>
     /// Thrown when trying to register an event with an unknown carrier movement id.

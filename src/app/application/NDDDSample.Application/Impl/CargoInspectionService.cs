@@ -15,7 +15,7 @@
         private readonly IApplicationEvents applicationEvents;
         private readonly ICargoRepository cargoRepository;
         private readonly IHandlingEventRepository handlingEventRepository;
-        private readonly ILog logger = LogFactory.GetApplicationLayer();
+        private readonly ILog logger = LogFactory.GetApplicationLayerLogger();
 
         public CargoInspectionService(IApplicationEvents applicationEvents,
                                       ICargoRepository cargoRepository,

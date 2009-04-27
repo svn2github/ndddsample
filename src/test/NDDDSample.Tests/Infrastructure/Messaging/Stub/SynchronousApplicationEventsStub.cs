@@ -3,7 +3,6 @@
     #region Usings
 
     using Application;
-    using Interfaces.Handlings;
     using NDDDSample.Domain.Model.Cargos;
     using NDDDSample.Domain.Model.Handlings;
 

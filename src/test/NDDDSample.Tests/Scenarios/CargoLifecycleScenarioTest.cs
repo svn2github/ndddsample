@@ -11,6 +11,7 @@
     using Infrastructure.Persistence.Inmemory;
     using NDDDSample.Domain.Model.Cargos;
     using NDDDSample.Domain.Model.Handlings;
+    using NDDDSample.Domain.Model.Handlings.Exceptions;
     using NDDDSample.Domain.Model.Locations;
     using NDDDSample.Domain.Model.Voyages;
     using NDDDSample.Domain.Service;

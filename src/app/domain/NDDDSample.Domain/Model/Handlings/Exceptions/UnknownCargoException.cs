@@ -1,10 +1,6 @@
-﻿namespace NDDDSample.Domain.Model.Handlings
+﻿namespace NDDDSample.Domain.Model.Handlings.Exceptions
 {
-    #region Usings
-
     using Cargos;
-
-    #endregion
 
     public class UnknownCargoException : CannotCreateHandlingEventException
     {

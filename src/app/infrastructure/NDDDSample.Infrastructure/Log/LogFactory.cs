@@ -11,9 +11,18 @@
         /// The method returns a logger for Application layer.
         /// </summary>
         /// <returns>ILog</returns>
-        public static ILog GetApplicationLayer()
+        public static ILog GetApplicationLayerLogger()
         {
             return Log4NetLoggerProxy.GetLogger("ApplicationLayerLogger");
+        }
+        
+        /// <summary>
+        /// The method returns a logger for Interface layer.
+        /// </summary>
+        /// <returns>ILog</returns>
+        public static ILog GetInterfaceLayerLogger()
+        {
+            return Log4NetLoggerProxy.GetLogger("InterfaceLayerLogger");
         }
     }
 }

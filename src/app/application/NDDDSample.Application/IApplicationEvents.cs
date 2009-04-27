@@ -4,7 +4,6 @@
 
     using Domain.Model.Cargos;
     using Domain.Model.Handlings;
-    using Interfaces.Handlings;
 
     #endregion
 

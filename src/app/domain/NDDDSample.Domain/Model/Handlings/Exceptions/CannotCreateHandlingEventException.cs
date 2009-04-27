@@ -1,10 +1,6 @@
-﻿namespace NDDDSample.Domain.Model.Handlings
+﻿namespace NDDDSample.Domain.Model.Handlings.Exceptions
 {
-    #region Usings
-
     using System;
-
-    #endregion
 
     /// <summary>
     /// If a HandlingEvent can't be created from a given set of parameters.

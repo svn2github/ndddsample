@@ -16,7 +16,7 @@
     {
         private readonly ICargoRepository cargoRepository;
         private readonly ILocationRepository locationRepository;
-        private readonly ILog logger = LogFactory.GetApplicationLayer();
+        private readonly ILog logger = LogFactory.GetApplicationLayerLogger();
         private readonly IRoutingService routingService;
 
         public BookingService(ICargoRepository cargoRepository,
@@ -35,17 +35,15 @@
                                        DateTime arrivalDeadline)
         {
             using (var transactionScope = new TransactionScope())
-            {
-                // TODO modeling this as a cargo factory might be suitable
+            {              
                 TrackingId trackingId = cargoRepository.NextTrackingId();
                 Location origin = locationRepository.Find(originUnLocode);
                 Location destination = locationRepository.Find(destinationUnLocode);
-                var routeSpecification = new RouteSpecification(origin, destination, arrivalDeadline);
 
-                Cargo cargo = new Cargo(trackingId, routeSpecification);
+                Cargo cargo = CargoFactory.NewCargo(trackingId, origin, destination, arrivalDeadline);
 
                 cargoRepository.Store(cargo);
-                logger.Info("Booked new cargo with tracking id " + cargo.TrackingId.IdString);
+                logger.Info("Booked new cargo with tracking id " + cargo.TrackingId);
 
                 transactionScope.Complete();
                 return cargo.TrackingId;
@@ -63,7 +61,8 @@
                     return new List<Itinerary>();
                 }
 
-                IList<Itinerary> routesForSpecification = routingService.FetchRoutesForSpecification(cargo.RouteSpecification);
+                IList<Itinerary> routesForSpecification =
+                    routingService.FetchRoutesForSpecification(cargo.RouteSpecification);
                 transactionScope.Complete();
                 return routesForSpecification;
             }

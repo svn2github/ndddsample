@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="JavaRelated\ToStringBuilder.cs" />
     <Compile Include="Model\Cargos\Cargo.cs" />
+    <Compile Include="Model\Cargos\CargoFactory.cs" />
     <Compile Include="Model\Cargos\Delivery.cs" />
     <Compile Include="Model\Cargos\HandlingActivity.cs" />
     <Compile Include="Model\Cargos\ICargoRepository.cs" />
@@ -55,15 +56,15 @@
     <Compile Include="Model\Cargos\RoutingStatus.cs" />
     <Compile Include="Model\Cargos\TrackingId.cs" />
     <Compile Include="Model\Cargos\TransportStatus.cs" />
-    <Compile Include="Model\Handlings\CannotCreateHandlingEventException.cs" />
+    <Compile Include="Model\Handlings\Exceptions\CannotCreateHandlingEventException.cs" />
     <Compile Include="Model\Handlings\HandlingEvent.cs" />
     <Compile Include="Model\Handlings\HandlingEventFactory.cs" />
     <Compile Include="Model\Handlings\HandlingHistory.cs" />
     <Compile Include="Model\Handlings\HandlingType.cs" />
     <Compile Include="Model\Handlings\IHandlingEventRepository.cs" />
-    <Compile Include="Model\Handlings\UnknownCargoException.cs" />
-    <Compile Include="Model\Handlings\UnknownLocationException.cs" />
-    <Compile Include="Model\Handlings\UnknownVoyageException.cs" />
+    <Compile Include="Model\Handlings\Exceptions\UnknownCargoException.cs" />
+    <Compile Include="Model\Handlings\Exceptions\UnknownLocationException.cs" />
+    <Compile Include="Model\Handlings\Exceptions\UnknownVoyageException.cs" />
     <Compile Include="Model\Locations\Location.cs" />
     <Compile Include="Model\Locations\ILocationRepository.cs" />
     <Compile Include="Model\Locations\SampleLocations.cs" />

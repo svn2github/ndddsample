@@ -56,6 +56,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="HandlingEventRegistrationAttempt.cs" />
     <Compile Include="IApplicationEvents.cs" />
     <Compile Include="IBookingService.cs" />
     <Compile Include="ICargoInspectionService.cs" />
@@ -78,10 +79,6 @@
     <ProjectReference Include="..\..\infrastructure\NDDDSample.Infrastructure\NDDDSample.Infrastructure.csproj">
       <Project>{6D41623A-7B9E-4DFA-8F2A-1B4EBEF7F990}</Project>
       <Name>NDDDSample.Infrastructure</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\interfaces\NDDDSample.Interfaces\NDDDSample.Interfaces.csproj">
-      <Project>{BDA5AFA5-0114-4C4C-989E-29457FAA4FDF}</Project>
-      <Name>NDDDSample.Interfaces</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
