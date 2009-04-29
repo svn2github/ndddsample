@@ -12,7 +12,7 @@
     /// This facade shields the domain layer - model, services, repositories -
     /// from concerns about such things as the user interface and remoting.
     /// </summary>
-    public interface BookingServiceFacade
+    public interface IBookingServiceFacade
     {
         string BookNewCargo(string origin, string destination, DateTime arrivalDeadline);
 

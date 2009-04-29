@@ -47,7 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Bookings\Facade\BookingServiceFacade.cs" />
+    <Compile Include="Bookings\Facade\IBookingServiceFacade.cs" />
     <Compile Include="Bookings\Facade\Dto\CargoRoutingDTO.cs" />
     <Compile Include="Bookings\Facade\Dto\LegDTO.cs" />
     <Compile Include="Bookings\Facade\Dto\LocationDTO.cs" />

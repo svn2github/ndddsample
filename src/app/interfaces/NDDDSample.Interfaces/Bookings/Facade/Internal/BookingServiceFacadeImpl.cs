@@ -20,7 +20,7 @@
     /// service and for keeping the OR-mapper unit-of-work open during DTO assembly,
     /// analogous to the view rendering for web interfaces.
     /// </summary>
-    public class BookingServiceFacadeImpl : BookingServiceFacade
+    public class BookingServiceFacadeImpl : IBookingServiceFacade
     {
         private readonly ILog logger = LogFactory.GetInterfaceLayerLogger();
         private IBookingService bookingService;
@@ -28,7 +28,7 @@
         private ILocationRepository locationRepository;
         private IVoyageRepository voyageRepository;
 
-        #region BookingServiceFacade Members
+        #region IBookingServiceFacade Members
 
         public IList<LocationDTO> ListShippingLocations()
         {
