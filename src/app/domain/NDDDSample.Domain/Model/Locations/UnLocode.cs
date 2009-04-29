@@ -3,7 +3,7 @@
     #region Usings
 
     using System.Text.RegularExpressions;
-    using JavaRelated;
+    using Infrastructure.Validations;
     using Shared;
 
     #endregion

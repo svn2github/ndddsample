@@ -3,10 +3,10 @@
     #region Usings
 
     using System.Transactions;
-    using Domain.JavaRelated;
     using Domain.Model.Cargos;
     using Domain.Model.Handlings;
     using Infrastructure.Log;
+    using Infrastructure.Validations;
 
     #endregion
 

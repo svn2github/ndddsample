@@ -1,11 +1,11 @@
 ﻿namespace NDDDSample.Application
 {
     using System;
-    using Domain.JavaRelated;
     using Domain.Model.Cargos;
     using Domain.Model.Handlings;
     using Domain.Model.Locations;
     using Domain.Model.Voyages;
+    using Infrastructure.Builders;
 
     /// <summary>
     /// This is a simple transfer object for passing incoming handling event

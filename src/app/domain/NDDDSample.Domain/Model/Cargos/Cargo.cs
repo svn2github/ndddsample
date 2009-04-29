@@ -3,7 +3,7 @@ namespace NDDDSample.Domain.Model.Cargos
     #region Usings
 
     using Handlings;
-    using JavaRelated;
+    using Infrastructure.Validations;
     using Locations;
     using Shared;
 

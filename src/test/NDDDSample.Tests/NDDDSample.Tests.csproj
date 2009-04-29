@@ -67,9 +67,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Domain\JavaRelated\EqualsBuilderTest.cs" />
-    <Compile Include="Domain\JavaRelated\HashCodeBuilderTest.cs" />
-    <Compile Include="Domain\JavaRelated\ToStringBuilderTest.cs" />
+    <Compile Include="Infrastructure\Builders\EqualsBuilderTest.cs" />
+    <Compile Include="Infrastructure\Builders\HashCodeBuilderTest.cs" />
+    <Compile Include="Infrastructure\Builders\ToStringBuilderTest.cs" />
     <Compile Include="Domain\Model\Cargos\CargoTest.cs" />
     <Compile Include="Domain\Model\Cargos\DeliveryTest.cs" />
     <Compile Include="Domain\Model\Cargos\ItineraryTest.cs" />
@@ -113,6 +113,10 @@
     <ProjectReference Include="..\..\app\domain\NDDDSample.Domain\NDDDSample.Domain.csproj">
       <Project>{A57A3967-E613-4598-94FF-BD55711D4CAD}</Project>
       <Name>NDDDSample.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\app\infrastructure\NDDDSample.Infrastructure\NDDDSample.Infrastructure.csproj">
+      <Project>{6D41623A-7B9E-4DFA-8F2A-1B4EBEF7F990}</Project>
+      <Name>NDDDSample.Infrastructure</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\app\infrastructure\NDDDSample.Persistence.NHibernate\NDDDSample.Persistence.NHibernate.csproj">
       <Project>{97413EF7-9172-4467-AB4E-ED1155272BD5}</Project>

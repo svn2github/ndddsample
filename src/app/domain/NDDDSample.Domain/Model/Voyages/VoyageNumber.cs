@@ -3,7 +3,7 @@
     #region Usings
 
     using System;
-    using JavaRelated;
+    using Infrastructure.Validations;
     using Shared;
 
     #endregion

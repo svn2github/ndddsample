@@ -44,7 +44,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="JavaRelated\ToStringBuilder.cs" />
     <Compile Include="Model\Cargos\Cargo.cs" />
     <Compile Include="Model\Cargos\CargoFactory.cs" />
     <Compile Include="Model\Cargos\Delivery.cs" />
@@ -72,7 +71,6 @@
     <Compile Include="Model\Voyages\CarrierMovement.cs" />
     <Compile Include="Model\Voyages\IVoyageRepository.cs" />
     <Compile Include="Model\Voyages\SampleVoyages.cs" />
-    <Compile Include="JavaRelated\EqualsBuilder.cs" />
     <Compile Include="Model\Voyages\Schedule.cs" />
     <Compile Include="Model\Voyages\Voyage.cs" />
     <Compile Include="Model\Voyages\VoyageNumber.cs" />
@@ -88,12 +86,15 @@
     <Compile Include="Shared\IValueObject.cs" />
     <Compile Include="Shared\NotSpecification.cs" />
     <Compile Include="Shared\OrSpecification.cs" />
-    <Compile Include="JavaRelated\ExtentionMethods.cs" />
-    <Compile Include="JavaRelated\HashCodeBuilder.cs" />
-    <Compile Include="JavaRelated\Validate.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\NDDDSample.snk" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\infrastructure\NDDDSample.Infrastructure\NDDDSample.Infrastructure.csproj">
+      <Project>{6D41623A-7B9E-4DFA-8F2A-1B4EBEF7F990}</Project>
+      <Name>NDDDSample.Infrastructure</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

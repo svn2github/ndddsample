@@ -51,10 +51,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Builders\EqualsBuilder.cs" />
+    <Compile Include="Builders\HashCodeBuilder.cs" />
+    <Compile Include="Builders\ToStringBuilder.cs" />
     <Compile Include="Log\ILog.cs" />
     <Compile Include="Log\Log4NetLoggerProxy.cs" />
     <Compile Include="Log\LogFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utils\DateTimeUtil.cs" />
+    <Compile Include="Utils\ListUtil.cs" />
+    <Compile Include="Validations\Validate.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\NDDDSample.snk" />

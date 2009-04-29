@@ -2,7 +2,7 @@ namespace NDDDSample.Domain.Model.Cargos
 {
     #region Usings
 
-    using JavaRelated;
+    using Infrastructure.Validations;
     using Shared;
 
     #endregion

@@ -4,7 +4,7 @@
 
     using System;
     using System.Collections.Generic;
-    using Domain.JavaRelated;
+    using Infrastructure.Utils;
 
     #endregion
 

@@ -2,7 +2,7 @@
 {
     #region Usings
 
-    using JavaRelated;
+    using Infrastructure.Validations;
     using Shared;
 
     #endregion
