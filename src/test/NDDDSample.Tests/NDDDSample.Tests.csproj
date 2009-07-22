@@ -122,9 +122,9 @@
       <Project>{97413EF7-9172-4467-AB4E-ED1155272BD5}</Project>
       <Name>NDDDSample.Persistence.NHibernate</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\app\interfaces\NDDDSample.Interfaces\NDDDSample.Interfaces.csproj">
+    <ProjectReference Include="..\..\app\interfaces\NDDDSample.Interfaces\NDDDSample.Interfaces.BookingRemoteService.Common.csproj">
       <Project>{BDA5AFA5-0114-4C4C-989E-29457FAA4FDF}</Project>
-      <Name>NDDDSample.Interfaces</Name>
+      <Name>NDDDSample.Interfaces.BookingRemoteService.Common</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

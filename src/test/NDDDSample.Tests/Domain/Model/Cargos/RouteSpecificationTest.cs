@@ -1,12 +1,12 @@
-﻿namespace NDDDSample.Tests.Domain.Model.Cargos
+namespace NDDDSample.Tests.Domain.Model.Cargos
 {
     #region Usings
 
     using System.Collections.Generic;
-    using Application.Utils;
     using NDDDSample.Domain.Model.Cargos;
     using NDDDSample.Domain.Model.Locations;
     using NDDDSample.Domain.Model.Voyages;
+    using NDDDSample.Infrastructure;
     using NUnit.Framework;
 
     #endregion
@@ -16,15 +16,15 @@
     {
         private static readonly Voyage hongKongTokyoNewYork = new Voyage.Builder(
             new VoyageNumber("V001"), SampleLocations.HONGKONG).
-            AddMovement(SampleLocations.TOKYO, DateTestUtil.ToDate("2009-02-01"), DateTestUtil.ToDate("2009-02-05")).
-            AddMovement(SampleLocations.NEWYORK, DateTestUtil.ToDate("2009-02-06"), DateTestUtil.ToDate("2009-02-10")).
-            AddMovement(SampleLocations.HONGKONG, DateTestUtil.ToDate("2009-02-11"), DateTestUtil.ToDate("2009-02-14")).
+            AddMovement(SampleLocations.TOKYO, DateUtil.ToDate("2009-02-01"), DateUtil.ToDate("2009-02-05")).
+            AddMovement(SampleLocations.NEWYORK, DateUtil.ToDate("2009-02-06"), DateUtil.ToDate("2009-02-10")).
+            AddMovement(SampleLocations.HONGKONG, DateUtil.ToDate("2009-02-11"), DateUtil.ToDate("2009-02-14")).
             Build();
 
         private static readonly Voyage dallasNewYorkChicago = new Voyage.Builder(
             new VoyageNumber("V002"), SampleLocations.DALLAS).
-            AddMovement(SampleLocations.NEWYORK, DateTestUtil.ToDate("2009-02-06"), DateTestUtil.ToDate("2009-02-07")).
-            AddMovement(SampleLocations.CHICAGO, DateTestUtil.ToDate("2009-02-12"), DateTestUtil.ToDate("2009-02-20")).
+            AddMovement(SampleLocations.NEWYORK, DateUtil.ToDate("2009-02-06"), DateUtil.ToDate("2009-02-07")).
+            AddMovement(SampleLocations.CHICAGO, DateUtil.ToDate("2009-02-12"), DateUtil.ToDate("2009-02-20")).
             Build();
 
         // TODO:
@@ -35,20 +35,20 @@
                                                                      new Leg(hongKongTokyoNewYork,
                                                                              SampleLocations.HONGKONG,
                                                                              SampleLocations.NEWYORK,
-                                                                             DateTestUtil.ToDate("2009-02-01"),
-                                                                             DateTestUtil.ToDate("2009-02-10")),
+                                                                             DateUtil.ToDate("2009-02-01"),
+                                                                             DateUtil.ToDate("2009-02-10")),
                                                                      new Leg(dallasNewYorkChicago,
                                                                              SampleLocations.NEWYORK,
                                                                              SampleLocations.CHICAGO,
-                                                                             DateTestUtil.ToDate("2009-02-12"),
-                                                                             DateTestUtil.ToDate("2009-02-20"))
+                                                                             DateUtil.ToDate("2009-02-12"),
+                                                                             DateUtil.ToDate("2009-02-20"))
                                                                  });
 
         [Test]
         public void testIsSatisfiedBy_Success()
         {
             var routeSpecification = new RouteSpecification(
-                SampleLocations.HONGKONG, SampleLocations.CHICAGO, DateTestUtil.ToDate("2009-03-01"));
+                SampleLocations.HONGKONG, SampleLocations.CHICAGO, DateUtil.ToDate("2009-03-01"));
 
             Assert.IsTrue(routeSpecification.IsSatisfiedBy(itinerary));
         }
@@ -57,7 +57,7 @@
         public void testIsSatisfiedBy_WrongOrigin()
         {
             var routeSpecification = new RouteSpecification(
-                SampleLocations.HANGZOU, SampleLocations.CHICAGO, DateTestUtil.ToDate("2009-03-01"));
+                SampleLocations.HANGZOU, SampleLocations.CHICAGO, DateUtil.ToDate("2009-03-01"));
 
             Assert.IsFalse(routeSpecification.IsSatisfiedBy(itinerary));
         }
@@ -66,7 +66,7 @@
         public void testIsSatisfiedBy_WrongDestination()
         {
             var routeSpecification = new RouteSpecification(
-                SampleLocations.HONGKONG, SampleLocations.DALLAS, DateTestUtil.ToDate("2009-03-01"));
+                SampleLocations.HONGKONG, SampleLocations.DALLAS, DateUtil.ToDate("2009-03-01"));
 
             Assert.IsFalse(routeSpecification.IsSatisfiedBy(itinerary));
         }
@@ -75,7 +75,7 @@
         public void testIsSatisfiedBy_MissedDeadline()
         {
             var routeSpecification = new RouteSpecification(
-                SampleLocations.HONGKONG, SampleLocations.CHICAGO, DateTestUtil.ToDate("2009-02-15"));
+                SampleLocations.HONGKONG, SampleLocations.CHICAGO, DateUtil.ToDate("2009-02-15"));
 
             Assert.IsFalse(routeSpecification.IsSatisfiedBy(itinerary));
         }

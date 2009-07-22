@@ -8,8 +8,8 @@
     <ProjectGuid>{BDA5AFA5-0114-4C4C-989E-29457FAA4FDF}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>NDDDSample.Interfaces</RootNamespace>
-    <AssemblyName>NDDDSample.Interfaces</AssemblyName>
+    <RootNamespace>NDDDSample.Interfaces.BookingRemoteService.Common</RootNamespace>
+    <AssemblyName>NDDDSample.Interfaces.BookingRemoteService.Common</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SignAssembly>true</SignAssembly>
@@ -37,6 +37,12 @@
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Runtime.Serialization">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.ServiceModel">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -47,15 +53,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Bookings\Facade\IBookingServiceFacade.cs" />
-    <Compile Include="Bookings\Facade\Dto\CargoRoutingDTO.cs" />
-    <Compile Include="Bookings\Facade\Dto\LegDTO.cs" />
-    <Compile Include="Bookings\Facade\Dto\LocationDTO.cs" />
-    <Compile Include="Bookings\Facade\Dto\RouteCandidateDTO.cs" />
-    <Compile Include="Bookings\Facade\Internal\Assembler\CargoRoutingDTOAssembler.cs" />
-    <Compile Include="Bookings\Facade\Internal\Assembler\ItineraryCandidateDTOAssembler.cs" />
-    <Compile Include="Bookings\Facade\Internal\Assembler\LocationDTOAssembler.cs" />
-    <Compile Include="Bookings\Facade\Internal\BookingServiceFacadeImpl.cs" />
+    <Compile Include="IBookingServiceFacade.cs" />
+    <Compile Include="Dto\CargoRoutingDTO.cs" />
+    <Compile Include="Dto\LegDTO.cs" />
+    <Compile Include="Dto\LocationDTO.cs" />
+    <Compile Include="Dto\RouteCandidateDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -74,12 +76,6 @@
       <Project>{6D41623A-7B9E-4DFA-8F2A-1B4EBEF7F990}</Project>
       <Name>NDDDSample.Infrastructure</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Bookings\Web\" />
-    <Folder Include="Handlings\File\" />
-    <Folder Include="Handlings\WS\" />
-    <Folder Include="Trackings\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

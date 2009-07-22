@@ -5,12 +5,12 @@
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
-    using System.Globalization;
-    using Application.Utils;
+    using System.Globalization;    
     using NDDDSample.Domain.Model.Cargos;
     using NDDDSample.Domain.Model.Handlings;
     using NDDDSample.Domain.Model.Locations;
     using NDDDSample.Domain.Model.Voyages;
+    using NDDDSample.Infrastructure;
     using NUnit.Framework;
 
     #endregion
@@ -37,7 +37,7 @@
         public void testConstruction()
         {
             var trackingId = new TrackingId("XYZ");
-            var arrivalDeadline = DateTestUtil.ToDate("2009-03-13");
+            var arrivalDeadline = DateUtil.ToDate("2009-03-13");
             var routeSpecification = new RouteSpecification(
                 SampleLocations.STOCKHOLM, SampleLocations.MELBOURNE, arrivalDeadline);
 

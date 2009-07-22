@@ -1,11 +1,11 @@
-﻿namespace NDDDSample.Tests.Infrastructure.Persistence.NHibernate
+namespace NDDDSample.Tests.Infrastructure.Persistence.NHibernate
 {
     #region Usings
 
     using System.Reflection;
-    using Application.Utils;
     using NDDDSample.Domain.Model.Cargos;
     using NDDDSample.Persistence.NHibernate;
+    using NDDDSample.Persistence.NHibernate.Utils;
     using NUnit.Framework;
     using Rhino.Commons;
     using Rhino.Commons.ForTesting;

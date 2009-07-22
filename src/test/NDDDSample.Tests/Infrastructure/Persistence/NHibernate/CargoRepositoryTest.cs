@@ -5,12 +5,12 @@
     using System;
     using System.Collections;
     using System.Collections.Generic;
-    using Application.Utils;
     using NDDDSample.Domain.Model.Cargos;
     using NDDDSample.Domain.Model.Handlings;
     using NDDDSample.Domain.Model.Locations;
     using NDDDSample.Domain.Model.Voyages;
     using NDDDSample.Persistence.NHibernate;
+    using NDDDSample.Persistence.NHibernate.Utils;
     using NUnit.Framework;
     using Rhino.Commons;
 
