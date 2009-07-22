@@ -51,19 +51,39 @@
     </Reference>
     <Reference Include="Castle.Core, Version=1.0.3.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\src\app\presentation\NDDDSample.Web\bin\Castle.Core.dll</HintPath>
+      <HintPath>..\..\..\..\lib\Rhino\Castle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.DynamicProxy2, Version=2.0.3.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\lib\Rhino\Castle.DynamicProxy2.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Facilities.AutomaticTransactionManagement, Version=1.0.3.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\lib\Rhino\Castle.Facilities.AutomaticTransactionManagement.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Facilities.Logging, Version=1.0.3.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\lib\Rhino\Castle.Facilities.Logging.dll</HintPath>
     </Reference>
     <Reference Include="Castle.Facilities.WcfIntegration, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\lib\Castle.Facilities.WcfIntegration.dll</HintPath>
+      <HintPath>..\..\..\..\lib\Rhino\Castle.Facilities.WcfIntegration.dll</HintPath>
     </Reference>
     <Reference Include="Castle.MicroKernel, Version=1.0.3.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\src\app\presentation\NDDDSample.Web\bin\Castle.MicroKernel.dll</HintPath>
+      <HintPath>..\..\..\..\lib\Rhino\Castle.MicroKernel.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Services.Logging.Log4netIntegration, Version=1.0.3.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\lib\Rhino\Castle.Services.Logging.Log4netIntegration.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Services.Transaction, Version=1.0.3.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\lib\Rhino\Castle.Services.Transaction.dll</HintPath>
     </Reference>
     <Reference Include="Castle.Windsor, Version=1.0.3.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\src\app\presentation\NDDDSample.Web\bin\Castle.Windsor.dll</HintPath>
+      <HintPath>..\..\..\..\lib\Rhino\Castle.Windsor.dll</HintPath>
     </Reference>
     <Reference Include="NHibernate, Version=2.1.0.1001, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -116,13 +136,13 @@
     <Compile Include="UnitOfWorkContext.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\NDDDSample.Interfaces.BookingRemoteService.Common\NDDDSample.Interfaces.BookingRemoteService.Common.csproj">
+      <Project>{B293706A-1955-4A51-9E87-E7F03FB3728B}</Project>
+      <Name>NDDDSample.Interfaces.BookingRemoteService.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\NDDDSample.Interfaces.BookingRemoteService\NDDDSample.Interfaces.BookingRemoteService.csproj">
       <Project>{7C9A434D-BC0E-4692-862D-56F57D39EFD6}</Project>
       <Name>NDDDSample.Interfaces.BookingRemoteService</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\NDDDSample.Interfaces\NDDDSample.Interfaces.BookingRemoteService.Common.csproj">
-      <Project>{BDA5AFA5-0114-4C4C-989E-29457FAA4FDF}</Project>
-      <Name>NDDDSample.Interfaces.BookingRemoteService.Common</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

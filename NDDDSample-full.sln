@@ -7,8 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NDDDSample.Tests", "src\tes
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NDDDSample.Application", "src\app\application\NDDDSample.Application\NDDDSample.Application.csproj", "{D9890BDD-C115-48F2-9A12-80A516A31ED0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NDDDSample.Interfaces.BookingRemoteService.Common", "src\app\interfaces\NDDDSample.Interfaces\NDDDSample.Interfaces.BookingRemoteService.Common.csproj", "{BDA5AFA5-0114-4C4C-989E-29457FAA4FDF}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NDDDSample.Infrastructure", "src\app\infrastructure\NDDDSample.Infrastructure\NDDDSample.Infrastructure.csproj", "{6D41623A-7B9E-4DFA-8F2A-1B4EBEF7F990}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NDDDSample.Persistence.NHibernate", "src\app\infrastructure\NDDDSample.Persistence.NHibernate\NDDDSample.Persistence.NHibernate.csproj", "{97413EF7-9172-4467-AB4E-ED1155272BD5}"
@@ -31,6 +29,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NDDDSample.Interfaces.Booki
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NDDDSample.Interfaces.BookingRemoteService.Host", "src\app\interfaces\NDDDSample.Interfaces.BookingRemoteService.Host\NDDDSample.Interfaces.BookingRemoteService.Host.csproj", "{C9DF9187-3933-4B5C-9603-BFE9262F922B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NDDDSample.Interfaces.BookingRemoteService.Common", "src\app\interfaces\NDDDSample.Interfaces.BookingRemoteService.Common\NDDDSample.Interfaces.BookingRemoteService.Common.csproj", "{B293706A-1955-4A51-9E87-E7F03FB3728B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -49,10 +49,6 @@ Global
 		{D9890BDD-C115-48F2-9A12-80A516A31ED0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D9890BDD-C115-48F2-9A12-80A516A31ED0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D9890BDD-C115-48F2-9A12-80A516A31ED0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BDA5AFA5-0114-4C4C-989E-29457FAA4FDF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BDA5AFA5-0114-4C4C-989E-29457FAA4FDF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BDA5AFA5-0114-4C4C-989E-29457FAA4FDF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BDA5AFA5-0114-4C4C-989E-29457FAA4FDF}.Release|Any CPU.Build.0 = Release|Any CPU
 		{6D41623A-7B9E-4DFA-8F2A-1B4EBEF7F990}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6D41623A-7B9E-4DFA-8F2A-1B4EBEF7F990}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6D41623A-7B9E-4DFA-8F2A-1B4EBEF7F990}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -77,6 +73,10 @@ Global
 		{C9DF9187-3933-4B5C-9603-BFE9262F922B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C9DF9187-3933-4B5C-9603-BFE9262F922B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C9DF9187-3933-4B5C-9603-BFE9262F922B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B293706A-1955-4A51-9E87-E7F03FB3728B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B293706A-1955-4A51-9E87-E7F03FB3728B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B293706A-1955-4A51-9E87-E7F03FB3728B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B293706A-1955-4A51-9E87-E7F03FB3728B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -84,9 +84,9 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{A57A3967-E613-4598-94FF-BD55711D4CAD} = {9B70223D-B545-4D88-A14A-F0CB585755C5}
 		{D9890BDD-C115-48F2-9A12-80A516A31ED0} = {6E741043-7965-4832-ADEA-2A584834E616}
-		{BDA5AFA5-0114-4C4C-989E-29457FAA4FDF} = {258AD889-2D2E-4751-B739-7345FE523B32}
 		{7C9A434D-BC0E-4692-862D-56F57D39EFD6} = {258AD889-2D2E-4751-B739-7345FE523B32}
 		{C9DF9187-3933-4B5C-9603-BFE9262F922B} = {258AD889-2D2E-4751-B739-7345FE523B32}
+		{B293706A-1955-4A51-9E87-E7F03FB3728B} = {258AD889-2D2E-4751-B739-7345FE523B32}
 		{97413EF7-9172-4467-AB4E-ED1155272BD5} = {24174AD1-2261-4839-89B9-E436807DAE6E}
 		{6D41623A-7B9E-4DFA-8F2A-1B4EBEF7F990} = {24174AD1-2261-4839-89B9-E436807DAE6E}
 		{CA4C3E92-0FBC-4305-BD7C-D546FEAAA5D7} = {A821E548-F2CD-4F83-A652-65DB305AE952}
