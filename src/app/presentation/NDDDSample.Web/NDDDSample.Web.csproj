@@ -62,9 +62,21 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\lib\Rhino\Castle.Facilities.AutomaticTransactionManagement.dll</HintPath>
     </Reference>
+    <Reference Include="Castle.Facilities.Logging, Version=1.0.3.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\lib\Rhino\Castle.Facilities.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Facilities.WcfIntegration, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\lib\Rhino\Castle.Facilities.WcfIntegration.dll</HintPath>
+    </Reference>
     <Reference Include="Castle.MicroKernel, Version=1.0.3.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\lib\Rhino\Castle.MicroKernel.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Services.Logging.Log4netIntegration, Version=1.0.3.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\lib\Rhino\Castle.Services.Logging.Log4netIntegration.dll</HintPath>
     </Reference>
     <Reference Include="Castle.Services.Transaction, Version=1.0.3.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -226,7 +238,6 @@
     <Compile Include="Views\Shared\Site.Master.designer.cs">
       <DependentUpon>Site.Master</DependentUpon>
     </Compile>
-    <Compile Include="Initializers\WindsorExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Default.aspx" />
@@ -247,6 +258,14 @@
     <Content Include="Views\Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\infrastructure\NDDDSample.Infrastructure\NDDDSample.Infrastructure.csproj">
+      <Project>{6D41623A-7B9E-4DFA-8F2A-1B4EBEF7F990}</Project>
+      <Name>NDDDSample.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\interfaces\NDDDSample.Interfaces.BookingRemoteService.Common\NDDDSample.Interfaces.BookingRemoteService.Common.csproj">
+      <Project>{B293706A-1955-4A51-9E87-E7F03FB3728B}</Project>
+      <Name>NDDDSample.Interfaces.BookingRemoteService.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\NDDDSample.Web.Controllers\NDDDSample.Web.Controllers.csproj">
       <Project>{CA4C3E92-0FBC-4305-BD7C-D546FEAAA5D7}</Project>
       <Name>NDDDSample.Web.Controllers</Name>
@@ -276,9 +295,9 @@
     <Content Include="Scripts\event.js" />
     <Content Include="Scripts\YAHOO.js" />
     <Content Include="Views\CargoTracking\Search.aspx" />
-    <Content Include="Windsor.boo">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Windsor.config" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v9.0\WebApplications\Microsoft.WebApplication.targets" />

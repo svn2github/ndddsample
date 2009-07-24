@@ -6,6 +6,8 @@ namespace NDDDSample.Web.Controllers.Tracking
     using System.Web.Mvc;
     using Domain.Model.Cargos;
     using Domain.Model.Handlings;
+    using Interfaces.BookingRemoteService.Common;
+    using Interfaces.BookingRemoteService.Common.Dto;
 
     #endregion
 
@@ -17,17 +19,17 @@ namespace NDDDSample.Web.Controllers.Tracking
     public class CargoTrackingController : Controller
     {
         private readonly ICargoRepository CargoRepository;
-        private readonly IHandlingEventRepository HandlingEventRepository;
+        private readonly IHandlingEventRepository HandlingEventRepository;        
 
         public CargoTrackingController(ICargoRepository cargoRepository,
                                        IHandlingEventRepository handlingEventRepository)
         {
             this.CargoRepository = cargoRepository;
-            this.HandlingEventRepository = handlingEventRepository;
+            this.HandlingEventRepository = handlingEventRepository;            
         }
 
         public ActionResult Index()
-        {
+        {           
             SetPageTitle();
             return View("Search", null);
         }

@@ -2,8 +2,13 @@ namespace NDDDSample.Web.Initializers
 {
     #region Usings
 
+    using System;
+    using Castle.Facilities.WcfIntegration;
     using Castle.MicroKernel.Registration;
     using Castle.Windsor;
+    using Castle.Windsor.Installer;
+    using Infrastructure.Utils;
+    using Interfaces.BookingRemoteService.Common;
 
     #endregion
 

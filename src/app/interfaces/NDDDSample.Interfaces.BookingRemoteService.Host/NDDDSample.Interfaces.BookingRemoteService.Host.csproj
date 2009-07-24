@@ -85,6 +85,14 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\lib\Rhino\Castle.Windsor.dll</HintPath>
     </Reference>
+    <Reference Include="Iesi.Collections, Version=1.0.1.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\presentation\NDDDSample.Web\bin\Iesi.Collections.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\presentation\NDDDSample.Web\bin\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="NHibernate, Version=2.1.0.1001, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\src\app\presentation\NDDDSample.Web\bin\NHibernate.dll</HintPath>
@@ -117,6 +125,10 @@
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Data.SQLite, Version=1.0.35.1, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\lib\Rhino\System.Data.SQLite.DLL</HintPath>
+    </Reference>
     <Reference Include="System.ServiceModel">
       <RequiredTargetFramework>3.0</RequiredTargetFramework>
     </Reference>
@@ -130,12 +142,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IoC\ContainerBuilder.cs" />
+    <Compile Include="Wcf\LifestyleMessageAction.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UnitOfWorkBehavior.cs" />
-    <Compile Include="UnitOfWorkContext.cs" />
+    <Compile Include="Wcf\UnitOfWorkBehavior.cs" />
+    <Compile Include="Wcf\UnitOfWorkContext.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\infrastructure\NDDDSample.Infrastructure\NDDDSample.Infrastructure.csproj">
+      <Project>{6D41623A-7B9E-4DFA-8F2A-1B4EBEF7F990}</Project>
+      <Name>NDDDSample.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\infrastructure\NDDDSample.Persistence.NHibernate\NDDDSample.Persistence.NHibernate.csproj">
+      <Project>{97413EF7-9172-4467-AB4E-ED1155272BD5}</Project>
+      <Name>NDDDSample.Persistence.NHibernate</Name>
+    </ProjectReference>
     <ProjectReference Include="..\NDDDSample.Interfaces.BookingRemoteService.Common\NDDDSample.Interfaces.BookingRemoteService.Common.csproj">
       <Project>{B293706A-1955-4A51-9E87-E7F03FB3728B}</Project>
       <Name>NDDDSample.Interfaces.BookingRemoteService.Common</Name>
@@ -147,6 +169,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Windsor.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Content Include="hibernate.cfg.xml">

@@ -1,9 +1,13 @@
-﻿namespace NDDDSample.Interfaces.BookingRemoteService.Host
+﻿namespace NDDDSample.Interfaces.BookingRemoteService.Host.Wcf
 {
+    #region Usings
+
     using System.ServiceModel;
     using System.ServiceModel.Channels;
     using System.ServiceModel.Dispatcher;
     using Rhino.Commons;
+
+    #endregion
 
     public class UnitOfWorkContext : ICallContextInitializer
     {
@@ -19,6 +23,7 @@
 
         public void AfterInvoke(object correlationState)
         {
+            //TODO:revise UoW logic
             if (UnitOfWork != null)
             {
                 UnitOfWork.Dispose();
@@ -26,5 +31,4 @@
             }
         }
     }
-
 }

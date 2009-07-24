@@ -1,12 +1,8 @@
-namespace NDDDSample.Web.Initializers
+namespace NDDDSample.Infrastructure.Utils
 {
-    #region Usings
-
     using System;
     using System.Linq;
     using Castle.MicroKernel.Registration;
-
-    #endregion
 
     public static class WindsorExtensions
     {

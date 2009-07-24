@@ -79,6 +79,10 @@
       <Project>{6D41623A-7B9E-4DFA-8F2A-1B4EBEF7F990}</Project>
       <Name>NDDDSample.Infrastructure</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\interfaces\NDDDSample.Interfaces.BookingRemoteService.Common\NDDDSample.Interfaces.BookingRemoteService.Common.csproj">
+      <Project>{B293706A-1955-4A51-9E87-E7F03FB3728B}</Project>
+      <Name>NDDDSample.Interfaces.BookingRemoteService.Common</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

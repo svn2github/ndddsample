@@ -6,7 +6,7 @@
     <property name="connection.provider">NHibernate.Connection.DriverConnectionProvider</property>
     <property name="dialect">NHibernate.Dialect.SQLiteDialect</property>
     <property name="connection.driver_class">NHibernate.Driver.SQLite20Driver</property>
-    <property name="connection.connection_string">Data Source=CargoDb.db;Version=3;New=True;</property>
+    <property name="connection.connection_string">Data Source=C:\CargoDb.s3db;Version=3;New=True;Pooling=True</property>
     <property name="connection.release_mode">on_close</property>
 
     <property name="show_sql">true</property>		

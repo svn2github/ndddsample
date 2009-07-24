@@ -1,4 +1,4 @@
-namespace NDDDSample.Interfaces.BookingRemoteService.Host
+namespace NDDDSample.Interfaces.BookingRemoteService.Host.Wcf
 {
     #region Usings
 

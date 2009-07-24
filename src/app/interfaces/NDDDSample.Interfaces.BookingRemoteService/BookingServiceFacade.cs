@@ -20,23 +20,34 @@
     public class BookingServiceFacade : IBookingServiceFacade
     {
         private readonly ILog logger = LogFactory.GetInterfaceLayerLogger();
-        private IBookingService bookingService;
-        private ICargoRepository cargoRepository;
-        private ILocationRepository locationRepository;
-        private IVoyageRepository voyageRepository;
+        private IBookingService BookingService;
+        private ICargoRepository CargoRepository;
+        private ILocationRepository LocationRepository;
+        private IVoyageRepository VoyageRepository;
+
+        public BookingServiceFacade(IBookingService bookingService,
+            ICargoRepository cargoRepository, 
+            ILocationRepository locationRepository,
+            IVoyageRepository voyageRepository)
+        {
+            this.BookingService = bookingService;
+            this.CargoRepository = cargoRepository;
+            this.LocationRepository = locationRepository;
+            this.VoyageRepository = voyageRepository;
+        }
 
         #region IBookingServiceFacade Members
 
         public IList<LocationDTO> ListShippingLocations()
         {
-            IList<Location> allLocations = locationRepository.FindAll();
+            IList<Location> allLocations = LocationRepository.FindAll();
             var assembler = new LocationDTOAssembler();
             return assembler.ToDTOList(allLocations);
         }
 
         public string BookNewCargo(string origin, string destination, DateTime arrivalDeadline)
         {
-            TrackingId trackingId = bookingService.BookNewCargo(
+            TrackingId trackingId = BookingService.BookNewCargo(
                 new UnLocode(origin),
                 new UnLocode(destination),
                 arrivalDeadline
@@ -47,30 +58,30 @@
 
         public CargoRoutingDTO LoadCargoForRouting(string trackingId)
         {
-            Cargo cargo = cargoRepository.Find(new TrackingId(trackingId));
+            Cargo cargo = CargoRepository.Find(new TrackingId(trackingId));
             var assembler = new CargoRoutingDTOAssembler();
             return assembler.ToDTO(cargo);
         }
 
         public void AssignCargoToRoute(string trackingIdStr, RouteCandidateDTO routeCandidateDTO)
         {
-            Itinerary itinerary = new ItineraryCandidateDTOAssembler().FromDTO(routeCandidateDTO, voyageRepository,
-                                                                               locationRepository);
+            Itinerary itinerary = new ItineraryCandidateDTOAssembler().FromDTO(routeCandidateDTO, VoyageRepository,
+                                                                               LocationRepository);
             TrackingId trackingId = new TrackingId(trackingIdStr);
 
-            bookingService.AssignCargoToRoute(itinerary, trackingId);
+            BookingService.AssignCargoToRoute(itinerary, trackingId);
         }
 
 
         public void ChangeDestination(string trackingId, string destinationUnLocode)
         {
-            bookingService.ChangeDestination(new TrackingId(trackingId), new UnLocode(destinationUnLocode));
+            BookingService.ChangeDestination(new TrackingId(trackingId), new UnLocode(destinationUnLocode));
         }
 
 
         public IList<CargoRoutingDTO> ListAllCargos()
         {
-            IList<Cargo> cargoList = cargoRepository.FindAll();
+            IList<Cargo> cargoList = CargoRepository.FindAll();
             List<CargoRoutingDTO> dtoList = new List<CargoRoutingDTO>(cargoList.Count);
             CargoRoutingDTOAssembler assembler = new CargoRoutingDTOAssembler();
             foreach (Cargo cargo in cargoList)
@@ -83,7 +94,7 @@
 
         public IList<RouteCandidateDTO> RequestPossibleRoutesForCargo(string trackingId)
         {
-            IList<Itinerary> itineraries = bookingService.RequestPossibleRoutesForCargo(new TrackingId(trackingId));
+            IList<Itinerary> itineraries = BookingService.RequestPossibleRoutesForCargo(new TrackingId(trackingId));
 
             var routeCandidates = new List<RouteCandidateDTO>(itineraries.Count);
             var dtoAssembler = new ItineraryCandidateDTOAssembler();
@@ -97,25 +108,5 @@
         }
 
         #endregion
-
-        public void SetBookingService(IBookingService bookingService)
-        {
-            this.bookingService = bookingService;
-        }
-
-        public void SetLocationRepository(ILocationRepository locationRepository)
-        {
-            this.locationRepository = locationRepository;
-        }
-
-        public void SetCargoRepository(ICargoRepository cargoRepository)
-        {
-            this.cargoRepository = cargoRepository;
-        }
-
-        public void SetVoyageRepository(IVoyageRepository voyageRepository)
-        {
-            this.voyageRepository = voyageRepository;
-        }
     }
 }
