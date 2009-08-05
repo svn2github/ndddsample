@@ -57,6 +57,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CargoAdmin\CargoAdminController.cs" />
     <Compile Include="MessageSource.cs" />
     <Compile Include="Tracking\CargoTrackingViewAdapter.cs" />
     <Compile Include="HomeController.cs" />

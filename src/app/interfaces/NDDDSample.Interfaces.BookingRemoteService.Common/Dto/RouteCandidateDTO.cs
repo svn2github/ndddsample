@@ -1,17 +1,19 @@
 ﻿namespace NDDDSample.Interfaces.BookingRemoteService.Common.Dto
 {
-    using System;
+    #region Usings
+
     using System.Collections.Generic;
     using System.Runtime.Serialization;
 
+    #endregion
+
     /// <summary>
     /// DTO for presenting and selecting an itinerary from a collection of candidates.
-    /// </summary>
-    [Serializable]
+    /// </summary>   
     [DataContract]
     public class RouteCandidateDTO
     {
-        private readonly IList<LegDTO> legs;
+        [DataMember] private IList<LegDTO> legs;
 
         /// <summary>
         /// Constructor.

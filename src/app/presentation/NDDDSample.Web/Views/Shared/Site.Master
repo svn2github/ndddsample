@@ -23,7 +23,8 @@
                 <ul id="menu">              
                     <li><%= Html.ActionLink("Home", "Index", "Home")%></li>
                     <li><%= Html.ActionLink("About Us", "About", "Home")%></li>
-                    <li><%= Html.ActionLink("Route Tracking", "Index", "CargoTracking")%></li>                                       
+                    <li><%= Html.ActionLink("Route Tracking", "Index", "CargoTracking")%></li>
+                    <li><%= Html.ActionLink("All cargos", "List", "CargoAdmin")%></li>                                       
                 </ul>
             
             </div>

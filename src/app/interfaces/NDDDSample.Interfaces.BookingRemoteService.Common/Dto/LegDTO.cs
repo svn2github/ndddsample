@@ -1,20 +1,23 @@
 ﻿namespace NDDDSample.Interfaces.BookingRemoteService.Common.Dto
 {
+    #region Usings
+
     using System;
     using System.Runtime.Serialization;
 
+    #endregion
+
     /// <summary>
     /// DTO for a leg in an itinerary.
-    /// </summary>
-    [Serializable]
+    /// </summary>    
     [DataContract]
     public class LegDTO
     {
-        private readonly string fromLocation;
-        private readonly DateTime loadTime;
-        private readonly string toLocation;
-        private readonly DateTime unloadTime;
-        private readonly string voyageNumber;
+        [DataMember] private string fromLocation;
+        [DataMember] private DateTime loadTime;
+        [DataMember] private string toLocation;
+        [DataMember] private DateTime unloadTime;
+        [DataMember] private string voyageNumber;
 
         /// <summary>
         /// Constructor
@@ -27,8 +30,8 @@
         public LegDTO(string voyageNumber, string from, string to, DateTime loadTime, DateTime unloadTime)
         {
             this.voyageNumber = voyageNumber;
-            this.fromLocation = from;
-            this.toLocation = to;
+            fromLocation = from;
+            toLocation = to;
             this.loadTime = loadTime;
             this.unloadTime = unloadTime;
         }

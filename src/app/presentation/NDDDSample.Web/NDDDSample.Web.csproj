@@ -196,6 +196,13 @@
     </Compile>
     <Compile Include="Initializers\NhInitializer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Views\CargoAdmin\List.aspx.cs">
+      <DependentUpon>List.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\CargoAdmin\List.aspx.designer.cs">
+      <DependentUpon>List.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Views\CargoTracking\Search.aspx.cs">
       <DependentUpon>Search.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -297,6 +304,7 @@
     <Content Include="Views\CargoTracking\Search.aspx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Views\CargoAdmin\List.aspx" />
     <Content Include="Windsor.config" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

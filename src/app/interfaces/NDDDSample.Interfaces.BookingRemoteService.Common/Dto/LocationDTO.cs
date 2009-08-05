@@ -1,17 +1,19 @@
 ﻿namespace NDDDSample.Interfaces.BookingRemoteService.Common.Dto
 {
-    using System;
+    #region Usings
+
     using System.Runtime.Serialization;
+
+    #endregion
 
     /// <summary>
     /// Location DTO.
-    /// </summary>
-    [Serializable]
+    /// </summary>   
     [DataContract]
     public class LocationDTO
     {
-        private readonly string name;
-        private readonly string unLocode;
+        [DataMember] private string name;
+        [DataMember] private string unLocode;
 
         /// <summary>
         /// Constructor.
