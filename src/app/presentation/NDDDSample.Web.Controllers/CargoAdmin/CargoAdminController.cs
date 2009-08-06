@@ -35,6 +35,11 @@
             return View(cargoList);
         }
 
+        public ActionResult Show(string trackingId)
+        {            
+            CargoRoutingDTO dto = BookingServiceFacade.LoadCargoForRouting(trackingId);
+            return View(dto);
+        }
 
         private void SetPageTitle()
         {

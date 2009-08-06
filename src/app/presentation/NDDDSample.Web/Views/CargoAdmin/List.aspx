@@ -2,7 +2,7 @@
 
 <%@ Import Namespace="NDDDSample.Web.Controllers.CargoAdmin" %>
 <%@ Import Namespace="NDDDSample.Interfaces.BookingRemoteService.Common.Dto" %>
-<asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+<asp:Content ID="cargoAdminList" ContentPlaceHolderID="MainContent" runat="server">
     <table border="1" width="600">
         <caption>
             All cargos</caption>
