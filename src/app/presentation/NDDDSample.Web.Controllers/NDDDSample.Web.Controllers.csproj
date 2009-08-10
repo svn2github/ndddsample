@@ -58,6 +58,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CargoAdmin\CargoAdminController.cs" />
+    <Compile Include="CargoAdmin\LegCommand.cs" />
+    <Compile Include="CargoAdmin\PickNewDestinationViewModel.cs" />
+    <Compile Include="CargoAdmin\SelectItineraryViewModel.cs" />
     <Compile Include="MessageSource.cs" />
     <Compile Include="Tracking\CargoTrackingViewAdapter.cs" />
     <Compile Include="HomeController.cs" />

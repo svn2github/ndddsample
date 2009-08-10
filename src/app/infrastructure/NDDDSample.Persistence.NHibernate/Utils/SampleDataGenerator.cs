@@ -2,7 +2,6 @@
 
 using IQuery=NHibernate.IQuery;
 using ISession=NHibernate.ISession;
-using ISessionFactory=NHibernate.ISessionFactory;
 using ITransaction=NHibernate.ITransaction;
 
 #endregion
@@ -199,24 +198,26 @@ namespace NDDDSample.Persistence.NHibernate.Utils
         }
 
         //TODO:atrosin Revise where and how is used the method
-        public static void LoadHibernateData(ISessionFactory sf, HandlingEventFactory handlingEventFactory,
+        public static void LoadHibernateData(ISession session, HandlingEventFactory handlingEventFactory,
                                              IHandlingEventRepository handlingEventRepository)
         {
-            Console.WriteLine("*** Loading Hibernate data ***");
-
-
-            ISession session = sf.GetCurrentSession();
+            Console.WriteLine("*** Loading Hibernate data ***");           
 
             foreach (Location location  in SampleLocations.GetAll())
             {
                 session.Save(location);
             }
 
-            session.Save(SampleVoyages.HONGKONG_TO_NEW_YORK);
+            foreach (Voyage voyage in SampleVoyages.GetAll())
+            {
+                session.Save(voyage);
+            }
+
+            /*session.Save(SampleVoyages.HONGKONG_TO_NEW_YORK);
             session.Save(SampleVoyages.NEW_YORK_TO_DALLAS);
             session.Save(SampleVoyages.DALLAS_TO_HELSINKI);
             session.Save(SampleVoyages.HELSINKI_TO_HONGKONG);
-            session.Save(SampleVoyages.DALLAS_TO_HELSINKI_ALT);
+            session.Save(SampleVoyages.DALLAS_TO_HELSINKI_ALT);*/
 
             var routeSpecification = new RouteSpecification(SampleLocations.HONGKONG,
                                                             SampleLocations.HELSINKI,
@@ -333,7 +334,7 @@ namespace NDDDSample.Persistence.NHibernate.Utils
             return BaseTime.AddHours(hours);
         }
 
-        public static void LoadSampleData()
+        public static void LoadTestSampleData()
         {
             using (ITransaction transaction = UnitOfWork.CurrentSession.BeginTransaction())
             {
@@ -343,10 +344,24 @@ namespace NDDDSample.Persistence.NHibernate.Utils
                 LoadCargoData(session);
                 LoadItineraryData(session);
                 LoadHandlingEventData(session);
-
                 transaction.Commit();
             }
         }
+
+         public static void LoadSampleData()
+         {
+             using (ITransaction transaction = UnitOfWork.CurrentSession.BeginTransaction())
+             {
+
+                 LoadHibernateData(UnitOfWork.CurrentSession,
+                                   new HandlingEventFactory(new CargoRepositoryHibernate(),
+                                                            new VoyageRepositoryHibernate(),
+                                                            new LocationRepositoryHibernate()),
+                                   new HandlingEventRepositoryHibernate());
+
+                 transaction.Commit();
+             }
+         }
 
         private static void ExecuteUpdate(ISession session, string sql, object[][] dataTable)
         {

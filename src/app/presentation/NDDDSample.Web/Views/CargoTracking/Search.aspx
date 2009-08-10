@@ -1,5 +1,5 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master" AutoEventWireup="true"
-    Inherits="NDDDSample.Web.Views.CargoTracking.Search" %>
+    Inherits="System.Web.Mvc.ViewPage<CargoTrackingViewAdapter>" %>
 
 <%@ Import Namespace="NDDDSample.Web.Controllers.Tracking" %>
 <asp:Content ID="trackSearchContent" ContentPlaceHolderID="MainContent" runat="server">
@@ -25,7 +25,7 @@
     <% if (ViewData.Model == null){%>
     <p class="notify">
         <%=TempData["Message"]%>
-        [<em>Hint: try tracking "XYZ" or "ABC".</em>]
+        [<em>Hint: try tracking "ABC123" or "JKL567".</em>]
     </p>
     <% }else { %>
     <div id="result">

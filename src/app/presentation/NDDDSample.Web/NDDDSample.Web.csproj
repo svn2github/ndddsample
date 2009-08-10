@@ -196,27 +196,6 @@
     </Compile>
     <Compile Include="Initializers\NhInitializer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Views\CargoAdmin\List.aspx.cs">
-      <DependentUpon>List.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Views\CargoAdmin\List.aspx.designer.cs">
-      <DependentUpon>List.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Views\CargoAdmin\Show.aspx.cs">
-      <DependentUpon>Show.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Views\CargoAdmin\Show.aspx.designer.cs">
-      <DependentUpon>Show.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Views\CargoTracking\Search.aspx.cs">
-      <DependentUpon>Search.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Views\CargoTracking\Search.aspx.designer.cs">
-      <DependentUpon>Search.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Views\Home\About.aspx.cs">
       <DependentUpon>About.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -312,6 +291,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\CargoAdmin\List.aspx" />
+    <Content Include="Views\CargoAdmin\PickNewDestination.aspx" />
+    <Content Include="Views\CargoAdmin\SelectItinerary.aspx" />
     <Content Include="Views\CargoAdmin\Show.aspx" />
     <Content Include="Windsor.config" />
   </ItemGroup>

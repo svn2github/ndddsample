@@ -1,7 +1,9 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="NDDDSample.Web.Views.CargoAdmin.List" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" 
+Inherits="System.Web.Mvc.ViewPage<IList<CargoRoutingDTO>>" %>
 
 <%@ Import Namespace="NDDDSample.Web.Controllers.CargoAdmin" %>
 <%@ Import Namespace="NDDDSample.Interfaces.BookingRemoteService.Common.Dto" %>
+
 <asp:Content ID="cargoAdminList" ContentPlaceHolderID="MainContent" runat="server">
     <table border="1" width="600">
         <caption>

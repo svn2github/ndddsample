@@ -1,5 +1,6 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master" AutoEventWireup="true"
-    Inherits="NDDDSample.Web.Views.CargoAdmin.Show" %>
+    Inherits="System.Web.Mvc.ViewPage<CargoRoutingDTO>" %>
+<%@ Import Namespace="NDDDSample.Interfaces.BookingRemoteService.Common.Dto"%>
 
 <asp:Content ID="cargoAdminShow" ContentPlaceHolderID="MainContent" runat="server">
     <table>

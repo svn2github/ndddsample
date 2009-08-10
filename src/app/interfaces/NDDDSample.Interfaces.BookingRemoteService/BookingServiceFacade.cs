@@ -1,5 +1,7 @@
 ﻿namespace NDDDSample.Interfaces.BookingRemoteService
 {
+    #region Usings
+
     using System;
     using System.Collections.Generic;
     using Application;
@@ -10,6 +12,8 @@
     using Domain.Model.Locations;
     using Domain.Model.Voyages;
     using Infrastructure.Log;
+
+    #endregion
 
     /// <summary>
     /// This implementation has additional support from the infrastructure, for exposing as an 
@@ -26,14 +30,14 @@
         private IVoyageRepository VoyageRepository;
 
         public BookingServiceFacade(IBookingService bookingService,
-            ICargoRepository cargoRepository, 
-            ILocationRepository locationRepository,
-            IVoyageRepository voyageRepository)
+                                    ICargoRepository cargoRepository,
+                                    ILocationRepository locationRepository,
+                                    IVoyageRepository voyageRepository)
         {
-            this.BookingService = bookingService;
-            this.CargoRepository = cargoRepository;
-            this.LocationRepository = locationRepository;
-            this.VoyageRepository = voyageRepository;
+            BookingService = bookingService;
+            CargoRepository = cargoRepository;
+            LocationRepository = locationRepository;
+            VoyageRepository = voyageRepository;
         }
 
         #region IBookingServiceFacade Members
@@ -67,7 +71,7 @@
         {
             Itinerary itinerary = new ItineraryCandidateDTOAssembler().FromDTO(routeCandidateDTO, VoyageRepository,
                                                                                LocationRepository);
-            TrackingId trackingId = new TrackingId(trackingIdStr);
+            var trackingId = new TrackingId(trackingIdStr);
 
             BookingService.AssignCargoToRoute(itinerary, trackingId);
         }
@@ -82,8 +86,8 @@
         public IList<CargoRoutingDTO> ListAllCargos()
         {
             IList<Cargo> cargoList = CargoRepository.FindAll();
-            List<CargoRoutingDTO> dtoList = new List<CargoRoutingDTO>(cargoList.Count);
-            CargoRoutingDTOAssembler assembler = new CargoRoutingDTOAssembler();
+            var dtoList = new List<CargoRoutingDTO>(cargoList.Count);
+            var assembler = new CargoRoutingDTOAssembler();
             foreach (Cargo cargo in cargoList)
             {
                 dtoList.Add(assembler.ToDTO(cargo));
@@ -94,7 +98,7 @@
 
         public IList<RouteCandidateDTO> RequestPossibleRoutesForCargo(string trackingId)
         {
-            IList<Itinerary> itineraries = BookingService.RequestPossibleRoutesForCargo(new TrackingId(trackingId));
+            var itineraries = BookingService.RequestPossibleRoutesForCargo(new TrackingId(trackingId));
 
             var routeCandidates = new List<RouteCandidateDTO>(itineraries.Count);
             var dtoAssembler = new ItineraryCandidateDTOAssembler();
