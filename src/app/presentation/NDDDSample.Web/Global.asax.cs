@@ -4,11 +4,9 @@
 
     using System;
     using System.Web.Mvc;
-    using System.Web.Routing;
-    using CommonServiceLocator.WindsorAdapter;
+    using System.Web.Routing;  
     using Controllers;
-    using Initializers;
-    using Microsoft.Practices.ServiceLocation;
+    using Initializers;    
     using MvcContrib.Castle;
 
     #endregion
@@ -39,7 +37,7 @@
             Container.RegisterControllers(typeof (HomeController).Assembly);
             ComponentRegistrar.AddComponentsTo(Container);
             //TODO: Register repositories and services for controllers
-            ServiceLocator.SetLocatorProvider(() => new WindsorServiceLocator(Container));
+           // ServiceLocator.SetLocatorProvider(() => new WindsorServiceLocator(Container));
         }
 
         private static void RegisterRoutes(RouteCollection routes)

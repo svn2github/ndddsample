@@ -60,7 +60,7 @@ namespace NDDDSample.Interfaces.BookingRemoteService.Host.IoC
                     .ActAs(new DefaultServiceModel()
                                .AddEndpoints(WcfEndpoint
                                                  .BoundTo(new NetTcpBinding())
-                                                 .At("net.tcp://localhost:8080/BookingServiceFacade")
+                                                 .At("net.tcp://localhost:8081/BookingServiceFacade")
                                                  // adds this message action to this endpoint
                                                  .AddExtensions(new LifestyleMessageAction()
                                                  )
