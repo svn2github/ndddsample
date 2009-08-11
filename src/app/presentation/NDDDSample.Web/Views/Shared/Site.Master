@@ -26,6 +26,7 @@
                     <li><%= Html.ActionLink("About Us", "About", "Home")%></li>
                     <li><%= Html.ActionLink("Route Tracking", "Index", "CargoTracking")%></li>
                     <li><%= Html.ActionLink("All cargos", "List", "CargoAdmin")%></li>                                       
+                    <li><%= Html.ActionLink("Register New Cargo", "RegistrationForm", "CargoAdmin")%></li>                                       
                 </ul>
             
             </div>

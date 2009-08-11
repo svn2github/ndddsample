@@ -2,7 +2,10 @@
 {
     #region Usings
 
+    using System;
     using System.Collections.Generic;
+    using System.Globalization;
+    using System.Linq;
     using System.Web.Mvc;
     using System.Web.Routing;
     using Interfaces.BookingRemoteService.Common;
@@ -26,6 +29,36 @@
         public CargoAdminController(IBookingServiceFacade bookingServiceFacade)
         {
             BookingServiceFacade = bookingServiceFacade;
+        }
+
+        public ActionResult RegistrationForm()
+        {
+            SetPageTitle();
+
+            IList<LocationDTO> dtoList = BookingServiceFacade.ListShippingLocations();
+
+            var unLocodeStrings = new List<string>();
+            unLocodeStrings.AddRange(
+                dtoList.Select(code => code.UnLocode)
+                );
+
+            return View(new RegistrationFormViewModel(dtoList, unLocodeStrings));
+        }
+
+        [AcceptVerbs(HttpVerbs.Post)]
+        public ActionResult Register(
+            [ModelBinder(typeof (RegistrationCommandBinder))] RegistrationCommand registrationCommand)
+        {
+            SetPageTitle();
+
+            DateTime arrivalDeadlineDateTime = DateTime.ParseExact(registrationCommand.ArrivalDeadline, "M/dd/yyyy",
+                                                                   CultureInfo.InvariantCulture);
+
+            string trackingId = BookingServiceFacade.BookNewCargo(
+                registrationCommand.OriginUnlocode, registrationCommand.DestinationUnlocode, arrivalDeadlineDateTime
+                );
+
+            return RedirectToAction("Show", new RouteValueDictionary(new {trackingId}));
         }
 
         public ActionResult List()
@@ -60,16 +93,17 @@
             SetPageTitle();
 
             var legDTOs = new List<LegDTO>(legCommands.Count);
-            foreach (var leg in legCommands)
-            {
-                legDTOs.Add(new LegDTO(
-                                leg.VoyageNumber,
-                                leg.FromUnLocode,
-                                leg.ToUnLocode,
-                                leg.FromDate,
-                                leg.ToDate)
-                    );
-            }
+
+            legDTOs.AddRange(
+                legCommands.Select(
+                    leg => new LegDTO(
+                               leg.VoyageNumber,
+                               leg.FromUnLocode,
+                               leg.ToUnLocode,
+                               leg.FromDate,
+                               leg.ToDate
+                               ))
+                );
 
             var selectedRoute = new RouteCandidateDTO(legDTOs);
 
@@ -94,7 +128,7 @@
             SetPageTitle();
 
             BookingServiceFacade.ChangeDestination(trackingId, unLocode);
-            return RedirectToAction("Show", new RouteValueDictionary(new {trackingId}));           
+            return RedirectToAction("Show", new RouteValueDictionary(new {trackingId}));
         }
 
         private void SetPageTitle()
