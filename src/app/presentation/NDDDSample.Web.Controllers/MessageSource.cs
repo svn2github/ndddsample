@@ -39,6 +39,11 @@
                 return defaultMsg;
             }
 
+            if (args == null)
+            {
+                return msgValue;
+            }
+
             return string.Format(msgValue, args);
         }
 

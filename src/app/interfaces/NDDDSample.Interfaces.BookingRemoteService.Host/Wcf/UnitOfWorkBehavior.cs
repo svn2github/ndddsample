@@ -16,6 +16,9 @@ namespace NDDDSample.Interfaces.BookingRemoteService.Host.Wcf
             ServiceDescription serviceDescription,
             ServiceHostBase serviceHostBase)
         {
+            serviceDescription.Behaviors.Find<ServiceDebugBehavior>()
+                .IncludeExceptionDetailInFaults = true;
+
             foreach (var cdb in serviceHostBase.ChannelDispatchers)
             {
                 var channelDispatcher = cdb as ChannelDispatcher;

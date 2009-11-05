@@ -57,6 +57,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaseController.cs" />
     <Compile Include="CargoAdmin\CargoAdminController.cs" />
     <Compile Include="CargoAdmin\LegCommand.cs" />
     <Compile Include="CargoAdmin\PickNewDestinationViewModel.cs" />
@@ -64,6 +65,7 @@
     <Compile Include="CargoAdmin\RegistrationFormViewModel.cs" />
     <Compile Include="CargoAdmin\SelectItineraryViewModel.cs" />
     <Compile Include="CargoAdmin\RegistrationCommandBinder.cs" />
+    <Compile Include="ErrorController.cs" />
     <Compile Include="MessageSource.cs" />
     <Compile Include="Tracking\CargoTrackingViewAdapter.cs" />
     <Compile Include="HomeController.cs" />
@@ -72,6 +74,7 @@
     <Compile Include="Tracking\HandlingEventViewAdapter.cs" />
     <Compile Include="Tracking\TrackCommand.cs" />
     <Compile Include="Tracking\TrackCommandBinder.cs" />
+    <Compile Include="ErrorMessageViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\application\NDDDSample.Application\NDDDSample.Application.csproj">

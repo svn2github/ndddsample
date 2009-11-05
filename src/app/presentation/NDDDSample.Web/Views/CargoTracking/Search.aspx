@@ -4,19 +4,17 @@
 <%@ Import Namespace="NDDDSample.Web.Controllers.Tracking" %>
 <asp:Content ID="trackSearchContent" ContentPlaceHolderID="MainContent" runat="server">
     <h2>
-        Tracking cargo</h2>
+        Tracking your cargo</h2>
     <% using (Html.BeginForm("Search", "CargoTracking"))
        { %>
     <div>
-        <table>
+        <table width="100px">
             <tr>
                 <td>
-                    Enter your tracking id:
-                </td>
-                <td>
+                    <strong>Enter your tracking id:</strong>
+                
                     <%=Html.TextBox("trackingId") %>
-                </td>
-                <td>
+                
                     <input type="submit" value="Track!" />
                 </td>
             </tr>

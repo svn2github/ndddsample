@@ -11,33 +11,32 @@
     <link href="../../Content/style.css" rel="stylesheet" type="text/css" />
     <link href="../../Content/calendar.css" rel="stylesheet" type="text/css" />
 </head>
-
 <body>
     <div class="page">
 
         <div id="header">
-            <div id="title">
-                <h1>My Sample MVC Application</h1>
-            </div>            
-            
-            <div id="menucontainer">            
+                                 
+            <div id="menucontainer" with="300px" >            
+                <a href="http://code.google.com/p/ndddsample/">
+                    <img src="/Content/Images/web_logo.png" align="left" /></a>
                 <ul id="menu">              
                     <li><%= Html.ActionLink("Home", "Index", "Home")%></li>
-                    <li><%= Html.ActionLink("About Us", "About", "Home")%></li>
-                    <li><%= Html.ActionLink("Route Tracking", "Index", "CargoTracking")%></li>
-                    <li><%= Html.ActionLink("All cargos", "List", "CargoAdmin")%></li>                                       
-                    <li><%= Html.ActionLink("Register New Cargo", "RegistrationForm", "CargoAdmin")%></li>                                       
-                </ul>
-            
+                    <li>
+                        <%= Html.ActionLink("Cargo Track", "Index", "CargoTracking")%>
+                        </li>
+                    <li>
+                        <%= Html.ActionLink("List Cargos", "List", "CargoAdmin")%>
+                        </li>
+                    <li><a href="http://code.google.com/p/ndddsample/">About</a></li>                                                                        
+                </ul>            
             </div>
         </div>
-
-        <div id="main">
-            <asp:ContentPlaceHolder ID="MainContent" runat="server" />
-
-            <div id="footer">
-                My Sample MVC Application &copy; Copyright 2008
-            </div>
+        <div id="main" style="height:400px; margin-bottom:0px; padding-bottom:0px">
+            <asp:ContentPlaceHolder ID="MainContent" runat="server" /> 
+                     
+        </div>
+        <div id="footer" style="vertical-align: bottom; margin-top: 0px; padding-top: 0px">
+            NDDDSample Application &copy; Copyright 2009
         </div>
     </div>
 </body>

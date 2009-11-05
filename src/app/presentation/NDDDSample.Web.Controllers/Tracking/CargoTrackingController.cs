@@ -2,6 +2,7 @@ namespace NDDDSample.Web.Controllers.Tracking
 {
     #region Usings
 
+    using System;
     using System.Collections.Generic;
     using System.Web.Mvc;
     using Domain.Model.Cargos;
@@ -16,7 +17,7 @@ namespace NDDDSample.Web.Controllers.Tracking
     /// a list of events that were heppened for the specific Cargo,
     /// identified by Cargo TrackingId
     /// </summary>
-    public class CargoTrackingController : Controller
+    public class CargoTrackingController : BaseController
     {
         private readonly ICargoRepository CargoRepository;
         private readonly IHandlingEventRepository HandlingEventRepository;        
@@ -29,15 +30,13 @@ namespace NDDDSample.Web.Controllers.Tracking
         }
 
         public ActionResult Index()
-        {           
-            SetPageTitle();
+        { 
             return View("Search", null);
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult Search([ModelBinder(typeof (TrackCommandBinder))] TrackCommand trackCommand)
         {
-            SetPageTitle();
             string trackingIdString = trackCommand.TrackingId;
 
             var trackingId = new TrackingId(trackingIdString);
@@ -53,15 +52,15 @@ namespace NDDDSample.Web.Controllers.Tracking
             }
             else
             {
-                TempData["Message"] = MessageSource.GetMessage("cargo.unknown_id");
+                SetMessage("cargo.unknown_id");
             }
 
             return View(cargoTrackingViewAdapter);
-        }
+        }      
 
-        private void SetPageTitle()
+        protected override string GetPageTitle()
         {
-            ViewData["Title"] = "Cargo Tracking";
+            return "Cargo Tracking";
         }
     }
 }

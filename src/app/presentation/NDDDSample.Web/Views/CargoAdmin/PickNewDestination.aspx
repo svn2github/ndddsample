@@ -25,14 +25,14 @@
         <%=ViewData.Model.Cargo.TrackingId%></caption>
     <tbody>
       <tr>
-        <td>Current destination</td>
-        <td>
+        <td width="250px">Current destination</td>
+        <td align="left" >
             <%=ViewData.Model.Cargo.FinalDestination%>                
         </td>
       </tr>
       <tr>
-        <td>New destination</td>
-        <td>
+        <td width="250px">New destination</td>
+        <td align="left">
           <select name="unlocode">
            <% foreach(var location in ViewData.Model.Locations)
             {%>            
@@ -47,9 +47,10 @@
     </tbody>
     <tfoot>
       <tr>
-        <td> </td>
+        <td> 
+            <input type="submit" value="Change destination" /></td>
         <td>
-          <input type="submit" value="Change destination"/>
+          
         </td>
       </tr>
     </tfoot>

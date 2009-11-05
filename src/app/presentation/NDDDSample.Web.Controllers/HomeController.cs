@@ -2,26 +2,27 @@
 {
     #region Usings
 
+    using System;
     using System.Web.Mvc;
 
     #endregion
 
     [HandleError]
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
         public ActionResult Index()
-        {
-            ViewData["Title"] = "Home Page";
-            ViewData["Message"] = "Welcome to ASP.NET MVC!";
-
+        {         
             return View();
         }
 
         public ActionResult About()
-        {
-            ViewData["Title"] = "About Page";
-
+        {            
             return View();
+        }
+
+        protected override string GetPageTitle()
+        {
+            return "Welcome to NDDDSample Application!";
         }
     }
 }

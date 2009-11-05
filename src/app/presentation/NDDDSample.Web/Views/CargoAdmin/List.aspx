@@ -5,9 +5,8 @@ Inherits="System.Web.Mvc.ViewPage<IList<CargoRoutingDTO>>" %>
 <%@ Import Namespace="NDDDSample.Interfaces.BookingRemoteService.Common.Dto" %>
 
 <asp:Content ID="cargoAdminList" ContentPlaceHolderID="MainContent" runat="server">
-    <table border="1" width="600">
-        <caption>
-            All cargos</caption>
+    <div><%= Html.ActionLink("Register New Cargo", "RegistrationForm", "CargoAdmin")%></div>
+    <table border="1" width="600">        
         <thead>
             <tr>
                 <td>

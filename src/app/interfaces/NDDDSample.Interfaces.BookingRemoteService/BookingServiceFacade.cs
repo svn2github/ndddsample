@@ -24,10 +24,10 @@
     public class BookingServiceFacade : IBookingServiceFacade
     {
         private readonly ILog logger = LogFactory.GetInterfaceLayerLogger();
-        private IBookingService BookingService;
-        private ICargoRepository CargoRepository;
-        private ILocationRepository LocationRepository;
-        private IVoyageRepository VoyageRepository;
+        private readonly IBookingService BookingService;
+        private readonly ICargoRepository CargoRepository;
+        private readonly ILocationRepository LocationRepository;
+        private readonly IVoyageRepository VoyageRepository;
 
         public BookingServiceFacade(IBookingService bookingService,
                                     ICargoRepository cargoRepository,
@@ -44,71 +44,119 @@
 
         public IList<LocationDTO> ListShippingLocations()
         {
-            IList<Location> allLocations = LocationRepository.FindAll();
-            var assembler = new LocationDTOAssembler();
-            return assembler.ToDTOList(allLocations);
+            try
+            {
+                IList<Location> allLocations = LocationRepository.FindAll();
+                var assembler = new LocationDTOAssembler();
+                return assembler.ToDTOList(allLocations);
+            }
+            catch (Exception exception)
+            {
+                throw new NDDDRemoteException(exception.Message);
+            }
         }
 
         public string BookNewCargo(string origin, string destination, DateTime arrivalDeadline)
         {
-            TrackingId trackingId = BookingService.BookNewCargo(
-                new UnLocode(origin),
-                new UnLocode(destination),
-                arrivalDeadline
-                );
-            return trackingId.IdString;
+            try
+            {
+                TrackingId trackingId = BookingService.BookNewCargo(
+                    new UnLocode(origin),
+                    new UnLocode(destination),
+                    arrivalDeadline
+                    );
+                return trackingId.IdString;
+            }
+            catch (Exception exception)
+            {
+                throw new NDDDRemoteException(exception.Message);
+            }
         }
-
 
         public CargoRoutingDTO LoadCargoForRouting(string trackingId)
         {
-            Cargo cargo = CargoRepository.Find(new TrackingId(trackingId));
-            var assembler = new CargoRoutingDTOAssembler();
-            return assembler.ToDTO(cargo);
+            try
+            {
+                Cargo cargo = CargoRepository.Find(new TrackingId(trackingId));
+                var assembler = new CargoRoutingDTOAssembler();
+                return assembler.ToDTO(cargo);
+            }
+            catch (Exception exception)
+            {
+                throw new NDDDRemoteException(exception.Message);
+            }
         }
 
         public void AssignCargoToRoute(string trackingIdStr, RouteCandidateDTO routeCandidateDTO)
         {
-            Itinerary itinerary = new ItineraryCandidateDTOAssembler().FromDTO(routeCandidateDTO, VoyageRepository,
-                                                                               LocationRepository);
-            var trackingId = new TrackingId(trackingIdStr);
+            try
+            {
+                Itinerary itinerary = new ItineraryCandidateDTOAssembler().FromDTO(routeCandidateDTO, VoyageRepository,
+                                                                                   LocationRepository);
+                var trackingId = new TrackingId(trackingIdStr);
 
-            BookingService.AssignCargoToRoute(itinerary, trackingId);
+                BookingService.AssignCargoToRoute(itinerary, trackingId);
+            }
+            catch (Exception exception)
+            {
+                throw new NDDDRemoteException(exception.Message);
+            }
         }
 
 
         public void ChangeDestination(string trackingId, string destinationUnLocode)
         {
-            BookingService.ChangeDestination(new TrackingId(trackingId), new UnLocode(destinationUnLocode));
+            try
+            {
+                BookingService.ChangeDestination(new TrackingId(trackingId), new UnLocode(destinationUnLocode));
+            }
+            catch (Exception exception)
+            {
+                throw new NDDDRemoteException(exception.Message);
+            }
         }
 
 
         public IList<CargoRoutingDTO> ListAllCargos()
         {
-            IList<Cargo> cargoList = CargoRepository.FindAll();
-            var dtoList = new List<CargoRoutingDTO>(cargoList.Count);
-            var assembler = new CargoRoutingDTOAssembler();
-            foreach (Cargo cargo in cargoList)
+            try
             {
-                dtoList.Add(assembler.ToDTO(cargo));
+                IList<Cargo> cargoList = CargoRepository.FindAll();
+                var dtoList = new List<CargoRoutingDTO>(cargoList.Count);
+                var assembler = new CargoRoutingDTOAssembler();
+                foreach (Cargo cargo in cargoList)
+                {
+                    dtoList.Add(assembler.ToDTO(cargo));
+                }
+                return dtoList;
             }
-            return dtoList;
+            catch (Exception exception)
+            {
+                throw new NDDDRemoteException(exception.Message);
+            }
         }
 
 
         public IList<RouteCandidateDTO> RequestPossibleRoutesForCargo(string trackingId)
         {
-            var itineraries = BookingService.RequestPossibleRoutesForCargo(new TrackingId(trackingId));
-
-            var routeCandidates = new List<RouteCandidateDTO>(itineraries.Count);
-            var dtoAssembler = new ItineraryCandidateDTOAssembler();
-
-            foreach (Itinerary itinerary in itineraries)
+            try
             {
-                routeCandidates.Add(dtoAssembler.ToDTO(itinerary));
-            }
+                var itineraries = BookingService.RequestPossibleRoutesForCargo(new TrackingId(trackingId));
 
-            return routeCandidates;
+                var routeCandidates = new List<RouteCandidateDTO>(itineraries.Count);
+                var dtoAssembler = new ItineraryCandidateDTOAssembler();
+
+                foreach (Itinerary itinerary in itineraries)
+                {
+                    routeCandidates.Add(dtoAssembler.ToDTO(itinerary));
+                }
+
+                return routeCandidates;
+            }
+            catch (Exception exception)
+            {
+                throw new NDDDRemoteException(exception.Message);
+            }
         }
 
         #endregion

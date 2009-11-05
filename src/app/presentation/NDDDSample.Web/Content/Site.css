@@ -95,6 +95,7 @@ page width. Or, you can specify an exact pixel width. */
     margin-bottom: 0px;
     color: #000;
     padding: 0;
+    height:40;
 }
 
 #header h1
@@ -142,11 +143,27 @@ ul#menu li
 {
     display: inline;
     list-style: none;
+    height:23px; 
+    width:140px; 
+    border-top:#cccccc solid 1px; 
+    border-right:#cccccc solid 1px; 
+    border-left:#cccccc solid 1px;
+	cursor:pointer;	
+	float:none; 
+	margin-left:2px; 
+	/*margin-bottom:-4px; */
+	padding-top:5px; 
+	color:#898989; 
+	font-size:1em;
+	font-weight:bold; 
+	text-decoration:none;
+	text-align:center;  
+	background:url(Images/tab_bg.jpg) #ffffff no-repeat;
 }
 
 ul#menu li#greeting
 {
-    padding: 10px 20px;
+    padding: 5px 5px;
     font-weight: bold;
     text-decoration: none;
     line-height: 2.8em;
@@ -157,27 +174,27 @@ ul#menu li a
 {
     padding: 10px 20px;
     font-weight: bold;
-    text-decoration: none;
+    /*text-decoration: none;*/
     line-height: 2.8em;
-    background-color: #e8eef4;
-    color: #034af3;
+    /*background-color: #e8eef4;
+    color: #034af3;*/
 }
 
 ul#menu li a:hover
 {
-    background-color: #fff;
+    /*background-color: #fff;*/
     text-decoration: none;
 }
 
 ul#menu li a:active
 {
-    background-color: #a6e2a6;
+    /*background-color: #a6e2a6;*/
     text-decoration: none;
 }
 
 ul#menu li.selected a
 {
-    background-color: #fff;
+    /*background-color: #fff;*/
     color: #000;
 }
 
@@ -242,3 +259,7 @@ ul#menu li.selected a
     font-weight: bold;
     color: #ff0000;
 }
+
+#TabArea                    { height:27px; width:99%; border-bottom:#cccccc solid 1px; margin-top:18px; padding-left:3px; text-decoration:none; }
+
+.PageTabOn                  {  }

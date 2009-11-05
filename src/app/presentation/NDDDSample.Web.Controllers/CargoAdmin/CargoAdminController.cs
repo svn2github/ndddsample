@@ -22,7 +22,7 @@
     /// there is never any one perfect solution for all situations, so we've chosen to demonstrate
     /// two polarized ways to build user interfaces.
     /// </summary>
-    public class CargoAdminController : Controller
+    public class CargoAdminController : BaseController
     {
         private readonly IBookingServiceFacade BookingServiceFacade;
 
@@ -32,9 +32,7 @@
         }
 
         public ActionResult RegistrationForm()
-        {
-            SetPageTitle();
-
+        {         
             IList<LocationDTO> dtoList = BookingServiceFacade.ListShippingLocations();
 
             var unLocodeStrings = new List<string>();
@@ -48,9 +46,7 @@
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult Register(
             [ModelBinder(typeof (RegistrationCommandBinder))] RegistrationCommand registrationCommand)
-        {
-            SetPageTitle();
-
+        {         
             DateTime arrivalDeadlineDateTime = DateTime.ParseExact(registrationCommand.ArrivalDeadline, "M/dd/yyyy",
                                                                    CultureInfo.InvariantCulture);
 
@@ -62,24 +58,20 @@
         }
 
         public ActionResult List()
-        {
-            SetPageTitle();
+        {         
             IList<CargoRoutingDTO> cargoList = BookingServiceFacade.ListAllCargos();
 
             return View(cargoList);
         }
 
         public ActionResult Show(string trackingId)
-        {
-            SetPageTitle();
+        {         
             CargoRoutingDTO dto = BookingServiceFacade.LoadCargoForRouting(trackingId);
             return View(dto);
         }
 
         public ActionResult SelectItinerary(string trackingId)
-        {
-            SetPageTitle();
-
+        {         
             IList<RouteCandidateDTO> routeCandidatesDto = BookingServiceFacade.RequestPossibleRoutesForCargo(trackingId);
             CargoRoutingDTO cargoDto = BookingServiceFacade.LoadCargoForRouting(trackingId);
 
@@ -89,9 +81,7 @@
         }
 
         public ActionResult AssignItinerary(string trackingId, IList<LegCommand> legCommands)
-        {
-            SetPageTitle();
-
+        {           
             var legDTOs = new List<LegDTO>(legCommands.Count);
 
             legDTOs.AddRange(
@@ -113,9 +103,7 @@
         }
 
         public ActionResult PickNewDestination(string trackingId)
-        {
-            SetPageTitle();
-
+        {           
             IList<LocationDTO> locations = BookingServiceFacade.ListShippingLocations();
             CargoRoutingDTO cargo = BookingServiceFacade.LoadCargoForRouting(trackingId);
 
@@ -124,16 +112,14 @@
 
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult ChangeDestination(string trackingId, string unLocode)
-        {
-            SetPageTitle();
-
+        {           
             BookingServiceFacade.ChangeDestination(trackingId, unLocode);
             return RedirectToAction("Show", new RouteValueDictionary(new {trackingId}));
         }
-
-        private void SetPageTitle()
-        {
-            ViewData["Title"] = "Cargo Administration";
+        
+        protected override string GetPageTitle()
+        {            
+            return "Cargo Administration";
         }
     }
 }
