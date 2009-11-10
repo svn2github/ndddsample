@@ -9,29 +9,29 @@ namespace NDDDSample.Tests.Domain.Model.Locations
     {        
         [Test]
         [ExpectedException(typeof(AssertionException))]
-        public void testNew()
+        public void TestNew()
         {
-            assertValid("AA234");
-            assertValid("AAA9B");
-            assertValid("AAAAA");
+            AssertValid("AA234");
+            AssertValid("AAA9B");
+            AssertValid("AAAAA");
 
-            assertInvalid("AAAA");
-            assertInvalid("AAAAAA");
-            assertInvalid("AAAA");
-            assertInvalid("AAAAAA");
-            assertInvalid("22AAA");
-            assertInvalid("AA111");
-            assertInvalid(null);
+            AssertInvalid("AAAA");
+            AssertInvalid("AAAAAA");
+            AssertInvalid("AAAA");
+            AssertInvalid("AAAAAA");
+            AssertInvalid("22AAA");
+            AssertInvalid("AA111");
+            AssertInvalid(null);
         }
         
         [Test]
-        public void testIdString()
+        public void TestIdString()
         {
             Assert.AreEqual("ABCDE", new UnLocode("AbcDe").IdString);
         }
 
         [Test]
-        public void testEquals()
+        public void TestEquals()
         {
             var allCaps = new UnLocode("ABCDE");
             var mixedCase = new UnLocode("aBcDe");
@@ -45,7 +45,7 @@ namespace NDDDSample.Tests.Domain.Model.Locations
         }
 
         [Test]
-        public void testHashCode()
+        public void TestHashCode()
         {
             var allCaps = new UnLocode("ABCDE");
             var mixedCase = new UnLocode("aBcDe");
@@ -53,12 +53,12 @@ namespace NDDDSample.Tests.Domain.Model.Locations
             Assert.AreEqual(allCaps.GetHashCode(), mixedCase.GetHashCode());
         }
 
-        private void assertValid(String unlocode)
+        private static void AssertValid(String unlocode)
         {
             new UnLocode(unlocode);
         }
         
-        private void assertInvalid(String unlocode)
+        private static void AssertInvalid(String unlocode)
         {
             try
             {

@@ -14,14 +14,14 @@ namespace NDDDSample.Tests.Domain.Model.Voyages
     {
         [Test]
         [ExpectedException(typeof(ArgumentNullException), UserMessage = "Should not accept null constructor arguments")]
-        public void testConstructor()
+        public void TestConstructor()
         {
             new CarrierMovement(null, null, new DateTime(), new DateTime());
             new CarrierMovement(SampleLocations.STOCKHOLM, null, new DateTime(), new DateTime());
         }
 
         [Test]
-        public void testSameValueAsEqualsHashCode()
+        public void TestSameValueAsEqualsHashCode()
         {
             var cm1 = new CarrierMovement(SampleLocations.STOCKHOLM, SampleLocations.HAMBURG, new DateTime(), new DateTime());
             var cm2 = new CarrierMovement(SampleLocations.STOCKHOLM, SampleLocations.HAMBURG, new DateTime(), new DateTime());

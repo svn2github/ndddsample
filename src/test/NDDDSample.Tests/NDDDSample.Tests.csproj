@@ -33,6 +33,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Moq, Version=3.1.416.3, Culture=neutral, PublicKeyToken=69f491c39445e920, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\tools\Moq\Moq.dll</HintPath>
+    </Reference>
     <Reference Include="NHibernate, Version=2.1.0.1001, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\lib\Rhino\NHibernate.dll</HintPath>
@@ -95,6 +99,7 @@
     <Compile Include="Infrastructure\Persistence\NHibernate\CarrierMovementRepositoryTest.cs" />
     <Compile Include="Infrastructure\Persistence\NHibernate\HandlingEventRepositoryTest.cs" />
     <Compile Include="Infrastructure\Persistence\NHibernate\LocationRepositoryTest.cs" />
+    <Compile Include="Infrastructure\Routing\ExternalRoutingServiceTest.cs" />
     <Compile Include="Scenarios\CargoLifecycleScenarioTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -114,6 +119,10 @@
       <Project>{A57A3967-E613-4598-94FF-BD55711D4CAD}</Project>
       <Name>NDDDSample.Domain</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\app\infrastructure\NDDDSample.Infrastructure.ExternalRouting\NDDDSample.Infrastructure.ExternalRouting.csproj">
+      <Project>{D3EC535E-06E8-4083-80CF-B94C58DC4052}</Project>
+      <Name>NDDDSample.Infrastructure.ExternalRouting</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\app\infrastructure\NDDDSample.Infrastructure\NDDDSample.Infrastructure.csproj">
       <Project>{6D41623A-7B9E-4DFA-8F2A-1B4EBEF7F990}</Project>
       <Name>NDDDSample.Infrastructure</Name>
@@ -122,14 +131,19 @@
       <Project>{97413EF7-9172-4467-AB4E-ED1155272BD5}</Project>
       <Name>NDDDSample.Persistence.NHibernate</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\app\interfaces\NDDDSample.Interfaces.PathfinderRemoteService.Common\NDDDSample.Interfaces.PathfinderRemoteService.Common.csproj">
+      <Project>{053C0D25-1C3D-4F9F-9FBA-44762592C9D4}</Project>
+      <Name>NDDDSample.Interfaces.PathfinderRemoteService.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\app\interfaces\NDDDSample.Interfaces.PathfinderRemoteService\NDDDSample.Interfaces.PathfinderRemoteService.csproj">
+      <Project>{C61C3E52-729B-4EE3-A57E-C3D72CAEF65D}</Project>
+      <Name>NDDDSample.Interfaces.PathfinderRemoteService</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="hibernate.cfg.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Infrastructure\Routing\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

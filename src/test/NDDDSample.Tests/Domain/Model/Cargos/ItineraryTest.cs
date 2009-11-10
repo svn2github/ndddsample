@@ -19,7 +19,7 @@
         private Voyage voyage, wrongVoyage;
 
         [SetUp]
-        protected void setUp()
+        protected void SetUp()
         {
             voyage = new Voyage.Builder(new VoyageNumber("0123"), SampleLocations.SHANGHAI).
                 AddMovement(SampleLocations.ROTTERDAM, dateTime, dateTime).
@@ -33,7 +33,7 @@
         }
 
         [Test]
-        public void testCargoOnTrack()
+        public void TestCargoOnTrack()
         {
             var trackingId = new TrackingId("CARGO1");
             var routeSpecification = new RouteSpecification(SampleLocations.SHANGHAI,
@@ -90,13 +90,13 @@
         }
 
         [Test]
-        public void testNextExpectedEvent()
+        public void TestNextExpectedEvent()
         {
             //TODO: implement the test
         }
 
         [Test]    
-        public void testCreateItinerary()
+        public void TestCreateItinerary()
         {
             try
             {

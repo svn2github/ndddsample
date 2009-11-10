@@ -11,49 +11,49 @@ namespace NDDDSample.Tests.Domain.Model.Voyages
     public class VoyageTest
     {
         [Test]
-        public void testVoyageNumber()
+        public void TestVoyageNumber()
         {
             //TODO: Test goes here...
         }
 
         [Test]
-        public void testSchedule()
+        public void TestSchedule()
         {
             //TODO: Test goes here...
         }
 
         [Test]
-        public void testHashCode()
+        public void TestHashCode()
         {
             //TODO: Test goes here...
         }
 
         [Test]
-        public void testEquals()
+        public void TestEquals()
         {
             //TODO: Test goes here...
         }
 
         [Test]
-        public void testSameIdentityAs()
+        public void TestSameIdentityAs()
         {
             //TODO: Test goes here...
         }
 
         [Test]
-        public void testToString()
+        public void TestToString()
         {
             //TODO: Test goes here...
         }
 
         [Test]
-        public void testAddMovement()
+        public void TestAddMovement()
         {
             //TODO: Test goes here...
         }
 
         [Test]
-        public void testBuild()
+        public void TestBuild()
         {
             //TODO: Test goes here...
         }

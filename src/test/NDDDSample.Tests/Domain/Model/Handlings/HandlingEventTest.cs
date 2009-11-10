@@ -19,7 +19,7 @@ namespace NDDDSample.Tests.Domain.Model.Handlings
         Cargo cargo;        
 
         [SetUp]
-        protected void setUp()
+        protected void SetUp()
         {
             var trackingId = new TrackingId("XYZ");
             var routeSpecification = new RouteSpecification(SampleLocations.HONGKONG, SampleLocations.NEWYORK, new DateTime());
@@ -27,14 +27,14 @@ namespace NDDDSample.Tests.Domain.Model.Handlings
         }
 
         [Test]
-        public void testNewWithLocation()
+        public void TestNewWithLocation()
         {
             var e1 = new HandlingEvent(cargo, new DateTime(), new DateTime(), HandlingType.CLAIM, SampleLocations.HELSINKI);
             Assert.AreEqual(SampleLocations.HELSINKI, e1.Location);
         }
 
         [Test]
-        public void testCurrentLocationLoadEvent()
+        public void TestCurrentLocationLoadEvent()
         {
 
             var ev = new HandlingEvent(cargo, new DateTime(), new DateTime(), HandlingType.LOAD,
@@ -44,7 +44,7 @@ namespace NDDDSample.Tests.Domain.Model.Handlings
         }
 
         [Test]
-        public void testCurrentLocationUnloadEvent()
+        public void TestCurrentLocationUnloadEvent()
         {
             var ev = new HandlingEvent(cargo, new DateTime(), new DateTime(), HandlingType.UNLOAD,
                                                  SampleLocations.HAMBURG, SampleVoyages.CM004);
@@ -53,7 +53,7 @@ namespace NDDDSample.Tests.Domain.Model.Handlings
         }
 
         [Test]
-        public void testCurrentLocationReceivedEvent()
+        public void TestCurrentLocationReceivedEvent()
         {
             var ev = new HandlingEvent(cargo, new DateTime(), new DateTime(), HandlingType.RECEIVE,
                                                  SampleLocations.CHICAGO);
@@ -62,7 +62,7 @@ namespace NDDDSample.Tests.Domain.Model.Handlings
         }
 
         [Test]
-        public void testCurrentLocationClaimedEvent()
+        public void TestCurrentLocationClaimedEvent()
         {
             var ev = new HandlingEvent(cargo, new DateTime(), new DateTime(), HandlingType.CLAIM,
                                                  SampleLocations.CHICAGO);
@@ -71,7 +71,7 @@ namespace NDDDSample.Tests.Domain.Model.Handlings
         }
 
         [Test]
-        public void testParseType()
+        public void TestParseType()
         {
             Assert.AreEqual(HandlingType.CLAIM, Enumeration.FromValue<HandlingType>("CLAIM"));
             Assert.AreEqual(HandlingType.LOAD, Enumeration.FromValue<HandlingType>("LOAD"));
@@ -82,13 +82,13 @@ namespace NDDDSample.Tests.Domain.Model.Handlings
 
         [Test]
         [ExpectedException(typeof(ApplicationException), UserMessage = "Should not accept null constructor arguments")]
-        public void testParseTypeIllegal()
+        public void TestParseTypeIllegal()
         {
             Enumeration.FromValue<HandlingType>("NOT_A_HANDLING_EVENT_TYPE");
         }
 
         [Test]
-        public void testEqualsAndSameAs()
+        public void TestEqualsAndSameAs()
         {
             var timeOccured = new DateTime();
             var timeRegistered = new DateTime();
@@ -111,7 +111,7 @@ namespace NDDDSample.Tests.Domain.Model.Handlings
         //TODO: egorgan revise commented tests
         [Test]
         [ExpectedException(typeof(AssertionException))]
-        public void testNewWithCarrierMovement()
+        public void TestNewWithCarrierMovement()
         {
             var e1 = new HandlingEvent(cargo, new DateTime(), new DateTime(), HandlingType.LOAD, SampleLocations.HONGKONG, SampleVoyages.CM003);
             Assert.AreEqual(SampleLocations.HONGKONG, e1.Location);

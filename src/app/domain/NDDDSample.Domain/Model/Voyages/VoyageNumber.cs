@@ -17,7 +17,7 @@
 
         #region Constr
 
-        public VoyageNumber(String number)
+        public VoyageNumber(string number)
         {
             Validate.NotNull(number);
 

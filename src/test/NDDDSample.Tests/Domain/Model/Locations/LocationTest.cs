@@ -13,7 +13,7 @@ namespace NDDDSample.Tests.Domain.Model.Locations
     {
         [Test]
         [ExpectedException(typeof(ArgumentNullException), UserMessage = "Should not allow any null constructor arguments")]
-        public void testEquals()
+        public void TestEquals()
         {            
             // Same UN locode - equal
             Assert.IsTrue(new Location(new UnLocode("ATEST"), "test-name").

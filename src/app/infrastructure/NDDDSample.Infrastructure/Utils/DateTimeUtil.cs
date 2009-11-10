@@ -21,5 +21,16 @@
         {
             return dateTime > whenDateTime;
         }
+        
+        /// <summary>
+        /// Compare a dateTime is smaller than whenDateTime. 
+        /// </summary>
+        /// <param name="dateTime">a date time</param>
+        /// <param name="whenDateTime">when date time</param>
+        /// <returns>true if dateTime is bigger then whenDateTime</returns>
+        public static bool Before(this DateTime dateTime, DateTime whenDateTime)
+        {
+            return dateTime < whenDateTime;
+        }
     }
 }

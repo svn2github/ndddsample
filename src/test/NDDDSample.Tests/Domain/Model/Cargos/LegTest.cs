@@ -10,7 +10,7 @@
 
         [ExpectedException(typeof(ArgumentNullException), UserMessage = "Should't accept null constructor arguments")]
         [Test]
-        public void testConstructor()
+        public void TestConstructor()
         {
             new Leg(null, null, null, DateTime.Now, DateTime.Now.AddDays(2));
         }

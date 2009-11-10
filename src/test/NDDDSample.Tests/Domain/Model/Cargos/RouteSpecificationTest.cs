@@ -45,7 +45,7 @@ namespace NDDDSample.Tests.Domain.Model.Cargos
                                                                  });
 
         [Test]
-        public void testIsSatisfiedBy_Success()
+        public void TestIsSatisfiedBySuccess()
         {
             var routeSpecification = new RouteSpecification(
                 SampleLocations.HONGKONG, SampleLocations.CHICAGO, DateUtil.ToDate("2009-03-01"));
@@ -54,7 +54,7 @@ namespace NDDDSample.Tests.Domain.Model.Cargos
         }
 
         [Test]
-        public void testIsSatisfiedBy_WrongOrigin()
+        public void TestIsSatisfiedByWrongOrigin()
         {
             var routeSpecification = new RouteSpecification(
                 SampleLocations.HANGZOU, SampleLocations.CHICAGO, DateUtil.ToDate("2009-03-01"));
@@ -63,7 +63,7 @@ namespace NDDDSample.Tests.Domain.Model.Cargos
         }
 
         [Test]
-        public void testIsSatisfiedBy_WrongDestination()
+        public void TestIsSatisfiedByWrongDestination()
         {
             var routeSpecification = new RouteSpecification(
                 SampleLocations.HONGKONG, SampleLocations.DALLAS, DateUtil.ToDate("2009-03-01"));
@@ -72,7 +72,7 @@ namespace NDDDSample.Tests.Domain.Model.Cargos
         }
 
         [Test]
-        public void testIsSatisfiedBy_MissedDeadline()
+        public void TestIsSatisfiedByMissedDeadline()
         {
             var routeSpecification = new RouteSpecification(
                 SampleLocations.HONGKONG, SampleLocations.CHICAGO, DateUtil.ToDate("2009-02-15"));

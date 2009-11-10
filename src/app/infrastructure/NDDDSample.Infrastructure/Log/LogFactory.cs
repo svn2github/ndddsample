@@ -24,5 +24,14 @@
         {
             return Log4NetLoggerProxy.GetLogger("InterfaceLayerLogger");
         }
+
+        /// <summary>
+        /// The method returns a logger for External Service.
+        /// </summary>
+        /// <returns>ILog</returns>
+        public static ILog GetExternalServiceLogger()
+        {
+            return Log4NetLoggerProxy.GetLogger("ExternalServiceLoggerd");
+        }
     }
 }

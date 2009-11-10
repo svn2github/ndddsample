@@ -17,7 +17,7 @@
                                                                DateTime.Now));
 
         [Test]
-        public void testToSilenceWarnings()
+        public void TestToSilenceWarnings()
         {
             //TODO: atrosin revise the test
             Assert.IsTrue(true);
@@ -26,7 +26,8 @@
 
         //TODO: atrosin revise commented tests
 
-        /*public void testEvensOrderedByTimeOccured() {
+   /*public void testEvensOrderedByTimeOccured() 
+     {
       DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
       HandlingEvent he1 = new HandlingEvent(cargo, df.parse("2010-01-03"), dateTime, HandlingEvent.Type.RECEIVE, NEWYORK);
       HandlingEvent he2 = new HandlingEvent(cargo, df.parse("2010-01-01"), dateTime, HandlingEvent.Type.LOAD, NEWYORK, CM003);
@@ -42,7 +43,8 @@
       assertSame(he3, orderEvents.get(3));
     }
 
-    public void testCargoStatusFromLastHandlingEvent() {
+    public void testCargoStatusFromLastHandlingEvent() 
+    {
       Set<HandlingEvent> events = new HashSet<HandlingEvent>();
       Delivery delivery = new Delivery(events);
 
@@ -65,7 +67,8 @@
       Assert.AreEqual(TransportStatus.CLAIMED, delivery.transportStatus());
     }
 
-    public void testLastKnownLocation() {
+    public void testLastKnownLocation()
+    {
       Set<HandlingEvent> events = new HashSet<HandlingEvent>();
       Delivery delivery = new Delivery(events);
 

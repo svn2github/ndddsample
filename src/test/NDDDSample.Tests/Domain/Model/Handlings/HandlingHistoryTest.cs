@@ -23,7 +23,7 @@ namespace NDDDSample.Tests.Domain.Model.Handlings
         HandlingHistory handlingHistory;
 
         [SetUp]
-        protected void setUp()
+        protected void SetUp()
         {
             cargo = new Cargo(new TrackingId("ABC"), new RouteSpecification(SampleLocations.SHANGHAI, SampleLocations.DALLAS, DateTime.Parse("2009-04-01")));
             voyage = new Voyage.Builder(new VoyageNumber("X25"), SampleLocations.HONGKONG).
@@ -38,13 +38,13 @@ namespace NDDDSample.Tests.Domain.Model.Handlings
         }
 
         [Test]
-        public void testDistinctEventsByCompletionTime()
+        public void TestDistinctEventsByCompletionTime()
         {
             Assert.AreEqual(new List<HandlingEvent>{event1, event2}, handlingHistory.DistinctEventsByCompletionTime());
         }
 
         [Test]
-        public void testMostRecentlyCompletedEvent()
+        public void TestMostRecentlyCompletedEvent()
         {
             Assert.AreEqual(event2, handlingHistory.MostRecentlyCompletedEvent());
         }

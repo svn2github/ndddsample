@@ -22,7 +22,7 @@
         private Voyage voyage;
 
         [SetUp]
-        protected void setUp()
+        protected void SetUp()
         {
             events = new List<HandlingEvent>();
 
@@ -34,7 +34,7 @@
         }
 
         [Test]
-        public void testConstruction()
+        public void TestConstruction()
         {
             var trackingId = new TrackingId("XYZ");
             var arrivalDeadline = DateUtil.ToDate("2009-03-13");
@@ -50,7 +50,7 @@
         }
 
         [Test]
-        public void testRoutingStatus()
+        public void TestRoutingStatus()
         {       
             Cargo cargo = new Cargo(new TrackingId("XYZ"),
                                     new RouteSpecification(SampleLocations.STOCKHOLM, SampleLocations.MELBOURNE,
@@ -94,7 +94,7 @@
         #endregion
 
         [Test]
-        public void testlastKnownLocationUnknownWhenNoEvents()
+        public void TestlastKnownLocationUnknownWhenNoEvents()
         {
             Cargo cargo = new Cargo(new TrackingId("XYZ"),
                                     new RouteSpecification(SampleLocations.STOCKHOLM, SampleLocations.MELBOURNE,
@@ -104,39 +104,39 @@
         }
 
         [Test]
-        public void testlastKnownLocationReceived()
+        public void TestlastKnownLocationReceived()
         {
-            Cargo cargo = populateCargoReceivedStockholm();
+            Cargo cargo = PopulateCargoReceivedStockholm();
 
             Assert.AreEqual(SampleLocations.STOCKHOLM, cargo.Delivery.LastKnownLocation);
         }
 
         [Test]
-        public void testlastKnownLocationClaimed()
+        public void TestlastKnownLocationClaimed()
         {
-            Cargo cargo = populateCargoClaimedMelbourne();
+            Cargo cargo = PopulateCargoClaimedMelbourne();
 
             Assert.AreEqual(SampleLocations.MELBOURNE, cargo.Delivery.LastKnownLocation);
         }
 
         [Test]
-        public void testlastKnownLocationUnloaded()
+        public void TestlastKnownLocationUnloaded()
         {
-            Cargo cargo = populateCargoOffHongKong();
+            Cargo cargo = PopulateCargoOffHongKong();
 
             Assert.AreEqual(SampleLocations.HONGKONG, cargo.Delivery.LastKnownLocation);
         }
 
         [Test]
-        public void testlastKnownLocationloaded()
+        public void TestlastKnownLocationloaded()
         {
-            Cargo cargo = populateCargoOnHamburg();
+            Cargo cargo = PopulateCargoOnHamburg();
 
             Assert.AreEqual(SampleLocations.HAMBURG, cargo.Delivery.LastKnownLocation);
         }
 
         [Test]
-        public void testEquality()
+        public void TestEquality()
         {
             RouteSpecification spec1 = new RouteSpecification(SampleLocations.STOCKHOLM, SampleLocations.HONGKONG,
                                                               DateTime.Now);
@@ -154,7 +154,7 @@
         }
 
         [Test]
-        public void testIsUnloadedAtFinalDestination()
+        public void TestIsUnloadedAtFinalDestination()
         {
             Cargo cargo = SetUpCargoWithItinerary(SampleLocations.HANGZOU, SampleLocations.TOKYO,
                                                   SampleLocations.NEWYORK);
@@ -193,13 +193,13 @@
 
         [Test]
         // TODO: Generate test data some better way
-        private Cargo populateCargoReceivedStockholm()
+        private Cargo PopulateCargoReceivedStockholm()
         {
             Cargo cargo = new Cargo(new TrackingId("XYZ"),
                                     new RouteSpecification(SampleLocations.STOCKHOLM, SampleLocations.MELBOURNE,
                                                            DateTime.Now));
 
-            HandlingEvent he = new HandlingEvent(cargo, getDate("2007-12-01"), DateTime.Now, HandlingType.RECEIVE,
+            HandlingEvent he = new HandlingEvent(cargo, GetDate("2007-12-01"), DateTime.Now, HandlingType.RECEIVE,
                                                  SampleLocations.STOCKHOLM);
             events.Add(he);
             cargo.DeriveDeliveryProgress(new HandlingHistory(events));
@@ -208,11 +208,11 @@
         }
 
         [Test]
-        private Cargo populateCargoClaimedMelbourne()
+        private Cargo PopulateCargoClaimedMelbourne()
         {
-            Cargo cargo = populateCargoOffMelbourne();
+            Cargo cargo = PopulateCargoOffMelbourne();
 
-            events.Add(new HandlingEvent(cargo, getDate("2007-12-09"), DateTime.Now, HandlingType.CLAIM,
+            events.Add(new HandlingEvent(cargo, GetDate("2007-12-09"), DateTime.Now, HandlingType.CLAIM,
                                          SampleLocations.MELBOURNE));
             cargo.DeriveDeliveryProgress(new HandlingHistory(events));
 
@@ -220,21 +220,21 @@
         }
 
         [Test]
-        private Cargo populateCargoOffHongKong()
+        private Cargo PopulateCargoOffHongKong()
         {
             Cargo cargo = new Cargo(new TrackingId("XYZ"),
                                     new RouteSpecification(SampleLocations.STOCKHOLM, SampleLocations.MELBOURNE,
                                                            DateTime.Now));
 
 
-            events.Add(new HandlingEvent(cargo, getDate("2007-12-01"), DateTime.Now, HandlingType.LOAD,
+            events.Add(new HandlingEvent(cargo, GetDate("2007-12-01"), DateTime.Now, HandlingType.LOAD,
                                          SampleLocations.STOCKHOLM, voyage));
-            events.Add(new HandlingEvent(cargo, getDate("2007-12-02"), DateTime.Now, HandlingType.UNLOAD,
+            events.Add(new HandlingEvent(cargo, GetDate("2007-12-02"), DateTime.Now, HandlingType.UNLOAD,
                                          SampleLocations.HAMBURG, voyage));
 
-            events.Add(new HandlingEvent(cargo, getDate("2007-12-03"), DateTime.Now, HandlingType.LOAD,
+            events.Add(new HandlingEvent(cargo, GetDate("2007-12-03"), DateTime.Now, HandlingType.LOAD,
                                          SampleLocations.HAMBURG, voyage));
-            events.Add(new HandlingEvent(cargo, getDate("2007-12-04"), DateTime.Now, HandlingType.UNLOAD,
+            events.Add(new HandlingEvent(cargo, GetDate("2007-12-04"), DateTime.Now, HandlingType.UNLOAD,
                                          SampleLocations.HONGKONG, voyage));
 
             cargo.DeriveDeliveryProgress(new HandlingHistory(events));
@@ -242,17 +242,17 @@
         }
 
         [Test]
-        private Cargo populateCargoOnHamburg()
+        private Cargo PopulateCargoOnHamburg()
         {
             Cargo cargo = new Cargo(new TrackingId("XYZ"),
                                     new RouteSpecification(SampleLocations.STOCKHOLM, SampleLocations.MELBOURNE,
                                                            DateTime.Now));
 
-            events.Add(new HandlingEvent(cargo, getDate("2007-12-01"), DateTime.Now, HandlingType.LOAD,
+            events.Add(new HandlingEvent(cargo, GetDate("2007-12-01"), DateTime.Now, HandlingType.LOAD,
                                          SampleLocations.STOCKHOLM, voyage));
-            events.Add(new HandlingEvent(cargo, getDate("2007-12-02"), DateTime.Now, HandlingType.UNLOAD,
+            events.Add(new HandlingEvent(cargo, GetDate("2007-12-02"), DateTime.Now, HandlingType.UNLOAD,
                                          SampleLocations.HAMBURG, voyage));
-            events.Add(new HandlingEvent(cargo, getDate("2007-12-03"), DateTime.Now, HandlingType.LOAD,
+            events.Add(new HandlingEvent(cargo, GetDate("2007-12-03"), DateTime.Now, HandlingType.LOAD,
                                          SampleLocations.HAMBURG, voyage));
 
             cargo.DeriveDeliveryProgress(new HandlingHistory(events));
@@ -260,25 +260,25 @@
         }
 
         [Test]
-        private Cargo populateCargoOffMelbourne()
+        private Cargo PopulateCargoOffMelbourne()
         {
             Cargo cargo = new Cargo(new TrackingId("XYZ"),
                                     new RouteSpecification(SampleLocations.STOCKHOLM, SampleLocations.MELBOURNE,
                                                            DateTime.Now));
 
-            events.Add(new HandlingEvent(cargo, getDate("2007-12-01"), DateTime.Now, HandlingType.LOAD,
+            events.Add(new HandlingEvent(cargo, GetDate("2007-12-01"), DateTime.Now, HandlingType.LOAD,
                                          SampleLocations.STOCKHOLM, voyage));
-            events.Add(new HandlingEvent(cargo, getDate("2007-12-02"), DateTime.Now, HandlingType.UNLOAD,
+            events.Add(new HandlingEvent(cargo, GetDate("2007-12-02"), DateTime.Now, HandlingType.UNLOAD,
                                          SampleLocations.HAMBURG, voyage));
 
-            events.Add(new HandlingEvent(cargo, getDate("2007-12-03"), DateTime.Now, HandlingType.LOAD,
+            events.Add(new HandlingEvent(cargo, GetDate("2007-12-03"), DateTime.Now, HandlingType.LOAD,
                                          SampleLocations.HAMBURG, voyage));
-            events.Add(new HandlingEvent(cargo, getDate("2007-12-04"), DateTime.Now, HandlingType.UNLOAD,
+            events.Add(new HandlingEvent(cargo, GetDate("2007-12-04"), DateTime.Now, HandlingType.UNLOAD,
                                          SampleLocations.HONGKONG, voyage));
 
-            events.Add(new HandlingEvent(cargo, getDate("2007-12-05"), DateTime.Now, HandlingType.LOAD,
+            events.Add(new HandlingEvent(cargo, GetDate("2007-12-05"), DateTime.Now, HandlingType.LOAD,
                                          SampleLocations.HONGKONG, voyage));
-            events.Add(new HandlingEvent(cargo, getDate("2007-12-07"), DateTime.Now, HandlingType.UNLOAD,
+            events.Add(new HandlingEvent(cargo, GetDate("2007-12-07"), DateTime.Now, HandlingType.UNLOAD,
                                          SampleLocations.MELBOURNE, voyage));
 
             cargo.DeriveDeliveryProgress(new HandlingHistory(events));
@@ -286,7 +286,7 @@
         }
                
         [Test]
-        public void testIsMisdirected()
+        public void TestIsMisdirected()
         {
             //A cargo with no itinerary is not misdirected
             Cargo cargo = new Cargo(new TrackingId("TRKID"),
@@ -414,7 +414,7 @@
         /// </summary>
         /// <param name="isoFormat">String to parse.</param>
         /// <returns>Created date instance.</returns>
-        private static DateTime getDate(string isoFormat)
+        private static DateTime GetDate(string isoFormat)
         {
             return DateTime.ParseExact(isoFormat, "yyyy-MM-dd", CultureInfo.InvariantCulture);
         }

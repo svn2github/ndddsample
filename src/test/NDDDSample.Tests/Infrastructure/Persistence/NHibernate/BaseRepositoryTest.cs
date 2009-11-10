@@ -43,7 +43,7 @@ namespace NDDDSample.Tests.Infrastructure.Persistence.NHibernate
         private static void LoadData()
         {
             // TODO store Sample* and object instances here instead of handwritten SQL
-            SampleDataGenerator.LoadSampleData();
+            SampleDataGenerator.LoadTestSampleData();
         }
 
         protected static void Flush()

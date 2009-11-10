@@ -218,7 +218,7 @@ namespace NDDDSample.Persistence.NHibernate.Utils
             session.Save(SampleVoyages.DALLAS_TO_HELSINKI);
             session.Save(SampleVoyages.HELSINKI_TO_HONGKONG);
             session.Save(SampleVoyages.DALLAS_TO_HELSINKI_ALT);*/
-
+             
             var routeSpecification = new RouteSpecification(SampleLocations.HONGKONG,
                                                             SampleLocations.HELSINKI,
                                                             DateUtil.ToDate("2009-03-15"));

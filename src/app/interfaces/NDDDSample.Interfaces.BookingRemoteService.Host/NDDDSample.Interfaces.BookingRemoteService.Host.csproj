@@ -168,6 +168,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\..\..\..\NDDDSample.snk">
+      <Link>Properties\NDDDSample.snk</Link>
+    </None>
     <None Include="App.config" />
     <None Include="Windsor.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
