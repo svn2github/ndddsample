@@ -112,16 +112,16 @@ page width. Or, you can specify an exact pixel width. */
 
 #main
 {
-    padding: 30px 30px 15px 30px;
+
     background-color: #fff;
-    margin-bottom: 30px;
+
     _height: 1px; /* only IE6 applies CSS properties starting with an underscrore */
 }
 
 #footer
 {
     color: #999;
-    padding: 10px 0;
+
     text-align: center;
     line-height: normal;
     margin: 0;
@@ -150,8 +150,7 @@ ul#menu li
     border-left:#cccccc solid 1px;
 	cursor:pointer;	
 	float:none; 
-	margin-left:2px; 
-	/*margin-bottom:-4px; */
+	margin-left:2px; 	
 	padding-top:5px; 
 	color:#898989; 
 	font-size:1em;

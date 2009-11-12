@@ -11,10 +11,11 @@
     {
         private static void Main(string[] args)
         {
-            Console.WriteLine("Starting PathfinderRemoteService.Host, hit Enter to close");
+            Console.WriteLine("Starting PathfinderRemoteService.Host");
 
             using (ContainerBuilder.Build())
             {
+                Console.WriteLine("PathfinderRemoteService.Host Started, hit Enter to close");
                 Console.ReadLine();
             }
         }

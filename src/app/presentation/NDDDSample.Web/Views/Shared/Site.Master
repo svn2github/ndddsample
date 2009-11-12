@@ -31,13 +31,13 @@
                 </ul>            
             </div>
         </div>
-        <div id="main" style="height:400px; margin-bottom:0px; padding-bottom:0px">
-            <asp:ContentPlaceHolder ID="MainContent" runat="server" /> 
-                     
+        <div id="main" style="min-height:99%; margin-bottom:0px; padding-bottom:0px">
+            <asp:ContentPlaceHolder ID="MainContent" runat="server" />
+            <div id="footer" style="vertical-align: bottom; margin-top: 0px; padding-top: 0px">
+                NDDDSample Application &copy; Copyright 2009
+            </div>         
         </div>
-        <div id="footer" style="vertical-align: bottom; margin-top: 0px; padding-top: 0px">
-            NDDDSample Application &copy; Copyright 2009
-        </div>
+       
     </div>
 </body>
 </html>

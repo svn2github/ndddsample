@@ -1,4 +1,4 @@
-namespace NDDDSample.Interfaces.BookingRemoteService.Common
+namespace NDDDSample.Interfaces.PathfinderRemoteService.Common
 {
     #region Usings
 
@@ -6,11 +6,12 @@ namespace NDDDSample.Interfaces.BookingRemoteService.Common
 
     #endregion
 
-    public class NDDDRemoteException : FaultException
+    public class NDDDRemotePathfinderException : FaultException
     {
         private readonly string message;
 
-        public NDDDRemoteException(string reason) : base(reason)
+        public NDDDRemotePathfinderException(string reason)
+            : base(reason)
         {
             message = reason;
         }

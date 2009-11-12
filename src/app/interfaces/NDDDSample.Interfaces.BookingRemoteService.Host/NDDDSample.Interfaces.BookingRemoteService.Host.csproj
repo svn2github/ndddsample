@@ -150,6 +150,10 @@
     <Compile Include="Wcf\UnitOfWorkContext.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\infrastructure\NDDDSample.Infrastructure.ExternalRouting\NDDDSample.Infrastructure.ExternalRouting.csproj">
+      <Project>{D3EC535E-06E8-4083-80CF-B94C58DC4052}</Project>
+      <Name>NDDDSample.Infrastructure.ExternalRouting</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\infrastructure\NDDDSample.Infrastructure\NDDDSample.Infrastructure.csproj">
       <Project>{6D41623A-7B9E-4DFA-8F2A-1B4EBEF7F990}</Project>
       <Name>NDDDSample.Infrastructure</Name>
@@ -165,6 +169,10 @@
     <ProjectReference Include="..\NDDDSample.Interfaces.BookingRemoteService\NDDDSample.Interfaces.BookingRemoteService.csproj">
       <Project>{7C9A434D-BC0E-4692-862D-56F57D39EFD6}</Project>
       <Name>NDDDSample.Interfaces.BookingRemoteService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NDDDSample.Interfaces.PathfinderRemoteService.Common\NDDDSample.Interfaces.PathfinderRemoteService.Common.csproj">
+      <Project>{053C0D25-1C3D-4F9F-9FBA-44762592C9D4}</Project>
+      <Name>NDDDSample.Interfaces.PathfinderRemoteService.Common</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

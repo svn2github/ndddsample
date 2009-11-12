@@ -40,15 +40,13 @@ namespace NDDDSample.Interfaces.BookingRemoteService.Host.IoC
             container.AddComponent("bookingInterface",
                                    Type.GetType("NDDDSample.Application.IBookingService, NDDDSample.Application"),
                                    Type.GetType("NDDDSample.Application.Impl.BookingService, NDDDSample.Application"));
-
-            //TODO:Remove RoutingServiceTemporaryImpl class after real implementation of IRoutingService
-            //TODO:remove IoC registration of the class
-            container.AddComponent("routingService",
+           
+            container.AddComponent("routingService",                                   
                                    Type.GetType("NDDDSample.Domain.Service.IRoutingService, NDDDSample.Domain"),
-                                   Type.GetType(
-                                       "NDDDSample.Application.Impl.RoutingServiceTemporaryImpl, NDDDSample.Application"));
+                                   Type.GetType("NDDDSample.Infrastructure.ExternalRouting.ExternalRoutingService, NDDDSample.Infrastructure.ExternalRouting"));
 
-            container.AddFacility<WcfFacility>()
+            container//.AddFacility<WcfFacility>() Note: commented because it
+                     //Note: is registered in windsor config already
                 .Register(
                 Component.For<MessageLifecycleBehavior>(),
                 Component.For<UnitOfWorkBehavior>(),

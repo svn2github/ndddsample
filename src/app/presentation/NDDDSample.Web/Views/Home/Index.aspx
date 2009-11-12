@@ -8,7 +8,7 @@
         There are two web interfaces available:</p>
     <ul>
         <li><strong>Public</strong> <%= Html.ActionLink("cargo tracking", "Index", "CargoTracking")%></li>
-        <li><strong>Administration</strong> of <%= Html.ActionLink("booking and routing", "List", "CargoAdmin")%>.<br /> (Before access it, please run NDDDSample.Interfaces.BookingRemoteService.Host, it is WCF services host used by <strong>Administration</strong> to 'access' domain model. 
+        <li><strong>Administration</strong> of <%= Html.ActionLink("booking and routing", "List", "CargoAdmin")%>.<br /> (Before access it, please run NDDDSample.Interfaces.BookingRemoteService.Host and NDDDSample.Interfaces.PathfinderRemoteService.Host, it is WCF services host used by <strong>Administration</strong> to 'access' domain model and external routing. 
         <br /><strong>Public</strong> interface use the domain model 'directly' i.e. in same process) </li>        
     </ul>
     <p>

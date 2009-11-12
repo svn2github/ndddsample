@@ -58,14 +58,10 @@
     <Compile Include="Dto\LocationDTO.cs" />
     <Compile Include="Dto\RouteCandidateDTO.cs" />
     <Compile Include="IBookingServiceFacade.cs" />
-    <Compile Include="NDDDRemoteException.cs" />
+    <Compile Include="NDDDRemoteBookingException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\domain\NDDDSample.Domain\NDDDSample.Domain.csproj">
-      <Project>{A57A3967-E613-4598-94FF-BD55711D4CAD}</Project>
-      <Name>NDDDSample.Domain</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\infrastructure\NDDDSample.Infrastructure\NDDDSample.Infrastructure.csproj">
       <Project>{6D41623A-7B9E-4DFA-8F2A-1B4EBEF7F990}</Project>
       <Name>NDDDSample.Infrastructure</Name>

@@ -52,7 +52,7 @@
             }
             catch (Exception exception)
             {
-                throw new NDDDRemoteException(exception.Message);
+                throw new NDDDRemoteBookingException(exception.Message);
             }
         }
 
@@ -69,7 +69,7 @@
             }
             catch (Exception exception)
             {
-                throw new NDDDRemoteException(exception.Message);
+                throw new NDDDRemoteBookingException(exception.Message);
             }
         }
 
@@ -83,7 +83,7 @@
             }
             catch (Exception exception)
             {
-                throw new NDDDRemoteException(exception.Message);
+                throw new NDDDRemoteBookingException(exception.Message);
             }
         }
 
@@ -99,7 +99,7 @@
             }
             catch (Exception exception)
             {
-                throw new NDDDRemoteException(exception.Message);
+                throw new NDDDRemoteBookingException(exception.Message);
             }
         }
 
@@ -112,7 +112,7 @@
             }
             catch (Exception exception)
             {
-                throw new NDDDRemoteException(exception.Message);
+                throw new NDDDRemoteBookingException(exception.Message);
             }
         }
 
@@ -132,7 +132,7 @@
             }
             catch (Exception exception)
             {
-                throw new NDDDRemoteException(exception.Message);
+                throw new NDDDRemoteBookingException(exception.Message);
             }
         }
 
@@ -155,7 +155,7 @@
             }
             catch (Exception exception)
             {
-                throw new NDDDRemoteException(exception.Message);
+                throw new NDDDRemoteBookingException(exception.Message);
             }
         }
 

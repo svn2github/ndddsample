@@ -35,7 +35,7 @@
         /// <summary>
         /// The RouteSpecification is picked apart and adapted to the external API.
         /// </summary>
-        /// <param name="routeSpecification"></param>
+        /// <param name="routeSpecification">Route Specification</param>
         /// <returns></returns>
         public IList<Itinerary> FetchRoutesForSpecification(RouteSpecification routeSpecification)
         {
@@ -60,7 +60,6 @@
             }
 
             //The returned result is then translated back into our domain model.
-
             IList<Itinerary> itineraries = new List<Itinerary>();
 
             foreach (TransitPath transitPath in transitPaths)
@@ -96,8 +95,7 @@
                 voyageRepository.Find(new VoyageNumber(edge.VoyageNumber)),
                 locationRepository.Find(new UnLocode(edge.FromUnLocode)),
                 locationRepository.Find(new UnLocode(edge.ToUnLocode)),
-                edge.FromDate, edge.ToDate
-                );
+                edge.FromDate, edge.ToDate);
         }
     }
 }

@@ -2,6 +2,7 @@ namespace NDDDSample.Interfaces.PathfinderRemoteService.Host.IoC
 {
     #region Usings
 
+    using System;
     using System.ServiceModel;
     using Castle.Facilities.WcfIntegration;
     using Castle.Facilities.WcfIntegration.Behaviors;
@@ -24,11 +25,12 @@ namespace NDDDSample.Interfaces.PathfinderRemoteService.Host.IoC
         }
 
         private static void RegisterComponents(IWindsorContainer container)
-        {                              
+        {
+            container.AddComponent("graphDAO", typeof(GraphDAO), typeof(GraphDAO));
+     
             container.AddFacility<WcfFacility>()
                 .Register(
-                Component.For<MessageLifecycleBehavior>(),
-                Component.For<UnitOfWorkBehavior>(),
+                Component.For<MessageLifecycleBehavior>(),               
                 Component
                     .For<IGraphTraversalService>()
                     .ImplementedBy<GraphTraversalService>()
