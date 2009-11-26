@@ -14,7 +14,7 @@
     <FileAlignment>512</FileAlignment>
     <StartupObject>
     </StartupObject>
-    <SignAssembly>true</SignAssembly>
+    <SignAssembly>false</SignAssembly>
     <AssemblyOriginatorKeyFile>Properties\NDDDSample.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -72,8 +72,8 @@
       <HintPath>..\..\..\..\lib\Rhino\Castle.Facilities.Logging.dll</HintPath>
     </Reference>
     <Reference Include="Castle.Facilities.WcfIntegration, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\lib\Rhino\Castle.Facilities.WcfIntegration.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
     </Reference>
     <Reference Include="Castle.MicroKernel, Version=1.0.3.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
