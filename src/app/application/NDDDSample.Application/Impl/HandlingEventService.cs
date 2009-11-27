@@ -36,6 +36,7 @@
                                           UnLocode unLocode,
                                           HandlingType type)
         {
+            //TODO: Revise transaciton and UoW logic
             using (var transactionScope = new TransactionScope())
             {
                 var registrationTime = new DateTime();

@@ -7,6 +7,7 @@
     using Domain.Model.Cargos;
     using Infrastructure.Log;
     using Infrastructure.Messaging;
+    using Rhino.Commons;
 
     #endregion
 
@@ -31,7 +32,13 @@
         {
             try
             {
-                cargoInspectionService.InspectCargo(new TrackingId(message.TrackingId));
+                //TODO: Revise transaciton and UoW logic
+                using (UnitOfWork.Start())
+                {
+                    cargoInspectionService.InspectCargo(new TrackingId(message.TrackingId));
+
+                    UnitOfWork.Current.Flush();
+                }
             }
             catch (Exception e)
             {

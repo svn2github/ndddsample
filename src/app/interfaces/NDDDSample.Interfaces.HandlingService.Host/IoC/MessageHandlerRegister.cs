@@ -16,7 +16,7 @@
     public class MessageHandlerRegister
     {
         public MessageHandlerRegister(IWindsorContainer container, Assembly messagesAssembly, Assembly handlersAssembly)
-        {
+        {          
             var messages = GetMessages(messagesAssembly);
             var messageHandlers = GetMessageHandlers(handlersAssembly);
 
@@ -32,7 +32,8 @@
 
                 foreach (var messageHandler in messageHandlers[message])
                 {
-                    container.Register(Component.For(typeof (IMessageHandler<>).MakeGenericType(message))
+                    Type genericType = typeof (IMessageHandler<>).MakeGenericType(message);
+                    container.Register(Component.For(genericType)
                                            .ImplementedBy(messageHandler));
                 }
             }
@@ -42,7 +43,6 @@
             }
         }
 
-       
 
         private static IDictionary<Type, IList<Type>> GetMessageHandlers(Assembly messageHandleAssembly)
         {
@@ -77,8 +77,10 @@
         {
             Type[] types = messagesAssembly.GetExportedTypes();
 
-            return types.Where(x => x.GetInterfaces().Contains(typeof(IMessage)))
-                .ToList();
+            var list = types.Where(x => x.GetInterfaces().Contains(typeof (IMessage)))
+                .ToList();           
+
+            return list;
         }
     }
 }

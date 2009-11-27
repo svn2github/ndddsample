@@ -152,6 +152,10 @@
     <Compile Include="Wcf\UnitOfWorkContext.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\application\NDDDSample.Application\NDDDSample.Application.csproj">
+      <Project>{D9890BDD-C115-48F2-9A12-80A516A31ED0}</Project>
+      <Name>NDDDSample.Application</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\domain\NDDDSample.Domain\NDDDSample.Domain.csproj">
       <Project>{A57A3967-E613-4598-94FF-BD55711D4CAD}</Project>
       <Name>NDDDSample.Domain</Name>

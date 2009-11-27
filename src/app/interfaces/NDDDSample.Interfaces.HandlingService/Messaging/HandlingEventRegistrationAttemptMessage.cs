@@ -2,6 +2,7 @@
 {
     #region Usings
 
+    using Application;
     using Infrastructure.Messaging;
 
     #endregion

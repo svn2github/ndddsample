@@ -65,9 +65,9 @@
             return null;
         }
 
-        public static DateTime? ParseDate(string completionTime, IList<String> errors)
+        public static DateTime ParseDate(string completionTime, IList<String> errors)
         {
-            DateTime? date;
+            DateTime date;
             try
             {
                 date = DateTime.ParseExact(completionTime, ISO_8601_FORMAT, CultureInfo.InvariantCulture);
@@ -75,7 +75,7 @@
             catch (FormatException)
             {
                 errors.Add("Invalid date format: " + completionTime + ", must be on ISO 8601 format: " + ISO_8601_FORMAT);
-                date = null;
+                throw;
             }
             return date;
         }

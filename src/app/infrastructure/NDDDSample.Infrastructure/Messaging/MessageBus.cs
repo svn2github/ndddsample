@@ -1,6 +1,10 @@
 namespace NDDDSample.Infrastructure.Messaging
 {
+    #region Usings
+
     using Castle.Windsor;
+
+    #endregion
 
     public class MessageBus : IMessageBus
     {

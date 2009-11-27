@@ -36,6 +36,7 @@
                                        UnLocode destinationUnLocode,
                                        DateTime arrivalDeadline)
         {
+            //TODO: Revise transaciton and UoW logic
             using (var transactionScope = new TransactionScope())
             {
                 TrackingId trackingId = cargoRepository.NextTrackingId();
@@ -54,6 +55,7 @@
 
         public IList<Itinerary> RequestPossibleRoutesForCargo(TrackingId trackingId)
         {
+            //TODO: Revise transaciton and UoW logic
             using (var transactionScope = new TransactionScope())
             {
                 Cargo cargo = cargoRepository.Find(trackingId);
@@ -73,6 +75,7 @@
 
         public void AssignCargoToRoute(Itinerary itinerary, TrackingId trackingId)
         {
+            //TODO: Revise transaciton and UoW logic
             using (var transactionScope = new TransactionScope())
             {
                 Cargo cargo = cargoRepository.Find(trackingId);
@@ -91,6 +94,7 @@
 
         public void ChangeDestination(TrackingId trackingId, UnLocode unLocode)
         {
+            //TODO: Revise transaciton and UoW logic
             using (var transactionScope = new TransactionScope())
             {
                 Cargo cargo = cargoRepository.Find(trackingId);

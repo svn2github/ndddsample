@@ -24,14 +24,19 @@
         {
             try
             {
-                var attempt = message.HandlingEventRegistration;
-                handlingEventService.RegisterHandlingEvent(
-                    attempt.CompletionTime,
-                    attempt.TrackingId,
-                    attempt.VoyageNumber,
-                    attempt.UnLocode,
-                    attempt.Type
-                    );
+                //TODO: Revise transaciton and UoW logic
+                using (Rhino.Commons.UnitOfWork.Start())
+                {
+                    var attempt = message.HandlingEventRegistration;
+                    handlingEventService.RegisterHandlingEvent(
+                        attempt.CompletionTime,
+                        attempt.TrackingId,
+                        attempt.VoyageNumber,
+                        attempt.UnLocode,
+                        attempt.Type);
+
+                    Rhino.Commons.UnitOfWork.Current.Flush();
+                }
             }
             catch (Exception e)
             {

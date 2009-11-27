@@ -80,6 +80,7 @@
     <Compile Include="Messaging\MessageBus.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utils\DateTimeUtil.cs" />
+    <Compile Include="Utils\FileUtils.cs" />
     <Compile Include="Utils\ListUtil.cs" />
     <Compile Include="Utils\WindsorExtensions.cs" />
     <Compile Include="Validations\Validate.cs" />

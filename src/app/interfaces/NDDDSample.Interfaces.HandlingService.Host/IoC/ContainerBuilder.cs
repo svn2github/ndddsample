@@ -2,13 +2,15 @@ namespace NDDDSample.Interfaces.HandlingService.Host.IoC
 {
     #region Usings
 
-    using System;
     using System.ServiceModel;
+    using Application;
+    using Application.Impl;
     using Castle.Facilities.WcfIntegration;
     using Castle.Facilities.WcfIntegration.Behaviors;
     using Castle.MicroKernel.Registration;
     using Castle.Windsor;
     using Castle.Windsor.Configuration.Interpreters;
+    using Domain.Model.Handlings;
     using Infrastructure.Messaging;
     using Infrastructure.Utils;
     using Messaging;
@@ -28,7 +30,8 @@ namespace NDDDSample.Interfaces.HandlingService.Host.IoC
             Rhino.Commons.IoC.Initialize(container);
 
             //Register messages and handlers
-            new MessageHandlerRegister(container, typeof(CargoHandledMessage).Assembly, typeof(CargoHandledHandler).Assembly);
+            new MessageHandlerRegister(container, typeof (CargoHandledMessage).Assembly,
+                                       typeof (CargoHandledHandler).Assembly);
 
             return container;
         }
@@ -41,10 +44,24 @@ namespace NDDDSample.Interfaces.HandlingService.Host.IoC
                     .FromAssemblyNamed("NDDDSample.Persistence.NHibernate")
                     .WithService.FirstNonGenericCoreInterface("NDDDSample.Domain.Model"));
 
-
             container.Register(Component.For<IMessageBus>()
-                                .ImplementedBy<MessageBus>()
-                                .LifeStyle.Singleton);
+                                   .ImplementedBy<MessageBus>()
+                                   .LifeStyle.Singleton);
+
+            container.Register(Component.For<IWindsorContainer>()
+                                   .Instance(container));
+
+            container.Register(Component.For<IApplicationEvents>()
+                                   .ImplementedBy<EsbApplicationEventsImpl>());
+
+            container.Register(Component.For<IHandlingEventService>()
+                                   .ImplementedBy<HandlingEventService>());
+
+            container.Register(Component.For<HandlingEventFactory>()
+                                   .ImplementedBy<HandlingEventFactory>());
+
+            container.Register(Component.For<ICargoInspectionService>()
+                                   .ImplementedBy<CargoInspectionService>());
 
 
             container //.AddFacility<WcfFacility>() Note: commented because it
