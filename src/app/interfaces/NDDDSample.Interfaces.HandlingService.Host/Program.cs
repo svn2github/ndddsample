@@ -21,8 +21,9 @@
             using (container)
             {
                 var applicationEvents = container.Resolve<IApplicationEvents>();
-                var directoryScanner = new UploadDirectoryScanner(applicationEvents, new DirectoryInfo("C:\\temp\\DDD1"),
-                                                                  new DirectoryInfo("C:\\temp\\DDD1\\ParseFailure"));
+                //Scan every 5 sec
+                var directoryScanner = new UploadDirectoryScanner(5 * 1000, applicationEvents, new DirectoryInfo("C:\\NdddScanner"),
+                                                                  new DirectoryInfo("C:\\NdddScanner\\ParseFailure"));
 
                 directoryScanner.Run();
                 Console.WriteLine("HandlingService.Host Started, hit Enter to close");

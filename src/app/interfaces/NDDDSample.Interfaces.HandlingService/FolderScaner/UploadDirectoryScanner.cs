@@ -26,6 +26,7 @@
     /// </summary>
     public class UploadDirectoryScanner
     {
+        private readonly uint ScanPeriod;
         private readonly IApplicationEvents AppEvents;
         private readonly DirectoryInfo UploadDirectory;
         private readonly DirectoryInfo ParseFailureDirectory;
@@ -33,9 +34,10 @@
         private Timer timer;
         private bool TimerCanceled;
 
-        public UploadDirectoryScanner(IApplicationEvents appEvents, DirectoryInfo uploadDirectory,
+        public UploadDirectoryScanner(uint scanPeriod, IApplicationEvents appEvents, DirectoryInfo uploadDirectory,
                                       DirectoryInfo parseFailureDirectory)
         {
+            ScanPeriod = scanPeriod;
             AppEvents = appEvents;
             UploadDirectory = uploadDirectory;
             ParseFailureDirectory = parseFailureDirectory;
@@ -44,8 +46,8 @@
 
         public void Run()
         {
-            SetProperties();            
-            timer = new Timer(TimerTaskCallBack, null, 0, 1000*1000);
+            SetProperties();
+            timer = new Timer(TimerTaskCallBack, null, 0, ScanPeriod);
         }
 
         public void CancelTask()
@@ -55,25 +57,28 @@
 
         private void TimerTaskCallBack(object state)
         {
-            foreach (FileInfo file in UploadDirectory.GetFiles())
+            lock (typeof(UploadDirectoryScanner))
             {
-                try
+                foreach (FileInfo file in UploadDirectory.GetFiles())
                 {
-                    Parse(file);
-                    Delete(file);
-                    logger.Info("Import of " + file.Name + " complete");
+                    try
+                    {
+                        Parse(file);
+                        Delete(file);
+                        logger.Info("Import of " + file.Name + " complete");
+                    }
+                    catch (Exception e)
+                    {
+                        logger.Error(e, e);
+                        Move(file);
+                    }
                 }
-                catch (Exception e)
-                {
-                    logger.Error(e, e);
-                    Move(file);
-                }
-            }
 
-            if (TimerCanceled)
-            {
-                timer.Dispose();
-                logger.Info("UploadDirectoryScanner Task Done  " + DateTime.Now);
+                if (TimerCanceled)
+                {
+                    timer.Dispose();
+                    logger.Info("UploadDirectoryScanner Task Done  " + DateTime.Now);
+                }
             }
         }
 
