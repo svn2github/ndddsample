@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/NDDDSample.Interfaces.HandlingService.WebService" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/NDDDSample.Interfaces.HandlingService.WebService" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:8088/HandlingReportServiceFacade?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <xs:complexType name="HandlingReport">
+    <xs:sequence>
+      <xs:element name="CompletionTime" nillable="true" type="xs:dateTime" />
+      <xs:element xmlns:q1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" name="TrackingIds" nillable="true" type="q1:ArrayOfstring" />
+      <xs:element name="Type" nillable="true" type="xs:string" />
+      <xs:element name="UnLocode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="VoyageNumber" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="HandlingReport" nillable="true" type="tns:HandlingReport" />
+  <xs:complexType name="HandlingReportException">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ErrorMessage" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="HandlingReportException" nillable="true" type="tns:HandlingReportException" />
+</xs:schema>

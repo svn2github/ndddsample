@@ -51,7 +51,7 @@
                     string errorString = ToStringBuilder.ReflectionToString(errors);
                     logger.Error("Parse error in handling report: " + errorString);
 
-                    throw new FaultException<HandlingReportException>(new HandlingReportException(errorString));
+                    throw new FaultException<HandlingReportException>(new HandlingReportException(errorString), new FaultReason(errorString));
                 }
             }
         }
