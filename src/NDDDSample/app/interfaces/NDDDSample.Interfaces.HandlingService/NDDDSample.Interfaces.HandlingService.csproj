@@ -35,7 +35,7 @@
   <ItemGroup>
     <Reference Include="Rhino.Commons.NHibernate, Version=2.0.0.0, Culture=neutral, PublicKeyToken=0b3305902db7183f, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\lib\Rhino\Rhino.Commons.NHibernate.dll</HintPath>
+      <HintPath>..\..\..\..\..\lib\Rhino\Rhino.Commons.NHibernate.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
