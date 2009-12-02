@@ -1,6 +1,10 @@
 ﻿namespace NDDDSample.RegisterApp.ViewModelValidators
 {
+    #region Usings
+
     using System;
+
+    #endregion
 
     /// <summary>
     /// A simple Validation error storage object, with a key
@@ -35,8 +39,8 @@
         /// </param>
         public ValidationFailure(string key, string description)
         {
-            this.Key = key;
-            this.Description = description;
+            Key = key;
+            Description = description;
         }
 
         #endregion
@@ -48,15 +52,9 @@
         /// </summary>
         public string Description
         {
-            get
-            {
-                return this.description;
-            }
+            get { return description; }
 
-            set
-            {
-                this.description = value;
-            }
+            set { description = value; }
         }
 
         /// <summary>
@@ -64,15 +62,9 @@
         /// </summary>
         public string Key
         {
-            get
-            {
-                return this.key;
-            }
+            get { return key; }
 
-            set
-            {
-                this.key = value;
-            }
+            set { key = value; }
         }
 
         #endregion
@@ -87,9 +79,9 @@
         /// </returns>
         public override string ToString()
         {
-            return String.Format("{0} {1}", this.Key, this.Description);
+            return String.Format("{0} {1}", Key, Description);
         }
 
-        #endregion        
+        #endregion
     }
 }

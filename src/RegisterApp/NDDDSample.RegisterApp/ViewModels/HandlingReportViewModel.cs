@@ -9,21 +9,12 @@
     using System.Globalization;
     using System.Linq;
     using System.ServiceModel;
-
     using Commands;
-
     using HandlingReportService;
-
-    using ViewModelValidators;    
+    using ViewModelValidators;
 
     #endregion
 
-    public enum HandlingType
-    {
-        None, Unload, Receive, Load, Customs, Claim
-
-    }
-     
     /// <summary>
     /// The handling report view model.
     /// </summary>
@@ -66,6 +57,9 @@
         /// </summary>
         private string voyage;
 
+        /// <summary>
+        /// The Completion Time.
+        /// </summary>
         private string completionTime;
 
         #endregion
@@ -83,10 +77,10 @@
             this.handlingReportServiceClient = handlingReportServiceClient;
 
             // initialise validator for this view model
-            this.handlingReportViewModelValidator = new HandlingReportViewModelValidator(this);
+            handlingReportViewModelValidator = new HandlingReportViewModelValidator(this);            
 
             HandlingReportCommands.RegisterHandlingReport = RelayCommand.RegisterCommand(
-                param => this.CanRegister(), param => this.Register());
+                param => CanRegister(), param => Register());
         }
 
         #endregion
@@ -100,10 +94,7 @@
         /// </exception>
         public string Error
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { throw new NotImplementedException(); }
         }
 
         /// <summary>
@@ -114,14 +105,14 @@
             get
             {
                 IDictionary handlingTypeList = new Dictionary<HandlingType, string>
-                    {
-                        { HandlingType.None, HandlingType.None.ToString() }, 
-                        { HandlingType.Unload, HandlingType.Unload.ToString() }, 
-                        { HandlingType.Receive, HandlingType.Receive.ToString() }, 
-                        { HandlingType.Load, HandlingType.Load.ToString() }, 
-                        { HandlingType.Customs, HandlingType.Customs.ToString() }, 
-                        { HandlingType.Claim, HandlingType.Claim.ToString() }
-                    };
+                                                   {
+                                                       {HandlingType.None, HandlingType.None.ToString()},
+                                                       {HandlingType.Unload, HandlingType.Unload.ToString()},
+                                                       {HandlingType.Receive, HandlingType.Receive.ToString()},
+                                                       {HandlingType.Load, HandlingType.Load.ToString()},
+                                                       {HandlingType.Customs, HandlingType.Customs.ToString()},
+                                                       {HandlingType.Claim, HandlingType.Claim.ToString()}
+                                                   };
                 return handlingTypeList;
             }
         }
@@ -131,15 +122,9 @@
         /// </summary>
         public string Location
         {
-            get
-            {
-                return this.location;
-            }
+            get { return location; }
 
-            set
-            {
-                this.location = value.Trim();
-            }
+            set { location = value.Trim(); }
         }
 
         /// <summary>
@@ -147,15 +132,9 @@
         /// </summary>
         public HandlingType SelectedHandlingType
         {
-            get
-            {
-                return this.selectedHandlingType;
-            }
+            get { return selectedHandlingType; }
 
-            set
-            {
-                this.selectedHandlingType = value;
-            }
+            set { selectedHandlingType = value; }
         }
 
         /// <summary>
@@ -163,15 +142,9 @@
         /// </summary>
         public string TrackingId
         {
-            get
-            {
-                return this.trackingId;
-            }
+            get { return trackingId; }
 
-            set
-            {
-                this.trackingId = value.Trim();
-            }
+            set { trackingId = value.Trim(); }
         }
 
         /// <summary>
@@ -179,15 +152,9 @@
         /// </summary>
         public IList<ValidationFailure> ValidationErrors
         {
-            get
-            {
-                return this.validationErrors;
-            }
+            get { return validationErrors; }
 
-            set
-            {
-                this.validationErrors = value;
-            }
+            set { validationErrors = value; }
         }
 
         /// <summary>
@@ -195,27 +162,15 @@
         /// </summary>
         public string Voyage
         {
-            get
-            {
-                return this.voyage;
-            }
+            get { return voyage; }
 
-            set
-            {
-                this.voyage = value.Trim();
-            }
+            set { voyage = value.Trim(); }
         }
 
         public string CompletionTime
         {
-            get
-            {
-                return this.completionTime;
-            }
-            set
-            {
-                this.completionTime = value;
-            }
+            get { return completionTime; }
+            set { completionTime = value; }
         }
 
         #endregion
@@ -232,11 +187,11 @@
         {
             get
             {
-                this.handlingReportViewModelValidator.Validate();
+                handlingReportViewModelValidator.Validate();
                 string errorText = string.Empty;
-                if (this.validationErrors.Any(x => x.Key == columnName))
+                if (validationErrors.Any(x => x.Key == columnName))
                 {
-                    errorText = this.validationErrors.Where(x => x.Key == columnName).First().Description;
+                    errorText = validationErrors.Where(x => x.Key == columnName).First().Description;
                 }
 
                 return errorText;
@@ -252,7 +207,7 @@
         /// </summary>
         public void Validate()
         {
-            this.handlingReportViewModelValidator.Validate();
+            handlingReportViewModelValidator.Validate();
         }
 
         #endregion
@@ -267,7 +222,7 @@
         /// </returns>
         public bool CanRegister()
         {
-            return this.validationErrors.Count == 0;
+            return validationErrors.Count == 0;
         }
 
         /// <summary>
@@ -277,18 +232,20 @@
         {
             const string ISO_8601_FORMAT = "yyyy-MM-dd HH:mm";
             var handlingReport = new HandlingReport
-                {
-                    CompletionTime = DateTime.ParseExact(this.completionTime, ISO_8601_FORMAT, CultureInfo.InvariantCulture),
-                    TrackingIds = new [] { this.trackingId },
-                    VoyageNumber = this.voyage, 
-                    UnLocode = this.location, 
-                    Type = this.selectedHandlingType.ToString().ToUpper()
-                };
+                                     {
+                                         CompletionTime =
+                                             DateTime.ParseExact(completionTime, ISO_8601_FORMAT,
+                                                                 CultureInfo.InvariantCulture),
+                                         TrackingIds = new[] {trackingId},
+                                         VoyageNumber = voyage,
+                                         UnLocode = location,
+                                         Type = selectedHandlingType.ToString().ToUpper()
+                                     };
 
             var error = string.Empty;
             try
             {
-                this.handlingReportServiceClient.SubmitReport(handlingReport);
+                handlingReportServiceClient.SubmitReport(handlingReport);
             }
             catch (FaultException<HandlingReportException> exception)
             {
@@ -296,7 +253,7 @@
             }
             catch (CommunicationException exception)
             {
-                error = exception.Message;
+                error = exception.Message;               
             }
         }
 

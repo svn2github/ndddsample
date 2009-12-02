@@ -29,24 +29,11 @@
         {
             base.OnStartup(e);
 
-            //RegisterServices();
-
             var viewModel = DynamicContainer.Instance.Resolve<HandlingReportViewModel>();
 
             var registerAppWindow = new RegisterAppWindow { DataContext = viewModel };
 
             registerAppWindow.Show();
-        }
-
-        /// <summary>
-        /// The register services.
-        /// </summary>
-        private static void RegisterServices()
-        {
-            DynamicContainer.Instance.AddComponent(
-                "handlingReportService", typeof(IHandlingReportService), typeof(HandlingReportServiceClient));
-            DynamicContainer.Instance.AddComponent(
-                "handlingReportViewModel", typeof(HandlingReportViewModel));
         }
 
         #endregion

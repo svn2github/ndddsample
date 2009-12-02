@@ -6,8 +6,7 @@
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Globalization;
-
-    using ViewModels;    
+    using ViewModels;
 
     #endregion
 
@@ -50,37 +49,48 @@
         public void Validate()
         {
             var localValidationErrors = new ObservableCollection<ValidationFailure>();
-           
-            try
-            {
-                DateTime.ParseExact(this.handlingReportViewModel.CompletionTime, ISO_8601_FORMAT, CultureInfo.InvariantCulture);
-            }
-            catch (FormatException)
-            {
-                localValidationErrors.Add(new ValidationFailure("CompletionTime", "Invalid date format: " + this.handlingReportViewModel.CompletionTime + ", must be on ISO 8601 format: " + ISO_8601_FORMAT));                
-            }
 
-            if (String.IsNullOrEmpty(this.handlingReportViewModel.Voyage))
+            if (String.IsNullOrEmpty(handlingReportViewModel.CompletionTime))
+            {
+                localValidationErrors.Add(new ValidationFailure("CompletionTime", "Completion Time has to be set!"));
+            }
+            else
+            {
+                try
+                {
+                    DateTime.ParseExact(handlingReportViewModel.CompletionTime, ISO_8601_FORMAT,
+                                        CultureInfo.InvariantCulture);
+                }
+                catch (FormatException)
+                {
+                    localValidationErrors.Add(new ValidationFailure("CompletionTime",
+                                                                    "Invalid date format: "
+                                                                    + handlingReportViewModel.CompletionTime
+                                                                    + ", must be on ISO 8601 format: " + ISO_8601_FORMAT));
+                }    
+            }            
+
+            if (String.IsNullOrEmpty(handlingReportViewModel.Voyage))
             {
                 localValidationErrors.Add(new ValidationFailure("Voyage", "Voyage has to be set!"));
             }
 
-            if (String.IsNullOrEmpty(this.handlingReportViewModel.Location))
+            if (String.IsNullOrEmpty(handlingReportViewModel.Location))
             {
                 localValidationErrors.Add(new ValidationFailure("Location", "Location has to be set!"));
             }
 
-            if (String.IsNullOrEmpty(this.handlingReportViewModel.TrackingId))
+            if (String.IsNullOrEmpty(handlingReportViewModel.TrackingId))
             {
                 localValidationErrors.Add(new ValidationFailure("TrackingId", "TrackingId has to be set!"));
             }
 
-            if (this.handlingReportViewModel.SelectedHandlingType.Equals(HandlingType.None))
+            if (handlingReportViewModel.SelectedHandlingType.Equals(HandlingType.None))
             {
                 localValidationErrors.Add(new ValidationFailure("SelectedHandlingType", "Handling  has to be set!"));
             }
 
-            this.handlingReportViewModel.ValidationErrors = localValidationErrors;
+            handlingReportViewModel.ValidationErrors = localValidationErrors;
         }
 
         public static DateTime ParseDate(string completionTime, IList<String> errors)
@@ -97,6 +107,7 @@
             }
             return date;
         }
+
         #endregion
     }
 }

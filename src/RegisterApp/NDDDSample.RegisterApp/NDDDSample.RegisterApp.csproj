@@ -93,6 +93,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\HandlingType.cs" />
     <Compile Include="ViewModelValidators\HandlingReportViewModelValidator.cs" />
     <Compile Include="ViewModelValidators\ValidationFailure.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">

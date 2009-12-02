@@ -20,7 +20,7 @@
         /// </summary>
         protected ViewModelBase()
         {
-            this.ThrowOnInvalidPropertyName = true;
+            ThrowOnInvalidPropertyName = true;
         }
 
         #endregion
@@ -53,8 +53,7 @@
         /// </param>
         /// <exception cref="Exception">
         /// </exception>
-        [Conditional("DEBUG")]
-        [DebuggerStepThrough]
+        [Conditional("DEBUG"), DebuggerStepThrough]        
         public void VerifyPropertyName(string propertyName)
         {
             // Verify that the property name matches a real,  
@@ -63,7 +62,7 @@
             {
                 string msg = "Invalid property name: " + propertyName;
 
-                if (this.ThrowOnInvalidPropertyName)
+                if (ThrowOnInvalidPropertyName)
                 {
                     throw new Exception(msg);
                 }
@@ -84,9 +83,9 @@
         /// </param>
         public virtual void OnPropertyChanged(string propertyName)
         {
-            this.VerifyPropertyName(propertyName);
+            VerifyPropertyName(propertyName);
 
-            PropertyChangedEventHandler handler = this.PropertyChanged;
+            PropertyChangedEventHandler handler = PropertyChanged;
             if (handler != null)
             {
                 var e = new PropertyChangedEventArgs(propertyName);

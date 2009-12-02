@@ -36,9 +36,7 @@
         /// The execute.
         /// </param>
         public RelayCommand(Action<object> execute)
-            : this(null, execute)
-        {
-        }
+            : this(null, execute) {}
 
         /// <summary>
         /// Initializes a new instance of the <see cref="RelayCommand"/> class.
@@ -71,15 +69,9 @@
         /// </summary>
         public event EventHandler CanExecuteChanged
         {
-            add
-            {
-                CommandManager.RequerySuggested += value;
-            }
+            add { CommandManager.RequerySuggested += value; }
 
-            remove
-            {
-                CommandManager.RequerySuggested -= value;
-            }
+            remove { CommandManager.RequerySuggested -= value; }
         }
 
         #endregion
@@ -100,7 +92,7 @@
         [DebuggerStepThrough]
         public bool CanExecute(object parameter)
         {
-            return this.canExecute == null ? true : this.canExecute(parameter);
+            return canExecute == null ? true : canExecute(parameter);
         }
 
         /// <summary>
@@ -111,10 +103,8 @@
         /// </param>
         public void Execute(object parameter)
         {
-            this.execute(parameter);
+            execute(parameter);
         }
-
-        
 
         #endregion
 
