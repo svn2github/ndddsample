@@ -11,6 +11,8 @@
     
     using ViewModels;
 
+    using Views;
+
     #endregion
 
     /// <summary>
@@ -22,6 +24,7 @@
         #region Fields
 
         private IHandlingReportService handlingReportServiceClient;
+        private IMessageBoxCreator messageBoxCreator;
 
         private HandlingReportViewModel handlingReportViewModel;
 
@@ -39,7 +42,8 @@
             basicHttpBinding.SendTimeout = TimeSpan.FromMinutes(5);
             var endpointAddress = new EndpointAddress("http://localhost:8088/HandlingReportServiceFacade/");            
             this.handlingReportServiceClient = new HandlingReportServiceClient(basicHttpBinding, endpointAddress);
-            this.handlingReportViewModel = new HandlingReportViewModel(this.handlingReportServiceClient);
+            this.messageBoxCreator = new MessageBoxCreator();
+            this.handlingReportViewModel = new HandlingReportViewModel(this.handlingReportServiceClient, this.messageBoxCreator);
         }
         
         [Test]
@@ -48,7 +52,7 @@
         {
             HandlingReport handlingReport = new HandlingReport();
             handlingReport.TrackingIds = new[] { "5" };
-            handlingReport.Type = HandlingType.Load.ToString();
+            handlingReport.Type = HandlingReportViewModel.HandlingType.Load.ToString();
             handlingReport.UnLocode = "NYC";
             handlingReport.VoyageNumber = "123qwe";
             handlingReport.CompletionTime = DateTime.Now;

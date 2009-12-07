@@ -9,9 +9,16 @@
     using System.Globalization;
     using System.Linq;
     using System.ServiceModel;
+
     using Commands;
+
     using HandlingReportService;
+
+    using Log;
+
     using ViewModelValidators;
+
+    using Views;
 
     #endregion
 
@@ -31,6 +38,16 @@
         /// The register app window validator.
         /// </summary>
         private readonly HandlingReportViewModelValidator handlingReportViewModelValidator;
+
+        /// <summary>
+        /// The message box creator.
+        /// </summary>
+        private readonly IMessageBoxCreator messageBoxCreator;
+
+        /// <summary>
+        /// The Completion Time.
+        /// </summary>
+        private string completionTime;
 
         /// <summary>
         /// The location.
@@ -57,10 +74,7 @@
         /// </summary>
         private string voyage;
 
-        /// <summary>
-        /// The Completion Time.
-        /// </summary>
-        private string completionTime;
+        private static readonly ILog logger = LogFactory.GetRegisterAppLogger();
 
         #endregion
 
@@ -72,20 +86,81 @@
         /// <param name="handlingReportServiceClient">
         /// The handling Report Service Client.
         /// </param>
-        public HandlingReportViewModel(IHandlingReportService handlingReportServiceClient)
+        /// <param name="messageBoxCreator">
+        /// The message Box Creator.
+        /// </param>
+        public HandlingReportViewModel(
+            IHandlingReportService handlingReportServiceClient, IMessageBoxCreator messageBoxCreator)
         {
             this.handlingReportServiceClient = handlingReportServiceClient;
+            this.messageBoxCreator = messageBoxCreator;
 
             // initialise validator for this view model
-            handlingReportViewModelValidator = new HandlingReportViewModelValidator(this);            
+            this.handlingReportViewModelValidator = new HandlingReportViewModelValidator(this);
 
             HandlingReportCommands.RegisterHandlingReport = RelayCommand.RegisterCommand(
-                param => CanRegister(), param => Register());
+                param => this.CanRegister(), param => this.Register());
+        }
+
+        #endregion
+
+        #region Enums
+
+        /// <summary>
+        /// The handling type.
+        /// </summary>
+        public enum HandlingType
+        {
+            /// <summary>
+            /// The none.
+            /// </summary>
+            None, 
+
+            /// <summary>
+            /// The customs.
+            /// </summary>
+            Customs, 
+
+            /// <summary>
+            /// The receive.
+            /// </summary>
+            Receive, 
+
+            /// <summary>
+            /// The load.
+            /// </summary>
+            Load, 
+
+            /// <summary>
+            /// The unload.
+            /// </summary>
+            Unload, 
+
+            /// <summary>
+            /// The claim.
+            /// </summary>
+            Claim
         }
 
         #endregion
 
         #region Properties
+
+        /// <summary>
+        /// Gets or sets CompletionTime.
+        /// </summary>
+        public string CompletionTime
+        {
+            get
+            {
+                return this.completionTime;
+            }
+
+            set
+            {
+                this.completionTime = value;
+            }
+        }
 
         /// <summary>
         /// Gets Error.
@@ -94,7 +169,10 @@
         /// </exception>
         public string Error
         {
-            get { throw new NotImplementedException(); }
+            get
+            {
+                throw new NotImplementedException();
+            }
         }
 
         /// <summary>
@@ -105,14 +183,14 @@
             get
             {
                 IDictionary handlingTypeList = new Dictionary<HandlingType, string>
-                                                   {
-                                                       {HandlingType.None, HandlingType.None.ToString()},
-                                                       {HandlingType.Unload, HandlingType.Unload.ToString()},
-                                                       {HandlingType.Receive, HandlingType.Receive.ToString()},
-                                                       {HandlingType.Load, HandlingType.Load.ToString()},
-                                                       {HandlingType.Customs, HandlingType.Customs.ToString()},
-                                                       {HandlingType.Claim, HandlingType.Claim.ToString()}
-                                                   };
+                    {
+                        { HandlingType.None, HandlingType.None.ToString() }, 
+                        { HandlingType.Unload, HandlingType.Unload.ToString() }, 
+                        { HandlingType.Receive, HandlingType.Receive.ToString() }, 
+                        { HandlingType.Load, HandlingType.Load.ToString() }, 
+                        { HandlingType.Customs, HandlingType.Customs.ToString() }, 
+                        { HandlingType.Claim, HandlingType.Claim.ToString() }
+                    };
                 return handlingTypeList;
             }
         }
@@ -122,9 +200,15 @@
         /// </summary>
         public string Location
         {
-            get { return location; }
+            get
+            {
+                return this.location;
+            }
 
-            set { location = value.Trim(); }
+            set
+            {
+                this.location = value.Trim();
+            }
         }
 
         /// <summary>
@@ -132,9 +216,15 @@
         /// </summary>
         public HandlingType SelectedHandlingType
         {
-            get { return selectedHandlingType; }
+            get
+            {
+                return this.selectedHandlingType;
+            }
 
-            set { selectedHandlingType = value; }
+            set
+            {
+                this.selectedHandlingType = value;
+            }
         }
 
         /// <summary>
@@ -142,9 +232,15 @@
         /// </summary>
         public string TrackingId
         {
-            get { return trackingId; }
+            get
+            {
+                return this.trackingId;
+            }
 
-            set { trackingId = value.Trim(); }
+            set
+            {
+                this.trackingId = value.Trim();
+            }
         }
 
         /// <summary>
@@ -152,9 +248,15 @@
         /// </summary>
         public IList<ValidationFailure> ValidationErrors
         {
-            get { return validationErrors; }
+            get
+            {
+                return this.validationErrors;
+            }
 
-            set { validationErrors = value; }
+            set
+            {
+                this.validationErrors = value;
+            }
         }
 
         /// <summary>
@@ -162,15 +264,15 @@
         /// </summary>
         public string Voyage
         {
-            get { return voyage; }
+            get
+            {
+                return this.voyage;
+            }
 
-            set { voyage = value.Trim(); }
-        }
-
-        public string CompletionTime
-        {
-            get { return completionTime; }
-            set { completionTime = value; }
+            set
+            {
+                this.voyage = value.Trim();
+            }
         }
 
         #endregion
@@ -178,7 +280,7 @@
         #region Indexers
 
         /// <summary>
-        /// The this.
+        /// The tindexer.
         /// </summary>
         /// <param name="columnName">
         /// The column name.
@@ -187,11 +289,11 @@
         {
             get
             {
-                handlingReportViewModelValidator.Validate();
+                this.handlingReportViewModelValidator.Validate();
                 string errorText = string.Empty;
-                if (validationErrors.Any(x => x.Key == columnName))
+                if (this.validationErrors.Any(x => x.Key == columnName))
                 {
-                    errorText = validationErrors.Where(x => x.Key == columnName).First().Description;
+                    errorText = this.validationErrors.Where(x => x.Key == columnName).First().Description;
                 }
 
                 return errorText;
@@ -203,18 +305,6 @@
         #region Public Methods
 
         /// <summary>
-        /// The validate.
-        /// </summary>
-        public void Validate()
-        {
-            handlingReportViewModelValidator.Validate();
-        }
-
-        #endregion
-
-        #region Methods
-
-        /// <summary>
         /// Determines whether the handling type can be registered.
         /// </summary>
         /// <returns>
@@ -222,7 +312,7 @@
         /// </returns>
         public bool CanRegister()
         {
-            return validationErrors.Count == 0;
+            return this.validationErrors.Count == 0;
         }
 
         /// <summary>
@@ -232,29 +322,37 @@
         {
             const string ISO_8601_FORMAT = "yyyy-MM-dd HH:mm";
             var handlingReport = new HandlingReport
-                                     {
-                                         CompletionTime =
-                                             DateTime.ParseExact(completionTime, ISO_8601_FORMAT,
-                                                                 CultureInfo.InvariantCulture),
-                                         TrackingIds = new[] {trackingId},
-                                         VoyageNumber = voyage,
-                                         UnLocode = location,
-                                         Type = selectedHandlingType.ToString().ToUpper()
-                                     };
-
-            var error = string.Empty;
+                {
+                    CompletionTime =
+                        DateTime.ParseExact(this.completionTime, ISO_8601_FORMAT, CultureInfo.InvariantCulture), 
+                    TrackingIds = new[] { this.trackingId }, 
+                    VoyageNumber = this.voyage, 
+                    UnLocode = this.location, 
+                    Type = this.selectedHandlingType.ToString().ToUpper()
+                };
+            
             try
             {
-                handlingReportServiceClient.SubmitReport(handlingReport);
+                this.handlingReportServiceClient.SubmitReport(handlingReport);
             }
             catch (FaultException<HandlingReportException> exception)
             {
-                error = exception.Message;
+                logger.Error(exception);
+                this.messageBoxCreator.ShowMessageBox("HandlingReportException", exception.Message);
             }
             catch (CommunicationException exception)
             {
-                error = exception.Message;               
+                logger.Error(exception);
+                this.messageBoxCreator.ShowMessageBox("CommunicationException", exception.Message);
             }
+        }
+
+        /// <summary>
+        /// The validate.
+        /// </summary>
+        public void Validate()
+        {
+            this.handlingReportViewModelValidator.Validate();
         }
 
         #endregion

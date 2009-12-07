@@ -45,6 +45,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\lib\Rhino\Castle.Windsor.dll</HintPath>
     </Reference>
+    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\lib\log4net\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -88,12 +92,14 @@
   <ItemGroup>
     <Compile Include="Commands\RelayCommand.cs" />
     <Compile Include="DynamicContainer.cs" />
+    <Compile Include="Log\ILog.cs" />
+    <Compile Include="Log\Log4NetLoggerProxy.cs" />
+    <Compile Include="Log\LogFactory.cs" />
     <Compile Include="Service References\HandlingReportService\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\HandlingType.cs" />
     <Compile Include="ViewModelValidators\HandlingReportViewModelValidator.cs" />
     <Compile Include="ViewModelValidators\ValidationFailure.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -112,6 +118,8 @@
     <Compile Include="Commands\HandlingReportCommands.cs" />
     <Compile Include="ViewModels\HandlingReportViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
+    <Compile Include="Views\IMessageBoxCreator.cs" />
+    <Compile Include="Views\MessageBoxCreator.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

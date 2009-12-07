@@ -10,6 +10,8 @@
     
     using ViewModels;
 
+    using Views;
+
     #endregion
 
     /// <summary>
@@ -21,6 +23,7 @@
         #region Fields
 
         private Mock<IHandlingReportService> handlingReportServiceClientMock;
+        private Mock<IMessageBoxCreator> messageBoxCreator;
 
         private HandlingReportViewModel handlingReportViewModel;
 
@@ -35,7 +38,8 @@
         public void SetUp()
         {            
             this.handlingReportServiceClientMock = new Mock<IHandlingReportService>();
-            this.handlingReportViewModel = new HandlingReportViewModel(this.handlingReportServiceClientMock.Object);
+            this.messageBoxCreator = new Mock<IMessageBoxCreator>();
+            this.handlingReportViewModel = new HandlingReportViewModel(this.handlingReportServiceClientMock.Object, this.messageBoxCreator.Object);
         }
         
         [Test]

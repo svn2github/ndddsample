@@ -5,6 +5,8 @@
     using System;
     using System.Collections.Generic;
     using System.ServiceModel;
+    using System.Text;
+
     using Application;
     using Domain.Model.Cargos;
     using Domain.Model.Handlings;
@@ -13,6 +15,7 @@
     using Infrastructure.Builders;
     using Infrastructure.Log;
     using Infrastructure.Utils;
+    using System.Linq;
 
     #endregion
 
@@ -48,7 +51,7 @@
                 }
                 else
                 {
-                    string errorString = ToStringBuilder.ReflectionToString(errors);
+                    string errorString = String.Join("<BR>", errors.ToArray());
                     logger.Error("Parse error in handling report: " + errorString);
 
                     throw new FaultException<HandlingReportException>(new HandlingReportException(errorString), new FaultReason(errorString));
