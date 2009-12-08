@@ -2,6 +2,6 @@
 {
     public static class HandlingReportCommands
     {
-        public static RelayCommand RegisterHandlingReport;
+        public static CompositeCommand RegisterHandlingReportCommand = new CompositeCommand();
     }
 }

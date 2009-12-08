@@ -76,6 +76,11 @@
 
         private static readonly ILog logger = LogFactory.GetRegisterAppLogger();
 
+        /// <summary>
+        /// Gets RegisterReportCommand.
+        /// </summary>
+        public DelegateCommand<object> RegisterReportCommand { get; private set; }
+
         #endregion
 
         #region Constructors and Destructors
@@ -98,8 +103,8 @@
             // initialise validator for this view model
             this.handlingReportViewModelValidator = new HandlingReportViewModelValidator(this);
 
-            HandlingReportCommands.RegisterHandlingReport = RelayCommand.RegisterCommand(
-                param => this.CanRegister(), param => this.Register());
+            this.RegisterReportCommand = new DelegateCommand<object>(this.Register, this.CanRegister);
+            HandlingReportCommands.RegisterHandlingReportCommand.RegisterCommand(this.RegisterReportCommand);                
         }
 
         #endregion
@@ -310,7 +315,7 @@
         /// <returns>
         /// <c>true</c> if the handling type can be registered; otherwise, <c>false</c>.
         /// </returns>
-        public bool CanRegister()
+        public bool CanRegister(object arg)
         {
             return this.validationErrors.Count == 0;
         }
@@ -318,7 +323,7 @@
         /// <summary>
         /// Loads the data from database.
         /// </summary>
-        public void Register()
+        public void Register(object obj)
         {
             const string ISO_8601_FORMAT = "yyyy-MM-dd HH:mm";
             var handlingReport = new HandlingReport

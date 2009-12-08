@@ -90,7 +90,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Commands\RelayCommand.cs" />
+    <Compile Include="Commands\CompositeCommand.cs" />
+    <Compile Include="Commands\DelegateCommand.cs" />
     <Compile Include="DynamicContainer.cs" />
     <Compile Include="Log\ILog.cs" />
     <Compile Include="Log\Log4NetLoggerProxy.cs" />

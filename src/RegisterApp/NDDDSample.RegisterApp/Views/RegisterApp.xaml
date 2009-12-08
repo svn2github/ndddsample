@@ -79,7 +79,7 @@
                     </ComboBox>
                 </Grid>
             </GroupBox>            
-            <Button Name="btnRegister" Width="100" HorizontalAlignment="Right" Command="{x:Static Commands:HandlingReportCommands.RegisterHandlingReport}">Register</Button>
+            <Button Name="btnRegister" Width="100" HorizontalAlignment="Right" Command="{x:Static Commands:HandlingReportCommands.RegisterHandlingReportCommand}">Register</Button>
         </StackPanel>
     </Grid>
 </Window>

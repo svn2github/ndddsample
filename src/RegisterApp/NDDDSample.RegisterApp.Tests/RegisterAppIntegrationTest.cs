@@ -1,17 +1,26 @@
-﻿namespace NDDDSample.RegisterApp.Tests
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="RegisterAppIntegrationTest.cs" company="">
+//   
+// </copyright>
+// <summary>
+//   The register app validation test.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
+
+namespace NDDDSample.RegisterApp.Tests
 {
     #region Usings
 
     using System;
     using System.ServiceModel;
 
-    using HandlingReportService;    
+    using HandlingReportService;
 
-    using NUnit.Framework;
-    
     using ViewModels;
 
     using Views;
+
+    using NUnit.Framework;
 
     #endregion
 
@@ -21,12 +30,22 @@
     [TestFixture]
     public class RegisterAppIntegrationTest
     {
-        #region Fields
+        #region Constants and Fields
 
+        /// <summary>
+        /// The handling report service client.
+        /// </summary>
         private IHandlingReportService handlingReportServiceClient;
-        private IMessageBoxCreator messageBoxCreator;
 
+        /// <summary>
+        /// The handling report view model.
+        /// </summary>
         private HandlingReportViewModel handlingReportViewModel;
+
+        /// <summary>
+        /// The message box creator.
+        /// </summary>
+        private IMessageBoxCreator messageBoxCreator;
 
         #endregion
 
@@ -40,17 +59,21 @@
         {
             var basicHttpBinding = new BasicHttpBinding();
             basicHttpBinding.SendTimeout = TimeSpan.FromMinutes(5);
-            var endpointAddress = new EndpointAddress("http://localhost:8088/HandlingReportServiceFacade/");            
+            var endpointAddress = new EndpointAddress("http://localhost:8088/HandlingReportServiceFacade/");
             this.handlingReportServiceClient = new HandlingReportServiceClient(basicHttpBinding, endpointAddress);
             this.messageBoxCreator = new MessageBoxCreator();
-            this.handlingReportViewModel = new HandlingReportViewModel(this.handlingReportServiceClient, this.messageBoxCreator);
+            this.handlingReportViewModel = new HandlingReportViewModel(
+                this.handlingReportServiceClient, this.messageBoxCreator);
         }
-        
+
+        /// <summary>
+        /// The test handling report view model validation.
+        /// </summary>
         [Test]
         [ExpectedException(typeof(FaultException<HandlingReportException>))]
         public void TestHandlingReportViewModelValidation()
         {
-            HandlingReport handlingReport = new HandlingReport();
+            var handlingReport = new HandlingReport();
             handlingReport.TrackingIds = new[] { "5" };
             handlingReport.Type = HandlingReportViewModel.HandlingType.Load.ToString();
             handlingReport.UnLocode = "NYC";

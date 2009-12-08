@@ -51,7 +51,7 @@
                 }
                 else
                 {
-                    string errorString = String.Join("<BR>", errors.ToArray());
+                    string errorString = String.Join("\r\n", errors.ToArray());
                     logger.Error("Parse error in handling report: " + errorString);
 
                     throw new FaultException<HandlingReportException>(new HandlingReportException(errorString), new FaultReason(errorString));
