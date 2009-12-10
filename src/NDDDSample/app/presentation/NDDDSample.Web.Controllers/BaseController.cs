@@ -19,7 +19,7 @@
             this.View("Error", new ErrorMessageViewModel(filterContext.Exception.Message)).ExecuteResult(this.ControllerContext);
         }
 
-        protected void SetMessage(string msgId)
+        public virtual void SetMessage(string msgId)
         {
             TempData["Message"] = MessageSource.GetMessage(msgId);
         }

@@ -73,6 +73,13 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\lib\Rhino\System.Data.SQLite.DLL</HintPath>
     </Reference>
+    <Reference Include="System.Web.Abstractions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Web.Routing">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -112,6 +119,11 @@
     <Compile Include="Infrastructure\Persistence\NHibernate\HandlingEventRepositoryTest.cs" />
     <Compile Include="Infrastructure\Persistence\NHibernate\LocationRepositoryTest.cs" />
     <Compile Include="Infrastructure\Routing\ExternalRoutingServiceTest.cs" />
+    <Compile Include="Presentation\CargoAdmin\CargoAdminControllerTest.cs" />
+    <Compile Include="Presentation\CargoAdmin\RegistrationCommandTest.cs" />
+    <Compile Include="Presentation\ControllerTestExtentions.cs" />
+    <Compile Include="Presentation\Tracking\CargoTrackingControllerTest.cs" />
+    <Compile Include="Presentation\Tracking\TrackCommandTest.cs" />
     <Compile Include="Scenarios\CargoLifecycleScenarioTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -143,6 +155,10 @@
       <Project>{97413EF7-9172-4467-AB4E-ED1155272BD5}</Project>
       <Name>NDDDSample.Persistence.NHibernate</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\app\interfaces\NDDDSample.Interfaces.BookingRemoteService.Common\NDDDSample.Interfaces.BookingRemoteService.Common.csproj">
+      <Project>{B293706A-1955-4A51-9E87-E7F03FB3728B}</Project>
+      <Name>NDDDSample.Interfaces.BookingRemoteService.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\app\interfaces\NDDDSample.Interfaces.PathfinderRemoteService.Common\NDDDSample.Interfaces.PathfinderRemoteService.Common.csproj">
       <Project>{053C0D25-1C3D-4F9F-9FBA-44762592C9D4}</Project>
       <Name>NDDDSample.Interfaces.PathfinderRemoteService.Common</Name>
@@ -150,6 +166,10 @@
     <ProjectReference Include="..\..\app\interfaces\NDDDSample.Interfaces.PathfinderRemoteService\NDDDSample.Interfaces.PathfinderRemoteService.csproj">
       <Project>{C61C3E52-729B-4EE3-A57E-C3D72CAEF65D}</Project>
       <Name>NDDDSample.Interfaces.PathfinderRemoteService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\app\presentation\NDDDSample.Web.Controllers\NDDDSample.Web.Controllers.csproj">
+      <Project>{CA4C3E92-0FBC-4305-BD7C-D546FEAAA5D7}</Project>
+      <Name>NDDDSample.Web.Controllers</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

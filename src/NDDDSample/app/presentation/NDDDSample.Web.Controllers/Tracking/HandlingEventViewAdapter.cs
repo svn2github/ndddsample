@@ -13,7 +13,7 @@
     {
         private readonly HandlingEvent handlingEvent;
         private readonly Cargo cargo;
-        private const string FORMAT = "yyyy-MM-dd hh:mm";
+        public const string FORMAT = "yyyy-MM-dd hh:mm";
 
         /// <summary>
         /// Constructor.

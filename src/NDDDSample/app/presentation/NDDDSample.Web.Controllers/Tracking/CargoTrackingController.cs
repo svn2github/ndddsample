@@ -19,6 +19,9 @@ namespace NDDDSample.Web.Controllers.Tracking
     /// </summary>
     public class CargoTrackingController : BaseController
     {
+        public const string SearchViewName = "Search";
+        public const string UnknownMessageId = "cargo.unknown_id";
+
         private readonly ICargoRepository CargoRepository;
         private readonly IHandlingEventRepository HandlingEventRepository;        
 
@@ -30,8 +33,8 @@ namespace NDDDSample.Web.Controllers.Tracking
         }
 
         public ActionResult Index()
-        { 
-            return View("Search", null);
+        {
+            return View(SearchViewName, null);
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
@@ -47,12 +50,13 @@ namespace NDDDSample.Web.Controllers.Tracking
             if (cargo != null)
             {
                 IList<HandlingEvent> handlingEvents =
-                    HandlingEventRepository.LookupHandlingHistoryOfCargo(trackingId).DistinctEventsByCompletionTime();               
+                    HandlingEventRepository.LookupHandlingHistoryOfCargo(trackingId)
+                    .DistinctEventsByCompletionTime();               
                 cargoTrackingViewAdapter = new CargoTrackingViewAdapter(cargo, handlingEvents);
             }
             else
             {
-                SetMessage("cargo.unknown_id");
+                SetMessage(UnknownMessageId);
             }
 
             return View(cargoTrackingViewAdapter);

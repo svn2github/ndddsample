@@ -24,6 +24,9 @@
     /// </summary>
     public class CargoAdminController : BaseController
     {
+        public const string RegisterDateFormat = "M/dd/yyyy";
+        public const string ShowActionName = "Show";
+
         private readonly IBookingServiceFacade BookingServiceFacade;
 
         public CargoAdminController(IBookingServiceFacade bookingServiceFacade)
@@ -46,16 +49,18 @@
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult Register(
             [ModelBinder(typeof (RegistrationCommandBinder))] RegistrationCommand registrationCommand)
-        {         
-            DateTime arrivalDeadlineDateTime = DateTime.ParseExact(registrationCommand.ArrivalDeadline, "M/dd/yyyy",
+        {
+            DateTime arrivalDeadlineDateTime = DateTime.ParseExact(registrationCommand.ArrivalDeadline, RegisterDateFormat,
                                                                    CultureInfo.InvariantCulture);
 
             string trackingId = BookingServiceFacade.BookNewCargo(
                 registrationCommand.OriginUnlocode, registrationCommand.DestinationUnlocode, arrivalDeadlineDateTime
                 );
 
-            return RedirectToAction("Show", new RouteValueDictionary(new {trackingId}));
+            return RedirectToAction(ShowActionName, new RouteValueDictionary(new {trackingId}));
         }
+
+        
 
         public ActionResult List()
         {         
@@ -120,6 +125,11 @@
         protected override string GetPageTitle()
         {            
             return "Cargo Administration";
+        }
+
+        public virtual new ActionResult RedirectToAction(string actionName, RouteValueDictionary routeValueDictionary)
+        {
+           return base.RedirectToAction(actionName, routeValueDictionary);
         }
     }
 }
