@@ -19,7 +19,7 @@ namespace NDDDSample.Tests.Scenarios
 
     #endregion
 
-    [TestFixture]
+    [TestFixture, Category(UnitTestCategories.Scenarios)]
     public class CargoLifecycleScenarioTest
     {
         #region Setup/Teardown

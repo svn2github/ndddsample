@@ -9,7 +9,7 @@
 
     #endregion
 
-    [TestFixture]
+    [TestFixture, Category(UnitTestCategories.Infrastructure)]
     public class LocationRepositoryTest : BaseRepositoryTest
     {
         private ILocationRepository locationRepository;

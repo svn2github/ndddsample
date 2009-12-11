@@ -13,7 +13,7 @@ namespace NDDDSample.Tests.Presentation.CargoAdmin
 
     #endregion
 
-    [TestFixture]
+    [TestFixture, Category(UnitTestCategories.Controllers)]
     public class CargoAdminControllerTest
     {
         [Test]

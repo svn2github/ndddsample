@@ -13,7 +13,7 @@ namespace NDDDSample.Tests.Domain.Model.Handlings
 
     #endregion
 
-    [TestFixture]    
+    [TestFixture, Category(UnitTestCategories.DomainModel)]  
     public class HandlingEventTest
     {
         Cargo cargo;        

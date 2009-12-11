@@ -10,7 +10,7 @@
 
     #endregion
 
-    [TestFixture]
+    [TestFixture, Category(UnitTestCategories.Controllers)]
     public class TrackCommandTest
     {
         [Test]

@@ -14,7 +14,7 @@
 
     #endregion
 
-    [TestFixture]
+    [TestFixture, Category(UnitTestCategories.Infrastructure)]
     public class HandlingEventRepositoryTest : BaseRepositoryTest
     {
         private IHandlingEventRepository handlingEventRepository;

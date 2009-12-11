@@ -29,7 +29,7 @@ namespace NDDDSample.Tests.Infrastructure.Builders
 
     #endregion
 
-    [TestFixture]
+    [TestFixture, Category(UnitTestCategories.Infrastructure)]
     public class EqualsBuilderTest
     {
         [Test, Ignore("Revise reflection comparation")]

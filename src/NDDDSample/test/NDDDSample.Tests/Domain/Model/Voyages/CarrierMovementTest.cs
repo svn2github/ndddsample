@@ -9,7 +9,7 @@ namespace NDDDSample.Tests.Domain.Model.Voyages
 
     #endregion
 
-    [TestFixture]
+    [TestFixture, Category(UnitTestCategories.DomainModel)]
     public class CarrierMovementTest
     {
         [Test]

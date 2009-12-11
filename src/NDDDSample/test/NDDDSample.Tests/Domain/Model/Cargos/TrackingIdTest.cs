@@ -8,7 +8,7 @@
 
     #endregion
 
-    [TestFixture]
+    [TestFixture, Category(UnitTestCategories.DomainModel)]
     public class TrackingIdTest
     {
         [ExpectedException(typeof (ArgumentNullException), UserMessage = "Should't accept null constructor arguments")

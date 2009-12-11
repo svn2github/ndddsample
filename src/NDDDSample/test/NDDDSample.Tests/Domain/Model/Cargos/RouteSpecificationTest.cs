@@ -11,7 +11,7 @@ namespace NDDDSample.Tests.Domain.Model.Cargos
 
     #endregion
 
-    [TestFixture]
+    [TestFixture, Category(UnitTestCategories.DomainModel)]
     public class RouteSpecificationTest
     {
         private static readonly Voyage hongKongTokyoNewYork = new Voyage.Builder(

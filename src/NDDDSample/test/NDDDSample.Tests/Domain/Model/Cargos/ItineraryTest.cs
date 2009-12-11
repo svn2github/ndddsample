@@ -12,7 +12,7 @@
 
     #endregion
 
-    [TestFixture]
+    [TestFixture, Category(UnitTestCategories.DomainModel)]
     public class ItineraryTest
     {
         private static readonly DateTime dateTime = new DateTime(2009, 1, 2);        

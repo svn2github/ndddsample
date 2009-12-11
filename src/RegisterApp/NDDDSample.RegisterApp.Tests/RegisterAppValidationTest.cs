@@ -17,7 +17,7 @@
     /// <summary>
     /// The register app validation test.
     /// </summary>
-    [TestFixture]
+    [TestFixture, Category("Register App")]
     public class RegisterAppValidationTest
     {
         #region Fields

@@ -7,7 +7,7 @@
 
     #endregion
 
-    [TestFixture]
+    [TestFixture, Category(UnitTestCategories.Infrastructure)]
     public class ToStringBuilderTest
     {
         [Test]

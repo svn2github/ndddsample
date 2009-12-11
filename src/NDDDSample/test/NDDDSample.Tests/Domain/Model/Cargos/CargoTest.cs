@@ -15,7 +15,7 @@
 
     #endregion
 
-    [TestFixture]
+    [TestFixture, Category(UnitTestCategories.DomainModel)]
     public class CargoTest
     {      
         private List<HandlingEvent> events;

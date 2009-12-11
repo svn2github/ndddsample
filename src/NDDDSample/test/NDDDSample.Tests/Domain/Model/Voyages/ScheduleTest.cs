@@ -6,7 +6,7 @@ namespace NDDDSample.Tests.Domain.Model.Voyages
 
     #endregion
 
-    [TestFixture]
+    [TestFixture, Category(UnitTestCategories.DomainModel)]
     [Ignore("Implement tests for this class")]
     public class ScheduleTest
     {

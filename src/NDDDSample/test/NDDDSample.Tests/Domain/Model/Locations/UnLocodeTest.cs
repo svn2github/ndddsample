@@ -1,14 +1,18 @@
 namespace NDDDSample.Tests.Domain.Model.Locations
 {
+    #region Usings
+
     using System;
     using NDDDSample.Domain.Model.Locations;
     using NUnit.Framework;
 
-    [TestFixture]
+    #endregion
+
+    [TestFixture, Category(UnitTestCategories.DomainModel)]
     public class UnLocodeTest
-    {        
-        [Test]
-        [ExpectedException(typeof(AssertionException))]
+    {
+        [Test, ExpectedException(typeof (AssertionException))]
+        
         public void TestNew()
         {
             AssertValid("AA234");
@@ -23,7 +27,7 @@ namespace NDDDSample.Tests.Domain.Model.Locations
             AssertInvalid("AA111");
             AssertInvalid(null);
         }
-        
+
         [Test]
         public void TestIdString()
         {
@@ -57,12 +61,12 @@ namespace NDDDSample.Tests.Domain.Model.Locations
         {
             new UnLocode(unlocode);
         }
-        
+
         private static void AssertInvalid(String unlocode)
         {
             try
             {
-                new UnLocode(unlocode);                
+                new UnLocode(unlocode);
             }
             catch (Exception expected)
             {

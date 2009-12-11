@@ -13,7 +13,7 @@
 
     #endregion
 
-    [TestFixture]
+    [TestFixture, Category(UnitTestCategories.Controllers)]
     public class CargoTrackingControllerTest
     {
         [Test]

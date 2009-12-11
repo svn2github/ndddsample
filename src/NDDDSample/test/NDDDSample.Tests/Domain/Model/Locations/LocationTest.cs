@@ -8,7 +8,7 @@ namespace NDDDSample.Tests.Domain.Model.Locations
 
     #endregion
 
-    [TestFixture]
+    [TestFixture, Category(UnitTestCategories.DomainModel)]
     public class LocationTest
     {
         [Test]

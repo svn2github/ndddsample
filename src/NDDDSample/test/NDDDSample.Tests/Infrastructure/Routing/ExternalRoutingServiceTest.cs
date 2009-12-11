@@ -17,7 +17,7 @@
 
     #endregion
 
-    [TestFixture]
+    [TestFixture, Category(UnitTestCategories.Infrastructure)]
     public class ExternalRoutingServiceTest
     {
         private ExternalRoutingService externalRoutingService;

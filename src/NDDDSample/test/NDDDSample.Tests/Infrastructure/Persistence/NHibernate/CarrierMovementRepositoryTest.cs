@@ -8,7 +8,7 @@
 
     #endregion
 
-    [TestFixture]
+    [TestFixture, Category(UnitTestCategories.Infrastructure)]
     public class CarrierMovementRepositoryTest : BaseRepositoryTest
     {
         private IVoyageRepository voyageRepository;

@@ -9,7 +9,7 @@
 
     #endregion
 
-    [TestFixture]
+    [TestFixture, Category(UnitTestCategories.DomainModel)]
     public class DeliveryTest
     {
         private Cargo cargo = new Cargo(new TrackingId("XYZ"),

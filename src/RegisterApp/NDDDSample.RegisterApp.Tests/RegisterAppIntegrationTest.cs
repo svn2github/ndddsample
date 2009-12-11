@@ -1,13 +1,4 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="RegisterAppIntegrationTest.cs" company="">
-//   
-// </copyright>
-// <summary>
-//   The register app validation test.
-// </summary>
-// --------------------------------------------------------------------------------------------------------------------
-
-namespace NDDDSample.RegisterApp.Tests
+﻿namespace NDDDSample.RegisterApp.Tests
 {
     #region Usings
 
@@ -27,7 +18,7 @@ namespace NDDDSample.RegisterApp.Tests
     /// <summary>
     /// The register app validation test.
     /// </summary>
-    [TestFixture]
+    [TestFixture, Category("Register App: Remote Integration")]
     public class RegisterAppIntegrationTest
     {
         #region Constants and Fields
