@@ -13,13 +13,12 @@
 </head>
 <body>
     <div class="page">
-
-        <div id="header">
+            <div id="header">
                                  
-            <div id="menucontainer" with="300px" >            
+            <div id="menucontainer" with="300px" >
                 <a href="http://code.google.com/p/ndddsample/">
-                    <img src="/Content/Images/web_logo.png" align="left" /></a>
-                <ul id="menu">              
+                <img src="/Content/Images/web_logo.png" align="left" style="vertical-align:top;float:none;"/></a>
+                <ul id="menu">
                     <li><%= Html.ActionLink("Home", "Index", "Home")%></li>
                     <li>
                         <%= Html.ActionLink("Cargo Track", "Index", "CargoTracking")%>
@@ -27,8 +26,8 @@
                     <li>
                         <%= Html.ActionLink("List Cargos", "List", "CargoAdmin")%>
                         </li>
-                    <li><a href="http://code.google.com/p/ndddsample/">About</a></li>                                                                        
-                </ul>            
+                    <li><a href="http://code.google.com/p/ndddsample/">About</a></li>
+                </ul>
             </div>
         </div>
         <div id="main" style="min-height:99%; margin-bottom:0px; padding-bottom:0px">
