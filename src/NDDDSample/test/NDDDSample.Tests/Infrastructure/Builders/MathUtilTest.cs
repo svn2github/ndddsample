@@ -10,7 +10,7 @@
     /// <summary>
     /// Test class for MathUtilTest
     /// </summary>
-    [TestFixture]
+    [TestFixture, Category(UnitTestCategories.Infrastructure)]
     public class MathUtilTest
     {
         [SetUp]

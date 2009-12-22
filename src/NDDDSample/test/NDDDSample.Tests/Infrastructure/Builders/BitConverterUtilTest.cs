@@ -10,8 +10,8 @@
     /// <summary>
     /// Test class for BitConverterUtil
     /// </summary>
-    [TestFixture]
-    internal class BitConverterUtilTest
+    [TestFixture, Category(UnitTestCategories.Infrastructure)]
+    public class BitConverterUtilTest
     {
         [SetUp]
         public void SetUp() {}
