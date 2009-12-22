@@ -32,7 +32,7 @@ namespace NDDDSample.Tests.Infrastructure.Builders
     [TestFixture, Category(UnitTestCategories.Infrastructure)]
     public class EqualsBuilderTest
     {
-        [Test, Ignore("Revise reflection comparation")]
+        [Test]
         public void testReflectionEquals()
         {
             TestObject o1 = new TestObject(4);
@@ -49,7 +49,7 @@ namespace NDDDSample.Tests.Infrastructure.Builders
             Assert.IsTrue(EqualsBuilder.ReflectionEquals((Object) null, (Object) null));
         }
 
-        [Test, Ignore("Revise reflection comparation")]
+        [Test]
         public void testReflectionHierarchyEquals()
         {
             testReflectionHierarchyEquals(false);
@@ -137,20 +137,20 @@ namespace NDDDSample.Tests.Infrastructure.Builders
         }
 
         /**
-      * Equivalence relationship tests inspired by "Effective Java":
-      * <ul>
-      * <li>reflection</li>
-      * <li>symmetry</li>
-      * <li>transitive</li>
-      * <li>consistency</li>
-      * <li>non-null reference</li>
-      * </ul>
-      * @param to a TestObject
-      * @param toBis a TestObject, equal to to and toTer
-      * @param toTer Left hand side, equal to to and toBis
-      * @param to2 a different TestObject
-      * @param oToChange a TestObject that will be changed
-      */
+  * Equivalence relationship tests inspired by "Effective Java":
+  * <ul>
+  * <li>reflection</li>
+  * <li>symmetry</li>
+  * <li>transitive</li>
+  * <li>consistency</li>
+  * <li>non-null reference</li>
+  * </ul>
+  * @param to a TestObject
+  * @param toBis a TestObject, equal to to and toTer
+  * @param toTer Left hand side, equal to to and toBis
+  * @param to2 a different TestObject
+  * @param oToChange a TestObject that will be changed
+  */
 
         public void testReflectionEqualsEquivalenceRelationship(
             TestObject to,
@@ -283,6 +283,22 @@ namespace NDDDSample.Tests.Infrastructure.Builders
             Assert.IsTrue(new EqualsBuilder().Append(Double.PositiveInfinity, Double.PositiveInfinity).IsEquals());
         }
 
+        /// <summary>
+        /// Tests Append(double lhs, double rhs, double epsilon).
+        /// </summary>
+        /// <remarks>
+        /// This is not in the Java version
+        /// </remarks>
+        [Test]
+        public void testDoubleApproximate()
+        {
+            double o1 = 0.09;
+            double o2 = 0.10;
+
+            Assert.IsFalse(new EqualsBuilder().Append(o1, o2, 0.005).IsEquals());
+            Assert.IsTrue(new EqualsBuilder().Append(o1, o2, 0.02).IsEquals());
+        }
+
         [Test]
         public void testFloat()
         {
@@ -296,6 +312,21 @@ namespace NDDDSample.Tests.Infrastructure.Builders
             Assert.IsTrue(new EqualsBuilder().Append(float.PositiveInfinity, float.PositiveInfinity).IsEquals());
         }
 
+        /// <summary>
+        /// Tests Append(float lhs, float rhs, float epsilon).
+        /// </summary>
+        /// <remarks>
+        /// This is not in the Java version
+        /// </remarks>
+        [Test]
+        public void testFloatApproximate()
+        {
+            float o1 = 0.09f;
+            float o2 = 0.10f;
+
+            Assert.IsFalse(new EqualsBuilder().Append(o1, o2, 0.005f).IsEquals());
+            Assert.IsTrue(new EqualsBuilder().Append(o1, o2, 0.02f).IsEquals());
+        }
 
         [Test]
         public void testBoolean()
@@ -875,10 +906,10 @@ namespace NDDDSample.Tests.Infrastructure.Builders
         }
 
         /**
-      * Tests two instances of classes that can be equal and that are not "related". The two classes are not subclasses
-      * of each other and do not share a parent aside from Object.
-      * See http://issues.apache.org/bugzilla/show_bug.cgi?id=33069
-      */
+  * Tests two instances of classes that can be equal and that are not "related". The two classes are not subclasses
+  * of each other and do not share a parent aside from Object.
+  * See http://issues.apache.org/bugzilla/show_bug.cgi?id=33069
+  */
 
         [Test]
         public void testUnrelatedClasses()
@@ -906,8 +937,8 @@ namespace NDDDSample.Tests.Infrastructure.Builders
         }
 
         /**
-    * Test from http://issues.apache.org/bugzilla/show_bug.cgi?id=33067
-    */
+* Test from http://issues.apache.org/bugzilla/show_bug.cgi?id=33067
+*/
 
         [Test]
         public void testNpeForNullElement()
@@ -944,6 +975,11 @@ namespace NDDDSample.Tests.Infrastructure.Builders
                 }
                 TestObject rhs = (TestObject) o;
                 return (a == rhs.a);
+            }
+
+            public override int GetHashCode()
+            {
+                return base.GetHashCode();
             }
 
             public void setA(int a)
@@ -984,6 +1020,11 @@ namespace NDDDSample.Tests.Infrastructure.Builders
                 return base.Equals(o) && (b == rhs.b);
             }
 
+            public override int GetHashCode()
+            {
+                return base.GetHashCode();
+            }
+
             public void setB(int b)
             {
                 this.b = b;
@@ -1004,7 +1045,8 @@ namespace NDDDSample.Tests.Infrastructure.Builders
         {
             [NonSerialized] private int t;
 
-            public TestTSubObject(int a, int t) : base(a)
+            public TestTSubObject(int a, int t)
+                : base(a)
             {
                 this.t = t;
             }
@@ -1014,7 +1056,8 @@ namespace NDDDSample.Tests.Infrastructure.Builders
         {
             [NonSerialized] private int tt;
 
-            public TestTTSubObject(int a, int t, int tt) : base(a, t)
+            public TestTTSubObject(int a, int t, int tt)
+                : base(a, t)
             {
                 this.tt = tt;
             }
@@ -1073,6 +1116,11 @@ namespace NDDDSample.Tests.Infrastructure.Builders
                 return false;
             }
 
+            public override int GetHashCode()
+            {
+                return base.GetHashCode();
+            }
+
             public int getA()
             {
                 return a;
@@ -1103,6 +1151,11 @@ namespace NDDDSample.Tests.Infrastructure.Builders
                     return b == ((TestBCanEqualA) o).getB();
                 }
                 return false;
+            }
+
+            public override int GetHashCode()
+            {
+                return base.GetHashCode();
             }
 
             public int getB()

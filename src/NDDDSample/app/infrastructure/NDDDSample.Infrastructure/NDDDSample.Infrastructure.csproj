@@ -67,8 +67,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Builders\BitConverterUtil.cs" />
     <Compile Include="Builders\EqualsBuilder.cs" />
     <Compile Include="Builders\HashCodeBuilder.cs" />
+    <Compile Include="Builders\MathUtil.cs" />
     <Compile Include="Builders\ToStringBuilder.cs" />
     <Compile Include="DateUtil.cs" />
     <Compile Include="Log\ILog.cs" />

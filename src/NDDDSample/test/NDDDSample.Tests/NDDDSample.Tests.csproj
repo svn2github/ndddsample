@@ -90,8 +90,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Infrastructure\Builders\BitConverterUtilTest.cs" />
     <Compile Include="Infrastructure\Builders\EqualsBuilderTest.cs" />
     <Compile Include="Infrastructure\Builders\HashCodeBuilderTest.cs" />
+    <Compile Include="Infrastructure\Builders\MathUtilTest.cs" />
     <Compile Include="Infrastructure\Builders\ToStringBuilderTest.cs" />
     <Compile Include="Domain\Model\Cargos\CargoTest.cs" />
     <Compile Include="Domain\Model\Cargos\DeliveryTest.cs" />
