@@ -1,0 +1,109 @@
+<?xml version="1.0"?>
+<project name="NDDDSample" default="all">	
+    <property name="solution.dir" value="src"/>
+	<property name="solution.file" value="NDDDSample-full.sln"/>	
+	<property name="build.base" value="build"/>	
+	<property name="nant.settings.currentframework" value="net-3.5" />	
+	<property name="build.dir.absolutepath" value="${path::get-full-path(build.base)}" />
+	<property name="nunit.libpath.nddsample" value="${solution.dir}\NDDDSample\test\NDDDSample.Tests\bin\Release" />
+	<property name="nunit.libpath.registerApp" value="${solution.dir}\RegisterApp\NDDDSample.RegisterApp.Tests\bin\Release" />
+	<property name="nunit.libfile.nddsample" value="NDDDSample.Tests.dll" />
+	<property name="nunit.libfile.registerApp" value="TestDataAccess.dll" />
+	<property name="nunit.outfile.nddsample" value="${nunit.libfile.nddsample}-Results.xml" />
+	<property name="nunit.outfile.registerApp" value="${nunit.libfile.registerApp}-Results.xml" />
+    		
+	<target name="build" depends="clean, init, compile, copy_files"/>
+	<target name="all" depends="build"/>
+
+	<target name="clean" description="delete build artifacts">
+		<delete dir="${build.base}" failonerror="false" />
+	</target>
+	
+	<target name="init" description="Initializes build properties">
+		<tstamp>
+			<formatter property="datetime.buildtime" pattern="yyyy-MM-dd, HH:mm:ss" />
+		</tstamp>
+		<delete dir="${build.base}"/>
+		<mkdir dir="${build.base}"/>
+		<echo message="Current Directory: ${project::get-base-directory()}"/>
+	</target>    
+		
+	<target name="compile" 
+            depends="init"
+            description="compiles the application">
+			
+		<exec program="${framework::get-framework-directory(framework::get-target-framework())}\msbuild.exe" 
+			commandline="${solution.file} /t:Clean /t:Rebuild /p:Configuration=Release;Platform=&quot;Any CPU&quot; /l:FileLogger,Microsoft.Build.Engine;logfile=${build.base}\build.log" verbose="true"/>
+    </target>
+	
+	<target name="copy_files" description="Copy files">
+		<mkdir  dir="${build.base}\NDDDSample.Web" failonerror="true" />		
+		<copy todir="${build.base}\NDDDSample.Web">
+			<fileset basedir="${solution.dir}\NDDDSample\app\presentation\NDDDSample.Web">
+				<include name="**/*.*"/>				
+				<exclude name="**/*.cs" />
+				<exclude name="**/*.proj" />
+				<exclude name="**/*.csproj" />
+				<exclude name="**/*.pdb" />
+			</fileset>
+		</copy>
+		
+		<mkdir  dir="${build.base}\NDDDSample.Interfaces.BookingRemoteService.Host" failonerror="true" />		
+		<copy todir="${build.base}\NDDDSample.Interfaces.BookingRemoteService.Host">
+			<fileset basedir="${solution.dir}\NDDDSample\app\interfaces\NDDDSample.Interfaces.BookingRemoteService.Host\bin\Release">
+				<include name="**/*.*"/>				
+				<exclude name="**/*.cs" />
+				<exclude name="**/*.proj" />
+				<exclude name="**/*.csproj" />
+				<exclude name="**/*.pdb" />
+			</fileset>
+		</copy>
+		
+		<mkdir  dir="${build.base}\NDDDSample.Interfaces.HandlingService.Host" failonerror="true" />		
+		<copy todir="${build.base}\NDDDSample.Interfaces.HandlingService.Host">
+			<fileset basedir="${solution.dir}\NDDDSample\app\interfaces\NDDDSample.Interfaces.HandlingService.Host\bin\Release">
+				<include name="**/*.*"/>				
+				<exclude name="**/*.cs" />
+				<exclude name="**/*.proj" />
+				<exclude name="**/*.csproj" />
+				<exclude name="**/*.pdb" />
+			</fileset>
+		</copy>
+
+		<mkdir  dir="${build.base}\NDDDSample.Interfaces.PathfinderRemoteService.Host" failonerror="true" />		
+		<copy todir="${build.base}\NDDDSample.Interfaces.PathfinderRemoteService.Host">
+			<fileset basedir="${solution.dir}\NDDDSample\app\interfaces\NDDDSample.Interfaces.PathfinderRemoteService.Host\bin\Release">
+				<include name="**/*.*"/>				
+				<exclude name="**/*.cs" />
+				<exclude name="**/*.proj" />
+				<exclude name="**/*.csproj" />
+				<exclude name="**/*.pdb" />
+			</fileset>
+		</copy>
+		
+		<mkdir  dir="${build.base}\NDDDSample.RegisterApp" failonerror="true" />		
+		<copy todir="${build.base}\NDDDSample.RegisterApp">
+			<fileset basedir="${solution.dir}\RegisterApp\NDDDSample.RegisterApp\bin\Release\">
+				<include name="**/*.*"/>				
+				<exclude name="**/*.cs" />
+				<exclude name="**/*.proj" />
+				<exclude name="**/*.csproj" />
+				<exclude name="**/*.pdb" />
+			</fileset>
+		</copy>
+	</target>
+
+	<target name="nunittest" description="Running NunitTest">
+		<echo message="Tested Library File is: ${nunit.libpath.nddsample}/${nunit.libfile.nddsample}"/>
+		<exec program="nunit-console.exe" 
+			commandline="${nunit.libpath.nddsample}/${nunit.libfile.nddsample}" 
+			failonerror="true"
+		/>		
+		
+		<echo message="Tested Library File is: ${nunit.libpath.registerApp}/${nunit.libfile.registerApp}"/>
+		<exec program="nunit-console.exe" 
+			commandline="${nunit.libpath.registerApp}/${nunit.libfile.registerApp}" 
+			failonerror="true"
+		/>		
+	</target>
+</project>
