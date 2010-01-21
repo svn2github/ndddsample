@@ -8,6 +8,17 @@ NDDDSample consists of the following parts:
 	- RegisterApp allowing to register handling events for cargos.
 
 ============
+= Solutions =
+============
+There are two solutions:
+1. Web Cargo Tracking Application - NDDDSample.sln
+2. Register desktop Application - RegisterApp.sln
+which simulates  concept where are two different organizations, as it is in the java version of ddd sample
+
+NDDDSample-full.sln doesn't have any business\domain meaning it is just full solution with all developed  
+projects.
+
+============
 = Building =
 ============
 
@@ -21,7 +32,7 @@ You'll find the built assemblies in subfolders of /build directory.
 
 1. Web interface can be found under build\NDDDSample.Web directory.
    To be able to book and track cargos the follwong services should be run:
-		- build\NDDDSample.Interfaces.BookingRemoteService.Host\NDDDSample.Interfaces.BookingRemoteService.Host.exe - wcf service allowing to book caargos
+		- build\NDDDSample.Interfaces.BookingRemoteService.Host\NDDDSample.Interfaces.BookingRemoteService.Host.exe - wcf service allowing to book cargos
 		- build\NDDDSample.Interfaces.PathfinderRemoteService.Host\NDDDSample.Interfaces.PathfinderRemoteService.Host.exe - wcf service allowing to find itineraries
 2. Handling events registering application can be found under build\NDDDSample.RegisterApp
    To be able to register handling events the following services should be run:
