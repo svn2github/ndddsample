@@ -5,14 +5,14 @@
 	<property name="build.base" value="build"/>	
 	<property name="nant.settings.currentframework" value="net-3.5" />	
 	<property name="build.dir.absolutepath" value="${path::get-full-path(build.base)}" />
-	<property name="nunit.libpath.nddsample" value="${solution.dir}\NDDDSample\test\NDDDSample.Tests\bin\Release" />
-	<property name="nunit.libpath.registerApp" value="${solution.dir}\RegisterApp\NDDDSample.RegisterApp.Tests\bin\Release" />
+	<property name="nunit.libpath.nddsample" value="${build.base}\NDDDSample.Tests" />
+	<property name="nunit.libpath.registerApp" value="${build.base}\NDDDSample.RegisterApp.Tests" />
 	<property name="nunit.libfile.nddsample" value="NDDDSample.Tests.dll" />
-	<property name="nunit.libfile.registerApp" value="TestDataAccess.dll" />
+	<property name="nunit.libfile.registerApp" value="NDDDSample.RegisterApp.Tests.dll" />
 	<property name="nunit.outfile.nddsample" value="${nunit.libfile.nddsample}-Results.xml" />
 	<property name="nunit.outfile.registerApp" value="${nunit.libfile.registerApp}-Results.xml" />
     		
-	<target name="build" depends="clean, init, compile, copy_files"/>
+	<target name="build" depends="clean, init, compile, copy_files, test"/>
 	<target name="all" depends="build"/>
 
 	<target name="clean" description="delete build artifacts">
@@ -83,7 +83,29 @@
 		
 		<mkdir  dir="${build.base}\NDDDSample.RegisterApp" failonerror="true" />		
 		<copy todir="${build.base}\NDDDSample.RegisterApp">
-			<fileset basedir="${solution.dir}\RegisterApp\NDDDSample.RegisterApp\bin\Release\">
+			<fileset basedir="${solution.dir}\RegisterApp\NDDDSample.RegisterApp\bin\Release">
+				<include name="**/*.*"/>				
+				<exclude name="**/*.cs" />
+				<exclude name="**/*.proj" />
+				<exclude name="**/*.csproj" />
+				<exclude name="**/*.pdb" />
+			</fileset>
+		</copy>
+		
+		<mkdir  dir="${build.base}\NDDDSample.Tests" failonerror="true" />		
+		<copy todir="${build.base}\NDDDSample.Tests">
+			<fileset basedir="${solution.dir}\NDDDSample\test\NDDDSample.Tests\bin\Release">
+				<include name="**/*.*"/>				
+				<exclude name="**/*.cs" />
+				<exclude name="**/*.proj" />
+				<exclude name="**/*.csproj" />
+				<exclude name="**/*.pdb" />
+			</fileset>
+		</copy>
+		
+		<mkdir  dir="${build.base}\NDDDSample.RegisterApp.Tests" failonerror="true" />		
+		<copy todir="${build.base}\NDDDSample.RegisterApp.Tests">
+			<fileset basedir="${solution.dir}\RegisterApp\NDDDSample.RegisterApp.Tests\bin\Release">
 				<include name="**/*.*"/>				
 				<exclude name="**/*.cs" />
 				<exclude name="**/*.proj" />
@@ -93,17 +115,21 @@
 		</copy>
 	</target>
 
-	<target name="nunittest" description="Running NunitTest">
+	<target name="test" description="Running NunitTest">
 		<echo message="Tested Library File is: ${nunit.libpath.nddsample}/${nunit.libfile.nddsample}"/>
-		<exec program="nunit-console.exe" 
-			commandline="${nunit.libpath.nddsample}/${nunit.libfile.nddsample}" 
-			failonerror="true"
+		<exec basedir="tools\nunit"              
+              workingdir="${build.base}\NDDDSample.Tests"
+			  program="nunit-console.exe" 
+			  commandline="${nunit.libfile.nddsample}" 
+			  failonerror="true"
 		/>		
 		
 		<echo message="Tested Library File is: ${nunit.libpath.registerApp}/${nunit.libfile.registerApp}"/>
-		<exec program="nunit-console.exe" 
-			commandline="${nunit.libpath.registerApp}/${nunit.libfile.registerApp}" 
-			failonerror="true"
-		/>		
+		<exec basedir="tools\nunit"              
+              workingdir="${build.base}\NDDDSample.RegisterApp.Tests"
+			  program="nunit-console.exe"
+			  commandline="${nunit.libfile.registerApp}" 
+			  failonerror="true"
+		/>
 	</target>
 </project>

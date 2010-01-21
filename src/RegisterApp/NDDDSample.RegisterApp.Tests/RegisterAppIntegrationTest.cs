@@ -46,6 +46,7 @@
         /// The set up.
         /// </summary>
         [SetUp]
+        [Ignore]
         public void SetUp()
         {
             var basicHttpBinding = new BasicHttpBinding();
@@ -61,6 +62,7 @@
         /// The test handling report view model validation.
         /// </summary>
         [Test]
+        [Ignore]
         [ExpectedException(typeof(FaultException<HandlingReportException>))]
         public void TestHandlingReportViewModelValidation()
         {
