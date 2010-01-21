@@ -4,9 +4,7 @@
 	<property name="solution.file" value="NDDDSample-full.sln"/>	
 	<property name="build.base" value="build"/>	
 	<property name="nant.settings.currentframework" value="net-3.5" />	
-	<property name="build.dir.absolutepath" value="${path::get-full-path(build.base)}" />
-	<property name="nunit.libpath.nddsample" value="${build.base}\NDDDSample.Tests" />
-	<property name="nunit.libpath.registerApp" value="${build.base}\NDDDSample.RegisterApp.Tests" />
+	<property name="build.dir.absolutepath" value="${path::get-full-path(build.base)}" />	
 	<property name="nunit.libfile.nddsample" value="NDDDSample.Tests.dll" />
 	<property name="nunit.libfile.registerApp" value="NDDDSample.RegisterApp.Tests.dll" />
 	<property name="nunit.outfile.nddsample" value="${nunit.libfile.nddsample}-Results.xml" />
@@ -116,20 +114,18 @@
 	</target>
 
 	<target name="test" description="Running NunitTest">
-		<echo message="Tested Library File is: ${nunit.libpath.nddsample}/${nunit.libfile.nddsample}"/>
+		<echo message="Tested Library File is: ${build.base}/NDDDSample.Tests/${nunit.libfile.nddsample}"/>
 		<exec basedir="tools\nunit"              
               workingdir="${build.base}\NDDDSample.Tests"
 			  program="nunit-console.exe" 
 			  commandline="${nunit.libfile.nddsample}" 
-			  failonerror="true"
-		/>		
+			  failonerror="true"/>		
 		
-		<echo message="Tested Library File is: ${nunit.libpath.registerApp}/${nunit.libfile.registerApp}"/>
+		<echo message="Tested Library File is: ${build.base}/NDDDSample.RegisterApp.Tests/${nunit.libfile.registerApp}"/>
 		<exec basedir="tools\nunit"              
               workingdir="${build.base}\NDDDSample.RegisterApp.Tests"
 			  program="nunit-console.exe"
-			  commandline="${nunit.libfile.registerApp}" 
-			  failonerror="true"
-		/>
+			  commandline="${nunit.libfile.registerApp}"
+			  failonerror="true"/>
 	</target>
 </project>

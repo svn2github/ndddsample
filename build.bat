@@ -1,3 +1,3 @@
 @echo off
 cls
-tools\NAnt\NAnt.exe -buildfile:NDDDSample.build %*
+tools\nant\NAnt.exe -buildfile:NDDDSample.build %*
