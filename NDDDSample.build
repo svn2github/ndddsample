@@ -35,14 +35,10 @@
     </target>
 	
 	<target name="copy_files" description="Copy files">
-		<mkdir  dir="${build.base}\NDDDSample.Web" failonerror="true" />		
-		<copy todir="${build.base}\NDDDSample.Web">
-			<fileset basedir="${solution.dir}\NDDDSample\app\presentation\NDDDSample.Web">
+		<mkdir  dir="${build.base}\NDDDSample.Web.Setup" failonerror="true" />		
+		<copy todir="${build.base}\NDDDSample.Web.Setup">
+			<fileset basedir="${solution.dir}\NDDDSample\app\presentation\NDDDSample.Web.Setup\Release">
 				<include name="**/*.*"/>				
-				<exclude name="**/*.cs" />
-				<exclude name="**/*.proj" />
-				<exclude name="**/*.csproj" />
-				<exclude name="**/*.pdb" />
 			</fileset>
 		</copy>
 		
