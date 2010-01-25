@@ -43,6 +43,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NDDDSample.Tests", "src\NDD
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NDDDSample.Interfaces.HandlingService.Host", "src\NDDDSample\app\interfaces\NDDDSample.Interfaces.HandlingService.Host\NDDDSample.Interfaces.HandlingService.Host.csproj", "{B3CD22B6-C615-4289-836C-0BF5D7F9D188}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "NDDDSample.Web.Setup", "src\NDDDSample\app\presentation\NDDDSample.Web.Setup\NDDDSample.Web.Setup.vdproj", "{5D418645-8BD9-4326-B083-9CC7A74CF6FB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -113,6 +115,10 @@ Global
 		{B3CD22B6-C615-4289-836C-0BF5D7F9D188}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B3CD22B6-C615-4289-836C-0BF5D7F9D188}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B3CD22B6-C615-4289-836C-0BF5D7F9D188}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5D418645-8BD9-4326-B083-9CC7A74CF6FB}.Debug|Any CPU.ActiveCfg = Debug
+		{5D418645-8BD9-4326-B083-9CC7A74CF6FB}.Debug|Any CPU.Build.0 = Debug
+		{5D418645-8BD9-4326-B083-9CC7A74CF6FB}.Release|Any CPU.ActiveCfg = Release
+		{5D418645-8BD9-4326-B083-9CC7A74CF6FB}.Release|Any CPU.Build.0 = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
