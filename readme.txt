@@ -21,14 +21,13 @@ projects.
 ============
 = Building =
 ============
-
 In order to build the source, run the build.bat file.
-
 You'll find the built assemblies in subfolders of /build directory.
 
 ===========
 = Running =
 ===========
+In order to run application first build the source. See the building section.
 
 - NDDDSample -
 	1. Setup NDDDSample by running setup_NDDDSample.bat
