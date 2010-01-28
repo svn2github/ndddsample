@@ -21,6 +21,7 @@ projects.
 ============
 = Building =
 ============
+ASP.NET MVC 1.0 must be installed.
 In order to build the source, run the build.bat file.
 You'll find the built assemblies in subfolders of /build directory.
 
