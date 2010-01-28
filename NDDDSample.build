@@ -9,9 +9,10 @@
 	<property name="nunit.libfile.registerApp" value="NDDDSample.RegisterApp.Tests.dll" />
 	<property name="nunit.outfile.nddsample" value="${nunit.libfile.nddsample}-Results.xml" />
 	<property name="nunit.outfile.registerApp" value="${nunit.libfile.registerApp}-Results.xml" />
+	<property name="vs" value="C:\Program Files\Microsoft Visual Studio 9.0\Common7\IDE\devenv.exe" />
     		
-	<target name="build" depends="clean, init, compile, copy_files, test"/>
-	<target name="all" depends="build"/>
+	<target name="build" depends="clean, init, compile, copy_files"/>
+	<target name="all" depends="build, test"/>	
 
 	<target name="clean" description="delete build artifacts">
 		<delete dir="${build.base}" failonerror="false" />
@@ -35,9 +36,9 @@
     </target>
 	
 	<target name="copy_files" description="Copy files">
-		<mkdir  dir="${build.base}\NDDDSample.Web.Setup" failonerror="true" />		
-		<copy todir="${build.base}\NDDDSample.Web.Setup">
-			<fileset basedir="${solution.dir}\NDDDSample\app\presentation\NDDDSample.Web.Setup\Release">
+		<mkdir  dir="${build.base}\NDDDSample.Web" failonerror="true" />		
+		<copy todir="${build.base}\NDDDSample.Web">
+			<fileset basedir="${solution.dir}\NDDDSample\app\presentation\NDDDSample.Web\Release">
 				<include name="**/*.*"/>				
 			</fileset>
 		</copy>
@@ -123,5 +124,23 @@
 			  program="nunit-console.exe"
 			  commandline="${nunit.libfile.registerApp}"
 			  failonerror="true"/>
+	</target>
+
+	<target name="setup" description="Preparing setup file">
+		<echo message="Visual Studio path: ${vs}"/>		
+		
+		<exec program="${vs}"
+			  commandline="${solution.file} /project NDDDSample.Web.Setup /build release"
+			  failonerror="true"/>
+
+		<mkdir  dir="${build.base}\NDDDSample.Web.Setup" failonerror="true" />		
+		<copy todir="${build.base}\NDDDSample.Web.Setup">
+			<fileset basedir="${solution.dir}\NDDDSample\app\presentation\NDDDSample.Web.Setup\Release">
+				<include name="**/*.*"/>				
+			</fileset>
+		</copy>
+		
+		<exec program="build\NDDDSample.Web.Setup\setup.exe" 
+			   failonerror="true"/>		
 	</target>
 </project>

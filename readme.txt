@@ -30,8 +30,10 @@ You'll find the built assemblies in subfolders of /build directory.
 In order to run application first build the source. See the building section.
 
 - NDDDSample -
-	1. Setup NDDDSample by running setup_NDDDSample.bat
-	2. Execute run_NDDDSample.bat to run NDDDSample.
+	1. To run setup from p.2 Visual Studio should be installed.
+	   Please verify also if property "vs" in "NDDDSample.build" file corresponds to the path of installed Visual Studio.
+	2. Setup NDDDSample by running setup_NDDDSample.bat
+	3. Execute run_NDDDSample.bat to run NDDDSample.
 		the following services are run automatically:
 			- NDDDSample.Interfaces.BookingRemoteService.Host.exe - wcf service allowing to book cargos
 			- NDDDSample.Interfaces.PathfinderRemoteService.Host.exe - wcf service allowing to find itineraries

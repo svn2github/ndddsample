@@ -1,4 +1,4 @@
 @echo off
 cls
 
-start build\NDDDSample.Web.Setup\setup.exe
+tools\nant\NAnt.exe setup -buildfile:NDDDSample.build %*
