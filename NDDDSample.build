@@ -10,6 +10,8 @@
 	<property name="nunit.outfile.nddsample" value="${nunit.libfile.nddsample}-Results.xml" />
 	<property name="nunit.outfile.registerApp" value="${nunit.libfile.registerApp}-Results.xml" />
 	<property name="vs" value="C:\Program Files\Microsoft Visual Studio 9.0\Common7\IDE\devenv.exe" />
+	<property name="windows.home" value="C:\Windows" />
+	<property name="windows_system.dir" value="system32" />	
     		
 	<target name="build" depends="clean, init, compile, copy_files"/>
 	<target name="all" depends="build, test"/>	
@@ -132,6 +134,12 @@
 
 	<target name="setup" description="Preparing setup file">
 		<echo message="Installing Cassini Web Server"/>
+		<exec basedir="${windows.home}/${windows_system.dir}" 
+			  program="msiexec.exe" 
+			  commandline="/a tools\UltiDevCassiniWebServer\CassiniServer2Setup.msi /quiet" verbose="true"/>
+		<exec basedir="${windows.home}/${windows_system.dir}" 
+			  program="msiexec.exe" 
+			  commandline="/a tools\UltiDevCassiniWebServer\CassiniExplorerSetup.msi /quiet" verbose="true"/>				   
 		<exec program="tools\UltiDevCassiniWebServer\UltiDevCassiniWS_SetupPrereq_VS2008.exe" 
 			   failonerror="true"/>
 			   

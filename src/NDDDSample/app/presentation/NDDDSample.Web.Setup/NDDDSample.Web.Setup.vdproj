@@ -231,6 +231,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_67948B924D3C4BA48CFE16E23B5D6C7A"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_7A5B2C15A92940069039EE2F518039D7"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -1391,6 +1397,26 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_67948B924D3C4BA48CFE16E23B5D6C7A"
+            {
+            "SourcePath" = "8:..\\NDDDSample.Web\\bin\\hibernate.cfg.xml"
+            "TargetName" = "8:hibernate.cfg.xml"
+            "Tag" = "8:"
+            "Folder" = "8:_30B66A7AC6774386A862BD6C6CD13FFD"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_7A5B2C15A92940069039EE2F518039D7"
             {
             "SourcePath" = "8:..\\NDDDSample.Web\\NDDDSample Web.url"
@@ -2037,7 +2063,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:NDDDSample.Web"
         "ProductCode" = "8:{AB5554C4-2034-4079-AB15-014EF9AF41A1}"
-        "PackageCode" = "8:{0FDD5CF8-3890-4B8D-B146-59B6F17D17B3}"
+        "PackageCode" = "8:{1B134F8B-F9DE-46C3-B023-449D2D137F2D}"
         "UpgradeCode" = "8:{8FB05403-76D5-413F-9435-559A845DAAF8}"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
