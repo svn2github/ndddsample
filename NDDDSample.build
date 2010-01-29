@@ -127,8 +127,11 @@
 	</target>
 
 	<target name="setup" description="Preparing setup file">
-		<echo message="Visual Studio path: ${vs}"/>		
-		
+		<echo message="Installing Cassini Web Server"/>
+		<exec program="tools\UltiDevCassiniWebServer\UltiDevCassiniWS_SetupPrereq_VS2008.exe" 
+			   failonerror="true"/>
+			   
+		<echo message="Visual Studio path: ${vs}"/>
 		<exec program="${vs}"
 			  commandline="${solution.file} /project NDDDSample.Web.Setup /build release"
 			  failonerror="true"/>
@@ -141,6 +144,6 @@
 		</copy>
 		
 		<exec program="build\NDDDSample.Web.Setup\setup.exe" 
-			   failonerror="true"/>		
+			   failonerror="true"/>
 	</target>
 </project>
