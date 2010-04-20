@@ -51,4 +51,4 @@ In order to run application first build the source. See the building section.
 ===========
 = More Details =
 ===========
-Can be found on project's home page: http://code.google.com/p/ndddsample/
+The last version of the project and details can be found on project's home page: http://code.google.com/p/ndddsample/
