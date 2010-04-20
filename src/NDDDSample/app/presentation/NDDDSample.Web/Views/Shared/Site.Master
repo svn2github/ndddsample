@@ -14,10 +14,9 @@
 <body>
     <div class="page">
             <div id="header">
-                                 
-            <div id="menucontainer" with="300px" >
-                <a href="http://code.google.com/p/ndddsample/">
-                <img src="/Content/Images/web_logo.png" align="left" style="vertical-align:top;float:none;"/></a>
+            <a href="http://code.google.com/p/ndddsample/">
+                <img src="/Content/Images/web_logo.png" style="vertical-align:top;float:left;"/></a>                    
+            <div id="menucontainer">
                 <ul id="menu">
                     <li><%= Html.ActionLink("Home", "Index", "Home")%></li>
                     <li>
@@ -30,7 +29,7 @@
                 </ul>
             </div>
         </div>
-        <div id="main" style="min-height:99%; margin-bottom:0px; padding-bottom:0px">
+        <div id="main" class="clear" >
             <asp:ContentPlaceHolder ID="MainContent" runat="server" />
             <div id="footer" style="vertical-align: bottom; margin-top: 0px; padding-top: 0px">
                 NDDDSample Application &copy; Copyright 2009

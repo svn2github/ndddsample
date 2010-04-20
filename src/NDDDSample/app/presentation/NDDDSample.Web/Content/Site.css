@@ -13,6 +13,8 @@ body
     color: #696969;
 }
 
+#header a img {border:1px solid #ffffff;}
+
 a:link
 {
     color: #034af3;
@@ -91,11 +93,10 @@ page width. Or, you can specify an exact pixel width. */
 
 #header
 {
-    position: relative;
     margin-bottom: 0px;
     color: #000;
     padding: 0;
-    height:40;
+    height:40px;
 }
 
 #header h1
@@ -114,7 +115,11 @@ page width. Or, you can specify an exact pixel width. */
 {
 
     background-color: #fff;
-
+    clear:both;
+    display:block;
+    margin-top:20px;
+    /margin-top:60px;
+    border-top:1px solid #5C87B2;
     _height: 1px; /* only IE6 applies CSS properties starting with an underscrore */
 }
 
@@ -132,24 +137,22 @@ page width. Or, you can specify an exact pixel width. */
 ----------------------------------------------------------*/
 ul#menu
 {
-    border-bottom: 1px #5C87B2 solid;
     padding: 0 0 2px;
-    position: relative;
     margin: 0;
     text-align: right;
+    float:right;
 }
 
 ul#menu li
 {
     display: inline;
     list-style: none;
-    height:23px; 
+    float:left;
     width:140px; 
     border-top:#cccccc solid 1px; 
     border-right:#cccccc solid 1px; 
     border-left:#cccccc solid 1px;
 	cursor:pointer;	
-	float:none; 
 	margin-left:2px; 	
 	padding-top:5px; 
 	color:#898989; 
@@ -211,7 +214,12 @@ ul#menu li.selected a
 
 #menucontainer
 {
-    margin-top:40px;
+    /*margin-top:40px;*/
+
+    display:block !important;
+    clear:both;
+    
+    
 }
 
 #title
