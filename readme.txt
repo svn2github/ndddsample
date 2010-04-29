@@ -14,9 +14,9 @@ There are two solutions:
 1. Web Cargo Tracking Application - NDDDSample.sln
 2. Register desktop Application - RegisterApp.sln
 which simulates  concept where are two different organizations, as it is in the java version of ddd sample
-
-NDDDSample-full.sln doesn't have any business\domain meaning it is just full solution with all developed  
+3. NDDDSample-full.sln doesn't have any business\domain meaning it is just full solution with all developed  
 projects.
+4. NDDDSample-full-with-setup.sln similar as from p.3 but with setup project.
 
 ============
 = Building =

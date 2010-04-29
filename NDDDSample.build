@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <project name="NDDDSample" default="all">	
     <property name="solution.dir" value="src"/>
-	<property name="solution.file" value="NDDDSample-full.sln"/>	
+	<property name="solution.file" value="NDDDSample-full-with-setup.sln"/>	
 	<property name="build.base" value="build"/>	
 	<property name="nant.settings.currentframework" value="net-3.5" />	
 	<property name="build.dir.absolutepath" value="${path::get-full-path(build.base)}" />	
