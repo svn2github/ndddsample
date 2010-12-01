@@ -17,14 +17,14 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://localhost:8088/HandlingReportServiceFacade" Protocol="http" SourceId="1" />
+    <MetadataSource Address="http://localhost:8089/HandlingReportServiceFacade" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="HandlingReportServiceFacade.xsd" MetadataType="Schema" ID="2cbbf90d-a151-400d-a97e-7bc974ad2587" SourceId="1" SourceUrl="http://localhost:8088/HandlingReportServiceFacade?xsd=xsd1" />
-    <MetadataFile FileName="HandlingReportService.wsdl" MetadataType="Wsdl" ID="7978fc03-6c92-45fb-afd0-49bc18bb476f" SourceId="1" SourceUrl="http://localhost:8088/HandlingReportServiceFacade" />
-    <MetadataFile FileName="HandlingReportServiceFacade1.xsd" MetadataType="Schema" ID="c53756bb-2f77-4ff2-95f8-68566dc4a259" SourceId="1" SourceUrl="http://localhost:8088/HandlingReportServiceFacade?xsd=xsd2" />
-    <MetadataFile FileName="HandlingReportServiceFacade2.xsd" MetadataType="Schema" ID="10fcdda2-fef8-46ba-af8a-4ce55aa32677" SourceId="1" SourceUrl="http://localhost:8088/HandlingReportServiceFacade?xsd=xsd3" />
-    <MetadataFile FileName="HandlingReportServiceFacade3.xsd" MetadataType="Schema" ID="201e2e74-dc27-4dc7-9692-ae004e2c35b7" SourceId="1" SourceUrl="http://localhost:8088/HandlingReportServiceFacade?xsd=xsd0" />
+    <MetadataFile FileName="HandlingReportServiceFacade.xsd" MetadataType="Schema" ID="2cbbf90d-a151-400d-a97e-7bc974ad2587" SourceId="1" SourceUrl="http://localhost:8089/HandlingReportServiceFacade?xsd=xsd1" />
+    <MetadataFile FileName="HandlingReportService.wsdl" MetadataType="Wsdl" ID="7978fc03-6c92-45fb-afd0-49bc18bb476f" SourceId="1" SourceUrl="http://localhost:8089/HandlingReportServiceFacade" />
+    <MetadataFile FileName="HandlingReportServiceFacade1.xsd" MetadataType="Schema" ID="c53756bb-2f77-4ff2-95f8-68566dc4a259" SourceId="1" SourceUrl="http://localhost:8089/HandlingReportServiceFacade?xsd=xsd2" />
+    <MetadataFile FileName="HandlingReportServiceFacade2.xsd" MetadataType="Schema" ID="10fcdda2-fef8-46ba-af8a-4ce55aa32677" SourceId="1" SourceUrl="http://localhost:8089/HandlingReportServiceFacade?xsd=xsd3" />
+    <MetadataFile FileName="HandlingReportServiceFacade3.xsd" MetadataType="Schema" ID="201e2e74-dc27-4dc7-9692-ae004e2c35b7" SourceId="1" SourceUrl="http://localhost:8089/HandlingReportServiceFacade?xsd=xsd0" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

@@ -77,7 +77,7 @@ namespace NDDDSample.Interfaces.HandlingService.Host.IoC
                     .ActAs(new DefaultServiceModel()
                                .AddEndpoints(WcfEndpoint
                                                  .BoundTo(new BasicHttpBinding())
-                                                 .At("http://localhost:8088/HandlingReportServiceFacade")                                                 
+                                                 .At("http://localhost:8089/HandlingReportServiceFacade")                                                 
                                                  // adds this message action to this endpoint
                                                  .AddExtensions(new LifestyleMessageAction()
                                                  )

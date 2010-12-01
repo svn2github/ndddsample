@@ -100,10 +100,10 @@
     </bindingConfiguration>
   </bindingConfigurations>
   <endpoints>
-    <endpoint name="BasicHttpBinding_IHandlingReportService" contract="HandlingReportService.IHandlingReportService" bindingType="basicHttpBinding" address="http://localhost:8088/HandlingReportServiceFacade" bindingConfiguration="BasicHttpBinding_IHandlingReportService">
+    <endpoint name="BasicHttpBinding_IHandlingReportService" contract="HandlingReportService.IHandlingReportService" bindingType="basicHttpBinding" address="http://localhost:8089/HandlingReportServiceFacade" bindingConfiguration="BasicHttpBinding_IHandlingReportService">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>http://localhost:8088/HandlingReportServiceFacade</serializedValue>
+          <serializedValue>http://localhost:8089/HandlingReportServiceFacade</serializedValue>
         </property>
         <property path="/behaviorConfiguration" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />

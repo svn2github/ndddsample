@@ -51,7 +51,7 @@
         {
             var basicHttpBinding = new BasicHttpBinding();
             basicHttpBinding.SendTimeout = TimeSpan.FromMinutes(5);
-            var endpointAddress = new EndpointAddress("http://localhost:8088/HandlingReportServiceFacade/");
+            var endpointAddress = new EndpointAddress("http://localhost:8089/HandlingReportServiceFacade/");
             this.handlingReportServiceClient = new HandlingReportServiceClient(basicHttpBinding, endpointAddress);
             this.messageBoxCreator = new MessageBoxCreator();
             this.handlingReportViewModel = new HandlingReportViewModel(
