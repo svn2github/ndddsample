@@ -339,6 +339,7 @@
             try
             {
                 this.handlingReportServiceClient.SubmitReport(handlingReport);
+                this.messageBoxCreator.ShowMessageBox("Success", "Event is succefully registered");
             }
             catch (FaultException<HandlingReportException> exception)
             {

@@ -29,6 +29,11 @@
         private readonly IApplicationEvents applicationEvents;
         private static readonly ILog logger = LogFactory.GetInterfaceLayerLogger();
 
+        public HandlingReportService(IApplicationEvents applicationEvents)
+        {
+            this.applicationEvents = applicationEvents;
+        }
+
         public void SubmitReport(HandlingReport handlingReport)
         {
             IList<string> errors = new List<string>();
