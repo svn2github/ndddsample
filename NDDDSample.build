@@ -9,7 +9,7 @@
 	<property name="nunit.libfile.registerApp" value="NDDDSample.RegisterApp.Tests.dll" />
 	<property name="nunit.outfile.nddsample" value="${nunit.libfile.nddsample}-Results.xml" />
 	<property name="nunit.outfile.registerApp" value="${nunit.libfile.registerApp}-Results.xml" />
-	<property name="vs" value="C:\Program Files\Microsoft Visual Studio 9.0\Common7\IDE\devenv.exe" />
+	<property name="vs" value="C:\Program Files\Microsoft Visual Studio 10.0\Common7\IDE\devenv.exe" />
     		
 	<target name="build" depends="clean, init, compile, copy_files"/>
 	<target name="all" depends="build, test"/>	
@@ -118,14 +118,14 @@
 		<echo message="Tested Library File is: ${build.base}/NDDDSample.Tests/${nunit.libfile.nddsample}"/>
 		<exec basedir="tools\nunit"              
               workingdir="${build.base}\NDDDSample.Tests"
-			  program="nunit-console.exe" 
+			  program="nunit-console-x86.exe" 
 			  commandline="${nunit.libfile.nddsample}" 
 			  failonerror="true"/>		
 		
 		<echo message="Tested Library File is: ${build.base}/NDDDSample.RegisterApp.Tests/${nunit.libfile.registerApp}"/>
 		<exec basedir="tools\nunit"              
               workingdir="${build.base}\NDDDSample.RegisterApp.Tests"
-			  program="nunit-console.exe"
+			  program="nunit-console-x86.exe"
 			  commandline="${nunit.libfile.registerApp}"
 			  failonerror="true"/>
 	</target>

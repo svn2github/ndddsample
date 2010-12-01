@@ -1,9 +1,9 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NDDDSample.RegisterApp", "src\RegisterApp\NDDDSample.RegisterApp\NDDDSample.RegisterApp.csproj", "{7E94A1FB-CA89-4955-95B7-CD95DC0D8B0C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NDDDSample.RegisterApp.Tests", "src\RegisterApp\NDDDSample.RegisterApp.Tests\NDDDSample.RegisterApp.Tests.csproj", "{087F58FC-3A46-4464-AEC0-10C41321AE99}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NDDDSample.RegisterApp.Tests", "src\RegisterApp\NDDDSample.RegisterApp.Tests\NDDDSample.RegisterApp.Tests.csproj", "{1077B4D9-3B5D-4623-904E-9D9D30FAE4E1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,10 +15,10 @@ Global
 		{7E94A1FB-CA89-4955-95B7-CD95DC0D8B0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7E94A1FB-CA89-4955-95B7-CD95DC0D8B0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7E94A1FB-CA89-4955-95B7-CD95DC0D8B0C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{087F58FC-3A46-4464-AEC0-10C41321AE99}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{087F58FC-3A46-4464-AEC0-10C41321AE99}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{087F58FC-3A46-4464-AEC0-10C41321AE99}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{087F58FC-3A46-4464-AEC0-10C41321AE99}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1077B4D9-3B5D-4623-904E-9D9D30FAE4E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1077B4D9-3B5D-4623-904E-9D9D30FAE4E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1077B4D9-3B5D-4623-904E-9D9D30FAE4E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1077B4D9-3B5D-4623-904E-9D9D30FAE4E1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
