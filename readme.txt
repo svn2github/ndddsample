@@ -17,14 +17,17 @@ which simulates  concept where are two different organizations, as it is in the 
 3. NDDDSample-full.sln doesn't have any business\domain meaning it is just full solution with all developed  
 projects.
 4. NDDDSample-full-with-setup.sln similar as from p.3 but with setup project.
+5. NDDDSample-Cloud-full.sln is cloud(Windws Azure) version of application
 
 ============
 = Building =
 ============
 ASP.NET MVC 2.0 must be installed.
-In order to build the source, run the build.bat file.
+In order to build the source, run the build.bat file. ()
 You'll find the built assemblies in subfolders of /build directory.
 
+Note: The cloud version can be built and run only from Visual Studio.
+	Windows Azure SDK needs to be installed. You can find it under tools\WindowsAzureSDK\
 ===========
 = Running =
 ===========
@@ -40,7 +43,9 @@ In order to run application first build the source. See the building section.
 			- NDDDSample.Interfaces.BookingRemoteService.Host.exe - wcf service allowing to book cargos
 			- NDDDSample.Interfaces.PathfinderRemoteService.Host.exe - wcf service allowing to find itineraries
 		the default browser is started with home page of NDDDSample web interface
-		
+- NDDDSample in the Cloud -
+	1. Set up NDDDCloudService prjoject as start-up project
+	2. Press (Ctrl + F5)/F5 to run/debug the solution
 - RegisterApp -	
 	1. Execute run_RegisterApp.bat to run RegisterApp.
 		the following services are run automatically:
