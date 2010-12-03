@@ -2,7 +2,12 @@
 {
     #region Usings
 
+    using System;
+    using System.ServiceModel;
     using System.Windows;
+
+    using Castle.Facilities.WcfIntegration;
+    using Castle.MicroKernel.Registration;
 
     using HandlingReportService;
 
@@ -29,7 +34,21 @@
         {
             base.OnStartup(e);
 
-            var viewModel = DynamicContainer.Instance.Resolve<HandlingReportViewModel>();
+            var container = DynamicContainer.Instance;
+
+            container.AddFacility<WcfFacility>();
+
+            container.Register(
+                Component.For<IHandlingReportService>()                
+                    .Named("handlingReportServiceClient")
+                    .LifeStyle.Transient
+                    .ActAs(DefaultClientModel
+                        .On(WcfEndpoint.BoundTo(new BasicHttpBinding())
+                            .At(new Uri("http://127.0.0.1:8089/HandlingReportServiceFacade"))
+                        ))
+                    .LifeStyle.Transient);
+
+            var viewModel = container.Resolve<HandlingReportViewModel>();
 
             var registerAppWindow = new RegisterAppWindow { DataContext = viewModel };
 

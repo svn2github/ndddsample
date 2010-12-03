@@ -11,6 +11,9 @@ namespace NDDDSample.Interfaces.BookingRemoteService.Host.IoC
     using Castle.Windsor.Configuration.Interpreters;
     using Common;
     using Infrastructure.Utils;
+
+    using NDDDSample.Interfaces.PathfinderRemoteService.Common;
+
     using Rhino.Commons;
     using Wcf;
 
@@ -18,6 +21,16 @@ namespace NDDDSample.Interfaces.BookingRemoteService.Host.IoC
 
     public static class ContainerBuilder
     {
+        private static string bookingRemoteServiceWorkerRoleEndpoint = "localhost:8081";        
+        private static string pathfinderRemoteServiceWorkerRoleEndpoint = "localhost:8082";
+
+        public static IWindsorContainer Build(string bookingEndpoint, string pathfinderEndpoint)
+        {
+            bookingRemoteServiceWorkerRoleEndpoint = bookingEndpoint;
+            pathfinderRemoteServiceWorkerRoleEndpoint = pathfinderEndpoint;
+            return Build();
+        }
+
         public static IWindsorContainer Build()
         {
             var container = new WindsorContainer(new XmlInterpreter("Windsor.config"));
@@ -45,9 +58,9 @@ namespace NDDDSample.Interfaces.BookingRemoteService.Host.IoC
                                    Type.GetType("NDDDSample.Domain.Service.IRoutingService, NDDDSample.Domain"),
                                    Type.GetType("NDDDSample.Infrastructure.ExternalRouting.ExternalRoutingService, NDDDSample.Infrastructure.ExternalRouting"));
 
-            container//.AddFacility<WcfFacility>() Note: commented because it
-                     //Note: is registered in windsor config already
-                .Register(
+            container.AddFacility<WcfFacility>();
+
+            container.Register(
                 Component.For<MessageLifecycleBehavior>(),
                 Component.For<UnitOfWorkBehavior>(),
                 Component
@@ -58,12 +71,24 @@ namespace NDDDSample.Interfaces.BookingRemoteService.Host.IoC
                     .ActAs(new DefaultServiceModel()
                                .AddEndpoints(WcfEndpoint
                                                  .BoundTo(new NetTcpBinding())
-                                                 .At("net.tcp://localhost:8081/BookingServiceFacade")
+                                                 //.At("net.tcp://localhost:8081/BookingServiceFacade")
+                                                 .At(String.Format("net.tcp://{0}/BookingServiceFacade", bookingRemoteServiceWorkerRoleEndpoint))
                                                  // adds this message action to this endpoint
                                                  .AddExtensions(new LifestyleMessageAction()
                                                  )
                                ))
                 );
+
+            container.Register(
+                Component
+                    .For<IGraphTraversalService>()                
+                    .Named("pathfinderRemoteFacade")
+                    .LifeStyle.Transient
+                    .ActAs(DefaultClientModel
+                    .On(WcfEndpoint.BoundTo(new NetTcpBinding())
+                        .At(String.Format("net.tcp://{0}/GraphTraversalService", pathfinderRemoteServiceWorkerRoleEndpoint))
+                        ))
+                        .LifeStyle.Transient);
         }
     }
 }
