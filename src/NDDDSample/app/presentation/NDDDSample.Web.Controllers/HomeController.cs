@@ -15,11 +15,6 @@
             return View();
         }
 
-        public ActionResult About()
-        {            
-            return View();
-        }
-
         protected override string GetPageTitle()
         {
             return "Welcome to NDDDSample Application!";

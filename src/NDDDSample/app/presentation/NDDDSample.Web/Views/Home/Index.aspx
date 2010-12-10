@@ -3,7 +3,7 @@
 
 <asp:Content ID="indexContent" ContentPlaceHolderID="MainContent" runat="server">
     <h2><%= Html.Encode(ViewData["Message"]) %></h2>            
-        Welcome to the <strong>C# Domain-Driven Design sample</strong> application.</p>
+       <p> Welcome to the <strong>C# Domain-Driven Design sample</strong> application.</p>
     <p>
         There are two web interfaces available:</p>
     <ul>
@@ -23,8 +23,8 @@
             Java version of the application is joint effort by Eric Evans' company <a href="http://www.domainlanguage.com">
         Domain Language</a> and the Swedish software consulting company<a href="http://www.citerus.se">Citerus</a>.
         <strong>For more info about C# version visit <a href="http://code.google.com/p/ndddsample/">
-            </strong>
-        </i>
-            the link.</a>           
+           
+        
+            the link.</a>  </strong> </i>         
         </p>        
 </asp:Content>
